@@ -1,781 +1,745 @@
+// ─── NOTE FOR NEXT.JS 13+ APP ROUTER ──────────────────────────────────────────
+// "use client" pages can't export `metadata`. Put this in a sibling
+// page.server.js / layout.js / metadata.js file:
+//
+// export const metadata = {
+//   title: "Process & Safety Engineering | Aarvi Engineering Services",
+//   description: "Expert FEED studies, HAZOP facilitation, SIL assessments, QRA, and
+//     process safety management. Serving oil & gas, refineries, and petrochemical sectors.",
+//   keywords: ["process engineering","safety engineering","HAZOP","SIL","QRA","FEED","PSM"],
+//   openGraph: { title: "Process & Safety Engineering", type: "website" }
+// };
+// ──────────────────────────────────────────────────────────────────────────────
+
 "use client";
-import React, { useState ,useRef } from 'react';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import Head from 'next/head';
-import { 
-  Activity, Database, FileText, Settings, ShieldAlert, Cpu, 
-  Target, ClipboardCheck, ArrowUpRight, ShieldCheck
-} from 'lucide-react';
+import React, { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
+import Head from "next/head";
+import {
+  Activity, Database, FileText, Settings, ShieldAlert, Cpu,
+  Target, ClipboardCheck, ArrowUpRight, ShieldCheck,
+  Users, Clock, BadgeCheck, Briefcase
+} from "lucide-react";
+
+// ─── ASSET IMPORTS (Commented out to prevent Next.js compilation errors until files exist) ───
+
+// Capabilities Wireframes (800x1000)
+import pe101Img from '../../../assets/PE-101.png';
+import pe102Img from '../../../assets/PE-102.png';
+import pe103Img from '../../../assets/PE-103.png';
+import pe104Img from '../../../assets/PE-104.png';
+import pe105Img from '../../../assets/PE-105.png';
+import pe106Img from '../../../assets/PE-106.png';
+import pe107Img from '../../../assets/PE-107.png';
+import pe108Img from '../../../assets/PE-108.png';
+
+/*
+// Software Logos (Transparent PNGs)
+import aspenHysysLogo from '../../../assets/aspen-hysys-logo.png';
+import aspenPlusLogo  from '../../../assets/aspen-plus-logo.png';
+import pipeNetLogo    from '../../../assets/pipenet-logo.png';
+import flareSimLogo   from '../../../assets/flaresim-logo.png';
+import phastLogo      from '../../../assets/phast-logo.png';
+import safetiLogo     from '../../../assets/safeti-logo.png';
+import phaProLogo     from '../../../assets/pha-pro-logo.png';
+import exSilentiaLogo from '../../../assets/exsilentia-logo.png';
+import detect3dLogo   from '../../../assets/detect3d-logo.png';
+import volgaLogo      from '../../../assets/volga-logo.png';
+import sppidLogo      from '../../../assets/sppid-logo.png';
+import avevaPidLogo   from '../../../assets/avevapid-logo.png';
+*/
 
 
 // ─── CAPABILITIES DATA ───────────────────────────────────────────────────────
 const CAPABILITIES = [
   {
-    num: "01",
-    code: "PE-101",
-    icon: Activity,
+    num: "01", code: "PE-101", icon: Activity,
+    image: pe101Img,
     title: "Process Design & Simulation",
     shortDesc: "Rigorous steady-state and dynamic thermodynamic multi-phase processing models.",
-    fullDesc: "We deliver comprehensive process simulation using industry-leading software, generating accurate design basis and operational envelopes for maximum throughput and efficiency optimization.",
-    deliverables: [
-      "Process Simulation Models",
-      "Thermodynamic Flow Reviews",
-      "Optimization Case Studies",
-      "Design Basis Documents"
-    ],
-    keyOutcomes: [
-      "Accurate design basis",
-      "Reduced energy losses",
-      "Maximum throughput",
-      "Validated feasibility"
-    ],
-    applications: [
-      "Refineries",
-      "Petrochemical Plants",
-      "Gas Processing",
-      "LNG / Cryogenic Plants"
-    ]
+    fullDesc: "Rigorous steady-state and dynamic thermodynamic multi-phase processing model builds ensuring maximum baseline plant throughput optimization.",
+    deliverables: ["Process Simulation Models", "Thermodynamic Flow Reviews", "Optimization Case Studies", "Design Basis Documents"],
+    keyOutcomes: ["Accurate design basis", "Reduced energy losses", "Maximum throughput", "Validated feasibility"],
+    applications: ["Refineries", "Petrochemical Plants", "Gas Processing", "LNG / Cryogenic Plants"]
   },
   {
-    num: "02",
-    code: "PE-102",
-    icon: Database,
+    num: "02", code: "PE-102", icon: Database,
+    image: pe102Img,
     title: "Heat & Material Balance",
     shortDesc: "Comprehensive stream property data generation across operational envelopes.",
     fullDesc: "Complete mass and energy balance calculations with stream-by-stream property data, covering steady-state operations and dynamic scenarios across full operating ranges.",
-    deliverables: [
-      "Balance Calculations",
-      "Stream Property Data",
-      "Energy Analysis Reports",
-      "Operational Envelope Maps"
-    ],
-    keyOutcomes: [
-      "Accurate property data",
-      "Energy optimization",
-      "Operating range clarity",
-      "Design verification"
-    ],
-    applications: [
-      "Refineries",
-      "Petrochemical Plants",
-      "Power Generation",
-      "Process Plants"
-    ]
+    deliverables: ["Balance Calculations", "Stream Property Data", "Energy Analysis Reports", "Operational Envelope Maps"],
+    keyOutcomes: ["Accurate property data", "Energy optimization", "Operating range clarity", "Design verification"],
+    applications: ["Refineries", "Petrochemical Plants", "Power Generation", "Process Plants"]
   },
   {
-    num: "03",
-    code: "PE-103",
-    icon: FileText,
+    num: "03", code: "PE-103", icon: FileText,
+    image: pe103Img,
     title: "PFD, P&ID & Datasheets",
     shortDesc: "Intelligent drafting and configuration mapping for equipment and instrumentation.",
     fullDesc: "Expert engineering drawing development including Process Flow Diagrams, Piping & Instrumentation Diagrams, and comprehensive equipment datasheets with full technical specifications.",
-    deliverables: [
-      "PFD Development",
-      "P&ID Configuration",
-      "Equipment Datasheets",
-      "Instrument Specifications"
-    ],
-    keyOutcomes: [
-      "Complete documentation",
-      "Design clarity",
-      "Buildable designs",
-      "Vendor compatibility"
-    ],
-    applications: [
-      "Refineries",
-      "Petrochemical Plants",
-      "Gas Processing",
-      "Industrial Plants"
-    ]
+    deliverables: ["PFD Development", "P&ID Configuration", "Equipment Datasheets", "Instrument Specifications"],
+    keyOutcomes: ["Complete documentation", "Design clarity", "Buildable designs", "Vendor compatibility"],
+    applications: ["Refineries", "Petrochemical Plants", "Gas Processing", "Industrial Plants"]
   },
   {
-    num: "04",
-    code: "PE-104",
-    icon: Settings,
+    num: "04", code: "PE-104", icon: Settings,
+    image: pe104Img,
     title: "Utility & Hydraulic Studies",
     shortDesc: "Network analysis mapping line friction heads, pump NPSH, and full sizing matrices.",
     fullDesc: "Complete utility system analysis including pressure drop calculations, pump sizing, NPSH evaluation, and comprehensive hydraulic network modeling for steam, water, and gas systems.",
-    deliverables: [
-      "Network Analysis Models",
-      "Pressure Drop Calculations",
-      "Pump Sizing & Selection",
-      "NPSH Availability Studies"
-    ],
-    keyOutcomes: [
-      "Optimized system design",
-      "Reliable operations",
-      "Cost-effective utilities",
-      "Full system coverage"
-    ],
-    applications: [
-      "Utility Systems",
-      "Steam Networks",
-      "Water Treatment",
-      "Compressed Gas"
-    ]
+    deliverables: ["Network Analysis Models", "Pressure Drop Calculations", "Pump Sizing & Selection", "NPSH Availability Studies"],
+    keyOutcomes: ["Optimized system design", "Reliable operations", "Cost-effective utilities", "Full system coverage"],
+    applications: ["Utility Systems", "Steam Networks", "Water Treatment", "Compressed Gas"]
   },
   {
-    num: "05",
-    code: "PE-105",
-    icon: ShieldAlert,
-    title: "Process Hazard Analysis",
+    num: "05", code: "PE-105", icon: ShieldAlert,
+    image: pe105Img,
+    title: "HAZID / HAZOP Studies",
     shortDesc: "Expertly facilitated HAZID & HAZOP screening sessions for high-consequence failure modes.",
     fullDesc: "Comprehensive hazard identification and analysis using HAZID and HAZOP methodologies to identify and evaluate process risks, consequences, and safeguards with expert facilitation.",
-    deliverables: [
-      "HAZID Study Reports",
-      "HAZOP Session Records",
-      "Risk Register Development",
-      "Safeguard Recommendations"
-    ],
-    keyOutcomes: [
-      "Risk identification complete",
-      "Safeguards specified",
-      "Regulatory compliance",
-      "Safety culture improvement"
-    ],
-    applications: [
-      "Oil & Gas",
-      "Petrochemicals",
-      "Refineries",
-      "Chemical Plants"
-    ]
+    deliverables: ["HAZID Study Reports", "HAZOP Session Records", "Risk Register Development", "Safeguard Recommendations"],
+    keyOutcomes: ["Risk identification complete", "Safeguards specified", "Regulatory compliance", "Safety culture improvement"],
+    applications: ["Oil & Gas", "Petrochemicals", "Refineries", "Chemical Plants"]
   },
   {
-    num: "06",
-    code: "PE-106",
-    icon: Cpu,
+    num: "06", code: "PE-106", icon: Cpu,
+    image: pe106Img,
     title: "SIL & Functional Safety",
     shortDesc: "Assessment and layer of protection analysis to calibrate automated safety instrument functions.",
     fullDesc: "Rigorous Safety Integrity Level determination and Functional Safety assessments including LOPA analysis, SIS design verification, and proof test strategies aligned with IEC 61508/61511 standards.",
-    deliverables: [
-      "SIL Assessment Reports",
-      "LOPA Studies",
-      "SIS Design Verification",
-      "Proof Test Procedures"
-    ],
-    keyOutcomes: [
-      "SIL targets defined",
-      "IEC compliance achieved",
-      "Instrument selection validated",
-      "Proof test schedules set"
-    ],
-    applications: [
-      "Safety Instrumented Systems",
-      "Automation Systems",
-      "Risk Management",
-      "Regulatory Compliance"
-    ]
+    deliverables: ["SIL Assessment Reports", "LOPA Studies", "SIS Design Verification", "Proof Test Procedures"],
+    keyOutcomes: ["SIL targets defined", "IEC compliance achieved", "Instrument selection validated", "Proof test schedules set"],
+    applications: ["Safety Instrumented Systems", "Automation Systems", "Risk Management", "Regulatory Compliance"]
   },
   {
-    num: "07",
-    code: "PE-107",
-    icon: Target,
+    num: "07", code: "PE-107", icon: Target,
+    image: pe107Img,
     title: "Risk & Consequence Analysis",
     shortDesc: "Quantitative mapping of gas cloud bounds, thermal radiation flares, and overpressure.",
     fullDesc: "Advanced consequence modeling including dispersion analysis, thermal radiation mapping, and overpressure calculations to quantify risk and support emergency planning and site layout.",
-    deliverables: [
-      "Dispersion Modeling",
-      "Thermal Radiation Maps",
-      "Overpressure Analysis",
-      "Risk Contour Maps"
-    ],
-    keyOutcomes: [
-      "Risk quantified",
-      "Emergency plans validated",
-      "Site layout optimized",
-      "Insurance data supplied"
-    ],
-    applications: [
-      "Risk Assessment",
-      "Site Layout",
-      "Emergency Planning",
-      "Insurance Requirements"
-    ]
+    deliverables: ["Dispersion Modeling", "Thermal Radiation Maps", "Overpressure Analysis", "Risk Contour Maps"],
+    keyOutcomes: ["Risk quantified", "Emergency plans validated", "Site layout optimized", "Insurance data supplied"],
+    applications: ["Risk Assessment", "Site Layout", "Emergency Planning", "Insurance Requirements"]
   },
   {
-    num: "08",
-    code: "PE-108",
-    icon: ClipboardCheck,
+    num: "08", code: "PE-108", icon: ClipboardCheck,
+    image: pe108Img,
     title: "Process Safety Management",
     shortDesc: "Pre-commissioning safety audits, mechanical completion, and operational readiness.",
     fullDesc: "Comprehensive PSM program development including pre-commissioning safety verification, mechanical completion audits, and commissioning readiness assessments ensuring safe startup.",
-    deliverables: [
-      "PSM Program Design",
-      "Safety Audits",
-      "Commissioning Checklists",
-      "Operational Procedures"
-    ],
-    keyOutcomes: [
-      "Safe startup",
-      "Zero incidents",
-      "Regulatory approval",
-      "Operator confidence"
-    ],
-    applications: [
-      "Project Startups",
-      "Plant Modifications",
-      "Regulatory Compliance",
-      "Operational Handover"
-    ]
+    deliverables: ["PSM Program Design", "Safety Audits", "Commissioning Checklists", "Operational Procedures"],
+    keyOutcomes: ["Safe startup", "Zero incidents", "Regulatory approval", "Operator confidence"],
+    applications: ["Project Startups", "Plant Modifications", "Regulatory Compliance", "Operational Handover"]
   }
 ];
 
 const SOFTWARE_TOOLS = [
-  { name: "Aspen HYSYS", category: "Thermodynamics" },
-  { name: "Aspen Plus", category: "Simulation" },
-  { name: "PipeNet", category: "Hydraulics" },
-  { name: "FlareSIM", category: "Flaring" },
-  { name: "PHAST", category: "Consequence" },
-  { name: "SAFETI", category: "Risk" },
-  { name: "PHA-Pro", category: "HAZOP" },
-  { name: "exSILentia", category: "SIL" },
-  { name: "Detect3D", category: "Gas Detection" }
+  { name: "Aspen HYSYS", category: "Thermodynamics" /*, logo: aspenHysysLogo */ },
+  { name: "Aspen Plus", category: "Simulation" /*, logo: aspenPlusLogo */ },
+  { name: "PipeNet", category: "Hydraulics" /*, logo: pipeNetLogo */ },
+  { name: "FlareSIM", category: "Flaring" /*, logo: flareSimLogo */ },
+  { name: "PHAST", category: "Consequence" /*, logo: phastLogo */ },
+  { name: "SAFETI", category: "Risk" /*, logo: safetiLogo */ },
+  { name: "PHA-Pro", category: "HAZOP" /*, logo: phaProLogo */ },
+  { name: "exSILentia", category: "SIL" /*, logo: exSilentiaLogo */ },
+  { name: "Detect3D", category: "Gas Detection" /*, logo: detect3dLogo */ },
+  { name: "VOLGA", category: "Emissions" /*, logo: volgaLogo */ },
+  { name: "SPPID", category: "P&ID" /*, logo: sppidLogo */ },
+  { name: "AVEVAPID", category: "P&ID" /*, logo: avevaPidLogo */ }
 ];
 
 const INDUSTRIES = [
-  { icon: "🛢️", name: "Oil & Gas", code: "OIL_GAS" },
-  { icon: "🏭", name: "Refineries", code: "REFINERY" },
-  { icon: "⚗️", name: "Petrochemicals", code: "PETROCHEM" },
-  { icon: "⚡", name: "Power Generation", code: "POWER" },
-  { icon: "❄️", name: "LNG & Gas Processing", code: "LNG" },
-  { icon: "🏗️", name: "Infrastructure", code: "INFRA" }
+  { icon: "⛽", name: "Oil & Gas" },
+  { icon: "🏭", name: "Refineries" },
+  { icon: "⚗️", name: "Petrochemicals" },
+  { icon: "⚡", name: "Power Generation" },
+  { icon: "❄️", name: "LNG & Gas Processing" },
+  { icon: "🏗️", name: "Infrastructure" }
 ];
 
-// ─── ANIMATION VARIANTS ─────────────────────────────────────────────────────
-const containerVariants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.08, delayChildren: 0.15 }
-  }
-};
+const FEATURED_PROJECT = null; 
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 60, damping: 15 } }
+// ─── ANIMATION VARIANTS ───────────────────────────────────────────────────────
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
 };
+const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.07 } } };
 
-// ─── MAIN COMPONENT ─────────────────────────────────────────────────────────
+// ─── COMPONENT ────────────────────────────────────────────────────────────────
 export default function ProcessSafetyEngineeringPage() {
-  const [expandedCapability, setExpandedCapability] = useState(0);
-  const detailsSectionRef = useRef(null);
-  const active = CAPABILITIES[expandedCapability];
+  const [activeCap, setActiveCap] = useState(0);
+  const [isMarqueeHovered, setIsMarqueeHovered] = useState(false);
+  const [isMarqueeClicked, setIsMarqueeClicked] = useState(false);
+  const detailsRef = useRef(null);
+  
+  const active = CAPABILITIES[activeCap];
 
-  const handleViewDetails = () => {
-  console.log("Clicked View Details");
+  const handleSelectCapability = (idx) => {
+    setActiveCap(idx);
+    setIsMarqueeClicked(true); // Permanently pauses the marquee so user can read below
 
-  const section = document.getElementById("service-details");
-
-  if (!section) {
-    console.log("Section not found");
-    return;
-  }
-
-  console.log(section);
-
-  window.scrollTo({
-    top: section.offsetTop - 100,
-    behavior: "smooth",
-  });
-};
+    if (detailsRef.current) {
+      window.scrollTo({
+        top: detailsRef.current.getBoundingClientRect().top + window.scrollY - 96,
+        behavior: "smooth",
+      });
+    }
+  };
 
   return (
     <>
       <Head>
-        <title>Process & Safety Engineering | Industrial Engineering Services</title>
-        <meta name="description" content="Expert process design, safety engineering, and HAZOP analysis. FEED studies, thermodynamic modeling, SIL assessments, and process safety management solutions." />
-        <meta name="keywords" content="process engineering, safety engineering, HAZOP, SIL assessment, process design, thermodynamic modeling" />
-        <meta property="og:title" content="Process & Safety Engineering Services" />
-        <meta property="og:description" content="Comprehensive process and safety engineering solutions for industrial facilities." />
+        <title>Process & Safety Engineering | Aarvi Engineering Services</title>
+        <meta
+          name="description"
+          content="Expert process design, HAZOP facilitation, SIL assessments, QRA, and process safety management for oil & gas, refining, and petrochemical facilities."
+        />
+        <meta name="keywords" content="process engineering, safety engineering, HAZOP, SIL assessment, QRA, FEED, PSM, process design" />
+        <meta property="og:title" content="Process & Safety Engineering | Aarvi Engineering Services" />
+        <meta property="og:description" content="End-to-end process and safety engineering solutions across the asset lifecycle." />
         <meta property="og:type" content="website" />
-        
-        {/* Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Service",
-              "name": "Process & Safety Engineering",
-              "description": "Industrial process design, safety analysis, and engineering services",
-              "serviceType": "Engineering Consulting",
-              "areaServed": "Global",
-              "hasOfferingDetails": {
-                "@type": "OfferingDetails",
-                "priceCurrency": "USD"
-              }
+              name: "Process & Safety Engineering",
+              description: "Industrial process design, hazard analysis, and process safety management services.",
+              serviceType: "Engineering Consulting",
+              areaServed: "Global",
+              provider: { "@type": "Organization", name: "Aarvi Engineering Services" }
             })
           }}
         />
       </Head>
 
-      <main className="w-full bg-[#050505] min-h-screen text-white font-sans selection:bg-white selection:text-[#050505]">
-        
-        {/* ────────────────────────────────────────────────────────────────────── */}
-        {/* HERO SECTION */}
-        {/* ────────────────────────────────────────────────────────────────────── */}
-        <section className="relative w-full min-h-screen flex items-center overflow-hidden bg-[#0a1628]">
-          
-          {/* Background video/image with overlay */}
+      <main className="w-full bg-aarvi-bg min-h-screen text-aarvi-navy font-sans selection:bg-aarvi-green/20 selection:text-aarvi-navy">
+
+        {/* ══════════════════════════════════════════════════════════════════ */}
+        {/* 1 · HERO — video bg + left text, exactly per reference layout      */}
+        {/* ══════════════════════════════════════════════════════════════════ */}
+        <section className="relative w-full min-h-[78vh] flex items-center overflow-hidden bg-aarvi-navy">
           <div className="absolute inset-0 w-full h-full">
-            <video 
-              autoPlay 
-              muted 
-              loop 
-              playsInline 
-              className="absolute inset-0 w-full h-full object-cover opacity-30"
+            <video
+              autoPlay muted loop playsInline
+              className="absolute inset-0 w-full h-full object-cover"
+              aria-hidden="true"
             >
               <source src="/process-hero.mp4" type="video/mp4" />
             </video>
-            
-            
-
-            {/* Gradient overlay */}
-            <div className="absolute inset-0 bg-linear-to-r from-[#0a1628] via-[#0a1628]/80 to-[#0a1628]/40" />
+            <div className="absolute inset-0 bg-linear-to-r from-aarvi-navy via-aarvi-navy/85 to-aarvi-navy/30" />
+            <div className="absolute inset-0 bg-aarvi-navy/20" />
           </div>
 
-          {/* Content */}
-          <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-32 w-full">
-            <div className="max-w-5xl">
-              
-              {/* Left: Text Content */}
-              <motion.div
-                initial={{ opacity: 0, x: -40 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
-              >
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#1db87a]/30 bg-[#1db87a]/10 mb-6">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#1db87a] animate-pulse" />
-                  <span className="text-[10px] font-mono font-bold text-[#1db87a] tracking-widest uppercase">
-                    Core Capability
-                  </span>
-                </div>
-
-                <h1 className="text-5xl lg:text-7xl font-black text-white uppercase tracking-tight leading-[1.05] mb-4">
-                  Process & Safety <br className="hidden sm:block" />
-                  Engineering
-                </h1>
-
-                <div className="w-12 h-1.5 bg-[#1db87a] rounded-full mb-6" />
-
-                <div className="flex flex-wrap gap-2 mb-8">
-                  {["FEED", "HAZOP", "SIL", "QRA", "PSM"].map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 text-xs font-mono font-bold text-[#1db87a] border border-[#1db87a]/30 rounded-md"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                <p className="text-lg text-white/70 leading-relaxed mb-8 max-w-lg">
-                  End-to-end process and safety engineering solutions that ensure operational integrity, regulatory compliance, and sustainable performance across the asset lifecycle.
-                </p>
-
-                {/* Stats */}
-                <div className="grid grid-cols-3 gap-6 mb-8 pb-8 border-b border-white/10">
-                  <div>
-                    <div className="text-3xl lg:text-4xl font-black text-[#1db87a]">32+</div>
-                    <div className="text-xs text-white/50 font-mono uppercase tracking-widest mt-1">EPC Partners</div>
-                  </div>
-                  <div>
-                    <div className="text-3xl lg:text-4xl font-black text-[#1db87a]">39+</div>
-                    <div className="text-xs text-white/50 font-mono uppercase tracking-widest mt-1">Years Experience</div>
-                  </div>
-                  <div>
-                    <div className="text-3xl lg:text-4xl font-black text-[#1db87a]">100%</div>
-                    <div className="text-xs text-white/50 font-mono uppercase tracking-widest mt-1">Audit Ready</div>
-                  </div>
-                </div>
-
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Link
-                    href="/contact"
-                    className="px-6 py-3 bg-[#1db87a] text-[#050505] font-black text-sm uppercase tracking-widest rounded-lg hover:bg-[#1db87a]/90 transition-all duration-300 flex items-center gap-2 group"
-                  >
-                    Get Started <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                  </Link>
-                 
-                </div>
+          <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-10 lg:py-14 w-full">
+            <motion.div
+              initial="hidden"
+              animate="show"
+              variants={stagger}
+              className="max-w-2xl"
+            >
+              <motion.div variants={fadeUp} className="flex items-center gap-2 mb-5">
+                <span className="w-1.5 h-1.5 rounded-full bg-aarvi-green animate-pulse" />
+                <span className="text-[11px] font-mono font-bold text-aarvi-green tracking-[0.25em] uppercase">
+                  Process Engineering
+                </span>
               </motion.div>
-              
-            </div>
+
+              <motion.h1
+                variants={fadeUp}
+                className="text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tight leading-[1.05] mb-5"
+              >
+                Process & Safety<br />Engineering
+              </motion.h1>
+
+              <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm font-bold text-white/60 mb-6">
+                {["FEED", "HAZOP", "SIL", "QRA", "PSM"].map((t, i) => (
+                  <React.Fragment key={t}>
+                    <span>{t}</span>
+                    {i < 4 && <span className="text-white/25">•</span>}
+                  </React.Fragment>
+                ))}
+              </motion.div>
+
+              <motion.p variants={fadeUp} className="text-base lg:text-lg text-white/70 leading-relaxed max-w-lg mb-9">
+                End-to-end process and safety engineering solutions that ensure
+                operational integrity, regulatory compliance, and sustainable
+                performance across the asset lifecycle.
+              </motion.p>
+
+              <motion.div variants={fadeUp} className="grid grid-cols-3 gap-6 mb-9 pb-9 border-b border-white/15 max-w-lg">
+                {[
+                  { icon: Users, value: "32+", label: "Global EPC Partners" },
+                  { icon: Clock, value: "39+", label: "Years of Excellence" },
+                  { icon: BadgeCheck, value: "100%", label: "Audit-Ready" }
+                ].map(({ icon: Icon, value, label }) => (
+                  <div key={label}>
+                    <div className="flex items-center gap-1.5 mb-1">
+                      <Icon className="w-4 h-4 text-aarvi-green" strokeWidth={1.5} />
+                      <span className="text-2xl lg:text-3xl font-black text-white leading-none">{value}</span>
+                    </div>
+                    <span className="text-[10px] text-white/50 font-mono uppercase tracking-widest">{label}</span>
+                  </div>
+                ))}
+              </motion.div>
+
+              <motion.div variants={fadeUp}>
+                <Link
+                  href="/contact?service=process-safety"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 bg-aarvi-green text-white font-black text-sm uppercase tracking-widest rounded-lg hover:bg-[#00744d] shadow-[0_8px_20px_rgba(0,135,90,0.35)] hover:shadow-[0_12px_28px_rgba(0,135,90,0.45)] transition-all group"
+                >
+                  Talk to Our Experts
+                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </Link>
+              </motion.div>
+            </motion.div>
           </div>
         </section>
 
-        {/* ────────────────────────────────────────────────────────────────────── */}
-        {/* CAPABILITIES OVERVIEW - GRID */}
-        {/* ────────────────────────────────────────────────────────────────────── */}
-        <section className="relative py-24 lg:py-32 bg-[#050505] border-b border-white/5">
+        {/* ══════════════════════════════════════════════════════════════════ */}
+        {/* 2 · CORE CAPABILITIES — Infinite Horizontal Marquee                */}
+        {/* ══════════════════════════════════════════════════════════════════ */}
+        <section className="bg-white py-10 lg:py-14 border-b border-slate-200 overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 lg:px-10">
-            
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
+            <motion.div 
+              initial="hidden" 
+              whileInView="show" 
+              viewport={{ once: true, margin: "-80px" }} 
+              variants={stagger} 
+              className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10"
             >
-              <span className="text-[10px] font-mono text-[#1db87a] tracking-widest uppercase">Our Core Capabilities</span>
-              <h2 className="text-4xl lg:text-5xl font-black text-white uppercase tracking-tight mt-2 mb-4">
-                Integrated Process & Safety Expertise
-              </h2>
-              <div className="w-12 h-1 bg-[#1db87a] mx-auto rounded-full" />
+              <div>
+                <motion.span 
+                  variants={fadeUp} 
+                  className="text-[10px] font-mono font-black text-aarvi-green tracking-[0.3em] uppercase block mb-3"
+                >
+                  Our 8 Core Capabilities
+                </motion.span>
+                <motion.h2 
+                  variants={fadeUp} 
+                  className="text-3xl md:text-4xl font-black text-aarvi-navy uppercase tracking-tight"
+                >
+                  Integrated Process & Safety Expertise
+                </motion.h2>
+              </div>
             </motion.div>
+          </div>
 
-            {/* Capability cards grid */}
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: "-100px" }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+          {/* Infinite Scrolling Track */}
+          <div 
+            className="w-full flex overflow-hidden group/track pb-4"
+            onMouseEnter={() => setIsMarqueeHovered(true)}
+            onMouseLeave={() => setIsMarqueeHovered(false)}
+          >
+            <div 
+              className={`flex gap-4 px-4 whitespace-nowrap will-change-transform animate-marquee ${
+                isMarqueeHovered || isMarqueeClicked ? '[animation-play-state:paused]' : ''
+              }`}
             >
-              {CAPABILITIES.map((cap, idx) => {
+              {[...CAPABILITIES, ...CAPABILITIES].map((cap, idx) => {
+                const originalIndex = idx % CAPABILITIES.length;
+                const isActive = originalIndex === activeCap;
                 const Icon = cap.icon;
-                const isActive = idx === expandedCapability;
                 
                 return (
-                  <motion.div
-                    key={cap.code}
-                    variants={itemVariants}
-                    onClick={() => setExpandedCapability(idx)}
-                    className={`relative p-6 rounded-2xl border transition-all duration-300 text-left group overflow-hidden ${
-                      isActive
-                        ? 'bg-[#1db87a]/15 border-[#1db87a]/60 shadow-lg shadow-[#1db87a]/10'
-                        : 'bg-[#0F0F0F] border-white/10 hover:border-white/20 hover:shadow-lg hover:shadow-white/5'
+                  <motion.button 
+                    key={`${cap.code}-${idx}`} 
+                    initial={{ opacity: 0, y: 16 }} 
+                    whileInView={{ opacity: 1, y: 0 }} 
+                    viewport={{ once: true, margin: "-60px" }} 
+                    transition={{ delay: originalIndex * 0.05, duration: 0.4 }} 
+                    onClick={() => handleSelectCapability(originalIndex)} 
+                    className={`group relative shrink-0 w-70 sm:w-[320px] p-5 rounded-2xl border-2 text-left transition-all duration-300 cursor-pointer ${
+                      isActive 
+                        ? "bg-white border-aarvi-green shadow-lg shadow-aarvi-green/10 -translate-y-1" 
+                        : "bg-white border-slate-200 hover:border-aarvi-green/50 hover:shadow-md hover:-translate-y-1"
                     }`}
                   >
-                    {/* Background gradient on hover */}
-                    <div
-                      className={`absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-300 ${
-                        isActive ? 'opacity-10' : ''
-                      }`}
-                      style={{
-                        background: 'linear-gradient(135deg, #1db87a 0%, transparent 100%)'
-                      }}
-                    />
-
-                    <div className="relative z-10 flex items-start justify-between mb-4">
+                    <div className="flex items-start justify-between mb-4">
                       <div className={`w-10 h-10 rounded-lg border flex items-center justify-center transition-all duration-300 ${
-                        isActive
-                          ? 'bg-[#1db87a] border-[#1db87a] text-[#050505]'
-                          : 'bg-white/5 border-white/10 text-white/40 group-hover:text-white/60'
+                        isActive 
+                          ? "bg-aarvi-green border-aarvi-green text-white" 
+                          : "bg-aarvi-bg border-slate-200 text-slate-400 group-hover:text-aarvi-green group-hover:border-aarvi-green/40"
                       }`}>
-                        <Icon className="w-5 h-5" strokeWidth={1.5} />
+                        <Icon className="w-4.5 h-4.5" strokeWidth={1.5} />
                       </div>
-                      <span className={`font-mono text-xs font-black tracking-widest transition-colors ${
-                        isActive ? 'text-[#1db87a]' : 'text-white/30 group-hover:text-white/40'
+                      <span className={`font-mono text-[10px] font-black tracking-widest transition-colors ${
+                        isActive ? "text-aarvi-green" : "text-slate-300"
                       }`}>
                         {cap.num}
                       </span>
                     </div>
 
-                    <h3 className={`text-sm lg:text-base font-black uppercase leading-tight tracking-tight transition-colors ${
-                      isActive ? 'text-white' : 'text-white/80 group-hover:text-white'
-                    }`}>
+                    <h3 className="text-sm font-black text-aarvi-navy uppercase leading-tight tracking-tight mb-2 min-h-[2.2em] whitespace-normal">
                       {cap.title}
                     </h3>
-
-                    <p className={`text-xs mt-3 leading-relaxed transition-colors ${
-                      isActive ? 'text-white/70' : 'text-white/40'
-                    }`}>
+                    
+                    <p className="text-[11px] text-slate-400 leading-relaxed line-clamp-2 whitespace-normal">
                       {cap.shortDesc}
                     </p>
 
                     {isActive && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        className="mt-4 pt-4 border-t border-white/10"
-                      >
-                       <motion.button
-  type="button"
-  onClick={(e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    handleViewDetails();
-  }}
-  whileHover={{ x: 6 }}
-  whileTap={{ scale: 0.97 }}
-  className="group inline-flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-[#1db87a] cursor-pointer"
->
-  <span>View Details</span>
-
-  <motion.span
-    className="inline-block"
-    animate={{ x: 0 }}
-    whileHover={{ x: 5 }}
-    transition={{ duration: 0.2 }}
-  >
-    →
-  </motion.span>
-</motion.button>
-        </motion.div>
+                      <div className="mt-3 pt-3 border-t border-aarvi-green/15 flex items-center gap-1">
+                        <span className="text-[9px] font-mono font-black text-aarvi-green uppercase tracking-widest">
+                          Selected
+                        </span>
+                      </div>
                     )}
-                  </motion.div>
+                  </motion.button>
                 );
               })}
-            </motion.div>
+            </div>
           </div>
         </section>
 
-        {/* ────────────────────────────────────────────────────────────────────── */}
-        {/* EXPANDED CAPABILITY SECTION */}
-        {/* ────────────────────────────────────────────────────────────────────── */}
-        <section 
-         id="service-details"
-        ref={detailsSectionRef}
-        className="relative py-20 lg:py-32 bg-[#0a1628] border-b border-white/5 scroll-mt-24">
+        {/* ══════════════════════════════════════════════════════════════════ */}
+        {/* 3 · CAPABILITY DETAIL — 70% content / 30% wireframe, equal height */}
+        {/* ══════════════════════════════════════════════════════════════════ */}
+        <section ref={detailsRef} id="service-details" className="bg-aarvi-bg py-10 lg:py-14 border-b border-slate-200 scroll-mt-24">
           <div className="max-w-7xl mx-auto px-6 lg:px-10">
-            <motion.div
-              key={expandedCapability}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start"
-            >
-              
-              {/* Left: Sidebar Navigation */}
-              <div className="lg:col-span-1">
-                <div className="sticky top-8 space-y-2">
-                  <h3 className="text-xs font-mono text-white/40 uppercase tracking-widest mb-4">Explore Service</h3>
-                  <div className="space-y-1 max-h-125 overflow-y-auto pr-2">
-                    {CAPABILITIES.map((cap, idx) => (
-                      <button
-                        key={cap.code}
-                        onClick={() =>  {
-        setExpandedCapability(idx);
-
-        window.scrollTo({
-            top:
-                detailsSectionRef.current.getBoundingClientRect().top +
-                window.scrollY -
-                90,
-            behavior: "smooth",
-        });
-    }}
-                        className={`w-full text-left px-4 py-3 rounded-lg text-sm font-bold uppercase tracking-tight transition-all duration-200 flex items-center gap-3 ${
-                          idx === expandedCapability
-                            ? 'bg-[#1db87a]/20 border border-[#1db87a] text-white'
-                            : 'hover:bg-white/5 text-white/50 hover:text-white/80 border border-transparent'
-                        }`}
-                      >
-                        <span className="font-mono text-xs">{cap.num}</span>
-                        <span className="flex-1 truncate">{cap.title}</span>
-                      </button>
-                    ))}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeCap}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.35 }}
+                className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col lg:flex-row"
+              >
+                {/* ─ 70%: Capability content ─ */}
+                <div className="w-full lg:w-[70%] p-8 lg:p-12">
+                  <div className="flex items-start gap-4 mb-7">
+                    <span className="text-5xl font-black text-aarvi-green leading-none font-mono">{active.num}</span>
+                    <div>
+                      <div className="inline-block px-2.5 py-1 bg-aarvi-green/10 border border-aarvi-green/30 rounded-full mb-2">
+                        <span className="text-[9px] font-mono font-black text-aarvi-green tracking-widest uppercase">
+                          {active.code}
+                        </span>
+                      </div>
+                      <h2 className="text-2xl lg:text-3xl font-black text-aarvi-navy uppercase tracking-tight leading-tight">
+                        {active.title}
+                      </h2>
+                    </div>
                   </div>
-                </div>
-              </div>
 
-              {/* Right: Capability Details */}
-              <div className="lg:col-span-2 space-y-8">
-                
-                {/* Header */}
-                <div>
-                  <div className="inline-block px-3 py-1 bg-[#1db87a]/15 border border-[#1db87a] rounded-full mb-4">
-                    <span className="text-[10px] font-mono text-[#1db87a] font-bold tracking-widest uppercase">
-                      {active.code}
-                    </span>
-                  </div>
-                  <h2 className="text-4xl font-black text-white uppercase tracking-tight mb-4">
-                    {active.title}
-                  </h2>
-                  <p className="text-white/60 text-lg leading-relaxed">
+                  <p className="text-text-body leading-relaxed mb-9 text-[15px] max-w-2xl">
                     {active.fullDesc}
                   </p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div>
+                      <p className="text-[10px] font-mono font-black text-slate-400 uppercase tracking-widest mb-3">
+                        Deliverables
+                      </p>
+                      <ul className="space-y-2.5">
+                        {active.deliverables.map((item) => (
+                          <li key={item} className="flex items-start gap-2 text-sm text-text-body">
+                            <span className="text-aarvi-green font-bold mt-0.5 shrink-0">✓</span>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div>
+                      <p className="text-[10px] font-mono font-black text-slate-400 uppercase tracking-widest mb-3">
+                        Key Outcomes
+                      </p>
+                      <ul className="space-y-2.5">
+                        {active.keyOutcomes.map((item) => (
+                          <li key={item} className="flex items-start gap-2 text-sm text-text-body">
+                            <span className="text-aarvi-green font-bold mt-0.5 shrink-0">✓</span>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div>
+                      <p className="text-[10px] font-mono font-black text-slate-400 uppercase tracking-widest mb-3">
+                        Typical Applications
+                      </p>
+                      <ul className="space-y-2.5">
+                        {active.applications.map((item) => (
+                          <li key={item} className="flex items-start gap-2 text-sm text-text-body">
+                            <span className="text-slate-300 font-bold mt-0.5 shrink-0">•</span>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="mt-9 pt-7 border-t border-slate-100">
+                    <Link
+                      href={`/contact?service=${active.code}`}
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-aarvi-green text-white font-black text-sm uppercase tracking-widest rounded-lg hover:bg-[#00744d] transition-colors group"
+                    >
+                      Discuss {active.code}
+                      <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </Link>
+                  </div>
                 </div>
 
-                {/* Three columns grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* ─ 30%: Wireframe visual panel ─ */}
+                <div className="w-full lg:w-[30%] relative min-h-75 lg:min-h-0 bg-linear-to-br from-aarvi-navy to-[#16213d] border-t lg:border-t-0 lg:border-l border-slate-200">
                   
-                  {/* Deliverables */}
-                  <div>
-                    <h3 className="text-xs font-mono text-[#1db87a] uppercase tracking-widest mb-4">Deliverables</h3>
-                    <ul className="space-y-2">
-                      {active.deliverables.map((item, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-                          <span className="text-[#1db87a] font-bold mt-0.5">✓</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  {/* ─── ADD IMAGE HERE (Uncomment when images are imported) ─── */}
+                  {
+                  <Image 
+                    src={active.image} 
+                    alt={`${active.title} — technical schematic`}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 30vw"
+                    className="object-cover opacity-90 z-10 mix-blend-screen"
+                  />
+                  }
 
-                  {/* Key Outcomes */}
-                  <div>
-                    <h3 className="text-xs font-mono text-[#1db87a] uppercase tracking-widest mb-4">Key Outcomes</h3>
-                    <ul className="space-y-2">
-                      {active.keyOutcomes.map((item, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-                          <span className="text-[#1db87a] font-bold mt-0.5">✓</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
+                  <div
+                    className="absolute inset-0 opacity-[0.08]"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(rgba(255,255,255,1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,1) 1px,transparent 1px)",
+                      backgroundSize: "32px 32px"
+                    }}
+                  />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-white/30 p-6 text-center z-0">
+                    <active.icon className="w-12 h-12" strokeWidth={1} />
+                    <span className="text-[9px] font-mono uppercase tracking-widest">
+                      Wireframe Visual<br />Placeholder
+                    </span>
                   </div>
-
-                  {/* Typical Applications */}
-                  <div>
-                    <h3 className="text-xs font-mono text-[#1db87a] uppercase tracking-widest mb-4">Applications</h3>
-                    <ul className="space-y-2">
-                      {active.applications.map((item, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-                          <span className="text-[#1db87a] font-bold mt-0.5">•</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
+                  <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between z-20">
+                    <span className="text-[9px] font-mono font-bold text-white/50 uppercase tracking-widest">
+                      {active.code}
+                    </span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-aarvi-green animate-pulse" />
                   </div>
                 </div>
-
-                {/* CTA */}
-                <div className="pt-6 border-t border-white/10">
-                  <Link
-                    href={`/contact?service=${active.code}`}
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-[#1db87a] text-[#050505] font-black text-sm uppercase tracking-widest rounded-lg hover:bg-[#1db87a]/90 transition-all group"
-                  >
-                    Discuss {active.code} <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </section>
 
-        {/* ────────────────────────────────────────────────────────────────────── */}
-        {/* SOFTWARE ECOSYSTEM */}
-        {/* ────────────────────────────────────────────────────────────────────── */}
-        <section className="relative py-24 lg:py-32 bg-[#050505] border-b border-white/5">
+        {/* ══════════════════════════════════════════════════════════════════ */}
+        {/* 4 · SOFTWARE ECOSYSTEM                                             */}
+        {/* ══════════════════════════════════════════════════════════════════ */}
+        <section className="bg-white py-10 lg:py-14 border-b border-slate-200">
           <div className="max-w-7xl mx-auto px-6 lg:px-10">
-            
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-80px" }}
+              variants={stagger}
+              className="text-center mb-12"
             >
-              <ShieldCheck className="w-10 h-10 text-[#1db87a] mx-auto mb-4" strokeWidth={1.5} />
-              <h2 className="text-4xl lg:text-5xl font-black text-white uppercase tracking-tight mb-4">
+              <motion.div variants={fadeUp} className="flex items-center justify-center gap-2 mb-3">
+                <ShieldCheck className="w-5 h-5 text-aarvi-green" strokeWidth={1.5} />
+                <span className="text-[10px] font-mono font-black text-aarvi-green tracking-[0.3em] uppercase">
+                  Software Ecosystem
+                </span>
+              </motion.div>
+              <motion.h2 variants={fadeUp} className="text-3xl md:text-4xl font-black text-aarvi-navy uppercase tracking-tight mb-3">
                 Advanced Tools. Proven Results.
-              </h2>
-              <p className="text-white/50 text-lg max-w-2xl mx-auto">
-                We leverage the world's most advanced thermodynamic and risk calculation environments to ensure absolute mathematical precision.
-              </p>
+              </motion.h2>
+              <motion.p variants={fadeUp} className="text-text-body text-sm font-medium max-w-xl mx-auto">
+                We leverage the world's most advanced thermodynamic and risk calculation
+                environments to ensure absolute mathematical precision.
+              </motion.p>
             </motion.div>
 
             <motion.div
-              variants={containerVariants}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: true, margin: "-100px" }}
-              className="flex flex-wrap justify-center gap-3"
+              viewport={{ once: true, margin: "-80px" }}
+              variants={stagger}
+              className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4"
             >
-              {SOFTWARE_TOOLS.map((tool, i) => (
+              {SOFTWARE_TOOLS.map((tool) => (
                 <motion.div
                   key={tool.name}
-                  variants={itemVariants}
-                  className="px-5 py-3 bg-[#0F0F0F] border border-white/10 rounded-xl hover:border-[#1db87a]/50 hover:bg-white/5 transition-all duration-300 group cursor-default"
+                  variants={fadeUp}
+                  className="p-5 rounded-xl border border-slate-200 bg-aarvi-bg hover:border-aarvi-green/40 hover:bg-white hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center text-center cursor-default min-h-30"
                 >
-                  <div className="font-mono text-xs font-black text-white uppercase tracking-widest group-hover:text-[#1db87a] transition-colors">
+                  {/* ─── ADD SOFTWARE LOGO HERE (Uncomment when logos are imported) ─── */}
+                  {/*
+                  <div className="relative w-12 h-12 mb-3">
+                    <Image 
+                      src={tool.logo} 
+                      alt={`${tool.name} logo`}
+                      fill
+                      className="object-contain"
+                    />
+                  </div> 
+                  */}
+                  <div className="font-mono text-xs font-black text-aarvi-navy uppercase tracking-widest leading-tight mb-1.5">
                     {tool.name}
                   </div>
-                  <div className="text-[9px] text-white/30 mt-1">{tool.category}</div>
+                  <div className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">{tool.category}</div>
                 </motion.div>
               ))}
             </motion.div>
           </div>
         </section>
 
-        {/* ────────────────────────────────────────────────────────────────────── */}
-        {/* INDUSTRIES WE SERVE */}
-        {/* ────────────────────────────────────────────────────────────────────── */}
-        <section className="relative py-24 lg:py-32 bg-[#0a1628] border-b border-white/5">
+        {/* ══════════════════════════════════════════════════════════════════ */}
+        {/* 5 · INDUSTRIES WE SERVE                                           */}
+        {/* ══════════════════════════════════════════════════════════════════ */}
+        <section className="bg-aarvi-bg py-10 lg:py-14 border-b border-slate-200">
           <div className="max-w-7xl mx-auto px-6 lg:px-10">
-            
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
-            >
-              <span className="text-[10px] font-mono text-[#1db87a] tracking-widest uppercase">Industry Focus</span>
-              <h2 className="text-4xl lg:text-5xl font-black text-white uppercase tracking-tight mt-2">
-                Engineering Solutions for Critical Industries
-              </h2>
-            </motion.div>
-
-            <motion.div
-              variants={containerVariants}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: "-80px" }}
+              variants={stagger}
+              className="text-center mb-12"
+            >
+              <motion.span variants={fadeUp} className="text-[10px] font-mono font-black text-aarvi-green tracking-[0.3em] uppercase block mb-3">
+                Industries We Serve
+              </motion.span>
+              <motion.h2 variants={fadeUp} className="text-3xl md:text-4xl font-black text-aarvi-navy uppercase tracking-tight">
+                Engineering Solutions for Critical Industries
+              </motion.h2>
+            </motion.div>
+
+            <motion.div
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-80px" }}
+              variants={stagger}
               className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4"
             >
-              {INDUSTRIES.map((industry) => (
+              {INDUSTRIES.map((ind) => (
                 <motion.div
-                  key={industry.code}
-                  variants={itemVariants}
-                  className="p-6 rounded-2xl bg-[#0F0F0F] border border-white/10 hover:border-[#1db87a]/50 hover:bg-white/5 transition-all duration-300 flex flex-col items-center text-center group cursor-default"
+                  key={ind.name}
+                  variants={fadeUp}
+                  className="group flex flex-col items-center py-7 px-4 rounded-2xl border border-slate-200 bg-white hover:border-aarvi-green/50 hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-default"
                 >
-                  <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">{industry.icon}</div>
-                  <h3 className="font-bold text-sm text-white group-hover:text-[#1db87a] transition-colors">
-                    {industry.name}
-                  </h3>
+                  <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">{ind.icon}</div>
+                  <span className="text-xs font-black text-aarvi-navy uppercase tracking-tight text-center leading-tight group-hover:text-aarvi-green transition-colors">
+                    {ind.name}
+                  </span>
                 </motion.div>
               ))}
             </motion.div>
           </div>
         </section>
 
-        {/* ────────────────────────────────────────────────────────────────────── */}
-        {/* CTA BANNER */}
-        {/* ────────────────────────────────────────────────────────────────────── */}
-        <section className="relative py-20 lg:py-28 bg-linear-to-r from-[#0a1628] via-[#0a1628] to-[#0a1628]/80 border-b border-white/5">
-          <div className="absolute inset-0 opacity-5" style={{
-            backgroundImage: 'linear-gradient(45deg, #1db87a 0%, transparent 50%)',
-          }} />
-
-          <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+        {/* ══════════════════════════════════════════════════════════════════ */}
+        {/* 6 · FEATURED PROJECT — wired for DB later                        */}
+        {/* ══════════════════════════════════════════════════════════════════ */}
+        <section className="bg-white py-10 lg:py-14 border-b border-slate-200">
+          <div className="max-w-7xl mx-auto px-6 lg:px-10">
+            <motion.span
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="flex flex-col md:flex-row items-center justify-between gap-8"
+              className="text-[10px] font-mono font-black text-aarvi-green tracking-[0.3em] uppercase block mb-8"
             >
-              
-              <div>
-                <span className="text-[10px] font-mono text-[#1db87a] uppercase tracking-widest mb-3 block">
-                  Next Steps
-                </span>
-                <h2 className="text-4xl lg:text-5xl font-black text-white uppercase tracking-tight mb-3">
-                  Need Process & Safety Engineering Expertise?
-                </h2>
-                <p className="text-white/60 text-lg max-w-lg">
-                  Connect with our technical authorities to discuss your specific process design and safety compliance requirements.
+              Featured Case Study
+            </motion.span>
+
+            {FEATURED_PROJECT ? (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch"
+              >
+                <div className="lg:col-span-5 relative rounded-2xl overflow-hidden min-h-75 bg-linear-to-br from-aarvi-navy to-[#16213d]" />
+
+                <div className="lg:col-span-7 flex flex-col justify-center">
+                  <h3 className="text-2xl font-black text-aarvi-navy uppercase tracking-tight mb-4">
+                    {FEATURED_PROJECT.title}
+                  </h3>
+                  <p className="text-text-body text-sm leading-relaxed mb-6">{FEATURED_PROJECT.scope}</p>
+                  <Link
+                    href="/projects"
+                    className="inline-flex items-center gap-2 text-aarvi-navy font-black text-xs uppercase tracking-widest hover:text-aarvi-green transition-colors w-fit"
+                  >
+                    View Case Study <ArrowUpRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="rounded-2xl border-2 border-dashed border-slate-200 bg-aarvi-bg p-12 lg:p-16 flex flex-col items-center text-center"
+              >
+                <div className="w-14 h-14 rounded-xl bg-white border border-slate-200 flex items-center justify-center mb-5">
+                  <Briefcase className="w-6 h-6 text-slate-300" strokeWidth={1.5} />
+                </div>
+                <h3 className="text-lg font-black text-aarvi-navy uppercase tracking-tight mb-2">
+                  Project Case Studies Coming Soon
+                </h3>
+                <p className="text-text-body text-sm max-w-md mb-6">
+                  This section will automatically pull a relevant featured project for
+                  Process & Safety Engineering from the projects database once connected.
                 </p>
+                <Link
+                  href="/projects"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 border border-slate-200 text-aarvi-navy font-black text-xs uppercase tracking-widest rounded-lg hover:border-aarvi-green hover:text-aarvi-green transition-colors"
+                >
+                  Browse All Projects <ArrowUpRight className="w-3.5 h-3.5" />
+                </Link>
+              </motion.div>
+            )}
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════════════════════════ */}
+        {/* 7 · CTA BANNER                                                     */}
+        {/* ══════════════════════════════════════════════════════════════════ */}
+        <section className="relative bg-aarvi-navy py-10 lg:py-14 overflow-hidden">
+          <div
+            className="absolute inset-0 pointer-events-none opacity-[0.05]"
+            style={{
+              backgroundImage: "radial-gradient(circle, #00875A 1px, transparent 1px)",
+              backgroundSize: "32px 32px"
+            }}
+          />
+          <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10">
+            <motion.div
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              variants={stagger}
+              className="flex flex-col md:flex-row items-start md:items-center justify-between gap-10"
+            >
+              <div className="max-w-lg">
+                <motion.span variants={fadeUp} className="text-aarvi-green text-[11px] font-bold uppercase tracking-[0.25em] mb-4 block">
+                  ┼ Let's Engineer Safety Together
+                </motion.span>
+                <motion.h2 variants={fadeUp} className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight leading-tight mb-4">
+                  Need Process & Safety Engineering Expertise?
+                </motion.h2>
+                <motion.p variants={fadeUp} className="text-white/60 text-sm leading-relaxed">
+                  Our experts are ready to support your next critical project.
+                </motion.p>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4 shrink-0">
+              <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-3 shrink-0">
                 <Link
                   href="/contact?service=process-safety"
-                  className="px-8 py-4 bg-[#1db87a] text-[#050505] font-black text-sm uppercase tracking-widest rounded-lg hover:bg-[#1db87a]/90 transition-all flex items-center gap-2 group whitespace-nowrap"
+                  className="inline-flex items-center justify-center gap-2 px-7 py-4 bg-aarvi-green text-white font-black text-sm uppercase tracking-widest rounded-lg hover:bg-[#00744d] shadow-[0_8px_20px_rgba(0,135,90,0.3)] hover:shadow-[0_12px_28px_rgba(0,135,90,0.4)] transition-all group"
                 >
-                  Talk to Experts <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  Talk to Our Experts
+                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </Link>
                 <Link
                   href="/downloads/process-capabilities.pdf"
-                  className="px-8 py-4 border border-white/20 text-white font-black text-sm uppercase tracking-widest rounded-lg hover:border-white/40 hover:bg-white/5 transition-all"
+                  className="inline-flex items-center justify-center gap-2 px-7 py-4 border border-white/20 text-white font-black text-sm uppercase tracking-widest rounded-lg hover:border-white/40 hover:bg-white/5 transition-all"
                 >
                   Download Capabilities
                 </Link>
-              </div>
+              </motion.div>
             </motion.div>
           </div>
         </section>

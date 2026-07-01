@@ -12,7 +12,7 @@ const coreValues = [
   },
   {
     title: "Integrated Multi-Discipline Delivery",
-    desc: "Process, Safety, Mechanical, Piping, Civil, Electrical and Instrumentation engineering are delivered through a single coordinated execution framework. Integrated teams reduce interface risks, improve constructability and accelerate project delivery.",
+    desc: "Process, Safety, Mechanical, Piping, Civil, Electrical and Instrumentation engineering are delivered through a single coordinated execution framework. Integrated multi-discipline teams improve design quality, reduce engineering interfaces, enhance constructability and minimize execution risks.",
     icon: <Settings className="w-6 h-6" />,
     id: "02"
   },
