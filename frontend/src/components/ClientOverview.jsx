@@ -137,7 +137,7 @@ export default function ClientOverview() {
               Validated by Industry Authorities
             </h2>
             <p className="text-slate-500 text-xs font-semibold leading-relaxed mt-4 max-w-sm">
-              From supermajor operators to global EPC contractors—our data deliverables populate the core models of the world's most complex assets.
+              From supermajor operators to global EPC contractors—our data deliverables populate the core models of the world&apos;s most complex assets.
             </p>
           </motion.div>
 
@@ -147,7 +147,7 @@ export default function ClientOverview() {
             className="bg-white border border-slate-200 rounded-3xl p-6 shadow-xs relative overflow-hidden h-60 flex flex-col justify-between"
           >
             <div className="absolute top-0 right-0 p-4 font-mono text-[8px] font-bold text-slate-300">
-              // SC_MATRIX_v3.2
+                {/* DYNAMIC SCREEN HUD */}
             </div>
 
             <AnimatePresence mode="wait">
@@ -163,7 +163,7 @@ export default function ClientOverview() {
                   <div className="flex items-center gap-2 mb-1.5">
                     <div className="w-1.5 h-1.5 rounded-full bg-aarvi-green animate-pulse" />
                     <span className="font-mono text-[9px] font-black tracking-wider text-slate-400 uppercase">
-                      {activeClient.marker} // ENGAGEMENT_DATA
+                      {activeClient.marker} {/* HUD Data Grid */}
                     </span>
                   </div>
                   <h3 className="text-xl font-black text-aarvi-navy uppercase tracking-tight line-clamp-1">
@@ -255,11 +255,7 @@ export default function ClientOverview() {
                         priority
                       />
                     </div>
-                    <span className={`text-[8px] font-mono font-black tracking-widest mt-2 transition-colors ${
-                      isActive ? "text-aarvi-green" : "text-slate-400"
-                    }`}>
-                      // {client.marker}
-                    </span>
+                    
                   </div>
                 );
               })}
@@ -302,11 +298,7 @@ export default function ClientOverview() {
                         priority
                       />
                     </div>
-                    <span className={`text-[8px] font-mono font-black tracking-widest mt-2 transition-colors ${
-                      isActive ? "text-aarvi-green" : "text-slate-400"
-                    }`}>
-                      // {client.marker}
-                    </span>
+                    
                   </div>
                 );
               })}

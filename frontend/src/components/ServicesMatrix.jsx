@@ -67,13 +67,7 @@ function ServiceRow({ svc, idx, globalIdx, isActive, isInView, onHover }) {
           focusVisibleRingColor: CYAN,
         }}
       >
-        {/* Catalog number */}
-        <span
-          className="text-[9px] font-mono w-5 shrink-0 transition-colors duration-200"
-          style={{ color: isActive ? CYAN : 'rgba(255,255,255,0.28)' }}
-        >
-          {String(globalIdx + 1).padStart(2, '0')}
-        </span>
+        
 
         {/* Icon box */}
         <div
@@ -95,13 +89,7 @@ function ServiceRow({ svc, idx, globalIdx, isActive, isInView, onHover }) {
           {svc.title}
         </span>
 
-        {/* Service code */}
-        <span
-          className="font-mono text-[8px] tracking-[0.15em] uppercase shrink-0 transition-colors duration-200 hidden xl:block"
-          style={{ color: isActive ? CYAN_DIM : 'rgba(255,255,255,0.18)' }}
-        >
-          {svc.code}
-        </span>
+        
 
         {/* Arrow */}
         <ArrowUpRight
@@ -129,19 +117,25 @@ export default function ServicesMatrix() {
       className="relative w-full bg-[#07080A] py-20 lg:py-24 overflow-hidden selection:bg-cyan-400 selection:text-black"
       aria-label="Engineering Services"
     >
+      <div 
+  aria-hidden="true"
+  className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+  style={{
+    backgroundImage: `
+      linear-gradient(to right, #ffffff 1px, transparent 1px), 
+      linear-gradient(to bottom, #ffffff 1px, transparent 1px)
+    `,
+    backgroundSize: "80px 80px",
+    backgroundPosition: "center",
+    // Masking creates the look of isolated "+" marks instead of long connecting grid lines
+    maskImage: "radial-gradient(circle, black 2px, transparent 2px)",
+    WebkitMaskImage: "radial-gradient(circle, black 2px, transparent 2px)",
+    maskSize: "80px 80px",
+    WebkitMaskSize: "80px 80px"
+  }}
+/>
 
-      {/* ── Blueprint grid — cyan tinted ── */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(0,212,184,0.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0,212,184,0.04) 1px, transparent 1px)
-          `,
-          backgroundSize: "48px 48px",
-        }}
-      />
+     
 
       {/* Subtle radial glow top-left */}
       <div
@@ -236,18 +230,7 @@ export default function ServicesMatrix() {
                         background: 'linear-gradient(to top, #0E1013 0%, rgba(14,16,19,0.15) 55%, transparent 100%)',
                       }}
                     />
-                    {/* Code badge */}
-                    <div
-                      className="absolute top-3 left-3 rounded px-2 py-0.5 backdrop-blur-sm"
-                      style={{
-                        background: 'rgba(0,212,184,0.12)',
-                        border: `1px solid ${CYAN_BORDER}`,
-                      }}
-                    >
-                      <span className="font-mono text-[9px] tracking-[0.2em] uppercase" style={{ color: CYAN }}>
-                        {active.code}
-                      </span>
-                    </div>
+                    
                   </div>
 
                   {/* Service info */}

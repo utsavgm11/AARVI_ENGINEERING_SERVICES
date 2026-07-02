@@ -41,16 +41,16 @@ import aspenHysysLogo from '../../../assets/aspen-hysys-logo.png';
 import aspenPlusLogo  from '../../../assets/aspen-plus-logo.png';
 import pipeNetLogo    from '../../../assets/pipenet-logo.png';
 import flareSimLogo   from '../../../assets/flaresim-logo.png';
-import phastLogo      from '../../../assets/phast-logo.png';
-import safetiLogo     from '../../../assets/safeti-logo.png';
+import phastLogo      from '../../../assets/phast-logo.webp';
+import safetiLogo     from '../../../assets/safeti-logo.webp';
 import phaProLogo     from '../../../assets/pha-pro-logo.png';
 import exSilentiaLogo from '../../../assets/exsilentia-logo.png';
 import detect3dLogo   from '../../../assets/detect3d-logo.png';
 import volgaLogo      from '../../../assets/volga-logo.png';
 import sppidLogo      from '../../../assets/sppid-logo.png';
-import avevaPidLogo   from '../../../assets/avevapid-logo.png';
-*/
+import avevaPidLogo   from '../../../assets/avevapid-logo.webp';
 
+*/
 
 // ─── CAPABILITIES DATA ───────────────────────────────────────────────────────
 const CAPABILITIES = [
@@ -416,11 +416,7 @@ export default function ProcessSafetyEngineeringPage() {
                   <div className="flex items-start gap-4 mb-7">
                     <span className="text-5xl font-black text-aarvi-green leading-none font-mono">{active.num}</span>
                     <div>
-                      <div className="inline-block px-2.5 py-1 bg-aarvi-green/10 border border-aarvi-green/30 rounded-full mb-2">
-                        <span className="text-[9px] font-mono font-black text-aarvi-green tracking-widest uppercase">
-                          {active.code}
-                        </span>
-                      </div>
+                      
                       <h2 className="text-2xl lg:text-3xl font-black text-aarvi-navy uppercase tracking-tight leading-tight">
                         {active.title}
                       </h2>
@@ -480,7 +476,7 @@ export default function ProcessSafetyEngineeringPage() {
                       href={`/contact?service=${active.code}`}
                       className="inline-flex items-center gap-2 px-6 py-3 bg-aarvi-green text-white font-black text-sm uppercase tracking-widest rounded-lg hover:bg-[#00744d] transition-colors group"
                     >
-                      Discuss {active.code}
+                      Discuss Projects
                       <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </Link>
                   </div>
@@ -508,18 +504,7 @@ export default function ProcessSafetyEngineeringPage() {
                       backgroundSize: "32px 32px"
                     }}
                   />
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-white/30 p-6 text-center z-0">
-                    <active.icon className="w-12 h-12" strokeWidth={1} />
-                    <span className="text-[9px] font-mono uppercase tracking-widest">
-                      Wireframe Visual<br />Placeholder
-                    </span>
-                  </div>
-                  <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between z-20">
-                    <span className="text-[9px] font-mono font-bold text-white/50 uppercase tracking-widest">
-                      {active.code}
-                    </span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-aarvi-green animate-pulse" />
-                  </div>
+                  
                 </div>
               </motion.div>
             </AnimatePresence>
@@ -548,7 +533,7 @@ export default function ProcessSafetyEngineeringPage() {
                 Advanced Tools. Proven Results.
               </motion.h2>
               <motion.p variants={fadeUp} className="text-text-body text-sm font-medium max-w-xl mx-auto">
-                We leverage the world's most advanced thermodynamic and risk calculation
+                We leverage the world&apos;s most advanced thermodynamic and risk calculation
                 environments to ensure absolute mathematical precision.
               </motion.p>
             </motion.div>
@@ -587,48 +572,7 @@ export default function ProcessSafetyEngineeringPage() {
           </div>
         </section>
 
-        {/* ══════════════════════════════════════════════════════════════════ */}
-        {/* 5 · INDUSTRIES WE SERVE                                           */}
-        {/* ══════════════════════════════════════════════════════════════════ */}
-        <section className="bg-aarvi-bg py-10 lg:py-14 border-b border-slate-200">
-          <div className="max-w-7xl mx-auto px-6 lg:px-10">
-            <motion.div
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: "-80px" }}
-              variants={stagger}
-              className="text-center mb-12"
-            >
-              <motion.span variants={fadeUp} className="text-[10px] font-mono font-black text-aarvi-green tracking-[0.3em] uppercase block mb-3">
-                Industries We Serve
-              </motion.span>
-              <motion.h2 variants={fadeUp} className="text-3xl md:text-4xl font-black text-aarvi-navy uppercase tracking-tight">
-                Engineering Solutions for Critical Industries
-              </motion.h2>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: "-80px" }}
-              variants={stagger}
-              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4"
-            >
-              {INDUSTRIES.map((ind) => (
-                <motion.div
-                  key={ind.name}
-                  variants={fadeUp}
-                  className="group flex flex-col items-center py-7 px-4 rounded-2xl border border-slate-200 bg-white hover:border-aarvi-green/50 hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-default"
-                >
-                  <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">{ind.icon}</div>
-                  <span className="text-xs font-black text-aarvi-navy uppercase tracking-tight text-center leading-tight group-hover:text-aarvi-green transition-colors">
-                    {ind.name}
-                  </span>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </section>
+        
 
         {/* ══════════════════════════════════════════════════════════════════ */}
         {/* 6 · FEATURED PROJECT — wired for DB later                        */}
@@ -715,7 +659,7 @@ export default function ProcessSafetyEngineeringPage() {
             >
               <div className="max-w-lg">
                 <motion.span variants={fadeUp} className="text-aarvi-green text-[11px] font-bold uppercase tracking-[0.25em] mb-4 block">
-                  ┼ Let's Engineer Safety Together
+                  ┼ Let&apos;s Engineer Safety Together
                 </motion.span>
                 <motion.h2 variants={fadeUp} className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight leading-tight mb-4">
                   Need Process & Safety Engineering Expertise?

@@ -1,5 +1,8 @@
 "use client";
 import React, { useState } from 'react';
+import { useAuth } from '@/context/AuthContext';
+import LoginModal from './LoginModal';
+import { ArrowUpRight, LayoutDashboard } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ShieldCheck, Mail, Phone, Building, Globe, MapPin, ExternalLink } from 'lucide-react';
@@ -51,6 +54,8 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
   const [activeOffice, setActiveOffice] = useState('chennai');
   const office = OFFICES[activeOffice];
+  const { token } = useAuth();
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   return (
     <footer className="w-full bg-[#060B19] border-t border-white/10 pt-16 pb-0 px-6 lg:px-10 text-slate-400 relative overflow-hidden select-none">
@@ -85,6 +90,24 @@ export default function Footer() {
               ISO 9001:2015 Framework
             </span>
           </div>
+
+          {token ? (
+  <Link
+    href="/admin/dashboard"
+    className="inline-flex items-center gap-2 mt-4 px-4 py-2.5 rounded-lg border border-aarvi-green/30 bg-aarvi-green/5 text-[10px] font-bold uppercase tracking-[0.18em] text-aarvi-green hover:bg-aarvi-green hover:text-black transition-all duration-300"
+  >
+    Console
+    <LayoutDashboard className="w-3.5 h-3.5" />
+  </Link>
+) : (
+  <button
+    onClick={() => setIsLoginOpen(true)}
+    className="inline-flex items-center gap-2 mt-4 px-4 py-2.5 rounded-lg border border-aarvi-green/30 bg-aarvi-green/5 text-[10px] font-bold uppercase tracking-[0.18em] text-aarvi-green hover:bg-aarvi-green hover:text-black transition-all duration-300 cursor-pointer"
+  >
+    Portal Login
+    <ArrowUpRight className="w-3.5 h-3.5" />
+  </button>
+)}
         </div>
 
         {/* COL 2 — Navigation Directory (Spans 2 Columns) */}
@@ -202,6 +225,10 @@ export default function Footer() {
         © {currentYear} AARVI ENCON LIMITED. ALL RIGHTS RESERVED.
       </div>
 
+    <LoginModal
+    isOpen={isLoginOpen}
+    onClose={() => setIsLoginOpen(false)}
+/>
     </footer>
   );
 }

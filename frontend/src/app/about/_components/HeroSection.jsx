@@ -95,27 +95,19 @@ export default function HeroSection() {
         </motion.div>
 
         {/* Fully Functional Scroll Indicators matching the image */}
-        <div className="absolute bottom-8 w-full px-8 md:px-16 lg:px-24 z-20 flex items-center justify-between pointer-events-none">
-          {/* Left Arrow */}
-          <button 
-            onClick={scrollToNextSection}
-            className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:border-white/80 hover:bg-white/10 text-white/80 hover:text-white transition-all cursor-pointer pointer-events-auto"
-            aria-label="Scroll down"
-          >
-            <ArrowDown className="w-4 h-4" />
-          </button>
+        <button
+  onClick={scrollToNextSection}
+  className="absolute bottom-5 right-8 md:right-12 lg:right-16 z-30 flex items-center gap-3 text-white/80 hover:text-white transition-all duration-300 cursor-pointer group focus:outline-none"
+  aria-label="Scroll down to next section"
+>
+  <span className="hidden sm:block font-mono text-xs uppercase tracking-[0.25em] font-semibold">
+    Scroll to explore
+  </span>
 
-          {/* Right Text + Arrow */}
-          <button 
-            onClick={scrollToNextSection}
-            className="hidden sm:flex items-center gap-3 text-white/80 font-mono text-xs hover:text-white transition-all cursor-pointer group pointer-events-auto"
-          >
-            <span className="uppercase tracking-widest font-semibold">Scroll to explore</span>
-            <div className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center group-hover:border-white/80 group-hover:bg-white/10 transition-all">
-              <ArrowDown className="w-4 h-4" />
-            </div>
-          </button>
-        </div>
+  <div className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center group-hover:border-white group-hover:bg-white/10 transition-all duration-300">
+    <ArrowDown className="w-4 h-4 animate-bounce" />
+  </div>
+</button>
 
       </div>
     </section>

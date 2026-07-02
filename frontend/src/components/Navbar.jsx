@@ -139,9 +139,6 @@ function ServiceDropdown({ t, onClose }) {
               className={`group flex flex-col gap-1 px-3.5 py-3 transition-colors duration-200 ${t.dlinkBg}`}
               style={{ borderBottom: `1px solid ${t.accent}08` }}
             >
-              <span className="font-mono text-[8px] tracking-[0.2em]" style={{ color: t.accent, opacity: 0.6 }}>
-                {s.code}
-              </span>
               <span className={`font-sans font-bold text-[11px] leading-snug tracking-wide transition-colors ${t.dlinkText} ${t.dlinkHov}`}>
                 {s.label}
               </span>
@@ -317,23 +314,7 @@ export default function Navbar() {
           {/* CTA + hamburger */}
           <div className="flex items-center gap-3 shrink-0">
             
-            {/* DYNAMIC DESKTOP CTA */}
-            {token ? (
-              <Link
-                href="/admin/dashboard"
-                onClick={closeMenu}
-                className={`hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 text-[11px] font-mono font-black tracking-wider uppercase rounded-none border transition-all duration-200 ${t.cta}`}
-              >
-                Console <LayoutDashboard className="w-3.5 h-3.5" strokeWidth={2.5} />
-              </Link>
-            ) : (
-              <button
-                onClick={() => setIsLoginOpen(true)}
-                className={`hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 text-[11px] font-mono font-black tracking-wider uppercase rounded-none border transition-all duration-200 ${t.cta}`}
-              >
-                Portal Login <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={2.5} />
-              </button>
-            )}
+            
 
             <button
               onClick={() => setMobileOpen((o) => !o)}
@@ -430,9 +411,6 @@ export default function Navbar() {
                         pathname === s.href ? t.linkAct : t.mobileSub
                       }`}
                     >
-                      <span className="font-mono text-[9px] mt-0.5 shrink-0" style={{ color: t.accent, opacity: 0.5 }}>
-                        {s.code}
-                      </span>
                       <span className="font-sans font-semibold leading-snug">{s.label}</span>
                     </Link>
                   ))}
@@ -444,23 +422,7 @@ export default function Navbar() {
                   </MobileSimpleLink>
                 ))}
 
-                {/* DYNAMIC MOBILE CTA */}
-                {token ? (
-                  <Link
-                    href="/admin/dashboard"
-                    onClick={() => setMobileOpen(false)}
-                    className={`mt-5 w-full flex items-center justify-center gap-1.5 py-3 text-[11px] font-mono font-black tracking-wider uppercase border transition-all duration-200 ${t.cta}`}
-                  >
-                    Console <LayoutDashboard className="w-3.5 h-3.5" strokeWidth={2.5} />
-                  </Link>
-                ) : (
-                  <button
-                    onClick={() => { setMobileOpen(false); setIsLoginOpen(true); }}
-                    className={`mt-5 w-full flex items-center justify-center gap-1.5 py-3 text-[11px] font-mono font-black tracking-wider uppercase border transition-all duration-200 ${t.cta}`}
-                  >
-                    Portal Login <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={2.5} />
-                  </button>
-                )}
+                
               </nav>
             </motion.div>
           )}
