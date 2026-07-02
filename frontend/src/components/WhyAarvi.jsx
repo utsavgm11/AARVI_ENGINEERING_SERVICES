@@ -118,11 +118,7 @@ export default function WhyAarvi() {
               role="listitem"
               className="relative bg-white rounded-3xl p-6 border border-slate-200/70 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 group overflow-hidden"
             >
-              {/* Scaled down watermark */}
-              <div className="absolute -top-4 -right-2 text-[6rem] font-black text-slate-50/80 group-hover:text-slate-100/80 transition-colors pointer-events-none select-none z-0">
-                {item.id}
-              </div>
-
+              
               <div className="relative z-10">
                 {/* Smaller, tighter icon box */}
                 <div className="w-12 h-12 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center mb-5 group-hover:bg-aarvi-green group-hover:scale-110 transition-all duration-300 shadow-sm">

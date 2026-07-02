@@ -142,9 +142,7 @@ function ClientCard({ client, index, visible }) {
       style={{ transitionDelay: visible ? `${index * 35}ms` : '0ms' }}
     >
       {/* Region badge */}
-      <span className={`absolute top-2.5 right-2.5 text-[8.5px] font-bold tracking-wider uppercase px-2 py-0.5 rounded ${REGION_COLORS[client.region]}`}>
-        {client.region}
-      </span>
+      
 
       {/* Corporate Logo Box (Grayscale flips to native color layout seamlessly on hover) */}
       <div className="relative w-full h-12 transition-all duration-300 grayscale opacity-35 group-hover:grayscale-0 group-hover:opacity-100 mix-blend-multiply">
@@ -158,12 +156,7 @@ function ClientCard({ client, index, visible }) {
         />
       </div>
 
-      <div className="text-center mt-1">
-        <p className="text-[12.5px] font-black text-aarvi-navy leading-tight group-hover:text-aarvi-green transition-colors">{client.name}</p>
-        <p className="text-[9px] font-mono font-bold tracking-wider uppercase text-slate-400 mt-0.5">
-          {FILTERS.find(f => f.key === client.sector)?.label}
-        </p>
-      </div>
+      
     </div>
   );
 }

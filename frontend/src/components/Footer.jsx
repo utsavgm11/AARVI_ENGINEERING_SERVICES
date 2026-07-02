@@ -19,19 +19,23 @@ const FOOTER_DIRECTORY = [
 ];
 
 const FOOTER_SERVICES = [
-  { label: "Process Engineering",     href: "/services/process-engineering" },
-  { label: "Piping & Plant Design",   href: "/services/piping-plant-design" },
-  { label: "Pipe Stress Analysis",    href: "/services/pipe-stress-analysis" },
-  { label: "Mechanical Equipment",    href: "/services/mechanical-engineering" },
-  { label: "Civil & Structural",      href: "/services/civil-structural-engineering" },
-  { label: "Offshore Topside",        href: "/services/offshore-structural-engineering" },
-  { label: "Electrical Systems",      href: "/services/electrical-engineering" },
-  { label: "Instrumentation & Control", href: "/services/instrumentation-engineering" },
+  { label: "Process & Safety Engineering",           href: "/services/process-safety-engineering" },
+  { label: "Plant Layout & Piping Engineering",      href: "/services/plant-layout-piping" },
+  { label: "Mechanical Engineering",                 href: "/services/mechanical-equipment" },
+  { label: "Civil & Structural Engineering",         href: "/services/civil-structural" },
+  { label: "Electrical Engineering",                 href: "/services/electrical-engineering" },
+  { label: "Instrumentation & Control Engineering",  href: "/services/instrumentation-control" },
+  { label: "Engineering Simulations",                href: "/services/engineering-simulations" },
+  { label: "Digital Engineering & 3D Modelling",     href: "/services/digital-engineering-3d" },
+  { label: "Project Engineering & PMC Support",      href: "/services/project-engineering-pmc" },
+  { label: "As-Built & Asset Documentation",         href: "/services/as-built-documentation" },
+  { label: "Engineering Data & Digitalization",      href: "/services/engineering-data-digitalization" },
+  { label: "Construction, Commissioning & Asset Support", href: "/services/construction-commissioning-support" },
 ];
 
 const OFFICES = {
   chennai: {
-    name: "Engineering HQ",
+    name: "Engineering Office",
     address: "1st Floor, Smartworks Bharati Vilas, 26B, Jawaharlal Nehru Salai, Guindy Industrial Estate, Ekkatuthangal, Chennai – 600032",
     phone: { display: "+91 44 4340 6666", href: "tel:+914443406666" },
     email: { display: "chennai@aarviencon.com", href: "mailto:chennai@aarviencon.com" },

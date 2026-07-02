@@ -79,6 +79,7 @@ const ALL_32_CLIENTS = [
 
 const TRACK_1_SET = ALL_32_CLIENTS.slice(0, 16);
 const TRACK_2_SET = ALL_32_CLIENTS.slice(16, 32);
+const TRACK_3_SET = ALL_32_CLIENTS.slice(22, 32);
 
 // ─── MOTION SCROLL ORCHESTRATION VARIANTS ────────────────────────────────────
 const hudContainerVariants = {
@@ -134,71 +135,15 @@ export default function ClientOverview() {
               ┼ STRATEGIC ALLIANCES
             </span>
             <h2 id="client-title" className="text-3xl md:text-4xl font-sans font-black text-aarvi-navy tracking-tight uppercase leading-none">
-              Validated by Industry Authorities
+              TRUSTED BY GLOBAL EPC CONTRACTORS & INDUSTRY LEADERS
             </h2>
             <p className="text-slate-500 text-xs font-semibold leading-relaxed mt-4 max-w-sm">
-              From supermajor operators to global EPC contractors—our data deliverables populate the core models of the world&apos;s most complex assets.
+              Trusted by leading EPC contractors, industrial enterprises, and energy companies across global engineering projects.
             </p>
           </motion.div>
 
           {/* DYNAMIC SCREEN HUD */}
-          <motion.div 
-            variants={hudItemVariants}
-            className="bg-white border border-slate-200 rounded-3xl p-6 shadow-xs relative overflow-hidden h-60 flex flex-col justify-between"
-          >
-            <div className="absolute top-0 right-0 p-4 font-mono text-[8px] font-bold text-slate-300">
-                {/* DYNAMIC SCREEN HUD */}
-            </div>
-
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeClient.id}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 10 }}
-                transition={{ duration: 0.25, ease: "easeOut" }}
-                className="space-y-4 flex-1 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center gap-2 mb-1.5">
-                    <div className="w-1.5 h-1.5 rounded-full bg-aarvi-green animate-pulse" />
-                    <span className="font-mono text-[9px] font-black tracking-wider text-slate-400 uppercase">
-                      {activeClient.marker} {/* HUD Data Grid */}
-                    </span>
-                  </div>
-                  <h3 className="text-xl font-black text-aarvi-navy uppercase tracking-tight line-clamp-1">
-                    {activeClient.name}
-                  </h3>
-                </div>
-
-                {/* HUD Data Grid */}
-                <div className="grid grid-cols-2 gap-y-3 gap-x-4 pt-2 border-t border-slate-100">
-                  <div className="flex items-center gap-2">
-                    <Target className="w-3.5 h-3.5 text-aarvi-green shrink-0" />
-                    <div className="font-mono text-[10px]">
-                      <span className="text-slate-400 block uppercase font-bold text-[8px]">Scale Classification</span>
-                      <span className="text-slate-700 font-black uppercase tracking-tight line-clamp-1">{activeClient.tier}</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <ShieldCheck className="w-3.5 h-3.5 text-aarvi-green shrink-0" />
-                    <div className="font-mono text-[10px]">
-                      <span className="text-slate-400 block uppercase font-bold text-[8px]">Operational Field</span>
-                      <span className="text-slate-700 font-black uppercase tracking-tight line-clamp-1">{activeClient.sector}</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-slate-50 border border-slate-100 rounded-xl p-3 flex items-center gap-2.5">
-                  <Briefcase className="w-3.5 h-3.5 text-aarvi-navy shrink-0" />
-                  <div className="font-mono text-[10px] leading-tight">
-                    <span className="text-slate-400 block uppercase font-bold text-[7px] mb-0.5">Primary Capability Engaged</span>
-                    <span className="text-aarvi-navy font-bold uppercase line-clamp-1">{activeClient.project}</span>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </motion.div>
+          
 
           <motion.div variants={hudItemVariants}>
             <Link 
@@ -236,9 +181,9 @@ export default function ClientOverview() {
                   <div
                     key={`${client.id}-t1-${idx}`}
                     onMouseEnter={() => setActiveClient(client)}
-                    className={`w-44 h-24 bg-white border rounded-2xl flex flex-col items-center justify-center p-4 cursor-pointer transition-all duration-300 ${
+                    className={`w-52 h-28 bg-white border rounded-2xl flex flex-col items-center justify-center p-4 cursor-pointer transition-all duration-300 ${
                       isActive 
-                        ? "border-aarvi-green shadow-md bg-slate-50 scale-102" 
+                        ? "border-aarvi-green shadow-[0_0_20px_rgba(0,138,94,0.12)]  bg-slate-50 scale-102" 
                         : "border-slate-200/80 hover:border-slate-400"
                     }`}
                   >
@@ -279,15 +224,15 @@ export default function ClientOverview() {
                   <div
                     key={`${client.id}-t2-${idx}`}
                     onMouseEnter={() => setActiveClient(client)}
-                    className={`w-44 h-24 bg-white border rounded-2xl flex flex-col items-center justify-center p-4 cursor-pointer transition-all duration-300 ${
+                    className={`w-52 h-28 bg-white border rounded-2xl flex flex-col items-center justify-center p-4 cursor-pointer transition-all duration-300 ${
                       isActive 
-                        ? "border-aarvi-green shadow-md bg-slate-50 scale-102" 
+                        ? "border-aarvi-green shadow-[0_0_20px_rgba(0,138,94,0.12)]  bg-slate-50 scale-102" 
                         : "border-slate-200/80 hover:border-slate-400"
                     }`}
                   >
                     <div 
                       className="relative w-full h-10 transition-all duration-300"
-                      style={{ filter: isActive ? 'none' : 'grayscale(100%) opacity(0.35)' }}
+                      style={{ filter: isActive ? 'none' : 'grayscale(100%) opacity(0.55)' }}
                     >
                       <Image 
                         src={client.logo}
@@ -304,6 +249,53 @@ export default function ClientOverview() {
               })}
             </div>
           </div>
+
+        {/* TRACK 03: Moving Left infinitely */}
+<div
+  className="w-full flex overflow-hidden group/track"
+  onMouseEnter={() => setIsSlowed(true)}
+  onMouseLeave={() => setIsSlowed(false)}
+>
+  <div
+    className={`flex gap-4 whitespace-nowrap will-change-transform animate-marquee-left ${
+      isSlowed ? "[animation-play-state:paused]" : ""
+    }`}
+  >
+    {[...TRACK_3_SET, ...TRACK_3_SET].map((client, idx) => {
+      const isActive = activeClient.id === client.id;
+
+      return (
+        <div
+          key={`${client.id}-t3-${idx}`}
+          onMouseEnter={() => setActiveClient(client)}
+          className={`w-52 h-28 bg-white border rounded-2xl flex items-center justify-center p-4 cursor-pointer transition-all duration-300 ${
+            isActive
+              ? "border-aarvi-green shadow-[0_0_20px_rgba(0,138,94,0.12)] bg-slate-50 scale-102"
+              : "border-slate-200/80 hover:border-slate-400"
+          }`}
+        >
+          <div
+            className="relative w-full h-10 transition-all duration-300"
+            style={{
+              filter: isActive
+                ? "none"
+                : "grayscale(100%) opacity(0.55)",
+            }}
+          >
+            <Image
+              src={client.logo}
+              alt={`${client.name} Logo`}
+              fill
+              sizes="180px"
+              className="object-contain"
+              priority
+            />
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</div>    
 
         </motion.div>
       </motion.div>

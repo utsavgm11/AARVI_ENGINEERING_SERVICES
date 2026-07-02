@@ -22,26 +22,26 @@ import img10 from '../assets/service-10.png';
 import img11 from '../assets/service-11.png';
 import img12 from '../assets/service-12.png';
 
-// ─── THEME TOKENS ────────────────────────────────────────────────────────────
-const CYAN       = '#00D4B8';        // primary accent
-const CYAN_DIM   = 'rgba(0,212,184,0.55)';
-const CYAN_GLOW  = 'rgba(0,212,184,0.12)';
-const CYAN_BORDER= 'rgba(0,212,184,0.3)';
+// ─── THEME TOKENS (Upgraded to Hero Palette) ────────────────────────────────
+const CYAN       = '#00E8B8';        // brighter, modern premium cyan
+const CYAN_DIM   = 'rgba(0,232,184,0.55)';
+const CYAN_GLOW  = 'rgba(0,232,184,0.04)'; // Subtle row glow
+const CYAN_BORDER= 'rgba(0,232,184,0.18)'; // Softened borders (40% reduction)
 
 // ─── SERVICE DATA ────────────────────────────────────────────────────────────
 const SERVICES = [
-  { title: "Process & Safety Engineering",  code: "PE-101", desc: "FEED studies, process simulation, PFD/P&ID development, and SIL assessments.",                        icon: Activity,  href: "/services/process-safety-engineering",      img: img1  },
-  { title: "Plant Layout & Piping",          code: "PP-102", desc: "3D routing, clash resolution, and isometric extraction.",                                               icon: Layers,    href: "/services/plant-layout-piping",              img: img2  },
-  { title: "Mechanical Engineering",         code: "ME-103", desc: "Static/rotating equipment sizing, vendor reviews, and pressure vessel support.",                       icon: Hammer,    href: "/services/mechanical-equipment",             img: img4  },
-  { title: "Civil & Structural",             code: "CS-104", desc: "Site development, structural steel racks, and blast-resistant design.",                                icon: Compass,   href: "/services/civil-structural",                 img: img5  },
-  { title: "Electrical Engineering",         code: "EL-105", desc: "Power system design, short circuit studies, and substation compliance.",                               icon: Zap,       href: "/services/electrical-engineering",           img: img7  },
-  { title: "Instrumentation & Control",      code: "IC-106", desc: "Datasheet development, cause & effect matrices, and SIS support.",                                    icon: Sliders,   href: "/services/instrumentation-control",          img: img8  },
-  { title: "Engineering Simulations",        code: "FE-107", desc: "Advanced computational fluid dynamics (CFD) and structural behaviour checks.",                        icon: Cpu,       href: "/services/engineering-simulations",          img: img10 },
-  { title: "Digital Engineering & 3D",       code: "DE-108", desc: "Integrated intelligent 3D plant coordination models and database upgrades.",                          icon: Box,       href: "/services/digital-engineering-3d",           img: img9  },
-  { title: "Project Engineering & PMC",      code: "PM-109", desc: "Project management, scheduling, and multi-discipline interface coordination.",                        icon: Briefcase, href: "/services/project-engineering-pmc",          img: img11 },
-  { title: "As-Built Documentation",         code: "AB-110", desc: "Database reconciliation and asset info validation handover packages.",                                icon: FileCheck, href: "/services/as-built-documentation",           img: img12 },
-  { title: "Engineering Data",               code: "ED-111", desc: "Legacy drawing digitization and digital twin data preparation workflows.",                            icon: Database,  href: "/services/engineering-data-digitalization",  img: img6  },
-  { title: "Construction & Commissioning",   code: "CC-112", desc: "Mechanical completion reviews, pre-commissioning, and startup support.",                              icon: Disc,      href: "/services/construction-commissioning-support",img: img3  },
+  { title: "Process & Safety Engineering", code: "PE-101", desc: "FEED studies, process simulation, PFD/P&ID development, and SIL assessments.", icon: Activity, href: "/services/process-safety-engineering", img: img1 },
+  { title: "Plant Layout & Piping Engineering", code: "PP-102", desc: "3D routing, clash resolution, and isometric extraction.", icon: Layers, href: "/services/plant-layout-piping", img: img2 },
+  { title: "Mechanical Engineering", code: "ME-103", desc: "Static/rotating equipment sizing, vendor reviews, and pressure vessel support.", icon: Hammer, href: "/services/mechanical-equipment", img: img4 },
+  { title: "Civil & Structural Engineering", code: "CS-104", desc: "Site development, structural steel racks, and blast-resistant design.", icon: Compass, href: "/services/civil-structural", img: img5 },
+  { title: "Electrical Engineering", code: "EL-105", desc: "Power system design, short circuit studies, and substation compliance.", icon: Zap, href: "/services/electrical-engineering", img: img7 },
+  { title: "Instrumentation & Control Engineering", code: "IC-106", desc: "Datasheet development, cause & effect matrices, and SIS support.", icon: Sliders, href: "/services/instrumentation-control", img: img8 },
+  { title: "Engineering Simulations", code: "FE-107", desc: "Advanced computational fluid dynamics (CFD) and structural behaviour checks.", icon: Cpu, href: "/services/engineering-simulations", img: img10 },
+  { title: "Digital Engineering & 3D Modelling", code: "DE-108", desc: "Integrated intelligent 3D plant coordination models and database upgrades.", icon: Box, href: "/services/digital-engineering-3d", img: img9 },
+  { title: "Project Engineering & PMC Support", code: "PM-109", desc: "Project management, scheduling, and multi-discipline interface coordination.", icon: Briefcase, href: "/services/project-engineering-pmc", img: img11 },
+  { title: "As-Built & Asset Documentation", code: "AB-110", desc: "Database reconciliation and asset info validation handover packages.", icon: FileCheck, href: "/services/as-built-documentation", img: img12 },
+  { title: "Engineering Data & Digitalization", code: "ED-111", desc: "Legacy drawing digitization and digital twin data preparation workflows.", icon: Database, href: "/services/engineering-data-digitalization", img: img6 },
+  { title: "Construction, Commissioning & Asset Support.", code: "CC-112", desc: "Mechanical completion reviews, pre-commissioning, and startup support.", icon: Disc, href: "/services/construction-commissioning-support", img: img3 },
 ];
 
 const COL_A = SERVICES.slice(0, 6);
@@ -56,40 +56,46 @@ function ServiceRow({ svc, idx, globalIdx, isActive, isInView, onHover }) {
       animate={isInView ? { opacity: 1, x: 0 } : {}}
       transition={{ delay: 0.08 + idx * 0.04, duration: 0.32 }}
       onMouseEnter={onHover}
+      className="group relative"
     >
+      {/* Background Hover Glow Block */}
+      <div 
+        className="absolute inset-0 -mx-4 rounded-xl transition-all duration-300 pointer-events-none"
+        style={{
+          background: isActive ? CYAN_GLOW : 'transparent',
+          boxShadow: isActive ? '0 0 25px rgba(0,232,184,0.08)' : 'none',
+        }}
+      />
+      
       <Link
         href={svc.href}
         aria-label={svc.title}
-        className="flex items-center gap-3 py-3.5 border-b w-full outline-none focus-visible:ring-1"
+        className="relative flex items-center gap-4 py-4 border-b w-full outline-none focus-visible:ring-1 z-10" // Increased py-4 for breathing room
         style={{
-          borderBottomColor: isActive ? CYAN_BORDER : 'rgba(255,255,255,0.08)',
+          borderBottomColor: isActive ? CYAN_BORDER : 'rgba(255,255,255,0.04)', // Reduced default border opacity
           transition: 'border-color 0.22s',
           focusVisibleRingColor: CYAN,
         }}
       >
-        
-
         {/* Icon box */}
         <div
           className="w-7 h-7 rounded-md flex items-center justify-center shrink-0 border transition-all duration-300"
           style={{
-            background:  isActive ? CYAN_GLOW  : 'rgba(255,255,255,0.04)',
-            borderColor: isActive ? CYAN_BORDER : 'rgba(255,255,255,0.1)',
+            background:  isActive ? CYAN_GLOW  : 'rgba(255,255,255,0.02)',
+            borderColor: isActive ? CYAN_BORDER : 'rgba(255,255,255,0.05)',
             color:       isActive ? CYAN        : 'rgba(255,255,255,0.4)',
           }}
         >
           <Icon className="w-3.5 h-3.5" strokeWidth={1.5} />
         </div>
 
-        {/* Title */}
+        {/* Title (Increased text size to 15px and opacity to 0.78 for better typography) */}
         <span
-          className="flex-1 text-[12.5px] font-bold uppercase tracking-wide transition-colors duration-200 leading-tight"
-          style={{ color: isActive ? '#ffffff' : 'rgba(255,255,255,0.62)' }}
+          className="flex-1 text-[15px] font-bold uppercase tracking-wide transition-colors duration-200 leading-tight"
+          style={{ color: isActive ? '#ffffff' : 'rgba(255,255,255,0.78)' }}
         >
           {svc.title}
         </span>
-
-        
 
         {/* Arrow */}
         <ArrowUpRight
@@ -114,37 +120,41 @@ export default function ServicesMatrix() {
   return (
     <section
       ref={ref}
-      className="relative w-full bg-[#07080A] py-20 lg:py-24 overflow-hidden selection:bg-cyan-400 selection:text-black"
+      // Added scanline animation class from your global CSS
+      className="relative w-full bg-[#04050A] py-24 lg:py-28 overflow-hidden selection:bg-[#00E8B8] selection:text-black"
       aria-label="Engineering Services"
     >
-      <div 
-  aria-hidden="true"
-  className="absolute inset-0 opacity-[0.03] pointer-events-none" 
-  style={{
-    backgroundImage: `
-      linear-gradient(to right, #ffffff 1px, transparent 1px), 
-      linear-gradient(to bottom, #ffffff 1px, transparent 1px)
-    `,
-    backgroundSize: "80px 80px",
-    backgroundPosition: "center",
-    // Masking creates the look of isolated "+" marks instead of long connecting grid lines
-    maskImage: "radial-gradient(circle, black 2px, transparent 2px)",
-    WebkitMaskImage: "radial-gradient(circle, black 2px, transparent 2px)",
-    maskSize: "80px 80px",
-    WebkitMaskSize: "80px 80px"
-  }}
-/>
+      {/* ── BACKGROUND: Ambient Animations & Scanlines (Grid Removed) ── */}
+      <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
+        
+        {/* Soft Scanline Overlay */}
+        <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.25)_50%)] bg-size-[100%_4px] opacity-70" />
+        
+        {/* Animated Top Left Glow */}
+        <motion.div
+          animate={{ x: [0, 30, 0], y: [0, -30, 0] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-40 -left-40 w-150 h-150 rounded-full opacity-60"
+          style={{ background: 'radial-gradient(circle, rgba(0,232,184,0.08) 0%, transparent 65%)' }}
+        />
+        
+        {/* Animated Center Glow */}
+        <motion.div
+          animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.6, 0.4] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-200 rounded-full opacity-40"
+          style={{ background: 'radial-gradient(circle, rgba(0,232,184,0.05) 0%, transparent 60%)' }}
+        />
+        
+        {/* Animated Bottom Right Glow */}
+        <motion.div
+          animate={{ x: [0, -30, 0], y: [0, 30, 0] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -bottom-40 -right-40 w-150 h-150 rounded-full opacity-60"
+          style={{ background: 'radial-gradient(circle, rgba(0,232,184,0.08) 0%, transparent 65%)' }}
+        />
 
-     
-
-      {/* Subtle radial glow top-left */}
-      <div
-        aria-hidden="true"
-        className="absolute -top-32 -left-32 w-125 h-125 rounded-full pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, rgba(0,212,184,0.06) 0%, transparent 70%)',
-        }}
-      />
+      </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
 
@@ -153,37 +163,29 @@ export default function ServicesMatrix() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="flex items-end justify-between mb-10 lg:mb-12"
+          className="flex items-end justify-between mb-12 lg:mb-16" // Increased bottom margin
         >
           <div>
             <div className="flex items-center gap-2 mb-3">
-              {/* Cyan pulse dot — matches hero style */}
-              <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: CYAN }} />
+              {/* Cyan pulse dot */}
+              <div className="w-1.5 h-1.5 rounded-full animate-pulse shadow-[0_0_8px_#00E8B8]" style={{ background: CYAN }} />
               <span
                 className="text-[10px] font-mono tracking-[0.25em] uppercase"
-                style={{ color: CYAN_DIM }}
+                style={{ color: CYAN }}
               >
                 Core Capabilities
               </span>
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-[2.75rem] font-black text-white uppercase tracking-tight leading-[1.05]">
+            {/* Unified White Color for Both Words */}
+            <h2 className="text-3xl md:text-4xl lg:text-[3rem] font-black text-white uppercase tracking-tight leading-[1.05]">
               Engineering
-              <span className="ml-3" style={{ color: 'rgba(255,255,255,0.25)' }}>Services</span>
+              <span className="ml-3 text-white">Services</span>
             </h2>
-          </div>
-
-          <div className="hidden sm:flex flex-col items-end gap-0.5">
-            <span className="text-5xl lg:text-6xl font-mono font-black leading-none" style={{ color: 'rgba(0,212,184,0.1)' }}>
-              12
-            </span>
-            <span className="text-[9px] font-mono tracking-widest uppercase" style={{ color: 'rgba(0,212,184,0.35)' }}>
-              Disciplines
-            </span>
           </div>
         </motion.div>
 
         {/* ── MAIN LAYOUT ─────────────────────────────────────────────────── */}
-        <div className="flex items-start gap-6 xl:gap-8">
+        <div className="flex items-start gap-8 xl:gap-12"> {/* Increased gap for breathing room */}
 
           {/* ─ Left: Live Preview Panel ─ */}
           <motion.aside
@@ -202,82 +204,64 @@ export default function ServicesMatrix() {
                 exit={{ opacity: 0, y: -7 }}
                 transition={{ duration: 0.18, ease: "easeOut" }}
               >
+                {/* UPGRADED CARD UI: Glass linear gradient, depth shadow */}
                 <div
-                  className="rounded-2xl overflow-hidden"
+                  className="rounded-2xl overflow-hidden backdrop-blur-sm"
                   style={{
-                    background: '#0E1013',
-                    border: `1px solid ${CYAN_BORDER}`,
-                    boxShadow: `0 0 32px rgba(0,212,184,0.07)`,
+                    background: 'linear-gradient(180deg, rgba(15,20,28,.95), rgba(9,11,18,.95))',
+                    border: `1px solid rgba(0,232,184,0.15)`,
+                    boxShadow: `0 20px 40px -10px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05)`,
                   }}
                 >
-                  {/* Service image */}
+                  {/* Service image (Sharper Treatment) */}
                   <div className="relative w-full" style={{ aspectRatio: '3 / 2' }}>
                     <Image
                       src={active.img}
                       alt={active.title}
                       fill
                       sizes="320px"
-                      className="object-cover"
+                      className="object-cover transition-all duration-500"
                       style={{
-                        opacity: 0.8,
-                        filter: 'grayscale(30%) hue-rotate(140deg) saturate(0.6)',
+                        opacity: 0.9,
+                        // Sharper, higher contrast, better saturation
+                        filter: 'brightness(0.95) contrast(1.08) saturate(0.85)',
                       }}
                     />
                     {/* Gradient fade to card bg */}
                     <div
                       className="absolute inset-0"
                       style={{
-                        background: 'linear-gradient(to top, #0E1013 0%, rgba(14,16,19,0.15) 55%, transparent 100%)',
+                        background: 'linear-gradient(to top, rgba(9,11,18,1) 0%, rgba(9,11,18,0.2) 60%, transparent 100%)',
                       }}
                     />
-                    
                   </div>
 
                   {/* Service info */}
-                  <div className="px-5 pt-4 pb-5">
-                    <h3 className="text-[14px] font-black text-white uppercase tracking-tight leading-snug">
+                  <div className="px-6 pt-3 pb-6 relative z-10">
+                    <h3 className="text-[15px] font-black text-white uppercase tracking-tight leading-snug">
                       {active.title}
                     </h3>
-                    <p className="text-[12px] leading-relaxed mt-2" style={{ color: 'rgba(255,255,255,0.58)' }}>
+                    <p className="text-[12px] leading-relaxed mt-2" style={{ color: 'rgba(255,255,255,0.65)' }}>
                       {active.desc}
                     </p>
                     <Link
                       href={active.href}
-                      className="inline-flex items-center gap-1.5 text-[10px] font-mono mt-4 pb-px transition-colors duration-200 group"
+                      className="inline-flex items-center gap-1.5 text-[10.5px] font-mono mt-5 pb-px transition-colors duration-200 group"
                       style={{ color: CYAN_DIM, borderBottom: `1px solid ${CYAN_BORDER}` }}
                       onMouseEnter={e => e.currentTarget.style.color = CYAN}
                       onMouseLeave={e => e.currentTarget.style.color = CYAN_DIM}
                     >
-                      Explore <ArrowUpRight className="w-2.5 h-2.5" />
+                      Explore Details <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </Link>
                   </div>
                 </div>
               </motion.div>
             </AnimatePresence>
-
-            {/* Progress indicator */}
-            <div className="flex items-center justify-between mt-3 px-1">
-              <span className="font-mono text-[9px]" style={{ color: 'rgba(0,212,184,0.4)' }}>
-                {String(activeIdx + 1).padStart(2, '0')}&nbsp;/&nbsp;12
-              </span>
-              <div className="flex items-center gap-0.5">
-                {SERVICES.map((_, i) => (
-                  <div
-                    key={i}
-                    className="h-px transition-all duration-300"
-                    style={{
-                      width:      i === activeIdx ? '16px' : '5px',
-                      background: i === activeIdx ? CYAN : 'rgba(255,255,255,0.18)',
-                    }}
-                  />
-                ))}
-              </div>
-            </div>
           </motion.aside>
 
           {/* ─ Column A: 01–06 ─ */}
           <div className="flex-1 min-w-0">
-            <div className="h-px w-full" style={{ background: `linear-gradient(to right, ${CYAN_BORDER}, transparent)` }} />
+            <div className="h-px w-full" style={{ background: `linear-gradient(to right, rgba(255,255,255,0.08), transparent)` }} />
             {COL_A.map((svc, idx) => (
               <ServiceRow
                 key={svc.code}
@@ -291,18 +275,18 @@ export default function ServicesMatrix() {
             ))}
           </div>
 
-          {/* Divider */}
+          {/* Divider (Reduced opacity) */}
           <div
             aria-hidden="true"
             className="hidden lg:block w-px self-stretch"
             style={{
-              background: `linear-gradient(to bottom, transparent, ${CYAN_BORDER} 20%, ${CYAN_BORDER} 80%, transparent)`,
+              background: `linear-gradient(to bottom, transparent, rgba(255,255,255,0.05) 20%, rgba(255,255,255,0.05) 80%, transparent)`,
             }}
           />
 
           {/* ─ Column B: 07–12 ─ */}
           <div className="flex-1 min-w-0">
-            <div className="h-px w-full" style={{ background: `linear-gradient(to right, ${CYAN_BORDER}, transparent)` }} />
+            <div className="h-px w-full" style={{ background: `linear-gradient(to right, rgba(255,255,255,0.08), transparent)` }} />
             {COL_B.map((svc, idx) => (
               <ServiceRow
                 key={svc.code}
@@ -323,30 +307,32 @@ export default function ServicesMatrix() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.85, duration: 0.4 }}
-          className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mt-10 pt-8"
-          style={{ borderTop: `1px solid rgba(0,212,184,0.12)` }}
+          className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mt-12 pt-8" // Increased mt-12
+          style={{ borderTop: `1px solid rgba(255,255,255,0.05)` }}
         >
-          <p className="text-[11px] font-mono tracking-wide" style={{ color: 'rgba(255,255,255,0.35)' }}>
+          <p className="text-[11px] font-mono tracking-wide" style={{ color: 'rgba(255,255,255,0.45)' }}>
             Full-lifecycle engineering · All project phases
           </p>
 
           <Link
             href="/services"
-            className="group inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest transition-all duration-300"
+            className="group inline-flex items-center gap-2.5 px-6 py-3 rounded-full text-[10.5px] font-mono font-bold uppercase tracking-widest transition-all duration-300"
             style={{
               border: `1px solid ${CYAN_BORDER}`,
               color: CYAN_DIM,
-              background: 'transparent',
+              background: 'rgba(0,0,0,0.2)',
             }}
             onMouseEnter={e => {
               e.currentTarget.style.background = CYAN_GLOW;
               e.currentTarget.style.color = CYAN;
               e.currentTarget.style.borderColor = CYAN;
+              e.currentTarget.style.boxShadow = '0 0 20px rgba(0,232,184,0.1)';
             }}
             onMouseLeave={e => {
-              e.currentTarget.style.background = 'transparent';
+              e.currentTarget.style.background = 'rgba(0,0,0,0.2)';
               e.currentTarget.style.color = CYAN_DIM;
               e.currentTarget.style.borderColor = CYAN_BORDER;
+              e.currentTarget.style.boxShadow = 'none';
             }}
           >
             View All Services
