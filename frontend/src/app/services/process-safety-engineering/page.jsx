@@ -57,7 +57,7 @@ const CAPABILITIES = [
   {
     num: "01", code: "PE-101", icon: Activity,
     image: pe101Img,
-    title: "Process Design & Simulation",
+    title: "Process Design ",
     shortDesc: "Rigorous steady-state and dynamic thermodynamic multi-phase processing models.",
     fullDesc: "Rigorous steady-state and dynamic thermodynamic multi-phase processing model builds ensuring maximum baseline plant throughput optimization.",
     deliverables: ["Process Simulation Models", "Thermodynamic Flow Reviews", "Optimization Case Studies", "Design Basis Documents"],
@@ -67,7 +67,7 @@ const CAPABILITIES = [
   {
     num: "02", code: "PE-102", icon: Database,
     image: pe102Img,
-    title: "Heat & Material Balance",
+    title: "Heat & Material Balance Development",
     shortDesc: "Comprehensive stream property data generation across operational envelopes.",
     fullDesc: "Complete mass and energy balance calculations with stream-by-stream property data, covering steady-state operations and dynamic scenarios across full operating ranges.",
     deliverables: ["Balance Calculations", "Stream Property Data", "Energy Analysis Reports", "Operational Envelope Maps"],
@@ -77,7 +77,7 @@ const CAPABILITIES = [
   {
     num: "03", code: "PE-103", icon: FileText,
     image: pe103Img,
-    title: "PFD, P&ID & Datasheets",
+    title: "PFD, P&ID & Process Datasheets",
     shortDesc: "Intelligent drafting and configuration mapping for equipment and instrumentation.",
     fullDesc: "Expert engineering drawing development including Process Flow Diagrams, Piping & Instrumentation Diagrams, and comprehensive equipment datasheets with full technical specifications.",
     deliverables: ["PFD Development", "P&ID Configuration", "Equipment Datasheets", "Instrument Specifications"],
@@ -87,7 +87,7 @@ const CAPABILITIES = [
   {
     num: "04", code: "PE-104", icon: Settings,
     image: pe104Img,
-    title: "Utility & Hydraulic Studies",
+    title: "Utility & Hydraulic System Studies",
     shortDesc: "Network analysis mapping line friction heads, pump NPSH, and full sizing matrices.",
     fullDesc: "Complete utility system analysis including pressure drop calculations, pump sizing, NPSH evaluation, and comprehensive hydraulic network modeling for steam, water, and gas systems.",
     deliverables: ["Network Analysis Models", "Pressure Drop Calculations", "Pump Sizing & Selection", "NPSH Availability Studies"],
@@ -97,7 +97,7 @@ const CAPABILITIES = [
   {
     num: "05", code: "PE-105", icon: ShieldAlert,
     image: pe105Img,
-    title: "HAZID / HAZOP Studies",
+    title: "Process Hazard Analysis (HAZID & HAZOP) ",
     shortDesc: "Expertly facilitated HAZID & HAZOP screening sessions for high-consequence failure modes.",
     fullDesc: "Comprehensive hazard identification and analysis using HAZID and HAZOP methodologies to identify and evaluate process risks, consequences, and safeguards with expert facilitation.",
     deliverables: ["HAZID Study Reports", "HAZOP Session Records", "Risk Register Development", "Safeguard Recommendations"],
@@ -107,7 +107,7 @@ const CAPABILITIES = [
   {
     num: "06", code: "PE-106", icon: Cpu,
     image: pe106Img,
-    title: "SIL & Functional Safety",
+    title: "SIL Assessment & Functional Safety ",
     shortDesc: "Assessment and layer of protection analysis to calibrate automated safety instrument functions.",
     fullDesc: "Rigorous Safety Integrity Level determination and Functional Safety assessments including LOPA analysis, SIS design verification, and proof test strategies aligned with IEC 61508/61511 standards.",
     deliverables: ["SIL Assessment Reports", "LOPA Studies", "SIS Design Verification", "Proof Test Procedures"],
@@ -117,7 +117,7 @@ const CAPABILITIES = [
   {
     num: "07", code: "PE-107", icon: Target,
     image: pe107Img,
-    title: "Risk & Consequence Analysis",
+    title: "Quantitative Risk & Consequence Analysis ",
     shortDesc: "Quantitative mapping of gas cloud bounds, thermal radiation flares, and overpressure.",
     fullDesc: "Advanced consequence modeling including dispersion analysis, thermal radiation mapping, and overpressure calculations to quantify risk and support emergency planning and site layout.",
     deliverables: ["Dispersion Modeling", "Thermal Radiation Maps", "Overpressure Analysis", "Risk Contour Maps"],
@@ -127,7 +127,7 @@ const CAPABILITIES = [
   {
     num: "08", code: "PE-108", icon: ClipboardCheck,
     image: pe108Img,
-    title: "Process Safety Management",
+    title: "Process Safety Management & Operational Readiness ",
     shortDesc: "Pre-commissioning safety audits, mechanical completion, and operational readiness.",
     fullDesc: "Comprehensive PSM program development including pre-commissioning safety verification, mechanical completion audits, and commissioning readiness assessments ensuring safe startup.",
     deliverables: ["PSM Program Design", "Safety Audits", "Commissioning Checklists", "Operational Procedures"],
@@ -177,6 +177,35 @@ export default function ProcessSafetyEngineeringPage() {
   const detailsRef = useRef(null);
   
   const active = CAPABILITIES[activeCap];
+
+  const carouselRef = useRef(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  // Mouse Drag Handlers for Desktop
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    setStartX(e.pageX - carouselRef.current.offsetLeft);
+    setScrollLeft(carouselRef.current.scrollLeft);
+  };
+
+  const handleMouseLeave = () => {
+    setIsDragging(false);
+    setIsMarqueeHovered(false); // Resume auto-scroll when mouse leaves
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - carouselRef.current.offsetLeft;
+    const walk = (x - startX) * 1.5; // 1.5 is the scroll speed multiplier
+    carouselRef.current.scrollLeft = scrollLeft - walk;
+  };
 
   const handleSelectCapability = (idx) => {
     setActiveCap(idx);
@@ -288,15 +317,7 @@ export default function ProcessSafetyEngineeringPage() {
                 ))}
               </motion.div>
 
-              <motion.div variants={fadeUp}>
-                <Link
-                  href="/contact?service=process-safety"
-                  className="inline-flex items-center gap-2 px-7 py-3.5 bg-aarvi-green text-white font-black text-sm uppercase tracking-widest rounded-lg hover:bg-[#00744d] shadow-[0_8px_20px_rgba(0,135,90,0.35)] hover:shadow-[0_12px_28px_rgba(0,135,90,0.45)] transition-all group"
-                >
-                  Talk to Our Experts
-                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </Link>
-              </motion.div>
+             
             </motion.div>
           </div>
         </section>
@@ -305,97 +326,97 @@ export default function ProcessSafetyEngineeringPage() {
         {/* 2 · CORE CAPABILITIES — Infinite Horizontal Marquee                */}
         {/* ══════════════════════════════════════════════════════════════════ */}
         <section className="bg-white py-10 lg:py-14 border-b border-slate-200 overflow-hidden">
-          <div className="max-w-7xl mx-auto px-6 lg:px-10">
-            <motion.div 
-              initial="hidden" 
-              whileInView="show" 
-              viewport={{ once: true, margin: "-80px" }} 
-              variants={stagger} 
-              className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10"
-            >
-              <div>
-                <motion.span 
-                  variants={fadeUp} 
-                  className="text-[10px] font-mono font-black text-aarvi-green tracking-[0.3em] uppercase block mb-3"
-                >
-                  Our 8 Core Capabilities
-                </motion.span>
-                <motion.h2 
-                  variants={fadeUp} 
-                  className="text-3xl md:text-4xl font-black text-aarvi-navy uppercase tracking-tight"
-                >
-                  Integrated Process & Safety Expertise
-                </motion.h2>
-              </div>
-            </motion.div>
-          </div>
+  <div className="max-w-7xl mx-auto px-6 lg:px-10">
+    <motion.div 
+      initial="hidden" 
+      whileInView="show" 
+      viewport={{ once: true, margin: "-80px" }} 
+      variants={stagger} 
+      className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10"
+    >
+      <div>
+        <motion.h2 
+          variants={fadeUp} 
+          className="text-3xl md:text-4xl font-black text-aarvi-navy uppercase tracking-tight"
+        >
+          Integrated Process & Safety Expertise
+        </motion.h2>
+      </div>
+    </motion.div>
+  </div>
 
-          {/* Infinite Scrolling Track */}
-          <div 
-            className="w-full flex overflow-hidden group/track pb-4"
-            onMouseEnter={() => setIsMarqueeHovered(true)}
-            onMouseLeave={() => setIsMarqueeHovered(false)}
+  {/* Interactive Scrolling Track */}
+  <div 
+    ref={carouselRef}
+    // Added native scroll support, hidden scrollbars, and grab cursors
+    className={`w-full flex overflow-x-auto pb-6 select-none scrollbar-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden ${
+      isDragging ? "cursor-grabbing" : "cursor-grab"
+    }`}
+    onMouseEnter={() => setIsMarqueeHovered(true)}
+    onMouseLeave={handleMouseLeave}
+    onMouseDown={handleMouseDown}
+    onMouseUp={handleMouseUp}
+    onMouseMove={handleMouseMove}
+    // Pause animation instantly when a mobile user touches it
+    onTouchStart={() => setIsMarqueeHovered(true)} 
+    onTouchEnd={() => setIsMarqueeHovered(false)}
+  >
+    <div 
+      // Pauses the CSS marquee when hovered, clicked, OR manually dragged
+      className={`flex gap-4 px-4 whitespace-nowrap will-change-transform animate-marquee ${
+        isMarqueeHovered || isMarqueeClicked || isDragging ? '[animation-play-state:paused]' : ''
+      }`}
+    >
+      {[...CAPABILITIES, ...CAPABILITIES].map((cap, idx) => {
+        const originalIndex = idx % CAPABILITIES.length;
+        const isActive = originalIndex === activeCap;
+        const Icon = cap.icon;
+        
+        return (
+          <motion.button 
+            key={`${cap.code}-${idx}`} 
+            initial={{ opacity: 0, y: 16 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            viewport={{ once: true, margin: "-60px" }} 
+            transition={{ delay: originalIndex * 0.05, duration: 0.4 }} 
+            onClick={() => handleSelectCapability(originalIndex)} 
+            className={`group relative shrink-0 w-70 sm:w-[320px] p-5 rounded-2xl border-2 text-left transition-all duration-300 pointer-events-auto ${
+              isActive 
+                ? "bg-white border-aarvi-green shadow-lg shadow-aarvi-green/10 -translate-y-1" 
+                : "bg-white border-slate-200 hover:border-aarvi-green/50 hover:shadow-md hover:-translate-y-1"
+            }`}
           >
-            <div 
-              className={`flex gap-4 px-4 whitespace-nowrap will-change-transform animate-marquee ${
-                isMarqueeHovered || isMarqueeClicked ? '[animation-play-state:paused]' : ''
-              }`}
-            >
-              {[...CAPABILITIES, ...CAPABILITIES].map((cap, idx) => {
-                const originalIndex = idx % CAPABILITIES.length;
-                const isActive = originalIndex === activeCap;
-                const Icon = cap.icon;
-                
-                return (
-                  <motion.button 
-                    key={`${cap.code}-${idx}`} 
-                    initial={{ opacity: 0, y: 16 }} 
-                    whileInView={{ opacity: 1, y: 0 }} 
-                    viewport={{ once: true, margin: "-60px" }} 
-                    transition={{ delay: originalIndex * 0.05, duration: 0.4 }} 
-                    onClick={() => handleSelectCapability(originalIndex)} 
-                    className={`group relative shrink-0 w-70 sm:w-[320px] p-5 rounded-2xl border-2 text-left transition-all duration-300 cursor-pointer ${
-                      isActive 
-                        ? "bg-white border-aarvi-green shadow-lg shadow-aarvi-green/10 -translate-y-1" 
-                        : "bg-white border-slate-200 hover:border-aarvi-green/50 hover:shadow-md hover:-translate-y-1"
-                    }`}
-                  >
-                    <div className="flex items-start justify-between mb-4">
-                      <div className={`w-10 h-10 rounded-lg border flex items-center justify-center transition-all duration-300 ${
-                        isActive 
-                          ? "bg-aarvi-green border-aarvi-green text-white" 
-                          : "bg-aarvi-bg border-slate-200 text-slate-400 group-hover:text-aarvi-green group-hover:border-aarvi-green/40"
-                      }`}>
-                        <Icon className="w-4.5 h-4.5" strokeWidth={1.5} />
-                      </div>
-                      <span className={`font-mono text-[10px] font-black tracking-widest transition-colors ${
-                        isActive ? "text-aarvi-green" : "text-slate-300"
-                      }`}>
-                        {cap.num}
-                      </span>
-                    </div>
-
-                    <h3 className="text-sm font-black text-aarvi-navy uppercase leading-tight tracking-tight mb-2 min-h-[2.2em] whitespace-normal">
-                      {cap.title}
-                    </h3>
-                    
-                    <p className="text-[11px] text-slate-400 leading-relaxed line-clamp-2 whitespace-normal">
-                      {cap.shortDesc}
-                    </p>
-
-                    {isActive && (
-                      <div className="mt-3 pt-3 border-t border-aarvi-green/15 flex items-center gap-1">
-                        <span className="text-[9px] font-mono font-black text-aarvi-green uppercase tracking-widest">
-                          Selected
-                        </span>
-                      </div>
-                    )}
-                  </motion.button>
-                );
-              })}
+            <div className="flex items-start justify-between mb-4">
+              <div className={`w-10 h-10 rounded-lg border flex items-center justify-center transition-all duration-300 ${
+                isActive 
+                  ? "bg-aarvi-green border-aarvi-green text-white" 
+                  : "bg-aarvi-bg border-slate-200 text-slate-400 group-hover:text-aarvi-green group-hover:border-aarvi-green/40"
+              }`}>
+                <Icon className="w-4.5 h-4.5" strokeWidth={1.5} />
+              </div>
             </div>
-          </div>
-        </section>
+
+            <h3 className="text-sm font-black text-aarvi-navy uppercase leading-tight tracking-tight mb-2 min-h-[2.2em] whitespace-normal">
+              {cap.title}
+            </h3>
+            
+            <p className="text-[11px] text-slate-400 leading-relaxed line-clamp-2 whitespace-normal">
+              {cap.shortDesc}
+            </p>
+
+            {isActive && (
+              <div className="mt-3 pt-3 border-t border-aarvi-green/15 flex items-center gap-1">
+                <span className="text-[9px] font-mono font-black text-aarvi-green uppercase tracking-widest">
+                  Selected
+                </span>
+              </div>
+            )}
+          </motion.button>
+        );
+      })}
+    </div>
+  </div>
+</section>
 
         {/* ══════════════════════════════════════════════════════════════════ */}
         {/* 3 · CAPABILITY DETAIL — 70% content / 30% wireframe, equal height */}

@@ -44,73 +44,101 @@ import {
 const INDUSTRIES = [
   {
     id: "oil-and-gas",
-    num: "01",
-    title: "Oil & Gas — Offshore & Onshore Facilities",
+    title: "Oil & Gas - Offshore & Onshore Facilities ",
     icon: Droplet,
-    excerpt: "Comprehensive upstream and downstream engineering frameworks for harsh marine and land configurations.",
-    keywords: ["Offshore Engineering", "Onshore Pipeline Systems", "Asset Integrity Management"],
+    excerpt:
+      "Integrated engineering solutions for upstream, midstream, and downstream oil & gas facilities across offshore and onshore operations.",
+    keywords: [
+      "Offshore Engineering",
+      "Onshore Pipelines",
+      "Asset Integrity"
+    ],
     metric: "150+ Facilities Engineered",
     image: oilGasImg
   },
   {
     id: "lng-gas-processing",
-    num: "02",
     title: "LNG & Gas Processing",
     icon: Wind,
-    excerpt: "Cryogenic infrastructure design, liquefaction plants, and strategic regasification terminal architectures.",
-    keywords: ["Cryogenic Engineering", "Liquefaction Terminal", "Gas Monetization"],
-    metric: "High-Efficiency Terminals",
-    image:  lngImg
+    excerpt:
+      "Engineering expertise for LNG terminals, cryogenic systems, gas processing plants, and regasification infrastructure.",
+    keywords: [
+      "Cryogenic Systems",
+      "LNG Terminals",
+      "Gas Processing"
+    ],
+    metric: "High-Efficiency LNG Projects",
+    image: lngImg
   },
   {
     id: "refining-petrochemicals",
-    num: "03",
     title: "Refining & Petrochemicals",
     icon: Flame,
-    excerpt: "Process system optimization, distillation units, and full-spectrum petrochemical plant integrations.",
-    keywords: ["Refinery Optimization", "Petrochemical Synthesis", "Process Safety Compliance"],
-    metric: "Global Compliance Scale",
-    image:  refiningImg
+    excerpt:
+      "End-to-end engineering for refineries and petrochemical facilities with a focus on safety, efficiency, and operational excellence.",
+    keywords: [
+      "Refinery Engineering",
+      "Petrochemicals",
+      "Process Safety"
+    ],
+    metric: "Global Process Expertise",
+    image: refiningImg
   },
   {
     id: "chemicals-fertilizers",
-    num: "04",
     title: "Chemicals & Fertilizers",
     icon: Layers,
-    excerpt: "Advanced technical design for multi-product chemical synthesis lines and heavy fertilizer plants.",
-    keywords: ["Ammonia Production Plants", "Industrial Synthesis Infrastructure", "Agrochemical Systems"],
-    metric: "Zero-Incident Design Profile",
-    image:  chemicalsImg
+    excerpt:
+      "Engineering support for chemical processing plants, fertilizer facilities, and industrial manufacturing infrastructure.",
+    keywords: [
+      "Chemical Plants",
+      "Fertilizer Systems",
+      "Process Engineering"
+    ],
+    metric: "Safe Process Design",
+    image: chemicalsImg
   },
   {
     id: "power-generation-utilities",
-    num: "05",
     title: "Power Generation & Utilities",
     icon: Zap,
-    excerpt: "Thermal power architectures, complex water treatment setups, and comprehensive industrial utilities distribution grid design.",
-    keywords: ["Thermal Power Systems", "Co-generation Loops", "Industrial Water Utility"],
-    metric: "Grid Scale Architectures",
-    image:  powerImg
+    excerpt:
+      "Engineering solutions for thermal power plants, utilities, water treatment systems, and industrial energy infrastructure.",
+    keywords: [
+      "Thermal Power",
+      "Utilities",
+      "Water Treatment"
+    ],
+    metric: "Power Infrastructure",
+    image: powerImg
   },
   {
     id: "renewable-energy",
-    num: "06",
     title: "Renewable Energy",
     icon: Sun,
-    excerpt: "Forward-thinking clean energy engineering, covering utility-scale solar arrays and hybrid grid configurations.",
-    keywords: ["Decarbonization Strategy", "Solar Array Substation", "Green Hydrogen Engineering"],
-    metric: "100% Sustainable Frameworks",
-    image:  renewableImg
+    excerpt:
+      "Supporting the energy transition with engineering solutions for solar, wind, battery storage, and green hydrogen projects.",
+    keywords: [
+      "Solar & Wind",
+      "Battery Storage",
+      "Green Hydrogen"
+    ],
+    metric: "Clean Energy Solutions",
+    image: renewableImg
   },
   {
     id: "industrial-infrastructure",
-    num: "07",
     title: "Industrial Infrastructure",
     icon: Factory,
-    excerpt: "Heavy civil, precise structural wireframing, and mechanical system layout design for advanced corporate production zones.",
-    keywords: ["Structural Wireframing", "Heavy Civil Foundations", "Mechanical Layout Optimization"],
-    metric: "Precision Structural Design",
-    image:  infraImg
+    excerpt:
+      "Comprehensive engineering for industrial infrastructure, structural systems, manufacturing facilities, and utility networks.",
+    keywords: [
+      "Structural Design",
+      "Industrial Facilities",
+      "Mechanical Systems"
+    ],
+    metric: "Integrated Infrastructure",
+    image: infraImg
   }
 ];
 
@@ -220,27 +248,10 @@ export default function IndustriesPage() {
                   className="object-cover"
                 />
               }
-              <div
-                className="absolute inset-0 opacity-[0.07]"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(rgba(255,255,255,1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,1) 1px,transparent 1px)",
-                  backgroundSize: "36px 36px"
-                }}
-              />
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-white/40">
-                <Factory className="w-10 h-10" strokeWidth={1} />
-                
-              </div>
+              
               <div className="absolute inset-0 bg-linear-to-t from-aarvi-navy/70 via-transparent to-transparent" />
 
-              {/* Floating badge */}
-              <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between">
-                <span className="text-[10px] font-mono font-bold text-white/70 uppercase tracking-widest">
-                  Multi-Discipline EPC
-                </span>
-                <span className="w-2 h-2 rounded-full bg-aarvi-green animate-pulse" />
-              </div>
+              
             </div>
           </motion.div>
         </div>
@@ -274,73 +285,63 @@ export default function IndustriesPage() {
                 <meta itemProp="name" content={industry.title} />
                 <meta itemProp="description" content={industry.excerpt} />
 
-                {/* ─── Card media / image placeholder ─── */}
+                {/* ─── Card media / image placeholder (UNTOUCHED) ─── */}
                 <div className="relative w-full aspect-video bg-aarvi-bg overflow-hidden">
-                  {
-                    
-
-                    <Image
-                      src={industry.image}
-                      alt={industry.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  }
+                  <Image
+                    src={industry.image}
+                    alt={industry.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
                   <div className="absolute inset-0 flex items-center justify-center bg-linear-to-br from-aarvi-navy/5 to-aarvi-green/5">
                     <Icon className="w-9 h-9 text-aarvi-navy/15" strokeWidth={1.2} />
                   </div>
-                  <div className="absolute top-3 left-3 px-2 py-1 bg-white/90 backdrop-blur-sm rounded-md border border-slate-100">
-                    <span className="font-mono text-[9px] font-bold text-slate-400 tracking-widest">
-                      {industry.num}
-                    </span>
-                  </div>
-                  
                 </div>
 
-                {/* ─── Card body ─── */}
-                <div className="p-7 lg:p-8 flex flex-col flex-1">
-                  {/* Icon block */}
-                  <div className="w-12 h-12 bg-aarvi-navy text-aarvi-green rounded-xl flex items-center justify-center mb-5 group-hover:bg-aarvi-green group-hover:text-white transition-colors duration-300 shadow-md shadow-aarvi-navy/10">
+                {/* ─── Card body (UI UPGRADED) ─── */}
+                <div className="p-7 lg:p-8 flex flex-col flex-1 relative z-10 bg-white">
+                  
+                  {/* Icon block - Added subtle border, refined colors, and a slight lift on hover */}
+                  <div className="w-12 h-12 bg-aarvi-navy/5 border border-aarvi-navy/10 text-aarvi-navy rounded-xl flex items-center justify-center mb-6 group-hover:bg-aarvi-navy group-hover:text-aarvi-green group-hover:border-aarvi-navy group-hover:-translate-y-1 transition-all duration-300 shadow-sm">
                     <Icon className="w-5 h-5" strokeWidth={1.5} />
                   </div>
 
-                  {/* Title & excerpt */}
+                  {/* Title - Tweaked font weight, size, and tighter tracking */}
                   <h2
-                    className="text-lg lg:text-xl font-bold text-aarvi-navy tracking-tight leading-snug mb-3 group-hover:text-aarvi-green transition-colors duration-300"
+                    className="text-[18px] lg:text-[20px] font-extrabold text-aarvi-navy tracking-tight leading-snug mb-3 group-hover:text-aarvi-green transition-colors duration-300"
                     itemProp="name"
                   >
                     {industry.title}
                   </h2>
-                  <p className="text-text-body text-sm leading-relaxed mb-6" itemProp="description">
+                  
+                  {/* Excerpt - Adjusted line height and text color for premium readability */}
+                  <p className="text-slate-500 text-[13.5px] leading-relaxed mb-6 grow" itemProp="description">
                     {industry.excerpt}
                   </p>
 
-                  {/* SEO keyword tags */}
-                  <div className="flex flex-wrap gap-2 mb-7">
+                  {/* SEO keyword tags - Refined spacing, borders, and added hover tint */}
+                  <div className="flex flex-wrap gap-1.5 mb-7">
                     {industry.keywords.map((kw) => (
                       <span
                         key={kw}
-                        className="bg-aarvi-bg text-slate-400 text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-md border border-slate-100"
+                        className="bg-slate-50 text-slate-500 text-[9.5px] font-bold uppercase tracking-widest px-2.5 py-1.5 rounded-sm border border-slate-200 group-hover:border-aarvi-green/30 group-hover:bg-aarvi-green/5 transition-colors duration-300"
                       >
                         {kw}
                       </span>
                     ))}
                   </div>
 
-                  {/* Footer */}
-                  <div className="border-t border-slate-100 pt-4 flex items-center justify-between mt-auto">
-                    <span className="text-[11px] font-bold tracking-wider uppercase text-slate-400">
+                  {/* Footer - Changed from centered text to a split CTA layout with animated arrow */}
+                  <div className="border-t border-slate-100 pt-5 mt-auto flex items-center justify-between group-hover:border-aarvi-green/20 transition-colors duration-300">
+                    <span className="text-[10.5px] font-bold uppercase tracking-widest text-slate-400 group-hover:text-aarvi-navy transition-colors duration-300">
                       {industry.metric}
                     </span>
-                    <Link
-                      href={`/services?sector=${industry.id}`}
-                      aria-label={`View capabilities for ${industry.title}`}
-                      className="text-aarvi-navy group-hover:text-aarvi-green font-bold text-xs flex items-center gap-1 transition-all duration-300"
-                    >
-                      View Capabilities
-                      <ArrowRight className={`w-3.5 h-3.5 transition-transform duration-300 ${isHovered ? "translate-x-1.5" : ""}`} />
-                    </Link>
+                    
+                    {/* Animated Arrow Icon for CTA feel */}
+                    <div className="w-7 h-7 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-aarvi-green transition-colors duration-300">
+                      <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition-colors duration-300" />
+                    </div>
                   </div>
                 </div>
 
@@ -348,7 +349,8 @@ export default function IndustriesPage() {
                 <div className="absolute top-0 right-0 w-16 h-16 bg-aarvi-green/5 rounded-bl-full translate-x-4 -translate-y-4 group-hover:scale-150 group-hover:bg-aarvi-green/10 transition-transform duration-500 pointer-events-none" />
               </motion.article>
             );
-          })}
+          }
+          )}
 
           {/* ─── "All Industries" closing tile ─── */}
           <motion.div
@@ -396,13 +398,7 @@ export default function IndustriesPage() {
             <source src="/industries-cta-bg.mp4" type="video/mp4" />
           </video>
         */}
-        <div
-          className="absolute inset-0 opacity-[0.05] pointer-events-none"
-          style={{
-            backgroundImage: "radial-gradient(circle, #00875A 1px, transparent 1px)",
-            backgroundSize: "32px 32px"
-          }}
-        />
+       
 
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <motion.div
