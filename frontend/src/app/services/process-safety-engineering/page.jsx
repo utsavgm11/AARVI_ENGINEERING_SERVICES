@@ -435,7 +435,7 @@ export default function ProcessSafetyEngineeringPage() {
                 {/* ─ 70%: Capability content ─ */}
                 <div className="w-full lg:w-[70%] p-8 lg:p-12">
                   <div className="flex items-start gap-4 mb-7">
-                    <span className="text-5xl font-black text-aarvi-green leading-none font-mono">{active.num}</span>
+                    
                     <div>
                       
                       <h2 className="text-2xl lg:text-3xl font-black text-aarvi-navy uppercase tracking-tight leading-tight">
@@ -493,13 +493,7 @@ export default function ProcessSafetyEngineeringPage() {
                   </div>
 
                   <div className="mt-9 pt-7 border-t border-slate-100">
-                    <Link
-                      href={`/contact?service=${active.code}`}
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-aarvi-green text-white font-black text-sm uppercase tracking-widest rounded-lg hover:bg-[#00744d] transition-colors group"
-                    >
-                      Discuss Projects
-                      <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                    </Link>
+                    
                   </div>
                 </div>
 
@@ -698,12 +692,7 @@ export default function ProcessSafetyEngineeringPage() {
                   Talk to Our Experts
                   <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </Link>
-                <Link
-                  href="/downloads/process-capabilities.pdf"
-                  className="inline-flex items-center justify-center gap-2 px-7 py-4 border border-white/20 text-white font-black text-sm uppercase tracking-widest rounded-lg hover:border-white/40 hover:bg-white/5 transition-all"
-                >
-                  Download Capabilities
-                </Link>
+                
               </motion.div>
             </motion.div>
           </div>
