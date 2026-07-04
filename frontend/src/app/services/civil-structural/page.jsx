@@ -22,45 +22,19 @@ import {
   Users, Clock, BadgeCheck, Briefcase
 } from "lucide-react";
 
-// ─── ASSET IMPORTS (Commented out to prevent Next.js compilation errors until files exist) ───
+// ─── ASSET IMPORTS ───────────────────────────────────────────────────────────
 
-/*
-// Capabilities Wireframes (800x1000)
-import cs101Img from '../../../assets/CS-101.png';
-import cs102Img from '../../../assets/CS-102.png';
-import cs103Img from '../../../assets/CS-103.png';
-import cs104Img from '../../../assets/CS-104.png';
-import cs105Img from '../../../assets/CS-105.png';
-import cs106Img from '../../../assets/CS-106.png';
-import cs107Img from '../../../assets/CS-107.png';
-import cs108Img from '../../../assets/CS-108.png';
-import cs109Img from '../../../assets/CS-109.png';
-import cs110Img from '../../../assets/CS-110.png';
+// Use a single, unified image for all capabilities as requested
+// Uncomment the line below when your image is in the assets folder
+import sharedCapabilityImg from '../../../assets/cse.png';
 
-// Software Logos (Transparent PNGs)
-import staadLogo  from '../../../assets/staad-logo.png';
-import sacsLogo   from '../../../assets/sacs-logo.png';
-import teklaLogo  from '../../../assets/tekla-logo.png';
-import autoCadLogo from '../../../assets/autocad-logo.png';
-*/
 
-// Use null as fallbacks while images are commented out to prevent crashing
-const cs101Img = null;
-const cs102Img = null;
-const cs103Img = null;
-const cs104Img = null;
-const cs105Img = null;
-const cs106Img = null;
-const cs107Img = null;
-const cs108Img = null;
-const cs109Img = null;
-const cs110Img = null;
 
 // ─── CAPABILITIES DATA ───────────────────────────────────────────────────────
 const CAPABILITIES = [
   {
     num: "01", code: "CS-101", icon: MapPin,
-    image: cs101Img,
+    image: sharedCapabilityImg,
     title: "Site Development Engineering",
     shortDesc: "Comprehensive topographical planning, grading, and drainage infrastructure.",
     fullDesc: "Complete site preparation engineering including topographical modeling, earthwork volume optimization, rough and fine grading plans, and complex surface/subsurface drainage network design to ensure flood-free facility operations.",
@@ -70,7 +44,7 @@ const CAPABILITIES = [
   },
   {
     num: "02", code: "CS-102", icon: Anchor,
-    image: cs102Img,
+    image: sharedCapabilityImg,
     title: "Offshore Structural Design",
     shortDesc: "Robust design of offshore platforms, jackets, and topside modules.",
     fullDesc: "Specialized engineering for harsh marine environments. We design offshore fixed platforms, jackets, and topside modules utilizing SACS software, ensuring structural integrity against extreme wave, wind, and operational fatigue loading.",
@@ -80,7 +54,7 @@ const CAPABILITIES = [
   },
   {
     num: "03", code: "CS-103", icon: AlignJustify,
-    image: cs103Img,
+    image: sharedCapabilityImg,
     title: "Pipe Rack Design",
     shortDesc: "Structural frameworks engineered to support complex, multi-level piping corridors.",
     fullDesc: "Design of robust steel and concrete pipe racks capable of handling massive dead loads, thermal friction forces from piping expansion, and complex dynamic loading. We ensure optimal spatial planning for piping, cable trays, and future expansions.",
@@ -90,7 +64,7 @@ const CAPABILITIES = [
   },
   {
     num: "04", code: "CS-104", icon: Building2,
-    image: cs104Img,
+    image: sharedCapabilityImg,
     title: "Design of Super Structures",
     shortDesc: "Architectural and structural engineering for heavy industrial buildings.",
     fullDesc: "Comprehensive design of massive industrial superstructures, including compressor shelters, turbine halls, and heavy manufacturing sheds. We integrate large EOT crane loads, mezzanine floors, and complex HVAC ducting support systems.",
@@ -100,7 +74,7 @@ const CAPABILITIES = [
   },
   {
     num: "05", code: "CS-105", icon: Activity,
-    image: cs105Img,
+    image: sharedCapabilityImg,
     title: "Structural Analysis",
     shortDesc: "Advanced finite element modeling to verify load-bearing integrity.",
     fullDesc: "Rigorous global structural analysis using STAAD.Pro to evaluate complex steel and concrete frameworks under dead, live, thermal, and dynamic operational loads, ensuring total compliance with AISC, ACI, and Eurocodes.",
@@ -110,7 +84,7 @@ const CAPABILITIES = [
   },
   {
     num: "06", code: "CS-106", icon: ArrowUpToLine,
-    image: cs106Img,
+    image: sharedCapabilityImg,
     title: "Lifting & Transportation Analysis",
     shortDesc: "Dynamic load simulations for the safe maneuvering of heavy modules.",
     fullDesc: "Critical engineering simulations for the fabrication, lifting, load-out, and sea-fastening of heavy pre-assembled modules (PAMs). We design lifting trunnions, spreader bars, and grillage to prevent structural yielding during transit.",
@@ -120,7 +94,7 @@ const CAPABILITIES = [
   },
   {
     num: "07", code: "CS-107", icon: Wind,
-    image: cs107Img,
+    image: sharedCapabilityImg,
     title: "Seismic & Wind Assessment",
     shortDesc: "Evaluating structural resilience against extreme environmental forces.",
     fullDesc: "Advanced dynamic analysis to simulate the impact of high-velocity winds, hurricanes, and severe seismic events on tall columns, towers, and building structures, applying ASCE 7, UBC, and local seismic codes.",
@@ -130,7 +104,7 @@ const CAPABILITIES = [
   },
   {
     num: "08", code: "CS-108", icon: Layers,
-    image: cs108Img,
+    image: sharedCapabilityImg,
     title: "Equipment Foundation Design",
     shortDesc: "Deep and shallow foundation engineering for heavy, vibrating machinery.",
     fullDesc: "Geotechnical interpretation and structural design of isolated footings, mat foundations, and deep piles. We specialize in dynamic block foundations for rotating equipment (compressors/turbines) to strictly limit soil resonance and vibration amplitudes.",
@@ -140,7 +114,7 @@ const CAPABILITIES = [
   },
   {
     num: "09", code: "CS-109", icon: ShieldAlert,
-    image: cs109Img,
+    image: sharedCapabilityImg,
     title: "Blast Resistant Structures",
     shortDesc: "Engineering heavily reinforced facilities to withstand explosive overpressures.",
     fullDesc: "Specialized design of Blast Resistant Modules (BRMs) and control rooms located within hazardous facility zones. We engineer high-mass concrete and steel systems to absorb and deflect vapor cloud explosion (VCE) blast waves per ASCE specifications.",
@@ -150,7 +124,7 @@ const CAPABILITIES = [
   },
   {
     num: "10", code: "CS-110", icon: Edit3,
-    image: cs110Img,
+    image: sharedCapabilityImg,
     title: "Structural Modification Studies",
     shortDesc: "Brownfield analysis for retrofitting and upgrading existing frameworks.",
     fullDesc: "Comprehensive adequacy checks of aging industrial structures. We conduct 3D laser scan integration, assess current load capacities, and design steel reinforcement retrofits to safely support new piping routes or heavier modern equipment.",
@@ -161,10 +135,10 @@ const CAPABILITIES = [
 ];
 
 const SOFTWARE_TOOLS = [
-  { name: "STAAD.Pro", category: "Structural Analysis" /*, logo: staadLogo */ },
-  { name: "SACS", category: "Offshore Analysis" /*, logo: sacsLogo */ },
-  { name: "Tekla", category: "Steel Detailing" /*, logo: teklaLogo */ },
-  { name: "AutoCAD", category: "Drafting" /*, logo: autoCadLogo */ }
+  { name: "STAAD.Pro", category: "Structural Analysis" },
+  { name: "SACS", category: "Offshore Analysis" },
+  { name: "Tekla Structures", category: "Steel Detailing" },
+  { name: "AutoCAD", category: "Drafting" }
 ];
 
 const FEATURED_PROJECT = null; 
@@ -380,7 +354,8 @@ export default function CivilStructuralEngineeringPage() {
                         isActive 
                           ? "bg-aarvi-green border-aarvi-green text-white" 
                           : "bg-aarvi-bg border-slate-200 text-slate-400 group-hover:text-aarvi-green group-hover:border-aarvi-green/40"
-                      }`}>
+                      }`}
+                      >
                         <Icon className="w-4.5 h-4.5" strokeWidth={1.5} />
                       </div>
                     </div>
@@ -484,7 +459,7 @@ export default function CivilStructuralEngineeringPage() {
                 <div className="w-full lg:w-[30%] relative min-h-75 lg:min-h-0 bg-linear-to-br from-aarvi-navy to-[#16213d] border-t lg:border-t-0 lg:border-l border-slate-200">
                   
                   {/* ─── ADD IMAGE HERE (Uncomment when images are imported) ─── */}
-                  {/*
+                  
                   {active.image && (
                     <Image 
                       src={active.image} 
@@ -494,7 +469,7 @@ export default function CivilStructuralEngineeringPage() {
                       className="object-cover opacity-90 z-10 mix-blend-screen"
                     />
                   )}
-                  */}
+                
 
                   <div
                     className="absolute inset-0 opacity-[0.08]"
@@ -548,19 +523,8 @@ export default function CivilStructuralEngineeringPage() {
                 <motion.div
                   key={tool.name}
                   variants={fadeUp}
-                  className="p-5 w-40 rounded-xl border border-slate-200 bg-aarvi-bg hover:border-aarvi-green/40 hover:bg-white hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center text-center cursor-default min-h-30"
+                  className="p-5 w-48 rounded-xl border border-slate-200 bg-aarvi-bg hover:border-aarvi-green/40 hover:bg-white hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center text-center cursor-default min-h-24"
                 >
-                  {/* ─── ADD SOFTWARE LOGO HERE (Uncomment when logos are imported) ─── */}
-                  {/*
-                  <div className="relative w-12 h-12 mb-3">
-                    <Image 
-                      src={tool.logo} 
-                      alt={`${tool.name} logo`}
-                      fill
-                      className="object-contain"
-                    />
-                  </div> 
-                  */}
                   <div className="font-mono text-xs font-black text-aarvi-navy uppercase tracking-widest leading-tight mb-1.5">
                     {tool.name}
                   </div>

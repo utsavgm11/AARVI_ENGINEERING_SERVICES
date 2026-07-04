@@ -4,8 +4,8 @@
 //
 // export const metadata = {
 //   title: "Plant Layout & Piping Engineering | Aarvi Engineering Services",
-//   description: "Expert 3D modeling, clash detection, stress analysis, and piping material engineering for complex industrial facilities.",
-//   keywords: ["piping engineering","plant layout","3D modeling","stress analysis","Caesar II","SP3D","E3D"],
+//   description: "Expert plant layout and piping engineering, including 3D modeling, stress analysis, and clash detection using E3D, SP3D, and Caesar II.",
+//   keywords: ["plant layout","piping engineering","3D modeling","pipe stress analysis","Caesar II","SP3D","AVEVA E3D","clash detection"],
 //   openGraph: { title: "Plant Layout & Piping Engineering", type: "website" }
 // };
 // ──────────────────────────────────────────────────────────────────────────────
@@ -17,148 +17,118 @@ import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
 import {
-  Map, BoxSelect, View, AlertOctagon, Waypoints, Magnet,
-  ScrollText, Factory, ArrowUpRight, ShieldCheck,
+  Map, Layers, Box, ShieldAlert, FileImage, Wrench, PenTool,
+  FileCheck, Activity, ArrowUpRight, ShieldCheck,
   Users, Clock, BadgeCheck, Briefcase
 } from "lucide-react";
 
-// ─── ASSET IMPORTS (Commented out to prevent Next.js compilation errors until files exist) ───
+// ─── ASSET IMPORTS ───────────────────────────────────────────────────────────
 
-/*
-// Capabilities Wireframes (800x1000)
-import pp101Img from '../../../assets/PP-101.png';
-import pp102Img from '../../../assets/PP-102.png';
-import pp103Img from '../../../assets/PP-103.png';
-import pp104Img from '../../../assets/PP-104.png';
-import pp105Img from '../../../assets/PP-105.png';
-import pp106Img from '../../../assets/PP-106.png';
-import pp107Img from '../../../assets/PP-107.png';
-import pp108Img from '../../../assets/PP-108.png';
-import pp109Img from '../../../assets/PP-109.png';
+// Use a single, unified image for all capabilities as requested
+// Uncomment the line below when your image is in the assets folder
+ import sharedCapabilityImg from '../../../assets/ple.png';
 
-// Software Logos (Transparent PNGs)
-import e3dLogo      from '../../../assets/e3d-logo.png';
-import sp3dLogo     from '../../../assets/sp3d-logo.png';
-import autoCadLogo  from '../../../assets/autocad-logo.png';
-import plant3dLogo  from '../../../assets/plant3d-logo.png';
-import navisworksLogo from '../../../assets/navisworks-logo.png';
-import caesarLogo   from '../../../assets/caesar-logo.png';
-import autoPipeLogo from '../../../assets/autopipe-logo.png';
-*/
 
-// Use null as fallbacks while images are commented out to prevent crashing
-const pp101Img = null;
-const pp102Img = null;
-const pp103Img = null;
-const pp104Img = null;
-const pp105Img = null;
-const pp106Img = null;
-const pp107Img = null;
-const pp108Img = null;
-const pp109Img = null;
 
 // ─── CAPABILITIES DATA ───────────────────────────────────────────────────────
 const CAPABILITIES = [
   {
-    num: "01", code: "PP-101", icon: Map,
-    image: pp101Img,
+    num: "01", code: "PL-101", icon: Map,
+    image: sharedCapabilityImg,
     title: "Plot Plan Development",
-    shortDesc: "Strategic master facility layouts prioritizing safety, accessibility, and constructability.",
-    fullDesc: "Strategic development of overall plant layout configurations. We optimize spatial distribution of process units, utility blocks, and piperacks to ensure maximum operational safety, logical process flow, and adherence to strict regulatory separation distances.",
-    deliverables: ["Overall Plot Plans", "Unit Plot Plans", "Hazard Distancing Studies", "Access & Egress Layouts"],
-    keyOutcomes: ["Optimized footprint", "Regulatory compliance", "Safe operability", "Clear construction zones"],
-    applications: ["Greenfield Facilities", "Plant Expansions", "Refineries", "Storage Terminals"]
+    shortDesc: "Strategic spatial arrangement of plant facilities to optimize process flow and safety.",
+    fullDesc: "Development of comprehensive overall and unit plot plans. We strategically arrange process equipment, piperacks, and utility blocks to optimize process flow, ensure strict safety spacing distances, and minimize the overall facility footprint.",
+    deliverables: ["Overall Plot Plans", "Unit Plot Plans", "Safety Distance Verifications", "Constructability Studies"],
+    keyOutcomes: ["Optimized plant footprint", "Regulatory code compliance", "Safe personnel egress routes", "Efficient land utilization"],
+    applications: ["Greenfield Plants", "Refineries", "Tank Farms", "Chemical Facilities"]
   },
   {
-    num: "02", code: "PP-102", icon: BoxSelect,
-    image: pp102Img,
+    num: "02", code: "PL-102", icon: Layers,
+    image: sharedCapabilityImg,
     title: "Equipment Layout Engineering",
-    shortDesc: "Detailed spatial orientation of static and rotary equipment within process limits.",
-    fullDesc: "Meticulous positioning of heavy static, rotary, and packaged equipment. Our layouts prioritize operational ergonomics, maintenance crane access, safe drop zones, and optimal nozzle orientations to minimize complex piping runs.",
-    deliverables: ["Equipment Layout Drawings", "Maintenance Drop Zone Studies", "Nozzle Orientation Checks", "Elevation Sections"],
-    keyOutcomes: ["Maintenance accessibility", "Optimized pipe routing", "Reduced footprint", "Crane access clearance"],
-    applications: ["Process Modules", "Compressor Shelters", "Pump Houses", "Reactor Structures"]
+    shortDesc: "Detailed positioning of mechanical assets ensuring operability and maintenance access.",
+    fullDesc: "Precise geometric positioning of process and utility equipment. We guarantee ergonomic operation, safe maintenance accessibility (drop zones/crane access), and highly efficient piping routing to minimize pressure drops.",
+    deliverables: ["Equipment Layout Drawings", "Maintenance Drop Zone Studies", "Sectional Elevation Views", "Equipment List Synchronization"],
+    keyOutcomes: ["Ergonomic operator access", "Minimal pipe routing runs", "Clash prevention", "Smooth maintenance turnarounds"],
+    applications: ["Compressor Shelters", "Pump Houses", "Process Modules", "Utility Blocks"]
   },
   {
-    num: "03", code: "PP-103", icon: View,
-    image: pp103Img,
+    num: "03", code: "PL-103", icon: Box,
+    image: sharedCapabilityImg,
     title: "3D Modeling",
-    shortDesc: "Intelligent, clash-free, data-centric digital twin construction of entire facilities.",
-    fullDesc: "Development of comprehensive, multi-discipline 3D models using industry-leading software (E3D/SP3D). We build intelligent digital twins that integrate piping, civil, structural, and E&I components for perfect visualization and spatial coordination.",
-    deliverables: ["Intelligent 3D Models", "Model Review Sessions (30/60/90%)", "Walkthrough Animations", "Database Exports"],
-    keyOutcomes: ["Visual design clarity", "Zero-clash construction", "Accurate MTOs", "Seamless discipline integration"],
-    applications: ["All Industrial Sectors", "Brownfield Upgrades", "Skid Modules", "Complex Process Plants"]
+    shortDesc: "Creation of highly accurate, intelligent 3D environments for complex process units.",
+    fullDesc: "Constructing high-fidelity, data-centric 3D models encompassing all piping, structural, and mechanical disciplines. Utilizing platforms like AVEVA E3D and SmartPlant 3D (SP3D) to establish a flawless single source of truth for the project.",
+    deliverables: ["Intelligent 3D Models", "Automated MTO Extraction", "Model Review Sessions (30/60/90%)", "Equipment Modeling"],
+    keyOutcomes: ["Visual design clarity", "Single source of truth", "Accurate Bill of Materials", "Seamless integration"],
+    applications: ["Complex Process Units", "Modular Skid Packages", "FPSO Topsides", "Brownfield Expansions"]
   },
   {
-    num: "04", code: "PP-104", icon: AlertOctagon,
-    image: pp104Img,
+    num: "04", code: "PL-104", icon: ShieldAlert,
+    image: sharedCapabilityImg,
     title: "Clash Detection & Resolution",
-    shortDesc: "Automated interference checking across all engineering disciplines prior to fabrication.",
-    fullDesc: "Rigorous hard and soft clash analysis utilizing Navisworks. We systematically detect and resolve interferences between piping, structural steel, cable trays, and equipment maintenance envelopes to eliminate costly on-site rework.",
+    shortDesc: "Systematic identification and mitigation of physical interferences before construction.",
+    fullDesc: "Rigorous clash analysis utilizing tools like Navisworks. We systematically detect, log, and resolve hard and soft interferences between piping, structural steel, cable trays, and maintenance envelopes long before fabrication begins.",
     deliverables: ["Clash Detection Reports", "Interference Resolution Logs", "Soft Clash (Maintenance) Audits", "Navisworks NWD Files"],
-    keyOutcomes: ["Zero field re-work", "Guaranteed constructability", "Schedule protection", "Cost savings"],
-    applications: ["Multi-discipline Projects", "Congested Brownfields", "Skid Packaging", "Dense Piperacks"]
+    keyOutcomes: ["Zero field rework", "Guaranteed constructability", "Schedule protection", "Cost savings"],
+    applications: ["Dense Piperacks", "Congested Brownfields", "Multi-contractor Interfaces", "Skid Packaging"]
   },
   {
-    num: "05", code: "PP-105", icon: Waypoints,
-    image: pp105Img,
-    title: "Piping GADs (General Arrangement)",
-    shortDesc: "Detailed orthographic piping extraction for construction sequence planning.",
-    fullDesc: "Extraction and detailing of comprehensive General Arrangement Drawings (GADs) from the 3D model. These precise orthographic plans provide constructors with the exact routing, elevations, and dimensional data required for field installation.",
-    deliverables: ["Piping Plan Drawings", "Elevation Sections", "Tie-in Location Plans", "Underground Piping Layouts"],
-    keyOutcomes: ["Clear installation guides", "Precise field tie-ins", "Accurate dimensioning", "Seamless construction"],
-    applications: ["Field Installation", "Fabrication Yards", "Underground Networks", "Complex Intersections"]
+    num: "05", code: "PL-105", icon: FileImage,
+    image: sharedCapabilityImg,
+    title: "Piping GADs",
+    shortDesc: "Precise General Arrangement Drawings detailing piping routes and battery limit tie-ins.",
+    fullDesc: "Extraction and drafting of highly detailed Piping General Arrangement Drawings (GADs). We document exact piping routes, elevations, inline instruments, and critical battery limit tie-in points for flawless field execution.",
+    deliverables: ["Piping Plan Drawings", "Sectional Elevations", "Tie-in Schedules", "Underground Piping Layouts"],
+    keyOutcomes: ["Clear installation guides", "Accurate routing representation", "Field execution clarity", "Contractor alignment"],
+    applications: ["Process Piping Networks", "Utility Headers", "Underground Drainage Systems", "Offsite Piping"]
   },
   {
-    num: "06", code: "PP-106", icon: Magnet,
-    image: pp106Img,
+    num: "06", code: "PL-106", icon: Wrench,
+    image: sharedCapabilityImg,
     title: "Pipe Support Engineering",
-    shortDesc: "Standard and special support design to restrain dynamic and thermal loads.",
-    fullDesc: "Comprehensive design and detailing of primary and secondary pipe supports. We engineer robust restraints, guides, anchors, and spring hangers tailored to absorb thermal expansion, sustain weight, and mitigate dynamic vibrational loads.",
-    deliverables: ["Support Location Plans", "Standard Support Details", "Special Support Structural Drawings", "Spring Hanger Datasheets"],
-    keyOutcomes: ["System integrity", "Vibration mitigation", "Thermal load management", "Code compliance"],
-    applications: ["High-Temp Lines", "Vibrating Equipment Lines", "Heavy Wall Piping", "FRP/GRP Systems"]
+    shortDesc: "Design and detailing of standard and special supports to withstand complex pipe loads.",
+    fullDesc: "Comprehensive engineering of pipe supporting structures. We design standard supports, custom trunnions, spring hangers, and dynamic restraints to safely transfer thermal, weight, and vibration loads to the primary structural steel.",
+    deliverables: ["Special Support Details", "Standard Support Layouts", "Spring Hanger Sizing", "Support Material Take-Offs"],
+    keyOutcomes: ["Preserved structural integrity", "Vibration damping", "Optimized support weights", "Stress load compliance"],
+    applications: ["High-Temperature Lines", "Vibrating Machinery Piping", "Heavy Wall Alloy Pipes", "FRP/GRP Piping"]
   },
   {
-    num: "07", code: "PP-107", icon: ScrollText,
-    image: pp107Img,
+    num: "07", code: "PL-107", icon: PenTool,
+    image: sharedCapabilityImg,
     title: "Isometric & Spool Generation",
-    shortDesc: "Automated extraction of fabrication-ready piping isometrics and BOMs.",
-    fullDesc: "Automated extraction of highly detailed piping isometrics directly from the intelligent 3D model. Each drawing includes precise cut lengths, weld mapping, and a comprehensive Bill of Materials (BOM) for shop fabrication.",
-    deliverables: ["Fabrication Isometrics", "Erection Isometrics", "Spool Drawings", "Accurate Bill of Materials (BOM)"],
-    keyOutcomes: ["Shop-ready drawings", "Accurate procurement", "Traceable weld tracking", "Minimized field welding"],
-    applications: ["Shop Fabrication", "Field Assembly", "Material Procurement", "Weld Mapping"]
+    shortDesc: "Automated extraction of fabrication-ready piping isometrics and weld maps.",
+    fullDesc: "Rapid generation of piping isometrics and fabrication spool drawings directly from the intelligent 3D model. We ensure all cut-lengths, weld locations, and bill of materials (BOM) are perfectly accurate for shop fabrication.",
+    deliverables: ["Piping Isometrics", "Fabrication Spools", "Weld Maps", "Cut-Length Summaries"],
+    keyOutcomes: ["Shop fabrication readiness", "Weld traceability", "Reduced field welding", "Accelerated erection"],
+    applications: ["Shop Fabrication Yards", "Site Assembly Corridors", "Alloy Piping Systems", "Modular Skids"]
   },
   {
-    num: "08", code: "PP-108", icon: Factory,
-    image: pp108Img,
-    title: "Material Engineering (RFQs, TQs, VDR)",
-    shortDesc: "Comprehensive material procurement support, vendor review, and specification drafting.",
-    fullDesc: "End-to-end piping material engineering including the generation of Piping Material Specifications (PMS), Requisitions for Quotation (RFQs), Technical Query (TQ) resolution, and rigorous Vendor Document Review (VDR) to ensure metallurgical integrity.",
-    deliverables: ["Piping Material Specs (PMS)", "Valve & Specialty Datasheets", "Technical Bid Evaluations (TBE)", "Vendor Document Reviews (VDR)"],
-    keyOutcomes: ["Optimal material selection", "Code compliance (ASME/API)", "Procurement accuracy", "Quality assurance"],
-    applications: ["Corrosive Environments", "Cryogenic Service", "High-Pressure Systems", "Specialty Valves"]
+    num: "08", code: "PL-108", icon: FileCheck,
+    image: sharedCapabilityImg,
+    title: "Material Engineering",
+    shortDesc: "Lifecycle management of piping material specifications and procurement execution.",
+    fullDesc: "Complete execution of piping material engineering. We develop precise Piping Material Specifications (PMS) and manage the procurement cycle, including RFQs, Technical Bid Evaluations (TBE), and Vendor Document Reviews (VDR).",
+    deliverables: ["Piping Material Specs (PMS)", "Material Requisitions (MR)", "Technical Bid Evaluations (TBE)", "Vendor Document Review (VDR)"],
+    keyOutcomes: ["Optimized metallurgy selection", "Cost-effective procurement", "Code compliant materials", "Vendor alignment"],
+    applications: ["Bulk Piping Procurement", "Specialty Manual Valves", "Corrosive Service Materials", "High-Pressure Fittings"]
   },
   {
-    num: "09", code: "PP-109", icon: ShieldCheck,
-    image: pp109Img,
+    num: "09", code: "PL-109", icon: Activity,
+    image: sharedCapabilityImg,
     title: "Pipe Stress Analysis",
-    shortDesc: "Finite element analysis of piping systems under thermal, seismic, and dynamic loads.",
-    fullDesc: "Advanced stress analysis using CAESAR II / AutoPipe to simulate complex piping behavior under thermal cycling, pressure, seismic events, and wind loads. We ensure all nozzle loads and stress margins remain strictly within ASME B31.3/B31.1 limits.",
-    deliverables: ["Stress Analysis Reports", "Equipment Nozzle Load Checks", "Spring Support Sizing", "Dynamic/Surge Analysis"],
-    keyOutcomes: ["Code compliance guaranteed", "Equipment nozzle protection", "Fatigue failure prevention", "Safe system flexibility"],
-    applications: ["Compressor Piping", "High-Temperature Lines", "PSV Flare Headers", "Long-Span Piperacks"]
+    shortDesc: "Advanced flexibility analysis to evaluate thermal expansion and dynamic load safety.",
+    fullDesc: "Rigorous pipe stress and flexibility analysis utilizing Caesar II or AutoPipe. We evaluate high-temperature expansion, dead weight, wind/seismic forces, and dynamic loads to ensure piping systems comply perfectly with ASME B31.3 codes.",
+    deliverables: ["Stress Analysis Reports", "Load Topologies", "Equipment Nozzle Load Checks", "Flange Leakage Checks"],
+    keyOutcomes: ["Equipment nozzle protection", "Thermal fatigue prevention", "B31.3/B31.1 compliance", "Safe operational lifecycles"],
+    applications: ["High-Temp Steam Lines", "Cryogenic Piping", "Pump/Compressor Suction Headers", "Flare Networks"]
   }
 ];
 
 const SOFTWARE_TOOLS = [
-  { name: "E3D", category: "3D Modeling" /*, logo: e3dLogo */ },
-  { name: "SP3D", category: "3D Modeling" /*, logo: sp3dLogo */ },
-  { name: "AutoCAD", category: "Drafting" /*, logo: autoCadLogo */ },
-  { name: "Plant3D", category: "3D Modeling" /*, logo: plant3dLogo */ },
-  { name: "Navisworks", category: "Clash Detection" /*, logo: navisworksLogo */ },
-  { name: "Caesar II", category: "Stress Analysis" /*, logo: caesarLogo */ },
-  { name: "AutoPipe", category: "Stress Analysis" /*, logo: autoPipeLogo */ }
+  { name: "AVEVA E3D / SP3D", category: "Intelligent 3D Modeling" },
+  { name: "Caesar II / AutoPipe", category: "Pipe Stress Analysis" },
+  { name: "AutoCAD / Plant3D", category: "Drafting & 3D Design" },
+  { name: "Navisworks", category: "Review & Clash Detection" }
 ];
 
 const FEATURED_PROJECT = null; 
@@ -226,11 +196,11 @@ export default function PlantLayoutPipingPage() {
         <title>Plant Layout & Piping Engineering | Aarvi Engineering Services</title>
         <meta
           name="description"
-          content="Expert 3D modeling, clash detection, stress analysis, and piping material engineering for complex industrial facilities."
+          content="Expert plant layout and piping engineering, including 3D modeling, stress analysis, and clash detection using E3D, SP3D, and Caesar II."
         />
-        <meta name="keywords" content="piping engineering, plant layout, 3D modeling, stress analysis, Caesar II, SP3D, E3D" />
+        <meta name="keywords" content="plant layout, piping engineering, 3D modeling, pipe stress analysis, Caesar II, SP3D, AVEVA E3D, clash detection" />
         <meta property="og:title" content="Plant Layout & Piping Engineering | Aarvi Engineering Services" />
-        <meta property="og:description" content="End-to-end piping design and stress analysis solutions across the asset lifecycle." />
+        <meta property="og:description" content="Facility routing, spatial optimization, and advanced piping stress solutions." />
         <meta property="og:type" content="website" />
       </Head>
 
@@ -247,7 +217,7 @@ export default function PlantLayoutPipingPage() {
               className="absolute inset-0 w-full h-full object-cover"
               aria-hidden="true"
             >
-              <source src="/piping_system.mp4" type="video/mp4" />
+              <source src="/piping-hero.mp4" type="video/mp4" />
             </video>
             }
             <div className="absolute inset-0 bg-linear-to-r from-aarvi-navy via-aarvi-navy/85 to-aarvi-navy/30" />
@@ -264,7 +234,7 @@ export default function PlantLayoutPipingPage() {
               <motion.div variants={fadeUp} className="flex items-center gap-2 mb-5">
                 <span className="w-1.5 h-1.5 rounded-full bg-aarvi-green animate-pulse" />
                 <span className="text-[11px] font-mono font-bold text-aarvi-green tracking-[0.25em] uppercase">
-                  Piping Engineering
+                  Facility Routing & Spatial Optimization
                 </span>
               </motion.div>
 
@@ -276,7 +246,7 @@ export default function PlantLayoutPipingPage() {
               </motion.h1>
 
               <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm font-bold text-white/60 mb-6">
-                {["3D Modeling", "Stress Analysis", "Isometric Prep", "Material Specs", "Clash Resolution"].map((t, i) => (
+                {["Plot Plans", "3D Modeling", "Clash Detection", "Stress Analysis", "Isometrics"].map((t, i) => (
                   <React.Fragment key={t}>
                     <span>{t}</span>
                     {i < 4 && <span className="text-white/25">•</span>}
@@ -285,14 +255,14 @@ export default function PlantLayoutPipingPage() {
               </motion.div>
 
               <motion.p variants={fadeUp} className="text-base lg:text-lg text-white/70 leading-relaxed max-w-lg mb-9">
-                Delivering highly accurate, clash-free intelligent 3D designs and rigorous stress analysis to ensure safe and efficient fluid transport across complex industrial facilities.
+                Delivering clash-free, highly optimized 3D plant layouts and precise piping engineering to ensure safe, accessible, and cost-effective facility operations.
               </motion.p>
 
               <motion.div variants={fadeUp} className="grid grid-cols-3 gap-6 mb-9 pb-9 border-b border-white/15 max-w-lg">
                 {[
                   { icon: Users, value: "32+", label: "Global EPC Partners" },
                   { icon: Clock, value: "39+", label: "Years of Excellence" },
-                  { icon: BadgeCheck, value: "100%", label: "Clash-Free Design" }
+                  { icon: BadgeCheck, value: "100%", label: "ASME B31 Compliant" }
                 ].map(({ icon: Icon, value, label }) => (
                   <div key={label}>
                     <div className="flex items-center gap-1.5 mb-1">
@@ -374,7 +344,8 @@ export default function PlantLayoutPipingPage() {
                         isActive 
                           ? "bg-aarvi-green border-aarvi-green text-white" 
                           : "bg-aarvi-bg border-slate-200 text-slate-400 group-hover:text-aarvi-green group-hover:border-aarvi-green/40"
-                      }`}>
+                      }`}
+                      >
                         <Icon className="w-4.5 h-4.5" strokeWidth={1.5} />
                       </div>
                     </div>
@@ -478,7 +449,7 @@ export default function PlantLayoutPipingPage() {
                 <div className="w-full lg:w-[30%] relative min-h-75 lg:min-h-0 bg-linear-to-br from-aarvi-navy to-[#16213d] border-t lg:border-t-0 lg:border-l border-slate-200">
                   
                   {/* ─── ADD IMAGE HERE (Uncomment when images are imported) ─── */}
-                  {/*
+                  
                   {active.image && (
                     <Image 
                       src={active.image} 
@@ -488,7 +459,7 @@ export default function PlantLayoutPipingPage() {
                       className="object-cover opacity-90 z-10 mix-blend-screen"
                     />
                   )}
-                  */}
+                  
 
                   <div
                     className="absolute inset-0 opacity-[0.08]"
@@ -526,8 +497,8 @@ export default function PlantLayoutPipingPage() {
                 Advanced Tools. Proven Results.
               </motion.h2>
               <motion.p variants={fadeUp} className="text-text-body text-sm font-medium max-w-xl mx-auto">
-                We leverage the world&apos;s most advanced 3D modeling and stress analysis
-                environments to ensure absolute structural and spatial precision.
+                We leverage the world&apos;s most advanced 3D modeling and piping stress calculation
+                environments to ensure absolute spatial and structural precision.
               </motion.p>
             </motion.div>
 
@@ -542,19 +513,8 @@ export default function PlantLayoutPipingPage() {
                 <motion.div
                   key={tool.name}
                   variants={fadeUp}
-                  className="p-5 w-40 rounded-xl border border-slate-200 bg-aarvi-bg hover:border-aarvi-green/40 hover:bg-white hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center text-center cursor-default min-h-30"
+                  className="p-5 w-48 rounded-xl border border-slate-200 bg-aarvi-bg hover:border-aarvi-green/40 hover:bg-white hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center text-center cursor-default min-h-24"
                 >
-                  {/* ─── ADD SOFTWARE LOGO HERE (Uncomment when logos are imported) ─── */}
-                  {/*
-                  <div className="relative w-12 h-12 mb-3">
-                    <Image 
-                      src={tool.logo} 
-                      alt={`${tool.name} logo`}
-                      fill
-                      className="object-contain"
-                    />
-                  </div> 
-                  */}
                   <div className="font-mono text-xs font-black text-aarvi-navy uppercase tracking-widest leading-tight mb-1.5">
                     {tool.name}
                   </div>
@@ -650,19 +610,19 @@ export default function PlantLayoutPipingPage() {
             >
               <div className="max-w-lg">
                 <motion.span variants={fadeUp} className="text-aarvi-green text-[11px] font-bold uppercase tracking-[0.25em] mb-4 block">
-                  ┼ Let&apos;s Engineer the Layout
+                  ┼ Let&apos;s Design the Facility
                 </motion.span>
                 <motion.h2 variants={fadeUp} className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight leading-tight mb-4">
-                  Need Plant Layout & Piping Expertise?
+                  Need Piping Engineering Expertise?
                 </motion.h2>
                 <motion.p variants={fadeUp} className="text-white/60 text-sm leading-relaxed">
-                  Our experts are ready to route and stress-analyze your next critical facility.
+                  Our experts are ready to design your next critical facility with highly optimized layouts and stress-validated piping systems.
                 </motion.p>
               </div>
 
               <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-3 shrink-0">
                 <Link
-                  href="/contact?service=piping-engineering"
+                  href="/contact?service=plant-layout-piping"
                   className="inline-flex items-center justify-center gap-2 px-7 py-4 bg-aarvi-green text-white font-black text-sm uppercase tracking-widest rounded-lg hover:bg-[#00744d] shadow-[0_8px_20px_rgba(0,135,90,0.3)] hover:shadow-[0_12px_28px_rgba(0,135,90,0.4)] transition-all group"
                 >
                   Talk to Our Experts

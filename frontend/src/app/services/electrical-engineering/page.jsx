@@ -22,40 +22,19 @@ import {
   Users, Clock, BadgeCheck, Briefcase
 } from "lucide-react";
 
-// ─── ASSET IMPORTS (Commented out to prevent Next.js compilation errors until files exist) ───
+// ─── ASSET IMPORTS ───────────────────────────────────────────────────────────
 
-/*
-// Capabilities Wireframes (800x1000)
-import ee101Img from '../../../assets/EE-101.png';
-import ee102Img from '../../../assets/EE-102.png';
-import ee103Img from '../../../assets/EE-103.png';
-import ee104Img from '../../../assets/EE-104.png';
-import ee105Img from '../../../assets/EE-105.png';
-import ee106Img from '../../../assets/EE-106.png';
-import ee107Img from '../../../assets/EE-107.png';
-import ee108Img from '../../../assets/EE-108.png';
+// Use a single, unified image for all capabilities as requested
+// Uncomment the line below when your image is in the assets folder
+import sharedCapabilityImg from '../../../assets/ee.png';
 
-// Software Logos (Transparent PNGs)
-import etapLogo      from '../../../assets/etap-logo.png';
-import spelLogo      from '../../../assets/spel-logo.png';
-import autoCadLogo   from '../../../assets/autocad-logo.png';
-*/
 
-// Use null as fallbacks while images are commented out to prevent crashing
-const ee101Img = null;
-const ee102Img = null;
-const ee103Img = null;
-const ee104Img = null;
-const ee105Img = null;
-const ee106Img = null;
-const ee107Img = null;
-const ee108Img = null;
 
 // ─── CAPABILITIES DATA ───────────────────────────────────────────────────────
 const CAPABILITIES = [
   {
     num: "01", code: "EE-101", icon: Zap,
-    image: ee101Img,
+    image: sharedCapabilityImg,
     title: "Power System Design",
     shortDesc: "End-to-end electrical distribution networks from high voltage to low voltage systems.",
     fullDesc: "Comprehensive design of robust electrical distribution architectures. We develop single line diagrams (SLDs), configure High Voltage (HV), Medium Voltage (MV), and Low Voltage (LV) networks, and design emergency backup systems ensuring uninterrupted facility power.",
@@ -65,7 +44,7 @@ const CAPABILITIES = [
   },
   {
     num: "02", code: "EE-102", icon: Activity,
-    image: ee102Img,
+    image: sharedCapabilityImg,
     title: "Load Flow Studies",
     shortDesc: "Steady-state power flow analysis to verify system capacity and voltage drop.",
     fullDesc: "Rigorous load flow and voltage drop analysis utilizing ETAP. We simulate steady-state conditions to determine real and reactive power flow, verify equipment continuous ratings, and ensure voltage profiles remain strictly within operational limits.",
@@ -75,7 +54,7 @@ const CAPABILITIES = [
   },
   {
     num: "03", code: "EE-103", icon: AlertTriangle,
-    image: ee103Img,
+    image: sharedCapabilityImg,
     title: "Short Circuit Studies",
     shortDesc: "Fault current calculations and protective relay coordination.",
     fullDesc: "Advanced fault analysis to calculate maximum available short-circuit currents. We determine precise breaker interruption ratings and develop comprehensive protective relay coordination studies to isolate electrical faults instantly and safely.",
@@ -85,7 +64,7 @@ const CAPABILITIES = [
   },
   {
     num: "04", code: "EE-104", icon: GitMerge,
-    image: ee104Img,
+    image: sharedCapabilityImg,
     title: "Cable Sizing & Routing",
     shortDesc: "Precise cable selection and intelligent 3D routing for optimal power delivery.",
     fullDesc: "Detailed engineering of power, control, and instrumentation cabling. We perform rigorous sizing calculations factoring in voltage drop, short-circuit withstand, and thermal derating, coupled with intelligent 3D cable tray routing to avoid field clashes.",
@@ -95,7 +74,7 @@ const CAPABILITIES = [
   },
   {
     num: "05", code: "EE-105", icon: CloudLightning,
-    image: ee105Img,
+    image: sharedCapabilityImg,
     title: "Earthing & Lightning Protection",
     shortDesc: "Grounding grid design and direct-strike shielding for maximum facility safety.",
     fullDesc: "Comprehensive design of plant grounding (earthing) systems and lightning protection networks in accordance with IEEE 80 and IEC 62305. We calculate step and touch potentials to ensure absolute safety for personnel and sensitive electronics.",
@@ -105,7 +84,7 @@ const CAPABILITIES = [
   },
   {
     num: "06", code: "EE-106", icon: Factory,
-    image: ee106Img,
+    image: sharedCapabilityImg,
     title: "Substation Engineering",
     shortDesc: "Complete layout and engineering of indoor GIS and outdoor AIS substations.",
     fullDesc: "End-to-end engineering for high-voltage substations. We develop optimized spatial layouts, equipment clearances, trench layouts, and structural interfaces for both Air Insulated Substations (AIS) and compact Gas Insulated Substations (GIS).",
@@ -115,7 +94,7 @@ const CAPABILITIES = [
   },
   {
     num: "07", code: "EE-107", icon: FileText,
-    image: ee107Img,
+    image: sharedCapabilityImg,
     title: "Electrical Equipment Specifications",
     shortDesc: "Detailed technical datasheets and vendor evaluations for critical power assets.",
     fullDesc: "Drafting of rigorous technical specifications for major electrical equipment including transformers, switchgears, Motor Control Centers (MCCs), and UPS systems. We manage the procurement cycle via Technical Bid Evaluations (TBE) and vendor document reviews.",
@@ -125,7 +104,7 @@ const CAPABILITIES = [
   },
   {
     num: "08", code: "EE-108", icon: ShieldAlert,
-    image: ee108Img,
+    image: sharedCapabilityImg,
     title: "Hazardous Area Compliance",
     shortDesc: "Area classification and intrinsically safe design for volatile environments.",
     fullDesc: "Evaluation and mapping of explosive vapor/dust environments per ATEX, NEC, and IEC standards. We generate precise hazardous area classification schedules and specify appropriately rated explosion-proof or intrinsically safe electrical equipment.",
@@ -136,9 +115,9 @@ const CAPABILITIES = [
 ];
 
 const SOFTWARE_TOOLS = [
-  { name: "ETAP", category: "Power System Analysis" /*, logo: etapLogo */ },
-  { name: "SmartPlant", category: "Electrical Design" /*, logo: spelLogo */ },
-  { name: "AutoCAD", category: "Drafting & 2D Layouts" /*, logo: autoCadLogo */ }
+  { name: "ETAP", category: "Power System Analysis" },
+  { name: "SmartPlant Electrical", category: "Electrical Design" },
+  { name: "AutoCAD", category: "Drafting & 2D Layouts" }
 ];
 
 const FEATURED_PROJECT = null; 
@@ -354,7 +333,8 @@ export default function ElectricalEngineeringPage() {
                         isActive 
                           ? "bg-aarvi-green border-aarvi-green text-white" 
                           : "bg-aarvi-bg border-slate-200 text-slate-400 group-hover:text-aarvi-green group-hover:border-aarvi-green/40"
-                      }`}>
+                      }`}
+                      >
                         <Icon className="w-4.5 h-4.5" strokeWidth={1.5} />
                       </div>
                     </div>
@@ -458,7 +438,7 @@ export default function ElectricalEngineeringPage() {
                 <div className="w-full lg:w-[30%] relative min-h-75 lg:min-h-0 bg-linear-to-br from-aarvi-navy to-[#16213d] border-t lg:border-t-0 lg:border-l border-slate-200">
                   
                   {/* ─── ADD IMAGE HERE (Uncomment when images are imported) ─── */}
-                  {/*
+                  
                   {active.image && (
                     <Image 
                       src={active.image} 
@@ -468,7 +448,7 @@ export default function ElectricalEngineeringPage() {
                       className="object-cover opacity-90 z-10 mix-blend-screen"
                     />
                   )}
-                  */}
+                  
 
                   <div
                     className="absolute inset-0 opacity-[0.08]"
@@ -522,19 +502,8 @@ export default function ElectricalEngineeringPage() {
                 <motion.div
                   key={tool.name}
                   variants={fadeUp}
-                  className="p-5 w-40 rounded-xl border border-slate-200 bg-aarvi-bg hover:border-aarvi-green/40 hover:bg-white hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center text-center cursor-default min-h-30"
+                  className="p-5 w-48 rounded-xl border border-slate-200 bg-aarvi-bg hover:border-aarvi-green/40 hover:bg-white hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center text-center cursor-default min-h-24"
                 >
-                  {/* ─── ADD SOFTWARE LOGO HERE (Uncomment when logos are imported) ─── */}
-                  {/*
-                  <div className="relative w-12 h-12 mb-3">
-                    <Image 
-                      src={tool.logo} 
-                      alt={`${tool.name} logo`}
-                      fill
-                      className="object-contain"
-                    />
-                  </div> 
-                  */}
                   <div className="font-mono text-xs font-black text-aarvi-navy uppercase tracking-widest leading-tight mb-1.5">
                     {tool.name}
                   </div>

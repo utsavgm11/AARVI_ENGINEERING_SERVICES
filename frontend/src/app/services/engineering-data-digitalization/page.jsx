@@ -25,10 +25,10 @@ import {
 
 // Use a single, unified image for all capabilities as requested
 // Uncomment the line below when your image is in the assets folder
-// import sharedCapabilityImg from '../../../assets/capabilities-shared.png';
+ import sharedCapabilityImg from '../../../assets/edd.png';
 
 // Fallback to prevent Next.js from crashing while the import is commented out
-const sharedCapabilityImg = null;
+
 
 // ─── CAPABILITIES DATA ───────────────────────────────────────────────────────
 const CAPABILITIES = [
@@ -426,8 +426,8 @@ export default function EngineeringDataDigitalizationPage() {
                 {/* ─ 30%: Wireframe visual panel ─ */}
                 <div className="w-full lg:w-[30%] relative min-h-75 lg:min-h-0 bg-linear-to-br from-aarvi-navy to-[#16213d] border-t lg:border-t-0 lg:border-l border-slate-200">
                   {/* ─── ADD IMAGE HERE (Uncomment when image is imported) ─── */}
-                  {/*
-                  {active.image && (
+                  
+                  { active.image && (
                     <Image 
                       src={active.image} 
                       alt={`${active.title} — technical schematic`}
@@ -436,7 +436,7 @@ export default function EngineeringDataDigitalizationPage() {
                       className="object-cover opacity-90 z-10 mix-blend-screen"
                     />
                   )}
-                  */}
+                  
 
                   <div
                     className="absolute inset-0 opacity-[0.08]"

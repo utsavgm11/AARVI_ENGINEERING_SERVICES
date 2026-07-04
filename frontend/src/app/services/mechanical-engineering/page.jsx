@@ -22,40 +22,18 @@ import {
   Users, Clock, BadgeCheck, Briefcase
 } from "lucide-react";
 
-// ─── ASSET IMPORTS (Commented out to prevent Next.js compilation errors until files exist) ───
+// ─── ASSET IMPORTS ───────────────────────────────────────────────────────────
 
-/*
-// Capabilities Wireframes (800x1000)
-import me101Img from '../../../assets/ME-101.png';
-import me102Img from '../../../assets/ME-102.png';
-import me103Img from '../../../assets/ME-103.png';
-import me104Img from '../../../assets/ME-104.png';
-import me105Img from '../../../assets/ME-105.png';
-import me106Img from '../../../assets/ME-106.png';
-import me107Img from '../../../assets/ME-107.png';
-import me108Img from '../../../assets/ME-108.png';
+// Use a single, unified image for all capabilities as requested
+// Uncomment the line below when your image is in the assets folder
+import sharedCapabilityImg from '../../../assets/me.png';
 
-// Software Logos (Transparent PNGs)
-import pvEliteLogo  from '../../../assets/pvelite-logo.png';
-import compressLogo from '../../../assets/compress-logo.png';
-import autoCadLogo  from '../../../assets/autocad-logo.png';
-*/
-
-// Use null as fallbacks while images are commented out to prevent crashing
-const me101Img = null;
-const me102Img = null;
-const me103Img = null;
-const me104Img = null;
-const me105Img = null;
-const me106Img = null;
-const me107Img = null;
-const me108Img = null;
 
 // ─── CAPABILITIES DATA ───────────────────────────────────────────────────────
 const CAPABILITIES = [
   {
     num: "01", code: "ME-101", icon: Cylinder,
-    image: me101Img,
+    image: sharedCapabilityImg,
     title: "Static Equipment Engineering",
     shortDesc: "Comprehensive sizing, specification, and mechanical design of non-moving plant equipment.",
     fullDesc: "Complete mechanical design and specification of critical static equipment. We prepare detailed datasheets, mechanical data, and technical specifications ensuring strict compliance with ASME, API, and client-specific metallurgical requirements.",
@@ -65,7 +43,7 @@ const CAPABILITIES = [
   },
   {
     num: "02", code: "ME-102", icon: Cog,
-    image: me102Img,
+    image: sharedCapabilityImg,
     title: "Rotating Equipment Engineering",
     shortDesc: "Specification and selection of pumps, compressors, turbines, and dynamic machinery.",
     fullDesc: "Expert evaluation, sizing, and selection of critical rotating machinery. We manage the entire lifecycle from generating API-compliant datasheets to conducting rigorous Technical Bid Evaluations (TBE) and vendor document reviews.",
@@ -75,7 +53,7 @@ const CAPABILITIES = [
   },
   {
     num: "03", code: "ME-103", icon: Box,
-    image: me103Img,
+    image: sharedCapabilityImg,
     title: "Package Equipment Design",
     shortDesc: "Integration and mechanical validation of complex, multi-component skid packages.",
     fullDesc: "Specialized engineering for modular and skid-mounted utility packages. We ensure seamless mechanical integration, structural integrity, and interface coordination between vendor-supplied packages and the main plant infrastructure.",
@@ -85,7 +63,7 @@ const CAPABILITIES = [
   },
   {
     num: "04", code: "ME-104", icon: Database,
-    image: me104Img,
+    image: sharedCapabilityImg,
     title: "Pressure Vessels",
     shortDesc: "ASME code-compliant design and thickness calculations for pressurized containment.",
     fullDesc: "Rigorous mechanical design of pressure vessels utilizing industry-standard software like PV Elite and Compress. We calculate exact shell thickness, nozzle reinforcements, and saddle supports to withstand extreme operational pressures and temperatures.",
@@ -95,7 +73,7 @@ const CAPABILITIES = [
   },
   {
     num: "05", code: "ME-105", icon: AlignVerticalSpaceBetween,
-    image: me105Img,
+    image: sharedCapabilityImg,
     title: "Columns & Towers",
     shortDesc: "Tall-tower structural and mechanical design for distillation and fractionation.",
     fullDesc: "Specialized mechanical engineering for tall distillation columns and fractionation towers. We analyze complex loading scenarios including wind deflection, seismic shear, internal tray/packing weights, and thermal expansion across vertical zones.",
@@ -105,7 +83,7 @@ const CAPABILITIES = [
   },
   {
     num: "06", code: "ME-106", icon: Thermometer,
-    image: me106Img,
+    image: sharedCapabilityImg,
     title: "Heat Exchangers",
     shortDesc: "Thermal and mechanical design of shell & tube and air-cooled heat exchangers.",
     fullDesc: "Comprehensive mechanical design of heat transfer equipment complying with TEMA and API 660/661 standards. We ensure precise tubesheet thickness, baffle spacing, and expansion joint design to handle extreme thermal differentials.",
@@ -115,7 +93,7 @@ const CAPABILITIES = [
   },
   {
     num: "07", code: "ME-107", icon: Container,
-    image: me107Img,
+    image: sharedCapabilityImg,
     title: "Tank Farm Engineering",
     shortDesc: "API 650 compliant design for atmospheric and low-pressure bulk storage facilities.",
     fullDesc: "Complete mechanical engineering of bulk storage tanks including floating roof, fixed roof, and cryogenic containment. We provide detailed shell course calculations, wind girder sizing, and settlement evaluations per API 650/620 guidelines.",
@@ -125,7 +103,7 @@ const CAPABILITIES = [
   },
   {
     num: "08", code: "ME-108", icon: Wrench,
-    image: me108Img,
+    image: sharedCapabilityImg,
     title: "Mechanical Handling & Hoisting",
     shortDesc: "Design of monorails, hoists, and EOT cranes for safe equipment maintenance.",
     fullDesc: "Engineering of permanent mechanical handling systems designed to safely extract, maneuver, and maintain heavy rotating equipment internals and valves during plant turnarounds and operational maintenance cycles.",
@@ -136,9 +114,9 @@ const CAPABILITIES = [
 ];
 
 const SOFTWARE_TOOLS = [
-  { name: "PV Elite", category: "Vessel Design" /*, logo: pvEliteLogo */ },
-  { name: "Compress", category: "Vessel Design" /*, logo: compressLogo */ },
-  { name: "AutoCAD", category: "Drafting" /*, logo: autoCadLogo */ }
+  { name: "PV Elite", category: "Vessel Design" },
+  { name: "Compress", category: "Vessel Design" },
+  { name: "AutoCAD", category: "Drafting" }
 ];
 
 const FEATURED_PROJECT = null; 
@@ -354,7 +332,8 @@ export default function MechanicalEngineeringPage() {
                         isActive 
                           ? "bg-aarvi-green border-aarvi-green text-white" 
                           : "bg-aarvi-bg border-slate-200 text-slate-400 group-hover:text-aarvi-green group-hover:border-aarvi-green/40"
-                      }`}>
+                      }`}
+                      >
                         <Icon className="w-4.5 h-4.5" strokeWidth={1.5} />
                       </div>
                     </div>
@@ -458,7 +437,7 @@ export default function MechanicalEngineeringPage() {
                 <div className="w-full lg:w-[30%] relative min-h-75 lg:min-h-0 bg-linear-to-br from-aarvi-navy to-[#16213d] border-t lg:border-t-0 lg:border-l border-slate-200">
                   
                   {/* ─── ADD IMAGE HERE (Uncomment when images are imported) ─── */}
-                  {/*
+                 
                   {active.image && (
                     <Image 
                       src={active.image} 
@@ -468,7 +447,7 @@ export default function MechanicalEngineeringPage() {
                       className="object-cover opacity-90 z-10 mix-blend-screen"
                     />
                   )}
-                  */}
+                 
 
                   <div
                     className="absolute inset-0 opacity-[0.08]"
@@ -522,19 +501,8 @@ export default function MechanicalEngineeringPage() {
                 <motion.div
                   key={tool.name}
                   variants={fadeUp}
-                  className="p-5 w-40 rounded-xl border border-slate-200 bg-aarvi-bg hover:border-aarvi-green/40 hover:bg-white hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center text-center cursor-default min-h-30"
+                  className="p-5 w-48 rounded-xl border border-slate-200 bg-aarvi-bg hover:border-aarvi-green/40 hover:bg-white hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center text-center cursor-default min-h-24"
                 >
-                  {/* ─── ADD SOFTWARE LOGO HERE (Uncomment when logos are imported) ─── */}
-                  {/*
-                  <div className="relative w-12 h-12 mb-3">
-                    <Image 
-                      src={tool.logo} 
-                      alt={`${tool.name} logo`}
-                      fill
-                      className="object-contain"
-                    />
-                  </div> 
-                  */}
                   <div className="font-mono text-xs font-black text-aarvi-navy uppercase tracking-widest leading-tight mb-1.5">
                     {tool.name}
                   </div>

@@ -11,7 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, EmailStr
-from sqlalchemy import create_engine, Column, String, DateTime, Text, func
+from sqlalchemy import create_engine, Column,Integer, String, DateTime, Text, func
 from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
@@ -72,6 +72,18 @@ class DBBlog(Base):
     author = Column(String, default="Aarvi Engineering Specialist")
     cover_img = Column(String, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
+
+# --- ADD THIS RIGHT AFTER THE DBBlog CLASS ---
+class DBContactInquiry(Base):
+    __tablename__ = "contact_inquiries"
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(255), nullable=False)
+    email = Column(String(255), nullable=False, index=True)
+    phone = Column(String(50))
+    company = Column(String(255))
+    service = Column(String(255), nullable=False, index=True)
+    message = Column(Text, nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())    
 
 # Automated verification execution to spin up infrastructure schemas safely
 Base.metadata.create_all(bind=engine)
@@ -135,6 +147,16 @@ class BlogResponseSchema(BlogCreateSchema):
     created_at: datetime
     class Config:
         from_attributes = True
+
+
+# --- ADD THIS RIGHT AFTER THE BlogResponseSchema ---
+class ContactInquiryCreate(BaseModel):
+    name: str
+    email: EmailStr
+    phone: Optional[str] = None
+    company: Optional[str] = None
+    service: str
+    message: str        
 
 # ─── FastAPI ENGINE HOOKS ───────────────────────────────────────────────────
 app = FastAPI(title="Aarvi Corporate Ecosystem Architecture API", version="2.0.0")
@@ -309,6 +331,7 @@ def delete_blog_post(blog_id: str, db: Session = Depends(get_db_session), _=Depe
     return {"detail": "Publication document completely expunged."}
 
 # ─── 5. MEDIA UPLOAD ENGINE ─────────────────────────────────────────────────
+# ─── 5. MEDIA UPLOAD ENGINE ─────────────────────────────────────────────────
 @app.post("/api/upload")
 def upload_media_file(
     file: UploadFile = File(...), 
@@ -324,5 +347,32 @@ def upload_media_file(
             shutil.copyfileobj(file.file, buffer)
             
         return {"url": f"/uploads/{unique_filename}"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"File processing failure: {str(e)}")
+    
+
+# ─── 6. PUBLIC CONTACT FORM INGESTION ───────────────────────────────────────
+@app.post("/api/contact", status_code=status.HTTP_201_CREATED)
+def receive_contact_inquiry(payload: ContactInquiryCreate, db: Session = Depends(get_db_session)):
+    """Receives contact form submissions from Next.js and securely logs them to PostgreSQL."""
+    try:
+        new_inquiry = DBContactInquiry(
+            name=payload.name.strip(),
+            email=payload.email.strip(),
+            phone=payload.phone.strip() if payload.phone else None,
+            company=payload.company.strip() if payload.company else None,
+            service=payload.service.strip(),
+            message=payload.message.strip()
+        )
+        db.add(new_inquiry)
+        db.commit()
+        db.refresh(new_inquiry)
+        return {"status": "success", "message": "Inquiry securely logged to database", "id": new_inquiry.id}
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, 
+            detail=f"Failed to log inquiry: {str(e)}"
+        )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"File processing failure: {str(e)}")

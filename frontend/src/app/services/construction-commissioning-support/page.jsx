@@ -16,6 +16,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
+
 import {
   HardHat, ClipboardCheck, Power, Activity, SearchCheck, 
   RotateCcw, PenTool, DatabaseBackup, ArrowUpRight, ShieldCheck,
@@ -26,10 +27,10 @@ import {
 
 // Use a single, unified image for all capabilities as requested
 // Uncomment the line below when your image is in the assets folder
-// import sharedCapabilityImg from '../../../assets/capabilities-shared.png';
+import sharedCapabilityImg from '../../../assets/cc_support.png';
 
 // Fallback to prevent Next.js from crashing while the import is commented out
-const sharedCapabilityImg = null;
+
 
 // ─── CAPABILITIES DATA ───────────────────────────────────────────────────────
 const CAPABILITIES = [
@@ -440,28 +441,25 @@ export default function ConstructionCommissioningPage() {
 
                 {/* ─ 30%: Wireframe visual panel ─ */}
                 <div className="w-full lg:w-[30%] relative min-h-75 lg:min-h-0 bg-linear-to-br from-aarvi-navy to-[#16213d] border-t lg:border-t-0 lg:border-l border-slate-200">
-                  {/* ─── ADD IMAGE HERE (Uncomment when image is imported) ─── */}
-                  {/*
-                  {active.image && (
-                    <Image 
-                      src={active.image} 
-                      alt={`${active.title} — technical schematic`}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 30vw"
-                      className="object-cover opacity-90 z-10 mix-blend-screen"
-                    />
-                  )}
-                  */}
+  {active.image && (
+    <Image
+      src={active.image}
+      alt={`${active.title} — technical schematic`}
+      fill
+      sizes="(max-width: 1024px) 100vw, 30vw"
+      className="object-cover opacity-90 z-10 mix-blend-screen"
+    />
+  )}
 
-                  <div
-                    className="absolute inset-0 opacity-[0.08]"
-                    style={{
-                      backgroundImage:
-                        "linear-gradient(rgba(255,255,255,1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,1) 1px,transparent 1px)",
-                      backgroundSize: "32px 32px"
-                    }}
-                  />
-                </div>
+  <div
+    className="absolute inset-0 opacity-[0.08]"
+    style={{
+      backgroundImage:
+        "linear-gradient(rgba(255,255,255,1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,1) 1px,transparent 1px)",
+      backgroundSize: "32px 32px",
+    }}
+  />
+</div>
               </motion.div>
             </AnimatePresence>
           </div>

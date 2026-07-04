@@ -22,37 +22,20 @@ import {
   Users, Clock, BadgeCheck, Briefcase
 } from "lucide-react";
 
-// ─── ASSET IMPORTS (Commented out to prevent Next.js compilation errors until files exist) ───
+// ─── ASSET IMPORTS ───────────────────────────────────────────────────────────
 
-/*
-// Capabilities Wireframes (800x1000)
-import sim101Img from '../../../assets/SIM-101.png';
-import sim102Img from '../../../assets/SIM-102.png';
-import sim103Img from '../../../assets/SIM-103.png';
-import sim104Img from '../../../assets/SIM-104.png';
-import sim105Img from '../../../assets/SIM-105.png';
-import sim106Img from '../../../assets/SIM-106.png';
-import sim107Img from '../../../assets/SIM-107.png';
+// Use a single, unified image for all capabilities as requested
+// Uncomment the line below when your image is in the assets folder
+ import sharedCapabilityImg from '../../../assets/es.png';
 
-// Software Logos (Transparent PNGs)
-import ansysFluentLogo    from '../../../assets/ansys-fluent-logo.png';
-import ansysMechLogo      from '../../../assets/ansys-mech-logo.png';
-*/
+// Fallback to prevent Next.js from crashing while the import is commented out
 
-// Use null as fallbacks while images are commented out to prevent crashing
-const sim101Img = null;
-const sim102Img = null;
-const sim103Img = null;
-const sim104Img = null;
-const sim105Img = null;
-const sim106Img = null;
-const sim107Img = null;
 
 // ─── CAPABILITIES DATA ───────────────────────────────────────────────────────
 const CAPABILITIES = [
   {
     num: "01", code: "SIM-101", icon: Waves,
-    image: sim101Img,
+    image: sharedCapabilityImg,
     title: "CFD Studies",
     shortDesc: "Advanced Computational Fluid Dynamics for precise fluid and gas behavior analysis.",
     fullDesc: "Utilizing ANSYS Fluent to perform rigorous Computational Fluid Dynamics (CFD) analysis. We simulate complex fluid flows, multiphase interactions, turbulence, and velocity distribution to solve critical aerodynamic and hydrodynamic challenges before physical fabrication.",
@@ -62,7 +45,7 @@ const CAPABILITIES = [
   },
   {
     num: "02", code: "SIM-102", icon: Grid,
-    image: sim102Img,
+    image: sharedCapabilityImg,
     title: "Finite Element Analysis (FEA)",
     shortDesc: "Micro-level stress and strain analysis on complex mechanical components.",
     fullDesc: "Executing highly detailed Finite Element Analysis (FEA) using ANSYS Mechanical. We divide complex geometries into discrete elements to calculate exact stress concentrations, strain, and material yielding points under extreme static and dynamic loading.",
@@ -72,7 +55,7 @@ const CAPABILITIES = [
   },
   {
     num: "03", code: "SIM-103", icon: FastForward,
-    image: sim103Img,
+    image: sharedCapabilityImg,
     title: "Flow Optimization Studies",
     shortDesc: "Geometric refinement to eliminate turbulence and maximize throughput efficiency.",
     fullDesc: "Systematic geometric modification driven by simulation data to optimize fluid pathways. We identify flow bottlenecks, eliminate recirculation (dead) zones, and contour internal surfaces to achieve maximum throughput with minimum energy expenditure.",
@@ -82,7 +65,7 @@ const CAPABILITIES = [
   },
   {
     num: "04", code: "SIM-104", icon: ThermometerSun,
-    image: sim104Img,
+    image: sharedCapabilityImg,
     title: "Thermal Performance Assessment",
     shortDesc: "Simulating heat transfer, thermal stress, and extreme temperature gradients.",
     fullDesc: "Advanced thermal simulation to analyze heat dissipation, thermal bridging, and temperature-induced stress. We model conduction, convection, and radiation to ensure equipment maintains structural integrity during extreme thermal cycling or fire scenarios.",
@@ -92,7 +75,7 @@ const CAPABILITIES = [
   },
   {
     num: "05", code: "SIM-105", icon: Cuboid,
-    image: sim105Img,
+    image: sharedCapabilityImg,
     title: "Structural Simulation",
     shortDesc: "Dynamic modeling of structures under seismic, wind, and impact loads.",
     fullDesc: "Comprehensive simulation of structural frameworks subjected to non-linear and dynamic forces. We assess modal frequencies, harmonic responses, and transient loads to ensure buildings and equipment skids survive earthquakes, blasts, and hurricane-force winds.",
@@ -102,7 +85,7 @@ const CAPABILITIES = [
   },
   {
     num: "06", code: "SIM-106", icon: CheckCircle,
-    image: sim106Img,
+    image: sharedCapabilityImg,
     title: "Design Verification Analysis",
     shortDesc: "Independent computational validation of third-party engineering designs.",
     fullDesc: "Acting as an independent engineering authority, we utilize advanced computational modeling to verify and validate existing designs against stringent industry codes (ASME, API, ISO), ensuring absolute safety and performance before capital is spent on fabrication.",
@@ -112,7 +95,7 @@ const CAPABILITIES = [
   },
   {
     num: "07", code: "SIM-107", icon: Gauge,
-    image: sim107Img,
+    image: sharedCapabilityImg,
     title: "Equipment Performance Validation",
     shortDesc: "Digital twin simulation to predict machinery behavior under varying real-world loads.",
     fullDesc: "Constructing high-fidelity digital twins of static and rotating machinery to simulate long-term performance. We predict how equipment will behave under off-design conditions, varying feedstocks, and emergency shutdown scenarios.",
@@ -123,8 +106,8 @@ const CAPABILITIES = [
 ];
 
 const SOFTWARE_TOOLS = [
-  { name: "ANSYS Fluent", category: "Computational Fluid Dynamics" /*, logo: ansysFluentLogo */ },
-  { name: "ANSYS Mechanical", category: "Finite Element Analysis" /*, logo: ansysMechLogo */ }
+  { name: "ANSYS Fluent", category: "Computational Fluid Dynamics" },
+  { name: "ANSYS Mechanical", category: "Finite Element Analysis" }
 ];
 
 const FEATURED_PROJECT = null; 
@@ -208,14 +191,14 @@ export default function EngineeringSimulationsPage() {
         <section className="relative w-full min-h-[78vh] flex items-center overflow-hidden bg-aarvi-navy">
           <div className="absolute inset-0 w-full h-full">
             {/* ─── ADD BG VIDEO HERE (Uncomment and replace src when ready) ─── */}
-            { <video
+             <video
               autoPlay muted loop playsInline
               className="absolute inset-0 w-full h-full object-cover"
               aria-hidden="true"
             >
               <source src="/simulations-hero.mp4" type="video/mp4" />
             </video>
-            }
+            
             <div className="absolute inset-0 bg-linear-to-r from-aarvi-navy via-aarvi-navy/85 to-aarvi-navy/30" />
             <div className="absolute inset-0 bg-aarvi-navy/20" />
           </div>
@@ -444,8 +427,8 @@ export default function EngineeringSimulationsPage() {
                 {/* ─ 30%: Wireframe visual panel ─ */}
                 <div className="w-full lg:w-[30%] relative min-h-75 lg:min-h-0 bg-linear-to-br from-aarvi-navy to-[#16213d] border-t lg:border-t-0 lg:border-l border-slate-200">
                   
-                  {/* ─── ADD IMAGE HERE (Uncomment when images are imported) ─── */}
-                  {/*
+                  {/* ─── ADD IMAGE HERE (Uncomment when image is imported) ─── */}
+                 
                   {active.image && (
                     <Image 
                       src={active.image} 
@@ -455,7 +438,7 @@ export default function EngineeringSimulationsPage() {
                       className="object-cover opacity-90 z-10 mix-blend-screen"
                     />
                   )}
-                  */}
+                 
 
                   <div
                     className="absolute inset-0 opacity-[0.08]"
@@ -509,19 +492,8 @@ export default function EngineeringSimulationsPage() {
                 <motion.div
                   key={tool.name}
                   variants={fadeUp}
-                  className="p-5 w-48 rounded-xl border border-slate-200 bg-aarvi-bg hover:border-aarvi-green/40 hover:bg-white hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center text-center cursor-default min-h-30"
+                  className="p-5 w-48 rounded-xl border border-slate-200 bg-aarvi-bg hover:border-aarvi-green/40 hover:bg-white hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center text-center cursor-default min-h-24"
                 >
-                  {/* ─── ADD SOFTWARE LOGO HERE (Uncomment when logos are imported) ─── */}
-                  {/*
-                  <div className="relative w-16 h-12 mb-3">
-                    <Image 
-                      src={tool.logo} 
-                      alt={`${tool.name} logo`}
-                      fill
-                      className="object-contain"
-                    />
-                  </div> 
-                  */}
                   <div className="font-mono text-xs font-black text-aarvi-navy uppercase tracking-widest leading-tight mb-1.5">
                     {tool.name}
                   </div>

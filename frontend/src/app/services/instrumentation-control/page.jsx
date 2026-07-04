@@ -21,39 +21,20 @@ import {
   RadioTower, ArrowUpRight, ShieldCheck, Users, Clock, BadgeCheck, Briefcase
 } from "lucide-react";
 
-// ─── ASSET IMPORTS (Commented out to prevent Next.js compilation errors until files exist) ───
+// ─── ASSET IMPORTS ───────────────────────────────────────────────────────────
 
-/*
-// Capabilities Wireframes (800x1000)
-import ic101Img from '../../../assets/IC-101.png';
-import ic102Img from '../../../assets/IC-102.png';
-import ic103Img from '../../../assets/IC-103.png';
-import ic104Img from '../../../assets/IC-104.png';
-import ic105Img from '../../../assets/IC-105.png';
-import ic106Img from '../../../assets/IC-106.png';
-import ic107Img from '../../../assets/IC-107.png';
-import ic108Img from '../../../assets/IC-108.png';
+// Use a single, unified image for all capabilities as requested
+// Uncomment the line below when your image is in the assets folder
+ import sharedCapabilityImg from '../../../assets/ice.png';
 
-// Software Logos (Transparent PNGs)
-import spiLogo   from '../../../assets/spi-logo.png';
-import avevaLogo from '../../../assets/aveva-inst-logo.png';
-*/
+// Fallback to prevent Next.js from crashing while the import is commented out
 
-// Use null as fallbacks while images are commented out to prevent crashing
-const ic101Img = null;
-const ic102Img = null;
-const ic103Img = null;
-const ic104Img = null;
-const ic105Img = null;
-const ic106Img = null;
-const ic107Img = null;
-const ic108Img = null;
 
 // ─── CAPABILITIES DATA ───────────────────────────────────────────────────────
 const CAPABILITIES = [
   {
     num: "01", code: "IC-101", icon: ListTree,
-    image: ic101Img,
+    image: sharedCapabilityImg,
     title: "Instrument Index Development",
     shortDesc: "Creation and management of dynamic, master databases for all plant instrumentation.",
     fullDesc: "Development and continuous lifecycle management of the master Instrument Index utilizing intelligent databases like SmartPlant Instrumentation (SPI/INtools). We ensure absolute alignment across P&IDs, ensuring every tag is tracked from FEED to as-built phases.",
@@ -63,7 +44,7 @@ const CAPABILITIES = [
   },
   {
     num: "02", code: "IC-102", icon: FileBox,
-    image: ic102Img,
+    image: sharedCapabilityImg,
     title: "Instrument Datasheets",
     shortDesc: "Precise technical specifications for field sensors, valves, and control elements.",
     fullDesc: "Generation of rigorous, ISA/API-compliant technical datasheets for all process instrumentation. We define exact wetted materials, operating ranges, communications protocols, and hazardous area certifications for flow, level, pressure, and temperature devices.",
@@ -73,7 +54,7 @@ const CAPABILITIES = [
   },
   {
     num: "03", code: "IC-103", icon: Cpu,
-    image: ic103Img,
+    image: sharedCapabilityImg,
     title: "I/O List Development",
     shortDesc: "Detailed Input/Output mapping to define precise control system hardware limits.",
     fullDesc: "Comprehensive mapping of every physical and soft signal interfacing with the DCS, SIS, and F&G systems. We categorize analogs, digitals, and communication links to allow exact sizing of system cabinets, marshaling panels, and controller loading.",
@@ -83,7 +64,7 @@ const CAPABILITIES = [
   },
   {
     num: "04", code: "IC-104", icon: FileCog,
-    image: ic104Img,
+    image: sharedCapabilityImg,
     title: "Control Philosophy Preparation",
     shortDesc: "Strategic narrative defining exactly how process units and packages operate.",
     fullDesc: "Development of high-level functional narratives that dictate process control strategies, automated sequences, interlock triggers, and safe shutdown procedures, ensuring the operations team and system integrators are perfectly aligned.",
@@ -93,7 +74,7 @@ const CAPABILITIES = [
   },
   {
     num: "05", code: "IC-105", icon: GitBranch,
-    image: ic105Img,
+    image: sharedCapabilityImg,
     title: "Cause & Effect Matrices",
     shortDesc: "Detailed logical mapping of fault conditions to their safe automated responses.",
     fullDesc: "Engineering of complex Cause & Effect (C&E) diagrams that map every process upset, fire detection, and manual trip directly to its corresponding automated valve closure or equipment shutdown, forming the DNA of the Safety Instrumented System.",
@@ -103,7 +84,7 @@ const CAPABILITIES = [
   },
   {
     num: "06", code: "IC-106", icon: Share2,
-    image: ic106Img,
+    image: sharedCapabilityImg,
     title: "Loop Design & Verification",
     shortDesc: "Detailed wiring and interconnection schematics from the field to the control room.",
     fullDesc: "Intelligent drafting of individual instrument loop diagrams (ILDs) utilizing tools like SPI. We map the exact electrical path from the field transmitter, through junction boxes and marshaling cabinets, directly into the specific DCS/PLC I/O card.",
@@ -113,7 +94,7 @@ const CAPABILITIES = [
   },
   {
     num: "07", code: "IC-107", icon: ShieldAlert,
-    image: ic107Img,
+    image: sharedCapabilityImg,
     title: "SIS Engineering Support",
     shortDesc: "Hardware specification and architectural layout for Safety Instrumented Systems.",
     fullDesc: "Engineering support dedicated to the specification and physical architecture of the Safety Instrumented System (SIS). We ensure the specified logic solvers, redundant voting architectures, and field sensors meet the required SIL targets defined in the LOPA.",
@@ -123,7 +104,7 @@ const CAPABILITIES = [
   },
   {
     num: "08", code: "IC-108", icon: RadioTower,
-    image: ic108Img,
+    image: sharedCapabilityImg,
     title: "Telecom System Engineering",
     shortDesc: "Design of mission-critical industrial communications and security networks.",
     fullDesc: "Engineering of robust industrial telecommunication packages essential for plant operations. We design PAGA (Public Address/General Alarm), CCTV networks, access control, structured cabling, and secure fiber optic/LAN backbones for hazardous areas.",
@@ -134,8 +115,8 @@ const CAPABILITIES = [
 ];
 
 const SOFTWARE_TOOLS = [
-  { name: "SPI (INtools)", category: "Intelligent DB & Loops" /*, logo: spiLogo */ },
-  { name: "AVEVA Instrumentation", category: "Intelligent DB & Loops" /*, logo: avevaLogo */ }
+  { name: "SmartPlant Inst.", category: "Intelligent DB & Loops" },
+  { name: "AVEVA Inst.", category: "Intelligent DB & Loops" }
 ];
 
 const FEATURED_PROJECT = null; 
@@ -219,7 +200,7 @@ export default function InstrumentationControlEngineeringPage() {
         <section className="relative w-full min-h-[78vh] flex items-center overflow-hidden bg-aarvi-navy">
           <div className="absolute inset-0 w-full h-full">
             {/* ─── ADD BG VIDEO HERE (Uncomment and replace src when ready) ─── */}
-            { <video
+            {<video
               autoPlay muted loop playsInline
               className="absolute inset-0 w-full h-full object-cover"
               aria-hidden="true"
@@ -456,7 +437,7 @@ export default function InstrumentationControlEngineeringPage() {
                 <div className="w-full lg:w-[30%] relative min-h-75 lg:min-h-0 bg-linear-to-br from-aarvi-navy to-[#16213d] border-t lg:border-t-0 lg:border-l border-slate-200">
                   
                   {/* ─── ADD IMAGE HERE (Uncomment when images are imported) ─── */}
-                  {/*
+                
                   {active.image && (
                     <Image 
                       src={active.image} 
@@ -466,7 +447,7 @@ export default function InstrumentationControlEngineeringPage() {
                       className="object-cover opacity-90 z-10 mix-blend-screen"
                     />
                   )}
-                  */}
+                  
 
                   <div
                     className="absolute inset-0 opacity-[0.08]"
@@ -520,19 +501,8 @@ export default function InstrumentationControlEngineeringPage() {
                 <motion.div
                   key={tool.name}
                   variants={fadeUp}
-                  className="p-5 w-40 rounded-xl border border-slate-200 bg-aarvi-bg hover:border-aarvi-green/40 hover:bg-white hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center text-center cursor-default min-h-30"
+                  className="p-5 w-48 rounded-xl border border-slate-200 bg-aarvi-bg hover:border-aarvi-green/40 hover:bg-white hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center text-center cursor-default min-h-24"
                 >
-                  {/* ─── ADD SOFTWARE LOGO HERE (Uncomment when logos are imported) ─── */}
-                  {/*
-                  <div className="relative w-12 h-12 mb-3">
-                    <Image 
-                      src={tool.logo} 
-                      alt={`${tool.name} logo`}
-                      fill
-                      className="object-contain"
-                    />
-                  </div> 
-                  */}
                   <div className="font-mono text-xs font-black text-aarvi-navy uppercase tracking-widest leading-tight mb-1.5">
                     {tool.name}
                   </div>

@@ -769,16 +769,24 @@ function HologramScene({ modelIndex, scrollProgress }) {
 
   // Detect model change → trigger transition
   useEffect(() => {
-    if (modelIndex !== prevIndex) {
+  if (modelIndex !== prevIndex) {
+
+    const start = setTimeout(() => {
       setTransitionOut(true);
       setBuildProgress(0);
-      const timer = setTimeout(() => {
-        setPrevIndex(modelIndex);
-        setTransitionOut(false);
-      }, 400);
-      return () => clearTimeout(timer);
-    }
-  }, [modelIndex, prevIndex]);
+    }, 0);
+
+    const timer = setTimeout(() => {
+      setPrevIndex(modelIndex);
+      setTransitionOut(false);
+    }, 400);
+
+    return () => {
+      clearTimeout(start);
+      clearTimeout(timer);
+    };
+  }
+}, [modelIndex, prevIndex]);
 
   useFrame((state, delta) => {
     if (!groupRef.current) return;
@@ -826,7 +834,7 @@ const SCENES = [
     eyebrow: "GLOBAL REACH  ·  Offshore & Marine",
     headline: "300K+",
     headlineSub: "Engineering Hours / Year",
-    accentLine: "From offshore platforms to critical downstream assets — Aarvi Encon delivers at scale.",
+    accentLine: "From offshore platforms to critical downstream assets — Aarvi Engineering and consultants delivers at scale.",
     badge: "Offshore & Subsea Specialists",
     model: 1,
     stat: { value: "300K+", label: "Annual hours deployed" },
@@ -860,7 +868,7 @@ function useSectionReveal(ref) {
     );
     obs.observe(el);
     return () => obs.disconnect();
-  }, []);
+  }, [ref]);
   return { revealed, entered };
 }
 
@@ -1106,13 +1114,7 @@ export default function InteractiveStory() {
                 aria-hidden={i !== sceneIndex}
                 role="article"
               >
-                {/* Eyebrow */}
-                <p
-                  className="font-mono text-[10px] font-bold tracking-[0.3em] uppercase mb-5"
-                  style={{ color: accentColors[i] }}
-                >
-                  ┼ {s.eyebrow}
-                </p>
+               
 
                 {/* Headline number */}
                 <h2
@@ -1175,7 +1177,7 @@ export default function InteractiveStory() {
               style={{ color: `${accentColor}50` }}
               aria-label="Aarvi Encon Engineering Services"
             >
-              Aarvi Encon Engineering Services · Est. 1987
+              AARVI ENGINEERING & CONSULTANTS
             </div>
           </div>
         </div>
