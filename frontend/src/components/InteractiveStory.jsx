@@ -2,7 +2,9 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import {ChevronLeft, ChevronRight, } from 'lucide-react';
+
 import * as THREE from 'three';
 
 // =========================================================================
@@ -757,7 +759,7 @@ function ChemicalPlantModel({ progress, color }) {
 // ANIMATED HOLOGRAM WRAPPER
 // Handles: auto-build animation, slow auto-rotation, mouse tilt
 // =========================================================================
-function HologramScene({ modelIndex, scrollProgress }) {
+function HologramScene({ modelIndex }) {
   const groupRef = useRef();
   const [buildProgress, setBuildProgress] = useState(0);
   const [prevIndex, setPrevIndex] = useState(modelIndex);
@@ -822,31 +824,43 @@ function HologramScene({ modelIndex, scrollProgress }) {
 // =========================================================================
 const SCENES = [
   {
-    eyebrow: "ESTABLISHED 1987  ·  Oil & Gas",
-    headline: "39+",
-    headlineSub: "Years of Excellence",
-    accentLine: "Precision-engineered manpower for Oil & Gas, EPC, Power & Infrastructure.",
-    badge: "ISO 9001:2015 Certified",
-    model: 0,
-    stat: { value: "39+", label: "Years in service" },
-  },
-  {
-    eyebrow: "GLOBAL REACH  ·  Offshore & Marine",
+    eyebrow: "ENGINEERING CAPABILITY",
     headline: "300K+",
     headlineSub: "Engineering Hours / Year",
-    accentLine: "From offshore platforms to critical downstream assets — Aarvi Engineering and consultants delivers at scale.",
-    badge: "Offshore & Subsea Specialists",
-    model: 1,
-    stat: { value: "300K+", label: "Annual hours deployed" },
+    accentLine:
+      "Engineering capability trusted to deliver complex industrial projects with confidence.",
+    badge: "QUALITY • CERTAINTY • EXECUTION",
+    model: 0,
+    stat: {
+      value: "300K+",
+      label: "Engineering Hours / Year",
+    },
   },
   {
-    eyebrow: "PROVEN NETWORK  ·  Process Industries",
-    headline: "250+",
-    headlineSub: "Global Clients Served",
-    accentLine: "Trusted by prime international EPC contractors, PSUs, and energy majors worldwide.",
-    badge: "Pan-India + International",
+    eyebrow: "SINCE 1987",
+    headline: "39+",
+    headlineSub: "Years of Excellence",
+    accentLine:
+      "Delivering multidisciplinary engineering solutions across Energy, Process Industries and Industrial Infrastructure.",
+    badge: "ENGINEERING • EXPERTISE • PERFORMANCE",
+    model: 1,
+    stat: {
+      value: "39+",
+      label: "Years of Excellence",
+    },
+  },
+  {
+    eyebrow: "MULTI-DISCIPLINARY ENGINEERING",
+    headline: "7+",
+    headlineSub: "Industries Served",
+    accentLine:
+      "Delivering engineering solutions across the complete industrial value chain—from upstream energy to industrial infrastructure.",
+    badge: "ENERGY • PROCESS • INFRASTRUCTURE",
     model: 2,
-    stat: { value: "250+", label: "Clients worldwide" },
+    stat: {
+      value: "7+",
+      label: "Industries Served",
+    },
   },
 ];
 
@@ -854,22 +868,39 @@ const SCENES = [
 // BACKGROUND FADE: Hero → Black
 // =========================================================================
 function useSectionReveal(ref) {
-  const [revealed, setRevealed] = useState(false);
-  const [entered, setEntered] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.intersectionRatio > 0.05) setRevealed(true);
-        if (entry.intersectionRatio > 0.4) setEntered(true);
-      },
-      { threshold: [0.05, 0.4] }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [ref]);
-  return { revealed, entered };
+    const [revealed, setRevealed] = useState(false);
+    const [entered, setEntered] = useState(false);
+    const [opacity, setOpacity] = useState(0);
+
+    useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setOpacity(entry.intersectionRatio);
+
+                if (entry.intersectionRatio > 0.05)
+                    setRevealed(true);
+
+                if (entry.intersectionRatio > 0.4)
+                    setEntered(true);
+            },
+            {
+                threshold: Array.from({ length: 101 }, (_, i) => i / 100)
+            }
+        );
+
+        observer.observe(el);
+
+        return () => observer.disconnect();
+    }, [ref]);
+
+    return {
+        revealed,
+        entered,
+        opacity,
+    };
 }
 
 // =========================================================================
@@ -933,21 +964,22 @@ function CornerMarkers({ color = "#00cfff" }) {
 // =========================================================================
 // SCROLL PROGRESS DOTS
 // =========================================================================
-function SceneDots({ active, total, color }) {
+function SceneDots({ active, total, color , onSelect}) {
   return (
     <div className="flex gap-2" role="tablist" aria-label="Story sections">
       {Array.from({ length: total }).map((_, i) => (
-        <div
-          key={i}
-          role="tab"
-          aria-selected={i === active}
-          aria-label={`Scene ${i + 1}`}
-          className="w-2 h-2 rounded-full transition-all duration-500"
-          style={{
-            background: i === active ? color : "rgba(255,255,255,0.2)",
-            transform: i === active ? "scale(1.4)" : "scale(1)",
-          }}
-        />
+       <button
+  key={i}
+  role="tab"
+  aria-selected={i === active}
+  aria-label={`Scene ${i + 1}`}
+  onClick={() => onSelect(i)}
+  className="w-2 h-2 rounded-full transition-all duration-500 cursor-pointer hover:scale-150"
+  style={{
+    background: i === active ? color : "rgba(255,255,255,0.25)",
+    transform: i === active ? "scale(1.4)" : "scale(1)",
+  }}
+/>
       ))}
     </div>
   );
@@ -958,46 +990,40 @@ function SceneDots({ active, total, color }) {
 // =========================================================================
 export default function InteractiveStory() {
   const sectionRef = useRef(null);
-  const { revealed, entered } = useSectionReveal(sectionRef);
+  
+ const {
+    revealed,
+    entered,
+    opacity,
+} = useSectionReveal(sectionRef);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end end"],
-  });
-
-  // Smooth spring on scroll for butter transitions
-  const smoothScroll = useSpring(scrollYProgress, { stiffness: 60, damping: 20, restDelta: 0.001 });
-
+const overlayOpacity = Math.min(opacity * 1.4, 1);
   // Which scene index (0, 1, 2) based on scroll 0→1
   const [sceneIndex, setSceneIndex] = useState(0);
-  useEffect(() => {
-    const unsub = smoothScroll.on("change", (v) => {
-      // scenes mapped: 0-0.33, 0.33-0.66, 0.66-1.0
-      if (v < 0.33) setSceneIndex(0);
-      else if (v < 0.67) setSceneIndex(1);
-      else setSceneIndex(2);
-    });
-    return unsub;
-  }, [smoothScroll]);
+  const nextScene = () => {
+  setSceneIndex((prev) => (prev + 1) % SCENES.length);
+};
+
+const prevScene = () => {
+  setSceneIndex((prev) =>
+    prev === 0 ? SCENES.length - 1 : prev - 1
+  );
+};
+  
 
   const scene = SCENES[sceneIndex];
   const accentColors = ["#00cfff", "#00e8b8", "#a78bfa"];
   const accentColor = accentColors[sceneIndex];
 
-  // Scene text opacity transitions
-  const scene1op = useTransform(smoothScroll, [0, 0.08, 0.28, 0.38], [0, 1, 1, 0]);
-  const scene2op = useTransform(smoothScroll, [0.33, 0.41, 0.58, 0.66], [0, 1, 1, 0]);
-  const scene3op = useTransform(smoothScroll, [0.66, 0.74, 1.0], [0, 1, 1]);
-  const sceneOpacities = [scene1op, scene2op, scene3op];
-
+  
   // BG fade: starts transparent, becomes black once section enters viewport
-  const bgOpacity = useTransform(smoothScroll, [0, 0.08], [0, 1]);
+  
 
   return (
     <section
       ref={sectionRef}
       aria-label="Aarvi Encon Engineering Excellence — Interactive Story"
-      className="relative h-[400vh]"
+      className="relative min-h-screen text-white"
       itemScope
       itemType="https://schema.org/Organization"
     >
@@ -1005,16 +1031,28 @@ export default function InteractiveStory() {
       <meta itemProp="name" content="Aarvi Encon Engineering Services & Consultants" />
       <meta itemProp="description" content="39+ years of technical manpower and engineering services for Oil & Gas, EPC, Power and Infrastructure sectors" />
       <meta itemProp="foundingDate" content="1987" />
-
-      {/* ── BACKGROUND OVERLAY ── */}
+    
       <motion.div
-        className="fixed inset-0 bg-[#04050A] pointer-events-none z-0"
-        style={{ opacity: bgOpacity }}
-        aria-hidden="true"
-      />
+    className="fixed inset-0 pointer-events-none z-0"
+    animate={{
+        opacity: overlayOpacity
+    }}
+    transition={{
+        duration: 0.2
+    }}
+    style={{
+        background: "#04050A"
+    }}
+/>
+     
 
       {/* ── STICKY VIEWPORT ── */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden z-10">
+      <div
+className="relative min-h-screen w-full overflow-hidden z-10"
+style={{
+background:"#04050A"
+}}
+>
 
         {/* Tech grid background */}
         <TechGridBg />
@@ -1027,7 +1065,7 @@ export default function InteractiveStory() {
               LEFT PANEL: 3D Blueprint Hologram
           ══════════════════════════════════════ */}
           <div
-            className="w-full lg:w-[55%] h-[45vh] lg:h-full relative flex items-center justify-center"
+            className="w-full lg:w-[55%] h-[45vh] lg:h-screen relative flex items-center justify-center"
             aria-label={`3D holographic model: ${["Oil Refinery", "Offshore Rig", "Chemical Plant"][sceneIndex]}`}
           >
             <CornerMarkers color={accentColor} />
@@ -1068,7 +1106,6 @@ export default function InteractiveStory() {
                 {revealed && (
                   <HologramScene
                     modelIndex={sceneIndex}
-                    scrollProgress={smoothScroll}
                   />
                 )}
 
@@ -1088,29 +1125,35 @@ export default function InteractiveStory() {
                   autoRotate={false}
                 />
               </Canvas>
-            </div>
-
-            {/* ── Interaction hint ── */}
             
 
-            {/* ── Progress dots (mobile: top of canvas, desktop: bottom) ── */}
-            <div className="absolute bottom-5 right-6 lg:right-8">
-              <SceneDots active={sceneIndex} total={3} color={accentColor} />
-            </div>
-          </div>
+            {/* ── Interaction hint ── */}
+          
+
+</div>
+</div>
+
+           
 
           {/* ══════════════════════════════════════
               RIGHT PANEL: Story Text Scenes
           ══════════════════════════════════════ */}
           <div
-            className="w-full lg:w-[45%] h-[55vh] lg:h-full relative flex items-center"
+            className="w-full lg:w-[45%] h-[55vh] lg:h-screen relative flex items-center"
             style={{ borderLeft: `1px solid ${accentColor}18` }}
           >
             {SCENES.map((s, i) => (
               <motion.article
                 key={i}
-                style={{ opacity: sceneOpacities[i] }}
-                className="absolute inset-0 flex flex-col justify-center px-8 sm:px-12 lg:px-14 pointer-events-none"
+                animate={{
+            opacity: sceneIndex === i ? 1 : 0,
+        }}
+        transition={{ duration: 0.5 }}
+                className={`absolute inset-0 flex flex-col justify-center px-8 sm:px-12 lg:px-14 transition-all duration-500 ${
+    sceneIndex === i
+        ? "pointer-events-auto"
+        : "pointer-events-none"
+}`}
                 aria-hidden={i !== sceneIndex}
                 role="article"
               >
@@ -1170,6 +1213,44 @@ export default function InteractiveStory() {
                 </div>
               </motion.article>
             ))}
+             {/* ── Progress dots (mobile: top of canvas, desktop: bottom) ── */}
+            <div className="absolute bottom-16 right-14 flex items-center gap-5 z-40 ">
+
+    <button
+        onClick={prevScene}
+        className="h-11 w-11 arrowPrev rounded-full border transition-all duration-300 hover:scale-110"
+        style={{
+            borderColor: accentColor,
+            color: accentColor,
+            boxShadow: `0 0 15px ${accentColor}55`
+        }}
+    >
+        <ChevronLeft size={22}/>
+    </button>
+
+    <SceneDots
+        active={sceneIndex}
+        total={3}
+        color={accentColor}
+        onSelect={setSceneIndex}
+    />
+
+    <button
+        onClick={nextScene}
+        className="h-11 w-11 arrowNext rounded-full border transition-all duration-300 hover:scale-110"
+        style={{
+            borderColor: accentColor,
+            color: accentColor,
+            boxShadow: `0 0 15px ${accentColor}55`
+        }}
+    >
+        <ChevronRight size={22}/>
+    </button>
+
+</div> 
+
+             
+          </div>
 
             {/* Static Aarvi Encon branding (always visible) */}
             <div
@@ -1180,17 +1261,6 @@ export default function InteractiveStory() {
               AARVI ENGINEERING & CONSULTANTS
             </div>
           </div>
-        </div>
-
-        {/* ── HORIZONTAL PROGRESS BAR ── */}
-        <motion.div
-          className="absolute bottom-0 left-0 h-0.5 z-30"
-          style={{
-            width: useTransform(smoothScroll, [0, 1], ["0%", "100%"]),
-            background: `linear-gradient(90deg, ${accentColors[0]}, ${accentColors[1]}, ${accentColors[2]})`,
-          }}
-          aria-hidden="true"
-        />
       </div>
     </section>
   );
