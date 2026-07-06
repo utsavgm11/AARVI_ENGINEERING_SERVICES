@@ -29,13 +29,7 @@ transform:translateX(0px);
 
 }
 
-.arrowNext{
-animation:floatArrow 1.8s ease-in-out infinite;
-}
 
-.arrowPrev{
-animation:floatArrow 1.8s ease-in-out infinite reverse;
-}
 
   @keyframes marqueeLeft {
     0% { transform: translateX(0%); }
@@ -103,4 +97,14 @@ animation:floatArrow 1.8s ease-in-out infinite reverse;
   ::-webkit-scrollbar-thumb:hover {
     background: #94A3B8;
   }
+}
+
+/* ─── Hologram Navigation Arrows ─── */
+
+.arrowNext {
+  animation: floatArrow 1.8s ease-in-out infinite;
+}
+
+.arrowPrev {
+  animation: floatArrow 1.8s ease-in-out infinite reverse;
 }
