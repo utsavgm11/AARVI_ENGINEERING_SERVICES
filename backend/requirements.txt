@@ -1,10 +1,9 @@
 fastapi
-uvicorn
-pyjwt
-passlib[bcrypt]
+uvicorn[standard]
 python-multipart
 sqlalchemy
+psycopg2-binary
 pydantic[email]
 python-dotenv
+PyJWT
 bcrypt
-psycopg2-binary

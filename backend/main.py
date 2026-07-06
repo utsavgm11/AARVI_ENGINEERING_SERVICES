@@ -11,7 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, EmailStr
-from sqlalchemy import create_engine, Column,Integer, String, DateTime, Text, func
+from sqlalchemy import create_engine, Column, Integer, String, DateTime, Text, func
 from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
@@ -73,7 +73,6 @@ class DBBlog(Base):
     cover_img = Column(String, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-# --- ADD THIS RIGHT AFTER THE DBBlog CLASS ---
 class DBContactInquiry(Base):
     __tablename__ = "contact_inquiries"
     id = Column(Integer, primary_key=True, index=True)
@@ -148,8 +147,6 @@ class BlogResponseSchema(BlogCreateSchema):
     class Config:
         from_attributes = True
 
-
-# --- ADD THIS RIGHT AFTER THE BlogResponseSchema ---
 class ContactInquiryCreate(BaseModel):
     name: str
     email: EmailStr
@@ -157,6 +154,12 @@ class ContactInquiryCreate(BaseModel):
     company: Optional[str] = None
     service: str
     message: str        
+
+class ContactInquiryResponse(ContactInquiryCreate):
+    id: int
+    created_at: datetime
+    class Config:
+        from_attributes = True
 
 # ─── FastAPI ENGINE HOOKS ───────────────────────────────────────────────────
 app = FastAPI(title="Aarvi Corporate Ecosystem Architecture API", version="2.0.0")
@@ -217,14 +220,12 @@ def require_role_clearance(allowed_roles: List[UserRole]):
 # ─── 1. CORE AUTHENTICATION ROUTES ──────────────────────────────────────────
 @app.post("/api/auth/login", response_model=TokenResponse)
 def authenticate_user(payload: LoginRequest, db: Session = Depends(get_db_session)):
-    # Clean input and query case-insensitively using SQLAlchemy func.lower
     cleaned_username = payload.username.strip()
     user = db.query(DBUser).filter(func.lower(DBUser.username) == func.lower(cleaned_username)).first()
     
     if not user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid system account credentials.")
     
-    # Secure binary password cross-check alignment
     provided_password = payload.password.encode('utf-8')
     stored_hash = user.hashed_password.encode('utf-8') if isinstance(user.hashed_password, str) else user.hashed_password
     
@@ -238,6 +239,11 @@ def authenticate_user(payload: LoginRequest, db: Session = Depends(get_db_sessio
     return {"access_token": encoded_jwt, "token_type": "bearer", "role": user.role}
 
 # ─── 2. IT MANAGER ONLY: ROLE MANAGEMENT PORTS ────────────────────────────────
+@app.get("/api/admin/users", response_model=List[UserResponseSchema])
+def get_all_users(db: Session = Depends(get_db_session), _=Depends(require_role_clearance([UserRole.IT_MANAGER]))):
+    """IT_MANAGER exclusively fetches all system users."""
+    return db.query(DBUser).order_by(DBUser.created_at.desc()).all()
+
 @app.post("/api/admin/users", response_model=UserResponseSchema, status_code=status.HTTP_201_CREATED)
 def it_manager_create_user(payload: UserCreateSchema, db: Session = Depends(get_db_session), _=Depends(require_role_clearance([UserRole.IT_MANAGER]))):
     collision_check = db.query(DBUser).filter((func.lower(DBUser.username) == func.lower(payload.username.strip())) | (func.lower(DBUser.email) == func.lower(payload.email.strip()))).first()
@@ -331,7 +337,6 @@ def delete_blog_post(blog_id: str, db: Session = Depends(get_db_session), _=Depe
     return {"detail": "Publication document completely expunged."}
 
 # ─── 5. MEDIA UPLOAD ENGINE ─────────────────────────────────────────────────
-# ─── 5. MEDIA UPLOAD ENGINE ─────────────────────────────────────────────────
 @app.post("/api/upload")
 def upload_media_file(
     file: UploadFile = File(...), 
@@ -352,6 +357,11 @@ def upload_media_file(
     
 
 # ─── 6. PUBLIC CONTACT FORM INGESTION ───────────────────────────────────────
+@app.get("/api/contact", response_model=List[ContactInquiryResponse])
+def get_all_contact_inquiries(db: Session = Depends(get_db_session), _=Depends(require_role_clearance([UserRole.IT_MANAGER, UserRole.IT_EXECUTIVE, UserRole.ADMIN]))):
+    """Securely fetches all contact form inquiries for the admin dashboard."""
+    return db.query(DBContactInquiry).order_by(DBContactInquiry.created_at.desc()).all()
+
 @app.post("/api/contact", status_code=status.HTTP_201_CREATED)
 def receive_contact_inquiry(payload: ContactInquiryCreate, db: Session = Depends(get_db_session)):
     """Receives contact form submissions from Next.js and securely logs them to PostgreSQL."""
@@ -374,5 +384,3 @@ def receive_contact_inquiry(payload: ContactInquiryCreate, db: Session = Depends
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, 
             detail=f"Failed to log inquiry: {str(e)}"
         )
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"File processing failure: {str(e)}")
