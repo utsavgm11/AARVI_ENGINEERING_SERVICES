@@ -102,9 +102,9 @@ transform:translateX(0px);
 /* ─── Hologram Navigation Arrows ─── */
 
 .arrowNext {
-  animation: floatArrow 1.8s ease-in-out infinite;
+  
 }
 
 .arrowPrev {
-  animation: floatArrow 1.8s ease-in-out infinite reverse;
+ 
 }
