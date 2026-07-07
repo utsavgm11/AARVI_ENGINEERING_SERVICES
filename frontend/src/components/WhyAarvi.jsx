@@ -6,32 +6,47 @@ import { Handshake, Settings, Factory, FileText, Globe } from 'lucide-react';
 const coreValues = [
   {
     title: "Engineering Beyond Project Completion",
-    desc: "From concept studies and FEED through detailed engineering, construction support, commissioning and asset documentation, Aarvi supports the complete project lifecycle. We help clients transition projects into safe, reliable and high-performing operating facilities.",
-    icon: <FileText className="w-6 h-6" />,
+    desc: [
+      "From concept studies and FEED through detailed engineering, construction support, commissioning and asset documentation, Aarvi supports the complete project lifecycle.",
+      "We help clients transition projects into safe, reliable and high-performing operating facilities."
+    ],
+    icon: <FileText className="w-5 h-5" />,
     id: "01"
   },
   {
     title: "Integrated Multi-Discipline Delivery",
-    desc: "Process, Safety, Mechanical, Piping, Civil, Electrical and Instrumentation engineering are delivered through a single coordinated execution framework. Integrated multi-discipline teams improve design quality, reduce engineering interfaces, enhance constructability and minimize execution risks.",
-    icon: <Settings className="w-6 h-6" />,
+    desc: [
+      "Process, Safety, Mechanical, Piping, Civil, Electrical and Instrumentation engineering are delivered through a single coordinated execution framework.",
+      "Integrated multi-discipline teams improve design quality, reduce engineering interfaces, enhance constructability and minimize execution risks."
+    ],
+    icon: <Settings className="w-5 h-5" />,
     id: "02"
   },
   {
     title: "Project Versatility",
-    desc: "Proven execution across onshore plants, offshore facilities and complex brownfield modifications. Experienced in retrofit projects, shutdowns, tie-ins and operating-facility constraints.",
-    icon: <Factory className="w-6 h-6" />,
+    desc: [
+      "Proven execution across onshore plants, offshore facilities and complex brownfield modifications.",
+      "Experienced in retrofit projects, shutdowns, tie-ins and operating-facility constraints."
+    ],
+    icon: <Factory className="w-5 h-5" />,
     id: "03"
   },
   {
     title: "Standards-Driven Engineering",
-    desc: "Engineering aligned with API, ASME, ISO, IEC, DNV, ABS and client-specific standards. Consistent compliance, documentation control and audit-ready deliverables across project phases.",
-    icon: <Globe className="w-6 h-6" />,
+    desc: [
+      "Engineering aligned with API, ASME, ISO, IEC, DNV, ABS and client-specific standards.",
+      "Consistent compliance, documentation control and audit-ready deliverables across project phases."
+    ],
+    icon: <Globe className="w-5 h-5" />,
     id: "04"
   },
   {
     title: "Proven Industry Relationships",
-    desc: "Long-standing partnerships with EPC contractors, owner operators, PSUs and industrial organizations. Built through reliable execution, technical accountability and repeat project engagement.",
-    icon: <Handshake className="w-6 h-6" />,
+    desc: [
+      "Long-standing partnerships with EPC contractors, owner operators, PSUs and industrial organizations.",
+      "Built through reliable execution, technical accountability and repeat project engagement."
+    ],
+    icon: <Handshake className="w-5 h-5" />,
     id: "05"
   }
 ];
@@ -102,44 +117,106 @@ export default function WhyAarvi() {
           </motion.h2>
         </header>
 
-        {/* 3x2 Matrix Grid */}
+        {/* Dynamic Matrix Grid mapping to the design layout */}
         <motion.div 
           variants={gridVariants}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
           role="list"
         >
-          {coreValues.map((item, idx) => (
+          {coreValues.slice(0,3).map((item, idx) => (
             <motion.article 
               key={idx}
               variants={itemVariants}
               role="listitem"
-              className="relative bg-white rounded-3xl p-6 border border-slate-200/70 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 group overflow-hidden"
+              // The 5th item spans two columns on large screens to mimic the layout in the image
+              className={"relative bg-white rounded-4xl p-8 border border-slate-200/70 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group overflow-hidden"}
             >
               
-              <div className="relative z-10">
-                {/* Smaller, tighter icon box */}
-                <div className="w-12 h-12 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center mb-5 group-hover:bg-aarvi-green group-hover:scale-110 transition-all duration-300 shadow-sm">
-                  <div className="text-aarvi-green group-hover:text-white transition-colors duration-300">
-                    {item.icon}
+             
+              <div className="relative z-10 h-full flex flex-col">
+                {/* Header layout: Icon and Title horizontally aligned */}
+                <div className="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                  <div className="w-10 h-10 shrink-0 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center group-hover:bg-aarvi-green transition-all duration-300 shadow-sm">
+                    <div className="text-aarvi-green group-hover:text-white transition-colors duration-300">
+                      {item.icon}
+                    </div>
                   </div>
+                  <h3 className="text-base md:text-lg font-black text-aarvi-navy uppercase tracking-tight leading-snug group-hover:text-aarvi-green transition-colors duration-300">
+                    {item.title}
+                  </h3>
                 </div>
 
-                <h3 className="text-lg md:text-xl font-black text-aarvi-navy uppercase tracking-tight mb-2 group-hover:text-aarvi-green transition-colors duration-300">
-                  {item.title}
-                </h3>
-                <p className="text-slate-500 font-medium text-sm leading-relaxed">
-                  {item.desc}
-                </p>
+                {/* Paragraph Content */}
+<div className="grow space-y-5">
+  {item.desc.map((paragraph, index) => (
+    <p
+      key={index}
+      className="text-slate-600 font-medium text-sm leading-relaxed"
+    >
+      {paragraph}
+    </p>
+  ))}
+</div>
               </div>
 
               {/* Bottom Decorative Hover Bar */}
-              <div className="absolute bottom-0 left-0 w-0 h-1 bg-aarvi-green group-hover:w-full transition-all duration-500 ease-out" />
+              <div className="absolute bottom-0 left-0 w-0 h-1.5 bg-aarvi-green group-hover:w-full transition-all duration-500 ease-out" />
             </motion.article>
           ))}
         </motion.div>
+        <motion.div
+  variants={gridVariants}
+  initial="hidden"
+  whileInView="show"
+  viewport={{ once: true, margin: "-50px" }}
+  className="mt-8 flex flex-wrap justify-center gap-6 lg:gap-8"
+>
+  {coreValues.slice(3).map((item, idx) => (
+
+    <motion.article 
+              key={idx}
+              variants={itemVariants}
+              role="listitem"
+              // The 5th item spans two columns on large screens to mimic the layout in the image
+              className={"relative w-full md:w-[48%] lg:w-[31.5%] bg-white rounded-4xl p-8 border border-slate-200/70 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group overflow-hidden"}
+            >
+              
+             
+              <div className="relative z-10 h-full flex flex-col">
+                {/* Header layout: Icon and Title horizontally aligned */}
+                <div className="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                  <div className="w-10 h-10 shrink-0 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center group-hover:bg-aarvi-green transition-all duration-300 shadow-sm">
+                    <div className="text-aarvi-green group-hover:text-white transition-colors duration-300">
+                      {item.icon}
+                    </div>
+                  </div>
+                  <h3 className="text-base md:text-lg font-black text-aarvi-navy uppercase tracking-tight leading-snug group-hover:text-aarvi-green transition-colors duration-300">
+                    {item.title}
+                  </h3>
+                </div>
+
+                {/* Paragraph Content */}
+<div className="grow space-y-5">
+  {item.desc.map((paragraph, index) => (
+    <p
+      key={index}
+      className="text-slate-600 font-medium text-sm leading-relaxed"
+    >
+      {paragraph}
+    </p>
+  ))}
+</div>
+              </div>
+
+              {/* Bottom Decorative Hover Bar */}
+              <div className="absolute bottom-0 left-0 w-0 h-1.5 bg-aarvi-green group-hover:w-full transition-all duration-500 ease-out" />
+            </motion.article>
+
+))}
+</motion.div>
 
       </div>
     </motion.section>
