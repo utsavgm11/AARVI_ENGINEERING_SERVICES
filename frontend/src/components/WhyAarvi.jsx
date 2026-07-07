@@ -84,7 +84,7 @@ export default function WhyAarvi() {
     <motion.section 
       ref={sectionRef}
       style={{ backgroundColor: bgColor }}
-      className="relative w-full py-16 lg:py-24 px-6 lg:px-8 overflow-hidden z-20"
+      className="relative w-full py-16 lg:py-24 px-4 lg:px-8 overflow-hidden z-20"
       aria-labelledby="why-aarvi-title"
     >
       {/* ─── CLEAN ISO-DOT MATRIX BACKGROUND LAYER ─── */}
@@ -99,12 +99,12 @@ export default function WhyAarvi() {
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Header Block */}
-        <header className="mb-12 lg:mb-16 text-center max-w-3xl mx-auto">
+        <header className="mb-10 lg:mb-14 text-center max-w-3xl mx-auto">
           <motion.span 
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-50px" }}
-            className="font-mono text-[10px] lg:text-[11px] font-black text-aarvi-green tracking-[0.2em] uppercase bg-aarvi-green/10 px-4 py-2 rounded-full mb-4 inline-block shadow-sm"
+            className="font-mono text-[10px] lg:text-[11px] font-black text-aarvi-green tracking-[0.2em] uppercase bg-aarvi-green/10 px-4 py-2 rounded-full mb-3 inline-block shadow-sm"
           >
             ┼ The Aarvi Advantage
           </motion.span>
@@ -117,106 +117,102 @@ export default function WhyAarvi() {
           </motion.h2>
         </header>
 
-        {/* Dynamic Matrix Grid mapping to the design layout */}
+        {/* First Row: 3 Cards */}
         <motion.div 
           variants={gridVariants}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6"
           role="list"
         >
-          {coreValues.slice(0,3).map((item, idx) => (
+          {coreValues.slice(0, 3).map((item, idx) => (
             <motion.article 
               key={idx}
               variants={itemVariants}
               role="listitem"
-              // The 5th item spans two columns on large screens to mimic the layout in the image
-              className={"relative bg-white rounded-4xl p-8 border border-slate-200/70 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group overflow-hidden"}
+              className="relative bg-white rounded-[20px] p-6 lg:p-8 flex flex-col border border-slate-200/70 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group overflow-hidden"
             >
-              
-             
-              <div className="relative z-10 h-full flex flex-col">
-                {/* Header layout: Icon and Title horizontally aligned */}
-                <div className="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
-                  <div className="w-10 h-10 shrink-0 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center group-hover:bg-aarvi-green transition-all duration-300 shadow-sm">
+              <div className="relative z-10 flex flex-col h-full">
+                
+                {/* Icon & Title Group */}
+                <div className="mb-4 pb-4 border-b border-slate-100 flex flex-col items-start">
+                  <div className="w-10 h-10 bg-slate-50 border border-slate-100 rounded-[10px] flex items-center justify-center shadow-sm mb-4 group-hover:bg-aarvi-green transition-all duration-300">
                     <div className="text-aarvi-green group-hover:text-white transition-colors duration-300">
                       {item.icon}
                     </div>
                   </div>
-                  <h3 className="text-base md:text-lg font-black text-aarvi-navy uppercase tracking-tight leading-snug group-hover:text-aarvi-green transition-colors duration-300">
+                  <h3 className="text-lg md:text-xl font-black text-aarvi-navy uppercase tracking-tight leading-snug group-hover:text-aarvi-green transition-colors duration-300">
                     {item.title}
                   </h3>
                 </div>
 
                 {/* Paragraph Content */}
-<div className="grow space-y-5">
-  {item.desc.map((paragraph, index) => (
-    <p
-      key={index}
-      className="text-slate-600 font-medium text-sm leading-relaxed"
-    >
-      {paragraph}
-    </p>
-  ))}
-</div>
+                <div className="grow space-y-3 mt-1">
+                  {item.desc.map((paragraph, index) => (
+                    <p
+                      key={index}
+                      className="text-slate-500 font-medium text-[14px] leading-[1.6]"
+                    >
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
               </div>
 
               {/* Bottom Decorative Hover Bar */}
-              <div className="absolute bottom-0 left-0 w-0 h-1.5 bg-aarvi-green group-hover:w-full transition-all duration-500 ease-out" />
+              <div className="absolute bottom-0 left-0 w-0 h-1 bg-aarvi-green group-hover:w-full transition-all duration-500 ease-out" />
             </motion.article>
           ))}
         </motion.div>
-        <motion.div
-  variants={gridVariants}
-  initial="hidden"
-  whileInView="show"
-  viewport={{ once: true, margin: "-50px" }}
-  className="mt-8 flex flex-wrap justify-center gap-6 lg:gap-8"
->
-  {coreValues.slice(3).map((item, idx) => (
 
-    <motion.article 
+        {/* Second Row: 2 Centered Cards */}
+        <motion.div
+          variants={gridVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-50px" }}
+          className="mt-5 lg:mt-6 flex flex-wrap justify-center gap-5 lg:gap-6"
+        >
+          {coreValues.slice(3).map((item, idx) => (
+            <motion.article 
               key={idx}
               variants={itemVariants}
               role="listitem"
-              // The 5th item spans two columns on large screens to mimic the layout in the image
-              className={"relative w-full md:w-[48%] lg:w-[31.5%] bg-white rounded-4xl p-8 border border-slate-200/70 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group overflow-hidden"}
+              className="relative w-full md:w-[calc(50%-10px)] lg:w-[calc(33.333%-16px)] bg-white rounded-[20px] p-6 lg:p-8 flex flex-col border border-slate-200/70 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group overflow-hidden"
             >
-              
-             
-              <div className="relative z-10 h-full flex flex-col">
-                {/* Header layout: Icon and Title horizontally aligned */}
-                <div className="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
-                  <div className="w-10 h-10 shrink-0 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center group-hover:bg-aarvi-green transition-all duration-300 shadow-sm">
+              <div className="relative z-10 flex flex-col h-full">
+                
+                {/* Icon & Title Group */}
+                <div className="mb-4 pb-4 border-b border-slate-100 flex flex-col items-start">
+                  <div className="w-10 h-10 bg-slate-50 border border-slate-100 rounded-[10px] flex items-center justify-center shadow-sm mb-4 group-hover:bg-aarvi-green transition-all duration-300">
                     <div className="text-aarvi-green group-hover:text-white transition-colors duration-300">
                       {item.icon}
                     </div>
                   </div>
-                  <h3 className="text-base md:text-lg font-black text-aarvi-navy uppercase tracking-tight leading-snug group-hover:text-aarvi-green transition-colors duration-300">
+                  <h3 className="text-lg md:text-xl font-black text-aarvi-navy uppercase tracking-tight leading-snug group-hover:text-aarvi-green transition-colors duration-300">
                     {item.title}
                   </h3>
                 </div>
 
                 {/* Paragraph Content */}
-<div className="grow space-y-5">
-  {item.desc.map((paragraph, index) => (
-    <p
-      key={index}
-      className="text-slate-600 font-medium text-sm leading-relaxed"
-    >
-      {paragraph}
-    </p>
-  ))}
-</div>
+                <div className="grow space-y-3 mt-1">
+                  {item.desc.map((paragraph, index) => (
+                    <p
+                      key={index}
+                      className="text-slate-500 font-medium text-[14px] leading-[1.6]"
+                    >
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
               </div>
 
               {/* Bottom Decorative Hover Bar */}
-              <div className="absolute bottom-0 left-0 w-0 h-1.5 bg-aarvi-green group-hover:w-full transition-all duration-500 ease-out" />
+              <div className="absolute bottom-0 left-0 w-0 h-1 bg-aarvi-green group-hover:w-full transition-all duration-500 ease-out" />
             </motion.article>
-
-))}
-</motion.div>
+          ))}
+        </motion.div>
 
       </div>
     </motion.section>
