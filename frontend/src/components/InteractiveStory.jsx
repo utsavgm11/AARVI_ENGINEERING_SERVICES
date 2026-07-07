@@ -1214,11 +1214,11 @@ background:"#04050A"
               </motion.article>
             ))}
              {/* ── Progress dots (mobile: top of canvas, desktop: bottom) ── */}
-            <div className="absolute bottom-16 right-14 flex items-center gap-5 z-40 ">
+            <div className="absolute bottom-20 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:bottom-14 lg:right-12 flex items-center gap-5 z-40 ">
 
     <button
         onClick={prevScene}
-        className="h-11 w-11 arrowPrev rounded-full border transition-all duration-300 hover:scale-110"
+        className="h-10 w-10 flex items-center justify-center arrowPrev rounded-full border transition-all duration-300 hover:scale-110 hover:-translate-y-0.5 active:scale-95"
         style={{
             borderColor: accentColor,
             color: accentColor,
@@ -1237,7 +1237,7 @@ background:"#04050A"
 
     <button
         onClick={nextScene}
-        className="h-11 w-11 arrowNext rounded-full border transition-all duration-300 hover:scale-110"
+        className="h-10 w-10 flex items-center justify-center arrowNext rounded-full border transition-all duration-300 hover:scale-110 hover:-translate-y-0.5 active:scale-95"
         style={{
             borderColor: accentColor,
             color: accentColor,
