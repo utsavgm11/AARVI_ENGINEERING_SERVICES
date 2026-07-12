@@ -4,8 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { 
-  ArrowUpRight, X, Globe, Mail, GraduationCap, 
-  Briefcase, CheckCircle2, Award
+  ArrowUpRight, X,Briefcase, Award
 } from 'lucide-react';
 
 // ─── IMPORT HOOK FOR LOCAL IMAGE ASSETS ─────────────────────────────────────
@@ -20,62 +19,61 @@ const LEADERSHIP_ROSTER = [
     id: "virendra-sanghavi",
     name: "Virendra D. Sanghavi",
     role: "Managing Director",
-    shortDesc: "Visionary leader with over 48 years of excellence in process plant design and engineering.",
-    background: "Chemical Engineering Graduate from UDCT",
-    experience: "48+ Years of Industry Excellence",
+    shortDesc: "48+ years leading engineering, EPC and industrial project execution.",
+    experience: "48+ Years",
     bio: [
-      "Virendra D. Sanghavi brings over 48 years of deep operational experience in the design, development, construction, and operation of process plants in India and abroad.",
-      "He maintains an exceptional track record in the industry, having worked with high-tier Engineering, Lubricant, Petrochemical, and Pharmaceutical companies, including Merck Sharp & Dohme India Ltd., Lubrizol India Ltd., Aker Solution (Erstwhile Davy Power Gas), and Bhansali Engineering Polymers Ltd.",
-      "Mr. Sanghavi has also held key positions of responsibility as a visiting lecturer at the Institute of Chemical Technology, Matunga, teaching piping engineering to third-year students. He is the Past President and sits on the Board of Governors of the UDCT Alumni Association.",
-      "He is the recipient of numerous awards for his pioneering engineering consultancy work, including the NOCIL Award for Excellence in Consultancy Services, the Star SME Award (2010), and the CFBP 'Jamnalal Bajaj Award' for 'Fair Business Practices' (2014) presented by the Late Dr. APJ Abdul Kalam."
-    ],
-    accreditedLogo: "UDCT / ICT Alumnus",
+  "Virendra D. Sanghavi brings over 48 years of distinguished experience in the design, engineering, construction, and operation of complex process plants across India and international markets. Throughout his career, he has held leadership roles with renowned organizations including Merck Sharp & Dohme India Ltd., Lubrizol India Ltd., Aker Solutions (formerly Davy Powergas), and Bhansali Engineering Polymers Ltd., contributing to the successful delivery of technically demanding industrial projects.",
+
+  "Beyond industry, Mr. Sanghavi has actively contributed to engineering education as a Visiting Lecturer at the Institute of Chemical Technology (formerly UDCT), Mumbai, where he taught Piping Engineering. He also served as the Past President and continues as a member of the Board of Governors of the UDCT Alumni Association.",
+
+  "His contributions have been recognized through prestigious honors, including the NOCIL Award for Excellence in Consultancy Services, the Star SME Award (2010), and the CFBP Jamnalal Bajaj Award for Fair Business Practices (2014), presented by the Late Dr. A.P.J. Abdul Kalam."
+],
     image: imgVirendra
   },
   {
     id: "jaydev-sanghavi",
     name: "Jaydev V. Sanghavi",
     role: "Executive Director",
-    shortDesc: "Strategic commander driving international expansion and complex project delivery.",
-    background: "Chemical Engineering Graduate from Mumbai University",
-    experience: "34+ Years of Operational Command",
+    shortDesc: "Driving strategic growth, operational excellence and international expansion.",
+    experience: "34+ Years",
     bio: [
-      "Jaydev V. Sanghavi joined Aarvi Encon Ltd. in 1992 and currently serves as the Executive Director.",
-      "With over 34 years of comprehensive experience spanning operations and finance, Jaydev has played a crucial role in developing strategic business tie-ups and successfully delivering several large-scale, complex projects.",
-      "Under his leadership, Aarvi Encon has become the largest Technical Staffing company in India, establishing international offices at major locations including India, Qatar, UAE, and Saudi Arabia."
-    ],
-    accreditedLogo: "Mumbai University",
+      "Jaydev V. Sanghavi has been associated with Aarvi Encon since 1992 and currently serves as the Executive Director, playing a pivotal role in the company's strategic growth and operational excellence. With over 34 years of experience across business operations, finance and corporate management, he has been instrumental in strengthening Aarvi's position within the engineering and industrial services sector.",
+
+  "Throughout his career, Jaydev has successfully developed strategic partnerships, expanded business relationships and led the execution of several large and complex projects across multiple industries. His leadership has been central to Aarvi's sustained growth, organizational transformation and international expansion.",
+
+  "Today, he oversees key business initiatives that support the company's long-term vision while driving operational efficiency and customer value. Under his leadership, Aarvi has established a strong international presence with operations across India, Qatar, UAE and Saudi Arabia, enabling the organization to support clients across diverse global markets."
+],
     image: imgJaydev
   },
   {
     id: "r-manoj",
     name: "R. Manoj",
     role: "Senior Vice President",
-    shortDesc: "Global operations head driving revenue and strategic international tie-ups.",
-    background: "Graduate from Andhra University",
-    experience: "24+ Years of Technical Management",
+    shortDesc: "Leading business development across engineering and EPC markets.",
+    experience: "24+ Years",
     bio: [
-      "R. Manoj joined Aarvi Encon Ltd. in 2004 and currently serves as the Senior Vice President.",
-      "With over 24 years of extensive experience in Engineering, Oil & Gas, and EPC industries, he has been instrumental in driving business growth across both Indian and international markets.",
-      "He has managed operations generating revenues exceeding INR 1,700 million and played a key role in developing strategic business tie-ups.",
-      "He leads Aarvi Encon's international business operations, managing regional offices across the UAE, Oman, Qatar, Saudi Arabia, Indonesia, and Malaysia."
+       "R. Manoj has been associated with Aarvi Encon since 2004 and currently serves as the Senior Vice President. With over 24 years of experience across Engineering, Oil & Gas and EPC industries, he has played a significant role in expanding the company's business footprint across domestic and international markets.",
+
+  "He has successfully led strategic business development initiatives, established long-term client partnerships and contributed to the execution of several major engineering and industrial projects. His commercial leadership has supported sustained business growth while delivering revenues exceeding INR 1,700 million.",
+
+  "Manoj also leads Aarvi's international business operations, overseeing regional activities across the UAE, Oman, Qatar, Saudi Arabia, Indonesia and Malaysia. His strong understanding of client requirements, market dynamics and project execution continues to strengthen Aarvi's global presence and long-term business relationships."
+
     ],
-    accreditedLogo: "Andhra University",
     image: imgManoj
   },
   {
     id: "sreenivasu-motupalli",
-    name: "Sreenivasu Motupalli",
+    name: "M. Sreenivasu",
     role: "Vice President - Engineering",
-    shortDesc: "Engineering veteran overseeing EPC execution and corporate systems management.",
-    background: "Mechanical Engineering Graduate from NIT, Rourkela",
-    experience: "45+ Years of Vast & Versatile EPC Experience",
+    shortDesc: "Leading multidisciplinary engineering for complex EPC projects.",
+    experience: "45+ Years",
     bio: [
-      "M Sreenivasu currently serves as the Vice President-Engineering at Aarvi Encon. He brings over 45 years of versatile experience through diverse fields in execution of Pre-FEED, FEED, and Detailed Engineering in an EPC environment.",
-      "His core responsibilities span multi-discipline Engineering Management, PMC Engineering Management, and scrutinizing EPC Contractor's execution models.",
-      "He further handles HOD functions for Plant & Piping Design, Corporate Systems Management (including Smart Plant Suite and AVEVA platforms), and serves as the Ethics & Compliance Representative."
+      "M. Sreenivasu serves as the Vice President – Engineering and brings over 45 years of multidisciplinary engineering experience in delivering Pre-FEED, FEED and Detailed Engineering for complex EPC projects. Throughout his career, he has successfully led engineering organizations, multidisciplinary project teams and PMC engineering services across large industrial developments.",
+
+  "His expertise spans Engineering Management, Project Engineering, Plant & Piping Engineering, EPC contractor review, digital engineering systems and corporate engineering governance. He has also led the implementation and management of advanced engineering platforms, including SmartPlant and AVEVA solutions.",
+
+  "Sreenivasu has extensive project experience across Offshore Oil & Gas, LNG, Refineries, Petrochemicals, Chemical Plants, LPG Facilities, Power Generation and Pharmaceutical Industries, supporting both greenfield and brownfield developments. His technical leadership and practical project experience continue to strengthen Aarvi's engineering capabilities and commitment to delivering technically robust, execution-focused solutions."
     ],
-    accreditedLogo: "NIT Rourkela",
     image: imgSreenivasu
   }
 ];
@@ -260,22 +258,14 @@ export default function BoardOfDirectorsSection() {
                   </div>
 
                   {/* Highlights Grid */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-6 border-y border-slate-100">
-                    <div className="flex items-start gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center shrink-0">
-                        <GraduationCap className="w-4 h-4 text-[#1db87a]" />
-                      </div>
-                      <div>
-                        <span className="text-[9px] font-bold text-slate-400 uppercase font-mono block">Education</span>
-                        <span className="text-xs font-bold text-[#0a1628] leading-tight">{selectedLeader.background}</span>
-                      </div>
-                    </div>
+                  <div className="py-6 border-y border-slate-100">
+                   
                     <div className="flex items-start gap-3">
                       <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center shrink-0">
                         <Briefcase className="w-4 h-4 text-[#1db87a]" />
                       </div>
                       <div>
-                        <span className="text-[9px] font-bold text-slate-400 uppercase font-mono block">Tenure</span>
+                        <span className="text-[9px] font-bold text-slate-400 uppercase font-mono block">Industry Expertise</span>
                         <span className="text-xs font-bold text-[#0a1628] leading-tight">{selectedLeader.experience}</span>
                       </div>
                     </div>
@@ -284,7 +274,7 @@ export default function BoardOfDirectorsSection() {
                   {/* Biography Paragraphs */}
                   <div className="space-y-4 pt-2">
                     <h4 className="text-xs font-black uppercase tracking-widest text-[#0a1628] flex items-center gap-2">
-                      <Award className="w-4 h-4 text-[#1db87a]" /> Executive Biography
+                      <Award className="w-4 h-4 text-[#1db87a]" /> Leadership Profile
                     </h4>
                     <div className="space-y-4 text-slate-500 text-sm leading-relaxed font-medium">
                       {selectedLeader.bio.map((paragraph, idx) => (
@@ -293,12 +283,7 @@ export default function BoardOfDirectorsSection() {
                     </div>
                   </div>
 
-                  {/* Footer Credentials */}
-                  <div className="pt-8 flex items-center gap-3">
-                    <div className="px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold text-slate-600 flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-[#1db87a]" /> {selectedLeader.accreditedLogo}
-                    </div>
-                  </div>
+              
                   
                 </div>
               </motion.div>

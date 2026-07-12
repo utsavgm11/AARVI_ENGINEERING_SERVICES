@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Menu, X, ArrowUpRight, LayoutDashboard } from 'lucide-react';
+import { ChevronDown, Menu, X, } from 'lucide-react';
 
 // ─── AUTHENTICATION & MODAL IMPORTS ──────────────────────────────────────────
 import { useAuth } from '@/context/AuthContext';
@@ -14,10 +14,7 @@ import logoImg from '../assets/aarvi-header-logo.png';
 
 // ─── NAV DATA ────────────────────────────────────────────────────────────────
 
-const ABOUT_LINKS = [
-  { label: "Vision & Mission", href: "/about#vision-mission" },
-  { label: "Management Team",  href: "/about#management-team" },
-];
+
 
 export const SERVICE_LINKS = [
   { 
@@ -150,41 +147,7 @@ function ServiceDropdown({ t, onClose }) {
   );
 }
 
-function AboutDropdown({ t, onClose }) {
-  return (
-    <div className={`absolute top-full left-0 w-full border-b backdrop-blur-2xl ${t.panel}`}>
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 py-8 grid grid-cols-12 gap-8">
-        <div className="col-span-3 flex flex-col gap-4 pr-6" style={{ borderRight: `1px solid ${t.accent}18` }}>
-          <p className="font-mono text-[9px] tracking-[0.25em] uppercase" style={{ color: t.accent }}>
-            Aarvi Encon
-          </p>
-          <h3 className="font-sans font-black uppercase tracking-tight leading-tight text-xl text-aarvi-navy">
-            Corporate<br />Governance
-          </h3>
-          <p className="font-mono text-[11px] leading-relaxed text-aarvi-navy/60">
-            39+ years of engineering excellence. Trusted by global EPC contractors since 1987.
-          </p>
-        </div>
 
-        <div className="col-span-9 grid grid-cols-2 gap-1">
-          {ABOUT_LINKS.map((a) => (
-            <Link
-              key={a.href}
-              href={a.href}
-              onClick={onClose}
-              className={`group flex items-start gap-2 px-3.5 py-3 rounded-sm transition-colors duration-150 ${t.dlinkBg}`}
-            >
-              <span className="mt-0.5 text-[8px]" style={{ color: t.accent, opacity: 0.5 }}>┼</span>
-              <span className={`font-sans font-bold text-[11px] leading-snug transition-colors ${t.dlinkText} ${t.dlinkHov}`}>
-                {a.label}
-              </span>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
 
 // ─── MAIN NAVBAR ─────────────────────────────────────────────────────────────
 
@@ -269,9 +232,9 @@ export default function Navbar() {
             <Image
               src={logoImg}
               alt="Aarvi Encon"
-              width={136}
-              height={44}
-              className="w-auto h-8 object-contain"
+              width={180}
+              height={60}
+              className="w-auto h-12 object-contain"
               priority
             />
           </Link>
@@ -280,15 +243,14 @@ export default function Navbar() {
           <nav className="hidden lg:flex items-center h-full flex-1 justify-center" aria-label="Main navigation">
             <NavLink href="/" t={t} onClick={closeMenu} isActive={pathname === '/'}>Home</NavLink>
 
-            <DropdownTrigger
-              label="About"
-              isMenuOpen={activeMenu === 'about'}
-              isActivePage={pathname.startsWith('/about')}
-              t={t}
-              onEnter={() => openMenu('about')}
-              onLeave={scheduleClose}
-              onClick={closeMenu}
-            />
+            <NavLink
+  href="/about"
+  t={t}
+  onClick={closeMenu}
+  isActive={pathname.startsWith('/about')}
+>
+  About
+</NavLink>
 
             <NavLink href="/industries" t={t} onClick={closeMenu} isActive={pathname.startsWith('/industries')}>
               Industries
@@ -352,18 +314,7 @@ export default function Navbar() {
                 <ServiceDropdown t={t} onClose={closeMenu} />
               </motion.div>
             )}
-            {activeMenu === 'about' && (
-              <motion.div
-                key="about-dd"
-                initial={{ opacity: 0, y: -8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -6 }}
-                transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                className="hidden lg:block"
-              >
-                <AboutDropdown t={t} onClose={closeMenu} />
-              </motion.div>
-            )}
+            
           </AnimatePresence>
         </div>
 
@@ -381,21 +332,14 @@ export default function Navbar() {
               <nav className="flex flex-col px-5 pt-4 pb-6 gap-0" aria-label="Mobile navigation">
                 <MobileSimpleLink href="/" t={t} onClose={() => setMobileOpen(false)} isActive={pathname === '/'}>Home</MobileSimpleLink>
 
-                <MobileAccordion label="About Us" t={t} isActivePage={pathname.startsWith('/about')}>
-                  {ABOUT_LINKS.map((a) => (
-                    <Link
-                      key={a.href}
-                      href={a.href}
-                      onClick={() => setMobileOpen(false)}
-                      className={`flex items-center gap-2 px-4 py-2.5 text-[12px] font-mono transition-colors ${
-                        pathname === a.href ? t.linkAct : t.mobileSub
-                      }`}
-                    >
-                      <span style={{ opacity: 0.4 }}>┼</span>
-                      {a.label}
-                    </Link>
-                  ))}
-                </MobileAccordion>
+                <MobileSimpleLink
+  href="/about"
+  t={t}
+  onClose={() => setMobileOpen(false)}
+  isActive={pathname.startsWith('/about')}
+>
+  About
+</MobileSimpleLink>
 
                 <MobileSimpleLink href="/industries" t={t} onClose={() => setMobileOpen(false)} isActive={pathname.startsWith('/industries')}>
                   Industries
