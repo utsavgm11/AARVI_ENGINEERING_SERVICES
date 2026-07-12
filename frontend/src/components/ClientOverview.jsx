@@ -135,10 +135,10 @@ export default function ClientOverview() {
               ┼ STRATEGIC ALLIANCES
             </span>
             <h2 id="client-title" className="text-3xl md:text-4xl font-sans font-black text-aarvi-navy tracking-tight uppercase leading-none">
-              TRUSTED BY GLOBAL EPC CONTRACTORS & INDUSTRY LEADERS
+              Delivering Engineering for Industry Leaders
             </h2>
-            <p className="text-slate-500 text-xs font-semibold leading-relaxed mt-4 max-w-sm">
-              Trusted by leading EPC contractors, industrial enterprises, and energy companies across global engineering projects.
+            <p className="text-slate-500 text-sm font-semibold leading-relaxed mt-4 max-w-md">
+             Partnering with global EPCs, owner operators and industrial organizations to deliver multidisciplinary engineering across the complete project lifecycle.
             </p>
           </motion.div>
 
@@ -158,7 +158,7 @@ export default function ClientOverview() {
         {/* RIGHT COLUMN: Asymmetric Ticker Tracks (7 Columns) */}
         <motion.div 
           variants={trackEntranceVariants}
-          className="lg:col-span-7 flex flex-col gap-4 relative justify-center"
+          className="lg:col-span-7 flex flex-col gap-6 relative justify-center"
         >
           {/* Subtle overlay shading edge vignette fade */}
           <div className="absolute -left-1 inset-y-0 w-24 bg-linear-to-r from-[#FAFAFA] to-transparent z-30 pointer-events-none" />
@@ -181,15 +181,15 @@ export default function ClientOverview() {
                   <div
                     key={`${client.id}-t1-${idx}`}
                     onMouseEnter={() => setActiveClient(client)}
-                    className={`w-52 h-28 bg-white border rounded-2xl flex flex-col items-center justify-center p-4 cursor-pointer transition-all duration-300 ${
+                    className={`w-56 h-32 bg-white border rounded-2xl flex flex-col items-center justify-center p-4 cursor-pointer transition-all duration-300 ${
                       isActive 
-                        ? "border-aarvi-green shadow-[0_0_20px_rgba(0,138,94,0.12)]  bg-slate-50 scale-102" 
+                        ? "border-aarvi-green shadow-[0_0_30px_rgba(0,138,94,0.18)]  bg-slate-50 scale-102" 
                         : "border-slate-200/80 hover:border-slate-400"
                     }`}
                   >
                     <div 
-                      className="relative w-full h-10 transition-all duration-300"
-                      style={{ filter: isActive ? 'none' : 'grayscale(100%) opacity(0.35)' }}
+                      className="relative w-full h-16 transition-all duration-300"
+                      style={{ filter: 'none' }}
                     >
                       <Image 
                         src={client.logo}
@@ -224,15 +224,15 @@ export default function ClientOverview() {
                   <div
                     key={`${client.id}-t2-${idx}`}
                     onMouseEnter={() => setActiveClient(client)}
-                    className={`w-52 h-28 bg-white border rounded-2xl flex flex-col items-center justify-center p-4 cursor-pointer transition-all duration-300 ${
+                    className={`w-56 h-32 bg-white border rounded-2xl flex flex-col items-center justify-center p-4 cursor-pointer transition-all duration-300 ${
                       isActive 
-                        ? "border-aarvi-green shadow-[0_0_20px_rgba(0,138,94,0.12)]  bg-slate-50 scale-102" 
+                        ? "border-aarvi-green shadow-[0_0_30px_rgba(0,138,94,0.18)]  bg-slate-50 scale-102" 
                         : "border-slate-200/80 hover:border-slate-400"
                     }`}
                   >
                     <div 
-                      className="relative w-full h-10 transition-all duration-300"
-                      style={{ filter: isActive ? 'none' : 'grayscale(100%) opacity(0.55)' }}
+                      className="relative w-full h-16 transition-all duration-300"
+                      style={{ filter: 'none'  }}
                     >
                       <Image 
                         src={client.logo}
@@ -268,18 +268,16 @@ export default function ClientOverview() {
         <div
           key={`${client.id}-t3-${idx}`}
           onMouseEnter={() => setActiveClient(client)}
-          className={`w-52 h-28 bg-white border rounded-2xl flex items-center justify-center p-4 cursor-pointer transition-all duration-300 ${
+          className={`w-56 h-32 bg-white border rounded-2xl flex items-center justify-center p-4 cursor-pointer transition-all duration-300 ${
             isActive
-              ? "border-aarvi-green shadow-[0_0_20px_rgba(0,138,94,0.12)] bg-slate-50 scale-102"
+              ? "border-aarvi-green shadow-[0_0_30px_rgba(0,138,94,0.18)] bg-slate-50 scale-102"
               : "border-slate-200/80 hover:border-slate-400"
           }`}
         >
           <div
-            className="relative w-full h-10 transition-all duration-300"
+            className="relative w-full h-16 transition-all duration-300"
             style={{
-              filter: isActive
-                ? "none"
-                : "grayscale(100%) opacity(0.55)",
+              filter:'none'
             }}
           >
             <Image

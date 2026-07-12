@@ -32,16 +32,16 @@ const CYAN_BORDER= 'rgba(0,232,184,0.18)'; // Softened borders (40% reduction)
 const SERVICES = [
   { title: "Process & Safety Engineering", code: "PE-101", desc: "FEED studies, process simulation, PFD/P&ID development, and SIL assessments.", icon: Activity, href: "/services/process-safety-engineering", img: img1 },
   { title: "Plant Layout & Piping Engineering", code: "PP-102", desc: "3D routing, clash resolution, and isometric extraction.", icon: Layers, href: "/services/plant-layout-piping", img: img2 },
-  { title: "Mechanical Engineering", code: "ME-103", desc: "Static/rotating equipment sizing, vendor reviews, and pressure vessel support.", icon: Hammer, href: "/services/mechanical-equipment", img: img4 },
-  { title: "Civil & Structural Engineering", code: "CS-104", desc: "Site development, structural steel racks, and blast-resistant design.", icon: Compass, href: "/services/civil-structural", img: img5 },
-  { title: "Electrical Engineering", code: "EL-105", desc: "Power system design, short circuit studies, and substation compliance.", icon: Zap, href: "/services/electrical-engineering", img: img7 },
-  { title: "Instrumentation & Control Engineering", code: "IC-106", desc: "Datasheet development, cause & effect matrices, and SIS support.", icon: Sliders, href: "/services/instrumentation-control", img: img8 },
-  { title: "Engineering Simulations", code: "FE-107", desc: "Advanced computational fluid dynamics (CFD) and structural behaviour checks.", icon: Cpu, href: "/services/engineering-simulations", img: img10 },
-  { title: "Digital Engineering & 3D Modelling", code: "DE-108", desc: "Integrated intelligent 3D plant coordination models and database upgrades.", icon: Box, href: "/services/digital-engineering-3d", img: img9 },
-  { title: "Project Engineering & PMC Support", code: "PM-109", desc: "Project management, scheduling, and multi-discipline interface coordination.", icon: Briefcase, href: "/services/project-engineering-pmc", img: img11 },
-  { title: "As-Built & Asset Documentation", code: "AB-110", desc: "Database reconciliation and asset info validation handover packages.", icon: FileCheck, href: "/services/as-built-documentation", img: img12 },
-  { title: "Engineering Data & Digitalization", code: "ED-111", desc: "Legacy drawing digitization and digital twin data preparation workflows.", icon: Database, href: "/services/engineering-data-digitalization", img: img6 },
-  { title: "Construction, Commissioning & Asset Support.", code: "CC-112", desc: "Mechanical completion reviews, pre-commissioning, and startup support.", icon: Disc, href: "/services/construction-commissioning-support", img: img3 },
+  { title: "Mechanical Engineering", code: "ME-103", desc: "Static/rotating equipment sizing, vendor reviews, and pressure vessel support.", icon: Hammer, href: "/services/mechanical-equipment", img: img3 },
+  { title: "Civil & Structural Engineering", code: "CS-104", desc: "Site development, structural steel racks, and blast-resistant design.", icon: Compass, href: "/services/civil-structural", img: img4 },
+  { title: "Electrical Engineering", code: "EL-105", desc: "Power system design, short circuit studies, and substation compliance.", icon: Zap, href: "/services/electrical-engineering", img: img5 },
+  { title: "Instrumentation & Control Engineering", code: "IC-106", desc: "Datasheet development, cause & effect matrices, and SIS support.", icon: Sliders, href: "/services/instrumentation-control", img: img6 },
+  { title: "Engineering Simulations", code: "FE-107", desc: "Advanced computational fluid dynamics (CFD) and structural behaviour checks.", icon: Cpu, href: "/services/engineering-simulations", img: img7 },
+  { title: "Digital Engineering & 3D Modelling", code: "DE-108", desc: "Integrated intelligent 3D plant coordination models and database upgrades.", icon: Box, href: "/services/digital-engineering-3d", img: img8 },
+  { title: "Project Engineering & PMC Support", code: "PM-109", desc: "Project management, scheduling, and multi-discipline interface coordination.", icon: Briefcase, href: "/services/project-engineering-pmc", img: img9 },
+  { title: "As-Built & Asset Documentation", code: "AB-110", desc: "Database reconciliation and asset info validation handover packages.", icon: FileCheck, href: "/services/as-built-documentation", img: img10 },
+  { title: "Engineering Data & Digitalization", code: "ED-111", desc: "Legacy drawing digitization and digital twin data preparation workflows.", icon: Database, href: "/services/engineering-data-digitalization", img: img11 },
+  { title: "Construction Management, Commissioning &amp; Asset Support.", code: "CC-112", desc: "Mechanical completion reviews, pre-commissioning, and startup support.", icon: Disc, href: "/services/construction-commissioning-support", img: img12 },
 ];
 
 const COL_A = SERVICES.slice(0, 6);

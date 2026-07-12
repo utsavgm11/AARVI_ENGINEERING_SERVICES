@@ -27,18 +27,29 @@ export default function HeroSection() {
   };
 
   const stats = [
-    { value: "39+", label: "Years of Excellence", icon: Award },
-    { value: "2000+", label: "Projects Delivered", icon: Briefcase },
-    { value: "1500+", label: "Skilled Professionals", icon: Users },
-    { value: "Global", label: "Presence", icon: Globe },
-  ];
+  {
+    value: "150+",
+    label: "Skilled Professionals",
+    icon: Users,
+  },
+  {
+    value: "Global",
+    label: "Project Experience",
+    icon: Globe,
+  },
+  {
+    value: "Multi-Discipline",
+    label: "Engineering Expertise",
+    icon: Briefcase,
+  },
+];
 
   return (
     // The outer section provides the white space (padding) around the video card
     <section className="w-full bg-white px-4 sm:px-6 lg:px-8 py-6">
       
       {/* The Video Container - mimicking the rounded card look */}
-      <div className="relative w-full h-[85vh] min-h-150 rounded-4xl overflow-hidden shadow-2xl flex items-center">
+      <div className="relative w-full h-screen min-h-225 rounded-4xl overflow-hidden shadow-2xl flex items-center">
         
         {/* Background Video */}
         <video
@@ -60,25 +71,56 @@ export default function HeroSection() {
           variants={containerVariants}
           initial="hidden"
           animate="show"
-          className="relative z-20 flex flex-col items-start justify-center text-left px-8 md:px-16 lg:px-24 w-full h-full max-w-7xl mx-auto"
+          className="relative z-20 flex flex-col items-start justify-start pt-24 pb-14 text-left px-10 md:px-20 lg:px-28 w-full h-full max-w-7xl mx-auto"
         >
           <div className="max-w-3xl">
             <motion.p variants={itemVariants} className="font-mono text-xs sm:text-sm font-bold tracking-[0.25em] text-[#008A5E] uppercase mb-4 sm:mb-6">
               ABOUT US
             </motion.p>
             
-            <motion.h1 variants={itemVariants} className="text-4xl sm:text-6xl lg:text-7xl font-sans font-black text-white tracking-tight leading-[1.05] mb-6">
-              ENGINEERING <br className="hidden sm:block" />
-              THAT <span className="text-[#008A5E]">GETS BUILT.</span>
-            </motion.h1>
+            <motion.h1
+  variants={itemVariants}
+  className="text-5xl sm:text-7xl lg:text-[74px] font-black text-white leading-[1.02] tracking-tight mb-3"
+>
+  ENGINEERING <br className="hidden sm:block" />
+  THAT <span className="text-[#008A5E]">GETS BUILT.</span>
+</motion.h1>
+
+<motion.h2
+  variants={itemVariants}
+  className="text-xl md:text-2xl font-semibold text-white mb-4"
+>
+  Beyond design. Into performance.
+</motion.h2>
             
-            <motion.p variants={itemVariants} className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-xl font-medium leading-relaxed drop-shadow-md mb-12">
-              Industrial assets are built once but operated for decades. Aarvi delivers integrated engineering solutions that reduce project risk and ensure long-term operational success.
-            </motion.p>
+            <motion.div
+  variants={itemVariants}
+  className="max-w-3xl text-sm lg:text-base text-slate-300 leading-7 space-y-4 mb-10"
+>
+  <p>
+    Industrial assets are built once, yet must perform safely, efficiently and
+    reliably for decades. That is why engineering cannot stop at design — it
+    must extend into construction, enable operations and create lasting asset
+    value.
+  </p>
+
+  <p>
+    Aarvi Engineering partners with owners, operators, EPC contractors and PMC
+    organizations to deliver integrated, multidisciplinary engineering
+    solutions across the complete asset lifecycle.
+  </p>
+
+  <p>
+    By combining technical expertise, digital engineering and hands-on project
+    experience, we help clients reduce project risk, improve execution
+    certainty, and build assets engineered not just to be built — but to
+    perform.
+  </p>
+</motion.div>
           </div>
 
           {/* Glassmorphism Stat Cards Row */}
-          <motion.div variants={itemVariants} className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 w-full max-w-4xl">
+          <motion.div variants={itemVariants} className="mt-2 grid grid-cols-1 sm:grid-cols-3 gap-6 w-full max-w-5xl">
             {stats.map((stat, index) => (
               <div 
                 key={index} 
@@ -87,7 +129,7 @@ export default function HeroSection() {
                 <stat.icon className="w-6 h-6 text-[#008A5E] mb-4 group-hover:scale-110 transition-transform duration-300" strokeWidth={2} />
                 <div>
                   <h3 className="text-2xl md:text-3xl font-black text-white tracking-tight mb-1">{stat.value}</h3>
-                  <p className="text-[10px] md:text-xs font-mono font-medium tracking-wider uppercase text-slate-300">{stat.label}</p>
+                  <p className="text-sm font-medium text-slate-300">{stat.label}</p>
                 </div>
               </div>
             ))}
@@ -97,7 +139,7 @@ export default function HeroSection() {
         {/* Fully Functional Scroll Indicators matching the image */}
         <button
   onClick={scrollToNextSection}
-  className="absolute bottom-5 right-8 md:right-12 lg:right-16 z-30 flex items-center gap-3 text-white/80 hover:text-white transition-all duration-300 cursor-pointer group focus:outline-none"
+  className="absolute bottom-8 right-8 md:right-12 lg:right-16 z-30 flex items-center gap-3 text-white/80 hover:text-white transition-all duration-300 cursor-pointer group focus:outline-none"
   aria-label="Scroll down to next section"
 >
   <span className="hidden sm:block font-mono text-xs uppercase tracking-[0.25em] font-semibold">

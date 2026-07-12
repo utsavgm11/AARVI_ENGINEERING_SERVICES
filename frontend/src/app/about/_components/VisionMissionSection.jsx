@@ -36,7 +36,7 @@ export default function VisionMissionSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-stretch">
           
          {/* ─── LEFT SIDE: TYPOGRAPHY & PLANT IMAGE ─── */}
-          <div className="lg:col-span-5 relative h-full min-h-125">
+          <div className="lg:col-span-6 relative h-full min-h-125">
             
             {/* Typography positioned at the top */}
             <motion.div 
@@ -55,15 +55,16 @@ export default function VisionMissionSection() {
               >
                 Our Purpose
               </motion.p>
-              <motion.h2 
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-                className="text-4xl md:text-5xl lg:text-[54px] font-black text-[#0A1628] tracking-tight leading-[1.1]"
-              >
-                Guided by Purpose.<br />Driven by Excellence.
-              </motion.h2>
+              <motion.h2
+  initial={{ opacity: 0, y: 10 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ delay: 0.3 }}
+  className="text-4xl md:text-5xl lg:text-[54px] font-black text-[#0A1628] tracking-tight leading-[1.08]"
+>
+  Engineering Relationships.<br />
+  Built to Last.
+</motion.h2>
               <motion.div 
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
@@ -71,22 +72,23 @@ export default function VisionMissionSection() {
                 transition={{ delay: 0.5, duration: 0.6 }}
                 className="w-16 h-1.5 bg-[#008A5E] rounded-full my-6 origin-left" 
               />
-              <motion.p 
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-                className="text-base text-slate-500 font-medium leading-relaxed max-w-md"
-              >
-                Our vision and mission shape every solution we deliver, every relationship we build, and every industry we serve.
-              </motion.p>
+              <motion.p
+  initial={{ opacity: 0, y: 10 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ delay: 0.4 }}
+  className="text-base text-slate-600 leading-8 max-w-lg"
+>
+  Great engineering creates great assets. Great partnerships create lasting
+  success. We believe both are essential to every project we undertake.
+</motion.p>
             </motion.div>
 
             
           </div>
 
           {/* ─── RIGHT SIDE: TALL CARDS ─── */}
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6 lg:pl-6">
+          <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-6 lg:pl-8">
             
             {/* VISION CARD */}
             <motion.div 
@@ -101,7 +103,8 @@ export default function VisionMissionSection() {
               </div>
               <h3 className="text-3xl font-black text-[#0A1628] mb-4 relative z-10">Our Vision</h3>
               <p className="text-sm font-semibold text-slate-600 leading-relaxed relative z-10">
-                Be a global company providing excellent sustainable innovative solutions admired by all stakeholders.
+                To become the preferred engineering partner for organizations shaping the
+    future of energy, process industries and industrial infrastructure.
               </p>
               
               {/* about-vision.png rendering */}
@@ -128,9 +131,10 @@ export default function VisionMissionSection() {
               <div className="w-14 h-14 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center text-[#008A5E] mb-6 relative z-10 group-hover:scale-110 group-hover:bg-[#008A5E] group-hover:text-white transition-all duration-500">
                 <Target className="w-6 h-6" strokeWidth={2.5} />
               </div>
-              <h3 className="text-3xl font-black text-[#0A1628] mb-4 relative z-10">Our Mission</h3>
+              <h3 className="text-3xl font-black text-[#0A1628] mb-4 relative z-10">Our Promise</h3>
               <p className="text-sm font-semibold text-slate-600 leading-relaxed relative z-10">
-                To serve our Customer with specialized expertise while maintaining the highest ethics and standards.
+                To deliver every project with integrity, technical excellence and
+    unwavering commitment to our clients' success.
               </p>
               
               {/* about-mission.png rendering */}

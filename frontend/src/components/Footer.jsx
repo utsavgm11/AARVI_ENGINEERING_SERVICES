@@ -14,23 +14,38 @@ const FOOTER_DIRECTORY = [
   { label: "Projects", href: "/projects" },
   { label: "Clients",  href: "/clients" },
   { label: "Blog",     href: "/blogs" },
-  { label: "Careers",  href: "/careers" },
   { label: "Contact",  href: "/contact" },
 ];
 
 const FOOTER_SERVICES = [
-  { label: "Process & Safety Engineering",           href: "/services/process-safety-engineering" },
-  { label: "Plant Layout & Piping Engineering",      href: "/services/plant-layout-piping" },
-  { label: "Mechanical Engineering",                 href: "/services/mechanical-equipment" },
-  { label: "Civil & Structural Engineering",         href: "/services/civil-structural" },
-  { label: "Electrical Engineering",                 href: "/services/electrical-engineering" },
-  { label: "Instrumentation & Control Engineering",  href: "/services/instrumentation-control" },
-  { label: "Engineering Simulations",                href: "/services/engineering-simulations" },
-  { label: "Digital Engineering & 3D Modelling",     href: "/services/digital-engineering-3d" },
-  { label: "Project Engineering & PMC Support",      href: "/services/project-engineering-pmc" },
-  { label: "As-Built & Asset Documentation",         href: "/services/as-built-documentation" },
-  { label: "Engineering Data & Digitalization",      href: "/services/engineering-data-digitalization" },
-  { label: "Construction, Commissioning & Asset Support", href: "/services/construction-commissioning-support" },
+  {
+    label: "Process & Safety Engineering",
+    href: "/services/process-safety-engineering",
+  },
+  {
+    label: "Plant Layout & Piping Engineering",
+    href: "/services/plant-layout-piping",
+  },
+  {
+    label: "Mechanical Engineering",
+    href: "/services/mechanical-equipment",
+  },
+  {
+    label: "Civil & Structural Engineering",
+    href: "/services/civil-structural",
+  },
+  {
+    label: "Electrical Engineering",
+    href: "/services/electrical-engineering",
+  },
+  {
+    label: "Instrumentation & Control Engineering",
+    href: "/services/instrumentation-control",
+  },
+  {
+    label: "Engineering Simulations",
+    href: "/services/engineering-simulations",
+  },
 ];
 
 const OFFICES = {
@@ -74,26 +89,29 @@ export default function Footer() {
         <div className="lg:col-span-3 flex flex-col gap-5">
           <Link href="/" className="inline-block w-fit transition-opacity hover:opacity-80">
             {/* CSS Filter magically inverts your dark logo into pure white */}
-            <Image
-              src={logoImg}
-              alt="Aarvi Engineering"
-              width={130}
-              height={40}
-              className="h-9 w-auto object-contain"
-              style={{ filter: 'brightness(0) invert(1)' }}
-            />
+           <Image
+  src={logoImg}
+  alt="Aarvi Engineering"
+  width={200}
+  height={60}
+  className="h-14 w-auto object-contain"
+  style={{ filter: 'brightness(0) invert(1)' }}
+/>
           </Link>
 
-          <p className="text-slate-400 text-[11.5px] font-medium leading-[1.8] max-w-xs">
-            Providing comprehensive multi-discipline design engineering and technical staffing solutions for global EPC, Oil & Gas, and Power infrastructure since 1987.
-          </p>
+          <div className="space-y-2 max-w-xs">
+  <h3 className="text-white text-lg font-bold leading-tight">
+    Engineering That Gets Built.
+  </h3>
 
-          <div className="flex items-center gap-2 pt-1 bg-white/5 border border-white/10 p-2.5 rounded-lg w-fit shadow-xs">
-            <ShieldCheck className="w-4 h-4 text-aarvi-green shrink-0" />
-            <span className="text-[10px] font-bold tracking-widest text-white uppercase">
-              ISO 9001:2015 Framework
-            </span>
-          </div>
+  <p className="text-slate-400 text-sm leading-relaxed">
+    Designed with purpose. Delivered with confidence.
+  </p>
+
+  <p className="text-aarvi-green text-xs font-semibold tracking-wider uppercase">
+    ISO 9001 • 14001 • 45001 Certified
+  </p>
+</div>
 
           {token ? (
   <Link
@@ -225,8 +243,8 @@ export default function Footer() {
       </div>
 
       {/* ── ULTRAMINIMAL BOTTOM COPYRIGHT ── */}
-      <div className="max-w-7xl mx-auto py-5 flex items-center justify-center font-mono text-[9px] font-black text-slate-500 tracking-[0.2em] relative z-10">
-        © {currentYear} AARVI ENCON LIMITED. ALL RIGHTS RESERVED.
+      <div className="max-w-7xl mx-auto py-5 flex items-center justify-center font-mono text-[10px] font-black text-slate-500 tracking-[0.2em] relative z-10">
+       © {currentYear} AARVI ENGINEERING AND CONSULTANTS PVT LTD. ALL RIGHTS RESERVED.
       </div>
 
     <LoginModal

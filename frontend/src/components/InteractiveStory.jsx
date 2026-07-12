@@ -854,7 +854,7 @@ const SCENES = [
     headline: "7+",
     headlineSub: "Industries Served",
     accentLine:
-      "Delivering engineering solutions across the complete industrial value chain—from upstream energy to industrial infrastructure.",
+      "Every industry has unique challenges. Our engineering is built around them, combining technical expertise with industry insight to deliver solutions that perform in the real world.",
     badge: "ENERGY • PROCESS • INFRASTRUCTURE",
     model: 2,
     stat: {
