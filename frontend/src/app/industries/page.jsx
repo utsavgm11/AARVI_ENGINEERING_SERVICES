@@ -195,39 +195,34 @@ export default function IndustriesPage() {
           >
             <span className="inline-flex items-center gap-2 text-aarvi-green font-bold text-[11px] uppercase tracking-[0.2em] mb-4">
               <span className="w-1.5 h-1.5 rounded-full bg-aarvi-green animate-pulse" />
-              Aarvi Corporate Verticals
+              Industry Expertise
             </span>
 
             <h1 className="text-4xl md:text-5xl lg:text-[3.4rem] font-extrabold text-aarvi-navy tracking-tight leading-[1.05] mb-6">
-              Engineering Excellence Across{" "}
-              <span className="relative inline-block">
-                Global Industries
-                <span className="absolute bottom-1.5 left-0 w-full h-2 bg-aarvi-green/25 rounded-sm -z-10" />
-              </span>
-            </h1>
+  Engineering for the World's Critical Industries
+</h1>
 
             <p className="text-text-body text-sm md:text-base leading-relaxed max-w-xl mb-8">
-              Aarvi Engineering Services delivers multi-discipline operational design
-              blueprinting tailored specifically to high-compliance sectors. We align
-              deep multi-physics safety knowledge with highly responsive digital
-              wireframing across seven core industrial verticals.
+              Every industry has its own operating environment, regulations and technical complexities. That's why we don't believe in one-size-fits-all engineering. Our multidisciplinary teams combine industry knowledge with engineering expertise to deliver practical solutions tailored to the unique demands of each sector we serve.
             </p>
 
             {/* Quick stat strip */}
-            <div className="flex flex-wrap gap-x-8 gap-y-4 pt-6 border-t border-slate-200">
-              {[
-                { value: "7", label: "Industry Verticals" },
-                { value: "32+", label: "Global EPC Partners" },
-                { value: "39+", label: "Years of Excellence" }
-              ].map((stat) => (
-                <div key={stat.label}>
-                  <div className="text-2xl font-extrabold text-aarvi-green leading-none">{stat.value}</div>
-                  <div className="text-[11px] text-slate-400 font-semibold uppercase tracking-wider mt-1.5">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
+           <div className="flex flex-wrap gap-4 pt-6 border-t border-slate-200">
+  {[
+    "Greenfield",
+    "Brownfield",
+    "Offshore",
+    "Onshore",
+  ].map((item) => (
+    <div
+      key={item}
+      className="flex items-center gap-2 text-sm font-semibold text-aarvi-navy"
+    >
+      <span className="text-aarvi-green text-lg">✓</span>
+      {item}
+    </div>
+  ))}
+</div>
           </motion.div>
 
           {/* Right: Hero image/banner placeholder */}
