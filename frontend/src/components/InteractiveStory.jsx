@@ -851,7 +851,7 @@ const SCENES = [
   },
   {
     eyebrow: "MULTI-DISCIPLINARY ENGINEERING",
-    headline: "7+",
+    headline: "8+",
     headlineSub: "Industries Served",
     accentLine:
       "Every industry has unique challenges. Our engineering is built around them, combining technical expertise with industry insight to deliver solutions that perform in the real world.",
