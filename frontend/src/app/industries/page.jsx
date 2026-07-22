@@ -23,121 +23,77 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
-  Droplet, Wind, Flame, Layers, Zap, Sun, Factory,
+  Droplet, Wind, Flame, Layers, Zap, Sun, Factory, Boxes,
   ArrowRight, ChevronRight, ArrowUpRight
 } from "lucide-react";
 
 // ─── IMAGE / VIDEO ASSET PLACEHOLDERS ─────────────────────────────────────────
-// Drop your files in /assets and uncomment the imports + <Image>/<video> tags
-// marked below with "ADD IMAGE HERE" / "ADD VIDEO HERE".
-//
- import heroBg            from '../../assets/industries-hero-bg.png';        // wide industrial banner, 
- import oilGasImg         from '../../assets/industry-oil-gas.png';          // 600x400
- import lngImg            from '../../assets/industry-lng.png';              // 600x400
- import refiningImg       from '../../assets/industry-refining.png';         // 600x400
- import chemicalsImg      from '../../assets/industry-chemicals.png';        // 600x400
- import powerImg          from '../../assets/industry-power.png';            // 600x400
- import renewableImg      from '../../assets/industry-renewable.png';        // 600x400
- import infraImg          from '../../assets/industry-infrastructure.png';   // 600x400
+import heroBg        from '../../assets/industries-hero-bg.png';         // wide industrial banner, 
+import oilGasImg     from '../../assets/industry-oil-gas.png';           // 600x400
+import lngImg        from '../../assets/industry-lng.png';               // 600x400
+import refiningImg   from '../../assets/industry-refining.png';          // 600x400
+import chemicalsImg  from '../../assets/industry-chemicals.png';         // 600x400
+import powerImg      from '../../assets/industry-power.png';             // 600x400
+import renewableImg  from '../../assets/industry-renewable.png';         // 600x400
+import processImg    from '../../assets/industry-chemicals.png';         // 600x400 (reusing or placeholder)
+import infraImg      from '../../assets/industry-infrastructure.png';    // 600x400
 
 // ─── INDUSTRY DATA ────────────────────────────────────────────────────────────
 const INDUSTRIES = [
   {
     id: "oil-and-gas",
-    title: "Oil & Gas - Offshore & Onshore Facilities ",
+    title: "Oil & Gas – Offshore & Onshore Facilities",
     icon: Droplet,
-    excerpt:
-      "Integrated engineering solutions for upstream, midstream, and downstream oil & gas facilities across offshore and onshore operations.",
-    keywords: [
-      "Offshore Engineering",
-      "Onshore Pipelines",
-      "Asset Integrity"
-    ],
-    metric: "150+ Facilities Engineered",
+    excerpt: "Supporting upstream, midstream and downstream facilities across offshore platforms, pipelines, terminals and onshore processing plants.",
     image: oilGasImg
   },
   {
     id: "lng-gas-processing",
     title: "LNG & Gas Processing",
     icon: Wind,
-    excerpt:
-      "Engineering expertise for LNG terminals, cryogenic systems, gas processing plants, and regasification infrastructure.",
-    keywords: [
-      "Cryogenic Systems",
-      "LNG Terminals",
-      "Gas Processing"
-    ],
-    metric: "High-Efficiency LNG Projects",
+    excerpt: "Delivering LNG terminals, cryogenic systems, gas processing plants and regasification facilities with proven technical capability.",
     image: lngImg
   },
   {
     id: "refining-petrochemicals",
     title: "Refining & Petrochemicals",
     icon: Flame,
-    excerpt:
-      "End-to-end engineering for refineries and petrochemical facilities with a focus on safety, efficiency, and operational excellence.",
-    keywords: [
-      "Refinery Engineering",
-      "Petrochemicals",
-      "Process Safety"
-    ],
-    metric: "Global Process Expertise",
+    excerpt: "Optimizing refinery and petrochemical assets through safe, reliable and performance-driven engineering.",
     image: refiningImg
   },
   {
     id: "chemicals-fertilizers",
     title: "Chemicals & Fertilizers",
     icon: Layers,
-    excerpt:
-      "Engineering support for chemical processing plants, fertilizer facilities, and industrial manufacturing infrastructure.",
-    keywords: [
-      "Chemical Plants",
-      "Fertilizer Systems",
-      "Process Engineering"
-    ],
-    metric: "Safe Process Design",
+    excerpt: "Serving chemical processing and fertilizer plants with practical design solutions for complex process facilities.",
     image: chemicalsImg
   },
   {
     id: "power-generation-utilities",
     title: "Power Generation & Utilities",
     icon: Zap,
-    excerpt:
-      "Engineering solutions for thermal power plants, utilities, water treatment systems, and industrial energy infrastructure.",
-    keywords: [
-      "Thermal Power",
-      "Utilities",
-      "Water Treatment"
-    ],
-    metric: "Power Infrastructure",
+    excerpt: "Enhancing power generation, utility systems and water infrastructure for reliable industrial operations.",
     image: powerImg
   },
   {
     id: "renewable-energy",
     title: "Renewable Energy",
     icon: Sun,
-    excerpt:
-      "Supporting the energy transition with engineering solutions for solar, wind, battery storage, and green hydrogen projects.",
-    keywords: [
-      "Solar & Wind",
-      "Battery Storage",
-      "Green Hydrogen"
-    ],
-    metric: "Clean Energy Solutions",
+    excerpt: "Advancing the energy transition across biogas, solar, wind, ethanol and green hydrogen developments.",
     image: renewableImg
+  },
+  {
+    id: "process-industries",
+    title: "Process Industries",
+    icon: Boxes,
+    excerpt: "Supporting cement, sugar, pulp & paper, food processing and other continuous process manufacturing facilities.",
+    image: processImg
   },
   {
     id: "industrial-infrastructure",
     title: "Industrial Infrastructure",
     icon: Factory,
-    excerpt:
-      "Comprehensive engineering for industrial infrastructure, structural systems, manufacturing facilities, and utility networks.",
-    keywords: [
-      "Structural Design",
-      "Industrial Facilities",
-      "Mechanical Systems"
-    ],
-    metric: "Integrated Infrastructure",
+    excerpt: "Strengthening industrial assets through utilities, warehouses, logistics terminals and supporting infrastructure.",
     image: infraImg
   }
 ];
@@ -199,30 +155,30 @@ export default function IndustriesPage() {
             </span>
 
             <h1 className="text-4xl md:text-5xl lg:text-[3.4rem] font-extrabold text-aarvi-navy tracking-tight leading-[1.05] mb-6">
-  Engineering for the World's Critical Industries
-</h1>
+              Engineering for the World&apos;s Critical Industries
+            </h1>
 
             <p className="text-text-body text-sm md:text-base leading-relaxed max-w-xl mb-8">
-              Every industry has its own operating environment, regulations and technical complexities. That's why we don't believe in one-size-fits-all engineering. Our multidisciplinary teams combine industry knowledge with engineering expertise to deliver practical solutions tailored to the unique demands of each sector we serve.
+              Every industry has its own operating environment, regulations and technical complexities. That&apos;s why we don&apos;t believe in one-size-fits-all engineering. Our multidisciplinary teams combine industry knowledge with engineering expertise to deliver practical solutions tailored to the unique demands of each sector we serve.
             </p>
 
             {/* Quick stat strip */}
-           <div className="flex flex-wrap gap-4 pt-6 border-t border-slate-200">
-  {[
-    "Greenfield",
-    "Brownfield",
-    "Offshore",
-    "Onshore",
-  ].map((item) => (
-    <div
-      key={item}
-      className="flex items-center gap-2 text-sm font-semibold text-aarvi-navy"
-    >
-      <span className="text-aarvi-green text-lg">✓</span>
-      {item}
-    </div>
-  ))}
-</div>
+            <div className="flex flex-wrap gap-4 pt-6 border-t border-slate-200">
+              {[
+                "Greenfield",
+                "Brownfield",
+                "Offshore",
+                "Onshore",
+              ].map((item) => (
+                <div
+                  key={item}
+                  className="flex items-center gap-2 text-sm font-semibold text-aarvi-navy"
+                >
+                  <span className="text-aarvi-green text-lg">✓</span>
+                  {item}
+                </div>
+              ))}
+            </div>
           </motion.div>
 
           {/* Right: Hero image/banner placeholder */}
@@ -233,27 +189,22 @@ export default function IndustriesPage() {
             className="lg:col-span-5"
           >
             <div className="relative w-full aspect-4/3 rounded-3xl overflow-hidden border border-slate-200 bg-linear-to-br from-aarvi-navy to-[#16213d]">
-              {
-                <Image
-                  src={heroBg}
-                  alt="Aarvi Engineering — multi-discipline industrial projects"
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 480px"
-                  className="object-cover"
-                />
-              }
-              
+              <Image
+                src={heroBg}
+                alt="Aarvi Engineering — multi-discipline industrial projects"
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 480px"
+                className="object-cover"
+              />
               <div className="absolute inset-0 bg-linear-to-t from-aarvi-navy/70 via-transparent to-transparent" />
-
-              
             </div>
           </motion.div>
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════════ */}
-      {/* INDUSTRIES GRID                                                      */}
+      {/* INDUSTRIES GRID                                                       */}
       {/* ══════════════════════════════════════════════════════════════════════ */}
       <section className="max-w-7xl mx-auto px-6 lg:px-8 pb-20 lg:pb-28">
         <motion.div
@@ -265,7 +216,6 @@ export default function IndustriesPage() {
         >
           {INDUSTRIES.map((industry) => {
             const Icon = industry.icon;
-            const isHovered = hoveredId === industry.id;
 
             return (
               <motion.article
@@ -280,7 +230,7 @@ export default function IndustriesPage() {
                 <meta itemProp="name" content={industry.title} />
                 <meta itemProp="description" content={industry.excerpt} />
 
-                {/* ─── Card media / image placeholder (UNTOUCHED) ─── */}
+                {/* Card media / image placeholder */}
                 <div className="relative w-full aspect-video bg-aarvi-bg overflow-hidden">
                   <Image
                     src={industry.image}
@@ -294,15 +244,15 @@ export default function IndustriesPage() {
                   </div>
                 </div>
 
-                {/* ─── Card body (UI UPGRADED) ─── */}
+                {/* Card body */}
                 <div className="p-7 lg:p-8 flex flex-col flex-1 relative z-10 bg-white">
                   
-                  {/* Icon block - Added subtle border, refined colors, and a slight lift on hover */}
+                  {/* Icon block */}
                   <div className="w-12 h-12 bg-aarvi-navy/5 border border-aarvi-navy/10 text-aarvi-navy rounded-xl flex items-center justify-center mb-6 group-hover:bg-aarvi-navy group-hover:text-aarvi-green group-hover:border-aarvi-navy group-hover:-translate-y-1 transition-all duration-300 shadow-sm">
                     <Icon className="w-5 h-5" strokeWidth={1.5} />
                   </div>
 
-                  {/* Title - Tweaked font weight, size, and tighter tracking */}
+                  {/* Title */}
                   <h2
                     className="text-[18px] lg:text-[20px] font-extrabold text-aarvi-navy tracking-tight leading-snug mb-3 group-hover:text-aarvi-green transition-colors duration-300"
                     itemProp="name"
@@ -310,42 +260,17 @@ export default function IndustriesPage() {
                     {industry.title}
                   </h2>
                   
-                  {/* Excerpt - Adjusted line height and text color for premium readability */}
-                  <p className="text-slate-500 text-[13.5px] leading-relaxed mb-6 grow" itemProp="description">
+                  {/* Excerpt */}
+                  <p className="text-slate-500 text-[13.5px] leading-relaxed mb-4 grow" itemProp="description">
                     {industry.excerpt}
                   </p>
-
-                  {/* SEO keyword tags - Refined spacing, borders, and added hover tint */}
-                  <div className="flex flex-wrap gap-1.5 mb-7">
-                    {industry.keywords.map((kw) => (
-                      <span
-                        key={kw}
-                        className="bg-slate-50 text-slate-500 text-[9.5px] font-bold uppercase tracking-widest px-2.5 py-1.5 rounded-sm border border-slate-200 group-hover:border-aarvi-green/30 group-hover:bg-aarvi-green/5 transition-colors duration-300"
-                      >
-                        {kw}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Footer - Changed from centered text to a split CTA layout with animated arrow */}
-                  <div className="border-t border-slate-100 pt-5 mt-auto flex items-center justify-between group-hover:border-aarvi-green/20 transition-colors duration-300">
-                    <span className="text-[10.5px] font-bold uppercase tracking-widest text-slate-400 group-hover:text-aarvi-navy transition-colors duration-300">
-                      {industry.metric}
-                    </span>
-                    
-                    {/* Animated Arrow Icon for CTA feel */}
-                    <div className="w-7 h-7 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-aarvi-green transition-colors duration-300">
-                      <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition-colors duration-300" />
-                    </div>
-                  </div>
                 </div>
 
                 {/* Decorative corner flare */}
                 <div className="absolute top-0 right-0 w-16 h-16 bg-aarvi-green/5 rounded-bl-full translate-x-4 -translate-y-4 group-hover:scale-150 group-hover:bg-aarvi-green/10 transition-transform duration-500 pointer-events-none" />
               </motion.article>
             );
-          }
-          )}
+          })}
 
           {/* ─── "All Industries" closing tile ─── */}
           <motion.div
@@ -381,20 +306,9 @@ export default function IndustriesPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════════ */}
-      {/* BOTTOM CONVERSION PANEL                                              */}
+      {/* BOTTOM CONVERSION PANEL                                               */}
       {/* ══════════════════════════════════════════════════════════════════════ */}
       <section className="relative bg-aarvi-navy py-20 lg:py-28 text-white overflow-hidden">
-        {/*
-          ─── ADD VIDEO HERE (optional) ───
-          For a richer closing CTA, you could swap this section's solid
-          background for a looping muted background video of plant operations:
-
-          <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-20">
-            <source src="/industries-cta-bg.mp4" type="video/mp4" />
-          </video>
-        */}
-       
-
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

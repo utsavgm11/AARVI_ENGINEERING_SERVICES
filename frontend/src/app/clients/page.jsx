@@ -136,27 +136,22 @@ function StatCard({ value, suffix, label, started, index }) {
 function ClientCard({ client, index, visible }) {
   return (
     <div
-      className={`bg-white hover:bg-slate-50 border border-slate-100 transition-all duration-500 p-6 flex flex-col items-center justify-center h-36 gap-3 group relative ${
+      className={`bg-white hover:bg-slate-50 border border-slate-100 transition-all duration-500 p-3 sm:p-5 flex flex-col items-center justify-center h-28 sm:h-36 w-full group relative ${
         visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
       }`}
       style={{ transitionDelay: visible ? `${index * 35}ms` : '0ms' }}
     >
-      {/* Region badge */}
-      
-
-      {/* Corporate Logo Box (Grayscale flips to native color layout seamlessly on hover) */}
-      <div className="relative w-full h-12 transition-all duration-300 grayscale opacity-35 group-hover:grayscale-0 group-hover:opacity-100 mix-blend-multiply">
+      {/* Corporate Logo Box (Fully colored, responsive, takes full available space, scales on hover) */}
+      <div className="relative w-full h-full transition-transform duration-500 ease-out group-hover:scale-110">
         <Image
           src={client.logo}
           alt={`${client.name} Logo`}
           fill
-          sizes="180px"
+          sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
           className="object-contain"
           priority={index < 8}
         />
       </div>
-
-      
     </div>
   );
 }
@@ -234,12 +229,12 @@ export default function ClientsPage() {
           </div>
           
           <h1 className="text-4xl md:text-6xl font-sans font-black text-white leading-[1.05] tracking-tight uppercase max-w-3xl mx-auto drop-shadow-md">
-            Engineering the world's <br />
+            Engineering the world&apos;s <br />
             <span className="text-aarvi-green">most critical assets</span>
           </h1>
           
           <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-xl mx-auto font-medium drop-shadow-sm">
-            From offshore platforms in the North Sea to downstream refinery expansions across South Asia — global industry leaders trust Aarvi's multi-discipline technical execution.
+            From offshore platforms in the North Sea to downstream refinery expansions across South Asia — global industry leaders trust Aarvi&apos;s multi-discipline technical execution.
           </p>
         </div>
       </section>

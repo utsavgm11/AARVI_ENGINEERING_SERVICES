@@ -9,8 +9,8 @@ import {
 
 // ─── IMPORT HOOK FOR LOCAL IMAGE ASSETS ─────────────────────────────────────
 // Place your portrait files inside src/assets/ with these exact downcase names:
-import imgVirendra from '../../../assets/virendra.png';
-import imgJaydev from '../../../assets/jaydev.png';
+import imgVirendra from '../../../assets/virendra.jpg';
+import imgJaydev from '../../../assets/jaydev.jpg';
 import imgManoj from '../../../assets/manoj.png';
 import imgSreenivasu from '../../../assets/sreenivasu.png';
 
@@ -134,7 +134,7 @@ export default function BoardOfDirectorsSection() {
             Corporate Governance
           </span>
           <h2 className="text-4xl md:text-5xl font-black text-[#0a1628] tracking-tight">
-            Team Behind Aarvi's<br />Innovators and Experts
+            Team Behind Aarvi&apos;s<br />Innovators and Experts
           </h2>
           <p className="text-slate-500 text-sm md:text-base font-medium leading-relaxed max-w-xl mx-auto">
             Meet the dedicated professionals driving our global success and delivering exceptional engineering solutions across the asset lifecycle.
@@ -157,6 +157,7 @@ export default function BoardOfDirectorsSection() {
                     src={leader.image} 
                     alt={leader.name} 
                     fill 
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-105" 
                     placeholder="blur" 
                   />
