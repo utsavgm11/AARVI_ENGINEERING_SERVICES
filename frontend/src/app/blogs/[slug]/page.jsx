@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import {
   ArrowLeft, ArrowRight, Clock, Link2, Loader2,
@@ -56,7 +57,7 @@ function NotFoundScreen() {
     >
       <h3 className="text-2xl font-bold text-white">Article Not Found</h3>
       <p className="text-sm max-w-md" style={{ color: 'rgba(255,255,255,0.5)' }}>
-        We couldn't locate this article. It may have been moved or removed.
+        We couldn&#39;t locate this article. It may have been moved or removed.
       </p>
       <Link
         href="/blogs"
@@ -212,11 +213,16 @@ export default function BlogDetail() {
           {coverImg && (
             <div className="absolute inset-0 pointer-events-none">
               <div className="absolute right-0 top-0 bottom-0 w-full lg:w-3/5">
-                <img
+                {/* Replaced <img> with Next.js <Image /> */}
+                <Image
                   src={coverImg}
                   alt={blog.title}
-                  className="w-full h-full object-cover"
+                  fill
+                  unoptimized
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                  className="object-cover"
                   style={{ opacity: 0.55 }}
+                  priority
                 />
                 {/* Gradient fade left */}
                 <div
@@ -238,8 +244,8 @@ export default function BlogDetail() {
 
           <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 pt-8 pb-12">
 
-            {/* Breadcrumb */}
-            <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 mb-8">
+            {/* Breadcrumb - Added flex-wrap for mobile responsiveness */}
+            <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 mb-8">
               <Link href="/" className="text-white/40 hover:text-white/70 transition-colors">
                 <Home className="w-3.5 h-3.5" />
               </Link>
@@ -248,7 +254,7 @@ export default function BlogDetail() {
                 Insights
               </Link>
               <ChevronRight className="w-3 h-3 text-white/25" />
-              <span className="text-[11px] font-mono text-white/60 uppercase tracking-wider truncate max-w-50">
+              <span className="text-[11px] font-mono text-white/60 uppercase tracking-wider truncate max-w-50 sm:max-w-xs">
                 {blog.title}
               </span>
             </nav>
@@ -290,7 +296,7 @@ export default function BlogDetail() {
                 </div>
                 <div>
                   <p className="text-[13px] font-semibold text-white">{blog.author || 'Aarvi Engineering Specialist'}</p>
-                  <div className="flex items-center gap-2 mt-0.5">
+                  <div className="flex flex-wrap items-center gap-2 mt-0.5">
                     <span className="text-[11px]" style={{ color: 'rgba(255,255,255,0.4)' }}>{publishDate}</span>
                     {publishDate && <span className="text-white/20">·</span>}
                     <span className="flex items-center gap-1 text-[11px]" style={{ color: 'rgba(255,255,255,0.4)' }}>
@@ -307,7 +313,8 @@ export default function BlogDetail() {
             BODY — white background, 3-col layout
         ════════════════════════════════════════════════════════════════ */}
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-16">
-          <div className="flex gap-8 lg:gap-12 xl:gap-16">
+          {/* Changed to flex-col lg:flex-row to prevent horizontal overflow on mobile */}
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-16">
 
             {/* ── FAR LEFT: Share rail (desktop only) ── */}
             <div className="hidden lg:block w-10 shrink-0 pt-1">
@@ -315,7 +322,7 @@ export default function BlogDetail() {
             </div>
 
             {/* ── CENTRE: Main article content ── */}
-            <main className="flex-1 min-w-0">
+            <main className="flex-1 min-w-0 overflow-hidden">
 
               {/* Video embed — shown only if blog.video_url exists */}
               {videoUrl && (
@@ -364,7 +371,7 @@ export default function BlogDetail() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.15 }}
                 className="
-                  prose prose-lg max-w-none
+                  prose prose-sm sm:prose-lg max-w-none
 
                   prose-p:text-slate-600 prose-p:leading-[1.8] prose-p:mb-6
 
@@ -399,7 +406,7 @@ export default function BlogDetail() {
                   <p className="text-sm font-semibold text-slate-900">Was this article helpful?</p>
                   <p className="text-xs text-slate-400 mt-0.5">Your feedback helps us create better content.</p>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2">
                   <button
                     onClick={() => setFeedback('helpful')}
                     className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border transition-all duration-200"
@@ -426,7 +433,7 @@ export default function BlogDetail() {
               </div>
 
               {/* ── Mobile share row ── */}
-              <div className="flex lg:hidden items-center gap-3 mt-8 pt-6" style={{ borderTop: '1px solid #e5e7eb' }}>
+              <div className="flex flex-wrap lg:hidden items-center gap-3 mt-8 pt-6" style={{ borderTop: '1px solid #e5e7eb' }}>
                 <span className="text-xs text-slate-400 font-mono uppercase tracking-wider mr-1">Share</span>
                 <button
                   onClick={shareOnLinkedIn}
@@ -458,10 +465,14 @@ export default function BlogDetail() {
                       className="group flex items-start gap-4 p-4 rounded-2xl border border-slate-100 hover:border-slate-300 transition-all duration-200"
                     >
                       {relatedBlogs[0].cover_img && (
-                        <img
+                        /* Replaced <img> with Next.js <Image /> */
+                        <Image
                           src={`${API_BASE}${relatedBlogs[0].cover_img}`}
                           alt={relatedBlogs[0].title}
-                          className="w-16 h-14 object-cover rounded-xl shrink-0"
+                          width={64}
+                          height={56}
+                          unoptimized
+                          className="object-cover rounded-xl shrink-0"
                         />
                       )}
                       <div>
@@ -480,14 +491,18 @@ export default function BlogDetail() {
                       className="group flex items-start gap-4 p-4 rounded-2xl border border-slate-100 hover:border-slate-300 transition-all duration-200 sm:flex-row-reverse sm:text-right"
                     >
                       {relatedBlogs[1].cover_img && (
-                        <img
+                        /* Replaced <img> with Next.js <Image /> */
+                        <Image
                           src={`${API_BASE}${relatedBlogs[1].cover_img}`}
                           alt={relatedBlogs[1].title}
-                          className="w-16 h-14 object-cover rounded-xl shrink-0"
+                          width={64}
+                          height={56}
+                          unoptimized
+                          className="object-cover rounded-xl shrink-0"
                         />
                       )}
                       <div>
-                        <span className="flex items-center justify-end gap-1 text-[10px] font-mono text-slate-400 uppercase tracking-wider mb-1">
+                        <span className="flex items-center justify-start sm:justify-end gap-1 text-[10px] font-mono text-slate-400 uppercase tracking-wider mb-1">
                           Next Article <ArrowRight className="w-3 h-3" />
                         </span>
                         <p className="text-sm font-semibold text-slate-900 group-hover:text-[#00D4B8] transition-colors leading-snug line-clamp-2">

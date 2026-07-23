@@ -11,7 +11,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth">
       <body className="antialiased bg-white text-slate-800 min-h-screen flex flex-col overflow-x-hidden relative">
         
         {/* Wrap the entire component tree cleanly inside the AuthProvider */}

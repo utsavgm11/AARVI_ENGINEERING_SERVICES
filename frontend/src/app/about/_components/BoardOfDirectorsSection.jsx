@@ -9,8 +9,8 @@ import {
 
 // ─── IMPORT HOOK FOR LOCAL IMAGE ASSETS ─────────────────────────────────────
 // Place your portrait files inside src/assets/ with these exact downcase names:
-import imgVirendra from '../../../assets/virendra.jpg';
-import imgJaydev from '../../../assets/jaydev.jpg';
+import imgVirendra from '../../../assets/virendra.png';
+import imgJaydev from '../../../assets/jaydev.png';
 import imgManoj from '../../../assets/manoj.png';
 import imgSreenivasu from '../../../assets/sreenivasu.png';
 
