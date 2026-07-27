@@ -170,7 +170,7 @@ export default function ServicesDirectoryPage() {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-aarvi-navy tracking-tight leading-none mb-6">
               Multi-Discipline <br className="hidden md:block" />
               <span className="relative inline-block mt-2">
-                Engineering Services
+                Engineering 
                 <span className="absolute bottom-1 left-0 w-full h-2 bg-aarvi-green/20 rounded-sm" />
               </span>
             </h1>
@@ -178,9 +178,9 @@ export default function ServicesDirectoryPage() {
 
           <div className="lg:col-span-5 pb-2">
             <p className="text-text-body text-sm md:text-base leading-relaxed border-l-2 border-aarvi-green/30 pl-5">
-              From initial FEED studies to final commissioning, Aarvi Encon delivers
-              full-lifecycle engineering solutions. We integrate advanced digital
-              tools with decades of multi-sector technical expertise.
+              Delivering Concept, Pre-FEED, FEED, Detailed Engineering, Construction Support,
+Commissioning and As-Built Services across the complete EPC project lifecycle for Energy,
+Process and Industrial Infrastructure projects.
             </p>
           </div>
         </div>
