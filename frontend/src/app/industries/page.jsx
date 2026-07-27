@@ -35,7 +35,7 @@ import refiningImg   from '../../assets/industry-refining.png';          // 600x
 import chemicalsImg  from '../../assets/industry-chemicals.png';         // 600x400
 import powerImg      from '../../assets/industry-power.png';             // 600x400
 import renewableImg  from '../../assets/industry-renewable.png';         // 600x400
-import processImg    from '../../assets/industry-chemicals.png';         // 600x400 (reusing or placeholder)
+import processImg    from '../../assets/industry-process.png';         // 600x400 (reusing or placeholder)
 import infraImg      from '../../assets/industry-infrastructure.png';    // 600x400
 
 // ─── INDUSTRY DATA ────────────────────────────────────────────────────────────

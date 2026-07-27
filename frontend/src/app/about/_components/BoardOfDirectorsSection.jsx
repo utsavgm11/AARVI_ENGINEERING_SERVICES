@@ -22,12 +22,10 @@ const LEADERSHIP_ROSTER = [
     shortDesc: "48+ years leading engineering, EPC and industrial project execution.",
     experience: "48+ Years",
     bio: [
-  "Virendra D. Sanghavi brings over 48 years of distinguished experience in the design, engineering, construction, and operation of complex process plants across India and international markets. Throughout his career, he has held leadership roles with renowned organizations including Merck Sharp & Dohme India Ltd., Lubrizol India Ltd., Aker Solutions (formerly Davy Powergas), and Bhansali Engineering Polymers Ltd., contributing to the successful delivery of technically demanding industrial projects.",
-
-  "Beyond industry, Mr. Sanghavi has actively contributed to engineering education as a Visiting Lecturer at the Institute of Chemical Technology (formerly UDCT), Mumbai, where he taught Piping Engineering. He also served as the Past President and continues as a member of the Board of Governors of the UDCT Alumni Association.",
-
-  "His contributions have been recognized through prestigious honors, including the NOCIL Award for Excellence in Consultancy Services, the Star SME Award (2010), and the CFBP Jamnalal Bajaj Award for Fair Business Practices (2014), presented by the Late Dr. A.P.J. Abdul Kalam."
-],
+      "Virendra D. Sanghavi brings over 48 years of distinguished experience in the design, engineering, construction, and operation of complex process plants across India and international markets. Throughout his career, he has held leadership roles with renowned organizations including Merck Sharp & Dohme India Ltd., Lubrizol India Ltd., Aker Solutions (formerly Davy Powergas), and Bhansali Engineering Polymers Ltd., contributing to the successful delivery of technically demanding industrial projects.",
+      "Beyond industry, Mr. Sanghavi has actively contributed to engineering education as a Visiting Lecturer at the Institute of Chemical Technology (formerly UDCT), Mumbai, where he taught Piping Engineering. He also served as the Past President and continues as a member of the Board of Governors of the UDCT Alumni Association.",
+      "His contributions have been recognized through prestigious honors, including the NOCIL Award for Excellence in Consultancy Services, the Star SME Award (2010), and the CFBP Jamnalal Bajaj Award for Fair Business Practices (2014), presented by the Late Dr. A.P.J. Abdul Kalam."
+    ],
     image: imgVirendra
   },
   {
@@ -38,26 +36,22 @@ const LEADERSHIP_ROSTER = [
     experience: "34+ Years",
     bio: [
       "Jaydev V. Sanghavi has been associated with Aarvi Encon since 1992 and currently serves as the Executive Director, playing a pivotal role in the company's strategic growth and operational excellence. With over 34 years of experience across business operations, finance and corporate management, he has been instrumental in strengthening Aarvi's position within the engineering and industrial services sector.",
-
-  "Throughout his career, Jaydev has successfully developed strategic partnerships, expanded business relationships and led the execution of several large and complex projects across multiple industries. His leadership has been central to Aarvi's sustained growth, organizational transformation and international expansion.",
-
-  "Today, he oversees key business initiatives that support the company's long-term vision while driving operational efficiency and customer value. Under his leadership, Aarvi has established a strong international presence with operations across India, Qatar, UAE and Saudi Arabia, enabling the organization to support clients across diverse global markets."
-],
+      "Throughout his career, Jaydev has successfully developed strategic partnerships, expanded business relationships and led the execution of several large and complex projects across multiple industries. His leadership has been central to Aarvi's sustained growth, organizational transformation and international expansion.",
+      "Today, he oversees key business initiatives that support the company's long-term vision while driving operational efficiency and customer value. Under his leadership, Aarvi has established a strong international presence with operations across India, Qatar, UAE and Saudi Arabia, enabling the organization to support clients across diverse global markets."
+    ],
     image: imgJaydev
   },
   {
     id: "r-manoj",
     name: "R. Manoj",
     role: "Senior Vice President",
-    shortDesc: "Leading business development across engineering and EPC markets.",
+    shortDesc: "Leading Business Transformation, Strategic Growth & P&L Performance in Engineering and EPC Market",
     experience: "24+ Years",
     bio: [
-       "R. Manoj has been associated with Aarvi Encon since 2004 and currently serves as the Senior Vice President. With over 24 years of experience across Engineering, Oil & Gas and EPC industries, he has played a significant role in expanding the company's business footprint across domestic and international markets.",
-
-  "He has successfully led strategic business development initiatives, established long-term client partnerships and contributed to the execution of several major engineering and industrial projects. His commercial leadership has supported sustained business growth while delivering revenues exceeding INR 1,700 million.",
-
-  "Manoj also leads Aarvi's international business operations, overseeing regional activities across the UAE, Oman, Qatar, Saudi Arabia, Indonesia and Malaysia. His strong understanding of client requirements, market dynamics and project execution continues to strengthen Aarvi's global presence and long-term business relationships."
-
+      "R. Manoj is a seasoned business leader with extensive experience in Business Development, Operations and Profit & Loss (P&L) management. Since joining Aarvi Encon Limited in 2004, he has played a pivotal role in driving the company's business growth across India while expanding its international presence.",
+      "He currently leads Business Development and Operations for Aarvi Encon's EngineeringServices and Secondment Business across India and overseas, spearheading strategic growth initiatives, strengthening long-term client partnerships and driving operational excellence.",
+      "As Director of Aarvi Encon Limited's international subsidiaries, he oversees business growth, strategic direction and operational performance, supporting the company's continued expansion across global markets.",
+      "Under his leadership, Aarvi continues to strengthen its presence across Energy, Process and Infrastructure sectors, supporting more than 50 client organizations through engineering and industrial services in India and international markets."
     ],
     image: imgManoj
   },
@@ -69,10 +63,8 @@ const LEADERSHIP_ROSTER = [
     experience: "45+ Years",
     bio: [
       "M. Sreenivasu serves as the Vice President – Engineering and brings over 45 years of multidisciplinary engineering experience in delivering Pre-FEED, FEED and Detailed Engineering for complex EPC projects. Throughout his career, he has successfully led engineering organizations, multidisciplinary project teams and PMC engineering services across large industrial developments.",
-
-  "His expertise spans Engineering Management, Project Engineering, Plant & Piping Engineering, EPC contractor review, digital engineering systems and corporate engineering governance. He has also led the implementation and management of advanced engineering platforms, including SmartPlant and AVEVA solutions.",
-
-  "Sreenivasu has extensive project experience across Offshore Oil & Gas, LNG, Refineries, Petrochemicals, Chemical Plants, LPG Facilities, Power Generation and Pharmaceutical Industries, supporting both greenfield and brownfield developments. His technical leadership and practical project experience continue to strengthen Aarvi's engineering capabilities and commitment to delivering technically robust, execution-focused solutions."
+      "His expertise spans Engineering Management, Project Engineering, Plant & Piping Engineering, EPC contractor review, digital engineering systems and corporate engineering governance. He has also led the implementation and management of advanced engineering platforms, including SmartPlant and AVEVA solutions.",
+      "Sreenivasu has extensive project experience across Offshore Oil & Gas, LNG, Refineries, Petrochemicals, Chemical Plants, LPG Facilities, Power Generation and Pharmaceutical Industries, supporting both greenfield and brownfield developments. His technical leadership and practical project experience continue to strengthen Aarvi's engineering capabilities and commitment to delivering technically robust, execution-focused solutions."
     ],
     image: imgSreenivasu
   }
@@ -174,13 +166,11 @@ export default function BoardOfDirectorsSection() {
                 className="absolute bottom-4 left-4 right-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 text-white transform transition-transform duration-300 group-hover:-translate-y-1"
               >
                
-
                 <h3 className="text-lg font-black tracking-tight">{leader.name}</h3>
                 <p className="text-[#1db87a] text-[10px] font-bold mb-2 font-mono uppercase tracking-wider">{leader.role}</p>
                 <p className="text-slate-300 text-[11px] leading-relaxed line-clamp-2 font-medium pr-2">
                   {leader.shortDesc}
                 </p>
-
                 
               </motion.div>
             </motion.div>
@@ -193,6 +183,7 @@ export default function BoardOfDirectorsSection() {
             Contact Us <ArrowUpRight className="w-4 h-4" />
           </Link>
         </div>
+
       </div>
 
       {/* ─── EXPANDED MODAL VIEW (SPLIT SCREEN) ─── */}
@@ -226,7 +217,10 @@ export default function BoardOfDirectorsSection() {
               </button>
 
               {/* Left Side: Image */}
-              <motion.div layoutId={`card-image-${selectedLeader.id}`} className="w-full md:w-[45%] h-64 md:h-auto relative shrink-0 bg-[#0a1628]">
+              <motion.div 
+                layoutId={`card-image-${selectedLeader.id}`} 
+                className="w-full md:w-[45%] h-64 md:h-auto relative shrink-0 bg-[#0a1628] overflow-hidden rounded-b-3xl md:rounded-b-none md:rounded-r-3xl"
+              >
                 {selectedLeader.image ? (
                   <Image 
                     src={selectedLeader.image} 
@@ -238,8 +232,6 @@ export default function BoardOfDirectorsSection() {
                 ) : (
                   <div className="w-full h-full bg-slate-200" />
                 )}
-                {/* Gradient fade to white for seamless desktop transition */}
-                <div className="hidden md:block absolute inset-y-0 right-0 w-24 bg-linear-to-l from-white to-transparent" />
               </motion.div>
 
               {/* Right Side: Detailed Biography (Scrollable) */}
@@ -283,17 +275,14 @@ export default function BoardOfDirectorsSection() {
                       ))}
                     </div>
                   </div>
-
               
                   
                 </div>
               </motion.div>
-
             </motion.div>
           </div>
         )}
       </AnimatePresence>
-
     </section>
   );
 }
