@@ -6,6 +6,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
+  ArrowUpRight,
   Activity,
   Layers,
   Hammer,
@@ -19,6 +20,7 @@ import {
   Database,
   Disc,
   ChevronRight,
+  Map,
 } from "lucide-react";
 
 // ─── LOCAL ASSETS ───
@@ -51,10 +53,17 @@ const ALL_SERVICES = [
     img: img2,
   },
   {
+    title: "Pipeline Engineering",
+    desc: "Pipeline routing, hydraulic analysis, stress flexibility, and material integrity.",
+    icon: Map, // Make sure to import 'Map' from lucide-react
+    href: "/services/pipeline-engineering",
+    img: img3, 
+  },
+  {
     title: "Mechanical Engineering",
     desc: "Static and rotating equipment sizing, vendor reviews, and pressure vessel support.",
     icon: Hammer,
-    href: "/services/mechanical-equipment",
+    href: "/services/mechanical-engineering",
     img: img4,
   },
   {
@@ -86,20 +95,6 @@ const ALL_SERVICES = [
     img: img10,
   },
   {
-    title: "Digital Engineering & 3D Modelling",
-    desc: "Integrated intelligent 3D plant coordination models and database upgrades.",
-    icon: Box,
-    href: "/services/digital-engineering-3d",
-    img: img9,
-  },
-  {
-    title: "Project Engineering & PMC Support",
-    desc: "Project management, scheduling, and multi-discipline interface coordination.",
-    icon: Briefcase,
-    href: "/services/project-engineering-pmc",
-    img: img11,
-  },
-  {
     title: "As-Built & Asset Documentation",
     desc: "Database reconciliation and asset info validation handover packages.",
     icon: FileCheck,
@@ -107,20 +102,27 @@ const ALL_SERVICES = [
     img: img12,
   },
   {
-    title: "Engineering Data & Digitalization",
-    desc: "Legacy drawing digitization and digital twin data preparation workflows.",
+    title: "Digitalization",
+    desc: "Engineering 2D/3D data migration, legacy digitization, and data integration.",
     icon: Database,
-    href: "/services/engineering-data-digitalization",
-    img: img6,
+    href: "/services/digitalization",
+    img: img9,
   },
   {
-    title: "Construction, Commissioning & Asset Support",
-    desc: "Mechanical completion reviews, pre-commissioning, and startup support.",
-    icon: Disc,
-    href: "/services/construction-commissioning-support",
-    img: img3,
+    title: "Project Delivery & Execution Support",
+    desc: "Procurement engineering, design coordination, and pre-commissioning support.",
+    icon: Briefcase,
+    href: "/services/project-delivery-execution-support",
+    img: img11,
   },
 ];
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+};
+const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
+
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -252,26 +254,43 @@ Process and Industrial Infrastructure projects.
         </motion.div>
       </section>
 
-      <section className="relative z-10 border-t border-slate-200 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 flex flex-col lg:flex-row items-center justify-between gap-10">
-          <div>
-            <h2 className="text-2xl lg:text-3xl font-extrabold text-aarvi-navy mb-3">
-              Need a specialized engineering team?
-            </h2>
-            <p className="text-text-body text-sm max-w-xl">
-              We deploy multidisciplinary task forces tailored to complex industrial
-              environments. Contact our business development team for a consultation.
-            </p>
+      <section className="relative bg-aarvi-navy py-16 lg:py-20 overflow-hidden">
+          <div
+            className="absolute inset-0 pointer-events-none opacity-[0.03]"
+            style={{
+              backgroundImage: "radial-gradient(circle, #ffffff 1.5px, transparent 1.5px)",
+              backgroundSize: "32px 32px"
+            }}
+          />
+          <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10">
+            <motion.div
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              variants={stagger}
+              className="flex flex-col md:flex-row items-start md:items-center justify-between gap-10 bg-white/5 backdrop-blur-sm border border-white/10 p-10 rounded-3xl"
+            >
+              <div className="max-w-xl">
+               
+                <motion.h2 variants={fadeUp} className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight leading-tight mb-4">
+                  Let&#39;s Build Your Next Project Together
+                </motion.h2>
+                <motion.p variants={fadeUp} className="text-white/60 text-base leading-relaxed font-medium">
+                  Whether you&#39;re developing a greenfield facility or upgrading an existing asset, we help transform concepts into safe, reliable and high-performing operating facilities.
+                </motion.p>
+              </div>
+              <motion.div variants={fadeUp} className="shrink-0">
+                <Link
+                  href="/contact?service=process-safety"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-5 bg-aarvi-green text-white font-black text-sm uppercase tracking-widest rounded-full hover:bg-white hover:text-aarvi-navy shadow-[0_8px_20px_rgba(0,135,90,0.3)] hover:shadow-[0_12px_28px_rgba(0,135,90,0.4)] transition-all duration-300 group"
+                >
+                  Talk to Our Experts
+                  <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </Link>
+              </motion.div>
+            </motion.div>
           </div>
-
-          <Link
-            href="/contact"
-            className="shrink-0 bg-aarvi-green hover:bg-[#00704A] text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-aarvi-green/20 transition-all hover:-translate-y-1"
-          >
-            Request a Consultation
-          </Link>
-        </div>
-      </section>
+        </section>
     </main>
   );
 }

@@ -28,54 +28,49 @@ export const SERVICE_LINKS = [
     code: "PP-102" 
   },
   { 
+    label: "Pipeline Engineering", 
+    href: "/services/pipeline-engineering", 
+    code: "PL-103" 
+  },
+  { 
     label: "Mechanical Engineering", 
     href: "/services/mechanical-engineering", 
-    code: "ME-103" 
+    code: "ME-104" 
   },
   { 
     label: "Civil & Structural Engineering", 
     href: "/services/civil-structural", 
-    code: "CS-104" 
+    code: "CS-105" 
   },
   { 
     label: "Electrical Engineering", 
     href: "/services/electrical-engineering", 
-    code: "EL-105" 
+    code: "EL-106" 
   },
   { 
     label: "Instrumentation & Control Engineering", 
     href: "/services/instrumentation-control", 
-    code: "IC-106" 
+    code: "IC-107" 
   },
   { 
     label: "Engineering Simulations", 
     href: "/services/engineering-simulations", 
-    code: "FE-107" 
-  },
-  { 
-    label: "Digital Engineering & 3D Modelling", 
-    href: "/services/digital-engineering-3d", 
-    code: "DE-108" 
-  },
-  { 
-    label: "Project Engineering & PMC Support", 
-    href: "/services/project-engineering-pmc", 
-    code: "PM-109" 
+    code: "ES-108" 
   },
   { 
     label: "As-Built & Asset Documentation", 
     href: "/services/as-built-documentation", 
-    code: "AB-110" 
+    code: "AB-109" 
   },
   { 
-    label: "Engineering Data & Digitalization", 
-    href: "/services/engineering-data-digitalization", 
-    code: "ED-111" 
+    label: "Digitalization", 
+    href: "/services/digitalization", 
+    code: "DG-110" 
   },
   { 
-    label: "Construction, Commissioning & Asset Support.", 
-    href: "/services/construction-commissioning-support", 
-    code: "CC-112" 
+    label: "Project Delivery & Execution Support", 
+    href: "/services/project-delivery-execution-support", 
+    code: "PD-111" 
   }
 ];
 

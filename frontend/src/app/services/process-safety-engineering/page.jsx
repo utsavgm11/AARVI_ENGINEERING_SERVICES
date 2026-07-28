@@ -194,13 +194,13 @@ export default function ProcessSafetyEngineeringPage() {
 
           </div>
         </section>
-        {/* ══════════════════════════════════════════════════════════════════ */}
+       {/* ══════════════════════════════════════════════════════════════════ */}
         {/* 3 · SOFTWARE ECOSYSTEM GRID                                        */}
         {/* ══════════════════════════════════════════════════════════════════ */}
         <section className="bg-slate-50/60 py-16 lg:py-24 border-b border-slate-200">
           <div className="max-w-7xl mx-auto px-6 lg:px-10">
             
-            {/* Main Title Header */}
+            {/* Header: Large Bold Title */}
             <motion.div
               initial="hidden"
               whileInView="show"
@@ -216,13 +216,13 @@ export default function ProcessSafetyEngineeringPage() {
               </motion.h2>
             </motion.div>
 
-            {/* Enhanced Software Cards Grid */}
+            {/* Perfectly Centered Flex Wrap Container */}
             <motion.div
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-80px" }}
               variants={stagger}
-              className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 lg:gap-5"
+              className="flex flex-wrap items-center justify-center gap-4 lg:gap-5 max-w-6xl mx-auto"
             >
               {SOFTWARE_TOOLS.map((tool) => {
                 const name = typeof tool === "string" ? tool : tool.name;
@@ -230,7 +230,7 @@ export default function ProcessSafetyEngineeringPage() {
                   <motion.div
                     key={name}
                     variants={fadeUp}
-                    className="group relative p-5 rounded-2xl bg-linear-to-br from-white via-white to-emerald-50/40 border border-slate-200/80 border-l-4 border-l-aarvi-green shadow-sm hover:shadow-xl hover:shadow-aarvi-green/10 hover:border-aarvi-green hover:-translate-y-1.5 transition-all duration-300 flex items-center justify-center text-center cursor-default min-h-23.75 overflow-hidden"
+                    className="group relative w-44 sm:w-52 p-5 rounded-2xl bg-linear-to-br from-white via-white to-emerald-50/40 border border-slate-200/80 border-l-4 border-l-aarvi-green shadow-sm hover:shadow-xl hover:shadow-aarvi-green/10 hover:border-aarvi-green hover:-translate-y-1.5 transition-all duration-300 flex items-center justify-center text-center cursor-default min-h-23.75 overflow-hidden shrink-0"
                   >
                     {/* Ambient green glow backlight on hover */}
                     <div className="absolute -right-6 -bottom-6 w-16 h-16 bg-aarvi-green/15 rounded-full blur-xl group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
