@@ -246,66 +246,7 @@ export default function ProcessSafetyEngineeringPage() {
 
           </div>
         </section>
-        {/* ══════════════════════════════════════════════════════════════════ */}
-        {/* 4 · FEATURED PROJECT — wired for DB later                        */}
-        {/* ══════════════════════════════════════════════════════════════════ */}
-        <section className="bg-aarvi-bg py-16 lg:py-24 border-b border-slate-200">
-          <div className="max-w-7xl mx-auto px-6 lg:px-10">
-            <motion.span
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="text-[10px] font-mono font-black text-aarvi-green tracking-[0.3em] uppercase block mb-10 text-center lg:text-left"
-            >
-              Featured Case Study
-            </motion.span>
-            
-            {FEATURED_PROJECT ? (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center bg-white rounded-3xl p-6 shadow-sm border border-slate-200"
-              >
-                <div className="lg:col-span-5 relative rounded-2xl overflow-hidden min-h-75 bg-linear-to-br from-aarvi-navy to-[#16213d]" />
-                <div className="lg:col-span-7 flex flex-col justify-center p-4 lg:p-8">
-                  <h3 className="text-3xl font-black text-aarvi-navy uppercase tracking-tight mb-4">
-                    {FEATURED_PROJECT.title}
-                  </h3>
-                  <p className="text-slate-500 text-base leading-relaxed mb-8">{FEATURED_PROJECT.scope}</p>
-                  <Link
-                    href="/projects"
-                    className="inline-flex items-center gap-2 bg-aarvi-navy text-white px-6 py-3 rounded-full font-black text-xs uppercase tracking-widest hover:bg-aarvi-green transition-colors w-fit shadow-md"
-                  >
-                    View Case Study <ArrowUpRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
-              </motion.div>
-            ) : (
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="rounded-3xl border-2 border-dashed border-slate-200 bg-white p-12 lg:p-20 flex flex-col items-center text-center shadow-sm"
-              >
-                <div className="w-16 h-16 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center mb-6 shadow-inner">
-                  <Briefcase className="w-7 h-7 text-slate-400" strokeWidth={1.5} />
-                </div>
-                <h3 className="text-xl md:text-2xl font-black text-aarvi-navy uppercase tracking-tight mb-3">
-                  Project Case Studies Coming Soon
-                </h3>
-               
-                <Link
-                  href="/projects"
-                  className="inline-flex items-center gap-2 px-8 py-4 border border-slate-200 text-aarvi-navy font-black text-xs uppercase tracking-widest rounded-full hover:border-aarvi-green hover:text-aarvi-green hover:shadow-md transition-all duration-300 bg-slate-50"
-                >
-                  Browse All Projects <ArrowUpRight className="w-4 h-4" />
-                </Link>
-              </motion.div>
-            )}
-          </div>
-        </section>
-
+        
         {/* ══════════════════════════════════════════════════════════════════ */}
         {/* 5 · CTA BANNER                                                     */}
         {/* ══════════════════════════════════════════════════════════════════ */}
