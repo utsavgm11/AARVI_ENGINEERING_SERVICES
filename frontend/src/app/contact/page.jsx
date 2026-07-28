@@ -238,7 +238,7 @@ export default function ContactPage() {
                       </div>
                     </div>
                     <h3 className="text-2xl lg:text-3xl font-black text-aarvi-navy tracking-tight mb-4">
-                      Inquiry Transmitted!
+                      Inquiry Sent!
                     </h3>
                     <p className="text-slate-500 text-sm max-w-md mx-auto mb-10 leading-relaxed">
                       Your technical requirements have been securely logged in our database. An engineering lead will review your scope and contact you shortly.
@@ -309,7 +309,7 @@ export default function ContactPage() {
                           <select required id="service" name="service" value={formData.service} onChange={handleChange}
                             className="w-full pl-11 pr-5 py-3.5 rounded-xl bg-aarvi-bg border border-slate-200 text-sm text-aarvi-navy focus:outline-none focus:ring-2 focus:ring-aarvi-green/50 focus:border-aarvi-green transition-all cursor-pointer appearance-none"
                           >
-                            <option value="" disabled>Select an engineering discipline...</option>
+                            <option value="" disabled>Select an engineering service...</option>
                             {SERVICES_LIST.map(svc => (
                               <option key={svc} value={svc}>{svc}</option>
                             ))}
@@ -337,9 +337,9 @@ export default function ContactPage() {
                         className="w-full sm:w-auto px-8 py-4 bg-aarvi-navy hover:bg-[#111827] text-white rounded-xl text-sm font-bold tracking-widest uppercase transition-all shadow-lg shadow-aarvi-navy/10 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                       >
                         {status === 'submitting' ? (
-                          <><Loader2 className="w-4 h-4 animate-spin" /> Transmitting</>
+                          <><Loader2 className="w-4 h-4 animate-spin" /> Submitting</>
                         ) : (
-                          <>Dispatch Inquiry <ArrowUpRight className="w-4 h-4" /></>
+                          <> Submit Inquiry  <ArrowUpRight className="w-4 h-4" /></>
                         )}
                       </button>
 
