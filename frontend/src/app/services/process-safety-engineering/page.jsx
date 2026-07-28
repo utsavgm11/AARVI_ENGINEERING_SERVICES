@@ -37,18 +37,18 @@ const SERVICES_LIST = [
 ];
 
 const SOFTWARE_TOOLS = [
-  { name: "Aspen HYSYS", category: "Thermodynamics" },
-  { name: "Aspen Plus", category: "Simulation" },
-  { name: "PipeNet", category: "Hydraulics" },
-  { name: "FlareSIM", category: "Flaring" },
-  { name: "PHAST", category: "Consequence" },
-  { name: "SAFETI", category: "Risk" },
-  { name: "PHA-Pro", category: "HAZOP" },
-  { name: "exSILentia", category: "SIL" },
-  { name: "Detect3D", category: "Gas Detection" },
-  { name: "OLGA", category: "Emissions" },
-  { name: "SPPID", category: "P&ID" },
-  { name: "AVEVAPID", category: "P&ID" }
+  "Aspen HYSYS",
+  "Aspen Plus",
+  "PipeNet",
+  "FlareSIM",
+  "PHAST",
+  "SAFETI",
+  "PHA-Pro",
+  "exSILentia",
+  "Detect3D",
+  "OLGA",
+  "SPPID",
+  "AVEVAPID"
 ];
 
 const FEATURED_PROJECT = null;
@@ -235,8 +235,8 @@ export default function ProcessSafetyEngineeringPage() {
                     {/* Ambient green glow backlight on hover */}
                     <div className="absolute -right-6 -bottom-6 w-16 h-16 bg-aarvi-green/15 rounded-full blur-xl group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
 
-                    {/* Software Name Alone */}
-                    <span className="font-mono text-xs sm:text-sm font-extrabold text-aarvi-navy uppercase tracking-wider leading-snug group-hover:text-aarvi-green transition-colors duration-300 relative z-10">
+                    {/* Software Name preserving exact capitalization */}
+                    <span className="font-mono text-xs sm:text-sm font-extrabold text-aarvi-navy tracking-wider leading-snug group-hover:text-aarvi-green transition-colors duration-300 relative z-10">
                       {name}
                     </span>
                   </motion.div>
@@ -248,7 +248,7 @@ export default function ProcessSafetyEngineeringPage() {
         </section>
         
         {/* ══════════════════════════════════════════════════════════════════ */}
-        {/* 5 · CTA BANNER                                                     */}
+        {/* 4 · CTA BANNER                                                     */}
         {/* ══════════════════════════════════════════════════════════════════ */}
         <section className="relative bg-aarvi-navy py-16 lg:py-20 overflow-hidden">
           <div

@@ -109,6 +109,12 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } }
 };
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+};
+const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
+
 // ─── COMPONENT ────────────────────────────────────────────────────────────────
 export default function IndustriesPage() {
   const [hoveredId, setHoveredId] = useState(null);
@@ -305,45 +311,46 @@ export default function IndustriesPage() {
         </motion.div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════════════════ */}
-      {/* BOTTOM CONVERSION PANEL                                               */}
-      {/* ══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative bg-aarvi-navy py-20 lg:py-28 text-white overflow-hidden">
-        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          > 
-            <span className="text-aarvi-green text-[11px] font-bold uppercase tracking-[0.2em] mb-4 block">
-                Let&apos;s Build Something Resilient
-            </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight">
-              Need Custom Technical Support Specifications?
-            </h2>
-            <p className="text-white/70 max-w-xl mx-auto text-sm leading-relaxed mb-9">
-              Our multi-discipline engineering staff maps out secure system layouts built
-              for long-term operations. Let us prepare your enterprise compliance package.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                href="/contact"
-                className="w-full sm:w-auto bg-aarvi-green hover:bg-[#00744d] text-white font-bold px-8 py-3.5 rounded-xl transition-all shadow-[0_8px_20px_rgba(0,135,90,0.3)] hover:shadow-[0_12px_28px_rgba(0,135,90,0.4)] text-sm tracking-wide inline-flex items-center justify-center gap-2 group"
-              >
-                Consult an Engineer
-                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </Link>
-              <Link
-                href="/projects"
-                className="w-full sm:w-auto bg-transparent border border-white/20 hover:border-white/40 hover:bg-white/5 text-white font-bold px-8 py-3.5 rounded-xl transition-all text-sm tracking-wide"
-              >
-                Examine Our Projects Log
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      {/* ══════════════════════════════════════════════════════════════════ */}
+        {/* 4 · CTA BANNER                                                     */}
+        {/* ══════════════════════════════════════════════════════════════════ */}
+        <section className="relative bg-aarvi-navy py-16 lg:py-20 overflow-hidden">
+          <div
+            className="absolute inset-0 pointer-events-none opacity-[0.03]"
+            style={{
+              backgroundImage: "radial-gradient(circle, #ffffff 1.5px, transparent 1.5px)",
+              backgroundSize: "32px 32px"
+            }}
+          />
+          <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10">
+            <motion.div
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              variants={stagger}
+              className="flex flex-col md:flex-row items-start md:items-center justify-between gap-10 bg-white/5 backdrop-blur-sm border border-white/10 p-10 rounded-3xl"
+            >
+              <div className="max-w-xl">
+               
+                <motion.h2 variants={fadeUp} className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight leading-tight mb-4">
+                  Let&#39;s Build Your Next Project Together
+                </motion.h2>
+                <motion.p variants={fadeUp} className="text-white/60 text-base leading-relaxed font-medium">
+                  Whether you&#39;re developing a greenfield facility or upgrading an existing asset, we help transform concepts into safe, reliable and high-performing operating facilities.
+                </motion.p>
+              </div>
+              <motion.div variants={fadeUp} className="shrink-0">
+                <Link
+                  href="/contact?service=process-safety"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-5 bg-aarvi-green text-white font-black text-sm uppercase tracking-widest rounded-full hover:bg-white hover:text-aarvi-navy shadow-[0_8px_20px_rgba(0,135,90,0.3)] hover:shadow-[0_12px_28px_rgba(0,135,90,0.4)] transition-all duration-300 group"
+                >
+                  Talk to Our Experts
+                  <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </Link>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
     </main>
   );
 }
