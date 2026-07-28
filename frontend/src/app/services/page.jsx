@@ -160,12 +160,7 @@ export default function ServicesDirectoryPage() {
       <section className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 pb-16 lg:pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-end">
           <div className="lg:col-span-7">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="w-8 h-0.5 bg-aarvi-green block" />
-              <span className="text-aarvi-green font-bold text-xs uppercase tracking-widest">
-                Our Capabilities
-              </span>
-            </div>
+            
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-aarvi-navy tracking-tight leading-none mb-6">
               Multi-Discipline <br className="hidden md:block" />

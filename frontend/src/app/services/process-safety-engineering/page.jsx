@@ -17,7 +17,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
 import {
-  ArrowUpRight, ShieldCheck, Briefcase, CheckCircle2, ChevronRight
+  ArrowUpRight, ShieldCheck, Briefcase, CheckCircle2, ChevronRight,Hexagon ,CircleDot,Settings ,ArrowRight,Star
 } from "lucide-react";
 
 // ─── ASSET IMPORTS ───────────────────────────────────────────────────────────
@@ -130,14 +130,7 @@ export default function ProcessSafetyEngineeringPage() {
                 </motion.p>
               </div>
 
-              <motion.div variants={fadeUp} className="mt-8">
-                <Link
-                  href="#service-details"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-aarvi-green text-white font-black text-sm uppercase tracking-widest rounded-full hover:bg-white hover:text-aarvi-navy shadow-lg transition-all duration-300"
-                >
-                  Explore Capabilities <ChevronRight className="w-4 h-4" />
-                </Link>
-              </motion.div>
+              
               
             </motion.div>
           </div>
@@ -160,103 +153,99 @@ export default function ProcessSafetyEngineeringPage() {
               <div className="w-full xl:w-[65%] p-8 md:p-12 lg:p-16 flex flex-col justify-center">
                 
                 <div className="mb-10">
-                  <span className="text-[10px] font-mono font-black text-aarvi-green uppercase tracking-[0.3em] block mb-3">
-                    Core Competencies
-                  </span>
                   <h2 className="text-3xl lg:text-4xl font-black text-aarvi-navy uppercase tracking-tight">
-                    Integrated Process & Safety Expertise
+                    Core Competencies
                   </h2>
                 </div>
 
-                {/* 9-Point Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
+                {/* 9-Point List (CSS Columns for vertical flow) */}
+                <div className="columns-1 md:columns-2 gap-4 mb-12">
                   {SERVICES_LIST.map((item, index) => (
                     <div 
                       key={index} 
-                      className="flex items-start gap-3 p-4 rounded-xl bg-slate-50 border border-slate-100 hover:border-aarvi-green/40 hover:bg-white hover:shadow-md transition-all duration-300 group"
+                      className="break-inside-avoid mb-4 flex items-start gap-3 p-4 rounded-xl bg-slate-50 border border-slate-100 hover:border-aarvi-green/40 hover:bg-white hover:shadow-md transition-all duration-300 group"
                     >
-                      <CheckCircle2 className="w-5 h-5 text-aarvi-green shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+                      <svg 
+  className="w-4 h-4 text-aarvi-green shrink-0 mt-1 transition-transform group-hover:scale-125 duration-300" 
+  viewBox="0 0 24 24" 
+  fill="currentColor"
+>
+  <path d="M12 0L14 7L20.5 3.5L17 10L24 12L17 14L20.5 20.5L14 17L12 24L10 17L3.5 20.5L7 14L0 12L7 10L3.5 3.5L10 7L12 0Z" />
+</svg>
                       <span className="text-sm font-bold text-aarvi-navy leading-snug">{item}</span>
                     </div>
                   ))}
                 </div>
                 
-                
               </div>
 
-              {/* ─ Right: Image ─ */}
-              <div className="w-full xl:w-[35%] relative min-h-100 xl:min-h-full bg-aarvi-navy">
-                <Image 
-                  src={pe101Img} 
-                  alt="Process and Safety Engineering Schematic"
-                  fill
-                  sizes="(max-width: 1280px) 100vw, 35vw"
-                  className="object-cover opacity-80 mix-blend-screen"
-                />
-                {/* Gradient overlay to blend image nicely into the edge */}
-                <div className="absolute inset-0 bg-linear-to-t xl:bg-linear-to-l from-aarvi-navy/80 to-transparent" />
-              </div>
+              {/* ─ Right: Image (Natural Colors) ─ */}
+<div className="w-full xl:w-[35%] relative min-h-87.5 xl:min-h-full bg-slate-100 overflow-hidden">
+  <Image 
+    src={pe101Img} 
+    alt="Process and Safety Engineering Schematic"
+    fill
+    sizes="(max-width: 1280px) 100vw, 35vw"
+    className="object-cover"
+  />
+</div>
 
             </motion.div>
 
           </div>
         </section>
-
         {/* ══════════════════════════════════════════════════════════════════ */}
-        {/* 3 · SOFTWARE ECOSYSTEM GRID                                      */}
+        {/* 3 · SOFTWARE ECOSYSTEM GRID                                        */}
         {/* ══════════════════════════════════════════════════════════════════ */}
-        <section className="bg-white py-16 lg:py-24 border-b border-slate-200">
+        <section className="bg-slate-50/60 py-16 lg:py-24 border-b border-slate-200">
           <div className="max-w-7xl mx-auto px-6 lg:px-10">
+            
+            {/* Main Title Header */}
             <motion.div
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-80px" }}
               variants={stagger}
-              className="text-center mb-16"
+              className="text-center mb-12 lg:mb-16"
             >
-              <motion.div variants={fadeUp} className="flex items-center justify-center gap-2 mb-4">
-                <ShieldCheck className="w-5 h-5 text-aarvi-green" strokeWidth={1.5} />
-                <span className="text-[11px] font-mono font-black text-aarvi-green tracking-[0.3em] uppercase">
-                  Software Ecosystem
-                </span>
-              </motion.div>
-              <motion.h2 variants={fadeUp} className="text-3xl md:text-5xl font-black text-aarvi-navy uppercase tracking-tight mb-4">
-                Advanced Tools. Proven Results.
+              <motion.h2 
+                variants={fadeUp} 
+                className="text-3xl md:text-5xl font-black text-aarvi-navy uppercase tracking-tight"
+              >
+                Software Ecosystem
               </motion.h2>
-              <motion.p variants={fadeUp} className="text-slate-500 text-base font-medium max-w-2xl mx-auto">
-                We leverage the world&apos;s most advanced thermodynamic and risk calculation
-                environments to ensure absolute mathematical precision in every project.
-              </motion.p>
             </motion.div>
 
+            {/* Enhanced Software Cards Grid */}
             <motion.div
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-80px" }}
               variants={stagger}
-              className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 lg:gap-6"
+              className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 lg:gap-5"
             >
-              {SOFTWARE_TOOLS.map((tool) => (
-                <motion.div
-                  key={tool.name}
-                  variants={fadeUp}
-                  className="group relative p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-aarvi-green/50 hover:bg-white hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center justify-center text-center cursor-default min-h-35 overflow-hidden"
-                >
-                  {/* Subtle top accent line on hover */}
-                  <div className="absolute top-0 left-0 w-full h-1 bg-aarvi-green transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
-                  
-                  <div className="font-mono text-sm font-black text-aarvi-navy uppercase tracking-widest leading-tight mb-2 relative z-10">
-                    {tool.name}
-                  </div>
-                  <div className="text-[10px] text-slate-400 font-bold uppercase tracking-widest relative z-10">
-                    {tool.category}
-                  </div>
-                </motion.div>
-              ))}
+              {SOFTWARE_TOOLS.map((tool) => {
+                const name = typeof tool === "string" ? tool : tool.name;
+                return (
+                  <motion.div
+                    key={name}
+                    variants={fadeUp}
+                    className="group relative p-5 rounded-2xl bg-linear-to-br from-white via-white to-emerald-50/40 border border-slate-200/80 border-l-4 border-l-aarvi-green shadow-sm hover:shadow-xl hover:shadow-aarvi-green/10 hover:border-aarvi-green hover:-translate-y-1.5 transition-all duration-300 flex items-center justify-center text-center cursor-default min-h-23.75 overflow-hidden"
+                  >
+                    {/* Ambient green glow backlight on hover */}
+                    <div className="absolute -right-6 -bottom-6 w-16 h-16 bg-aarvi-green/15 rounded-full blur-xl group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
+
+                    {/* Software Name Alone */}
+                    <span className="font-mono text-xs sm:text-sm font-extrabold text-aarvi-navy uppercase tracking-wider leading-snug group-hover:text-aarvi-green transition-colors duration-300 relative z-10">
+                      {name}
+                    </span>
+                  </motion.div>
+                );
+              })}
             </motion.div>
+
           </div>
         </section>
-        
         {/* ══════════════════════════════════════════════════════════════════ */}
         {/* 4 · FEATURED PROJECT — wired for DB later                        */}
         {/* ══════════════════════════════════════════════════════════════════ */}
@@ -305,10 +294,7 @@ export default function ProcessSafetyEngineeringPage() {
                 <h3 className="text-xl md:text-2xl font-black text-aarvi-navy uppercase tracking-tight mb-3">
                   Project Case Studies Coming Soon
                 </h3>
-                <p className="text-slate-500 text-base max-w-lg mb-8">
-                  This section will automatically pull a relevant featured project for
-                  Process & Safety Engineering from the active projects database.
-                </p>
+               
                 <Link
                   href="/projects"
                   className="inline-flex items-center gap-2 px-8 py-4 border border-slate-200 text-aarvi-navy font-black text-xs uppercase tracking-widest rounded-full hover:border-aarvi-green hover:text-aarvi-green hover:shadow-md transition-all duration-300 bg-slate-50"
@@ -340,14 +326,12 @@ export default function ProcessSafetyEngineeringPage() {
               className="flex flex-col md:flex-row items-start md:items-center justify-between gap-10 bg-white/5 backdrop-blur-sm border border-white/10 p-10 rounded-3xl"
             >
               <div className="max-w-xl">
-                <motion.span variants={fadeUp} className="text-aarvi-green text-[11px] font-bold uppercase tracking-[0.25em] mb-4 block">
-                  Let&apos;s Engineer Safety Together
-                </motion.span>
+               
                 <motion.h2 variants={fadeUp} className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight leading-tight mb-4">
-                  Need Process & Safety Engineering Expertise?
+                  Let&#39;s Build Your Next Project Together
                 </motion.h2>
                 <motion.p variants={fadeUp} className="text-white/60 text-base leading-relaxed font-medium">
-                  Our experts are ready to support your next critical project with precision and compliance.
+                  Whether you&#39;re developing a greenfield facility or upgrading an existing asset, we help transform concepts into safe, reliable and high-performing operating facilities.
                 </motion.p>
               </div>
               <motion.div variants={fadeUp} className="shrink-0">
