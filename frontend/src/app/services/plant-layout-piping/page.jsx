@@ -34,13 +34,13 @@ const SERVICES_LIST = [
 ];
 
 const SOFTWARE_TOOLS = [
-  "E3D",
-  "SP3D",
+  "AVEVA E3D",
+  "SmartPlant 3D",
   "AutoCAD",
-  "Plant3D",
+  "AutoCAD Plant 3D",
   "Navisworks",
-  "Caesar II",
-  "AutoPipe"
+  "CAESAR II",
+  "AutoPIPE"
 ];
 
 // ─── ANIMATION VARIANTS ───────────────────────────────────────────────────────
@@ -110,7 +110,7 @@ export default function PlantLayoutPipingPage() {
         {/* ══════════════════════════════════════════════════════════════════ */}
         {/* 2 · CORE COMPETENCIES CARD                                         */}
         {/* ══════════════════════════════════════════════════════════════════ */}
-        <section id="service-details" className="bg-aarvi-bg py-16 lg:py-24 scroll-mt-24">
+        <section id="service-details" className="bg-aarvi-bg py-6 lg:py-8 scroll-mt-24">
           <div className="max-w-7xl mx-auto px-6 lg:px-10">
             
             <motion.div
@@ -170,7 +170,7 @@ export default function PlantLayoutPipingPage() {
        {/* ══════════════════════════════════════════════════════════════════ */}
         {/* 3 · SOFTWARE ECOSYSTEM GRID                                        */}
         {/* ══════════════════════════════════════════════════════════════════ */}
-        <section className="bg-slate-50/60 py-16 lg:py-24 border-b border-slate-200">
+        <section className="bg-slate-50/60 py-6 lg:py-8 border-b border-slate-200">
           <div className="max-w-7xl mx-auto px-6 lg:px-10">
             
             {/* Header: Large Bold Title */}

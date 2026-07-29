@@ -27,9 +27,9 @@ import {
 import img1 from "../../assets/service-1.png";
 import img2 from "../../assets/service-2.png";
 import img3 from "../../assets/service-3.png";
-import img4 from "../../assets/service-4.png";
-import img5 from "../../assets/service-5.png";
-import img6 from "../../assets/service-6.png";
+import img4 from "../../assets/service-3me.png";
+import img5 from "../../assets/service-4.png";
+import img6 from "../../assets/service-5.png";
 import img7 from "../../assets/service-7.png";
 import img8 from "../../assets/service-8.png";
 import img9 from "../../assets/service-9.png";
@@ -40,77 +40,77 @@ import img12 from "../../assets/service-12.png";
 const ALL_SERVICES = [
   {
     title: "Process & Safety Engineering",
-    desc: "FEED studies, process simulation, PFD/P&ID development, and SIL assessments.",
+    desc: "Process design, simulation, PFD/P&ID development, HAZOP, SIL assessment, and process safety management.",
     icon: Activity,
     href: "/services/process-safety-engineering",
     img: img1,
   },
   {
     title: "Plant Layout & Piping Engineering",
-    desc: "3D routing, clash resolution, and isometric extraction.",
+    desc: "Plot plans, equipment layout, 3D modelling, pipe stress analysis, clash detection, and isometric generation.",
     icon: Layers,
     href: "/services/plant-layout-piping",
     img: img2,
   },
   {
     title: "Pipeline Engineering",
-    desc: "Pipeline routing, hydraulic analysis, stress flexibility, and material integrity.",
-    icon: Map, // Make sure to import 'Map' from lucide-react
+    desc: "Pipeline routing, hydraulic and surge analysis, stress analysis, integrity engineering, and as-built documentation.",
+    icon: Map,
     href: "/services/pipeline-engineering",
-    img: img3, 
+    img: img3,
   },
   {
     title: "Mechanical Engineering",
-    desc: "Static and rotating equipment sizing, vendor reviews, and pressure vessel support.",
+    desc: "Static, rotating and package equipment, pressure vessels, heat exchangers, tanks, and mechanical handling systems.",
     icon: Hammer,
     href: "/services/mechanical-engineering",
     img: img4,
   },
   {
     title: "Civil & Structural Engineering",
-    desc: "Site development, structural steel racks, and blast-resistant design.",
+    desc: "Pipe racks, structural steel, foundations, offshore structures, seismic analysis, and blast-resistant design.",
     icon: Compass,
     href: "/services/civil-structural",
     img: img5,
   },
   {
     title: "Electrical Engineering",
-    desc: "Power system design, short circuit studies, and substation compliance.",
+    desc: "Power system design, load flow studies, short circuit analysis, cable routing, substations, and hazardous area compliance.",
     icon: Zap,
     href: "/services/electrical-engineering",
-    img: img7,
+    img: img6,
   },
   {
     title: "Instrumentation & Control Engineering",
-    desc: "Datasheet development, cause and effect matrices, and SIS support.",
+    desc: "Instrumentation design, I/O lists, control philosophy, SIS engineering, loop design, and telecom systems.",
     icon: Sliders,
     href: "/services/instrumentation-control",
     img: img8,
   },
   {
     title: "Engineering Simulations",
-    desc: "Advanced computational fluid dynamics and structural behaviour checks.",
+    desc: "CFD, finite element analysis, thermal studies, structural simulations, design verification, and performance validation.",
     icon: Cpu,
     href: "/services/engineering-simulations",
     img: img10,
   },
   {
     title: "As-Built & Asset Documentation",
-    desc: "Database reconciliation and asset info validation handover packages.",
+    desc: "Redline incorporation, as-built updates, asset verification, engineering database reconciliation, and handover documentation.",
     icon: FileCheck,
     href: "/services/as-built-documentation",
     img: img12,
   },
   {
     title: "Digitalization",
-    desc: "Engineering 2D/3D data migration, legacy digitization, and data integration.",
+    desc: "Engineering 2D/3D data migration, legacy drawing digitization, and SmartPlant data management & integration.",
     icon: Database,
     href: "/services/digitalization",
     img: img9,
   },
   {
     title: "Project Delivery & Execution Support",
-    desc: "Procurement engineering, design coordination, and pre-commissioning support.",
+    desc: "Procurement engineering, vendor management, design coordination, commissioning, maintenance, and asset integrity support.",
     icon: Briefcase,
     href: "/services/project-delivery-execution-support",
     img: img11,
