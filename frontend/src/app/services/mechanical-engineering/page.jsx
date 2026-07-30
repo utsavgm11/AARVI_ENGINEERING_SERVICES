@@ -89,7 +89,7 @@ export default function MechanicalEngineeringPage() {
               <div className="border-l-4 border-aarvi-green pl-6 py-2 mb-8">
                 <motion.h1
                   variants={fadeUp}
-                  className="text-4xl md:text-5xl lg:text-7xl font-black text-white uppercase tracking-tight leading-[1.05] mb-6 shadow-sm"
+                  className="text-4xl md:text-5xl lg:text-7xl font-black text-white uppercase tracking-tight leading-[1.05] mb-6 "
                 >
                   Mechanical<br />Engineering
                 </motion.h1>

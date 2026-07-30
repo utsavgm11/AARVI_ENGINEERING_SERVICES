@@ -145,21 +145,8 @@ export default function ServicesDirectoryPage() {
   return (
     <main className="bg-aarvi-bg min-h-screen text-aarvi-navy selection:bg-aarvi-green/30 selection:text-aarvi-navy relative overflow-hidden">
       <div className="fixed inset-0 tech-grid opacity-50 pointer-events-none z-0" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 pt-28">
-        <nav
-          aria-label="Breadcrumb"
-          className="flex items-center gap-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-8"
-        >
-          <Link href="/" className="hover:text-aarvi-green transition-colors">
-            Home
-          </Link>
-          <ChevronRight className="w-3 h-3" />
-          <span className="text-aarvi-navy">Core Capabilities</span>
-        </nav>
-      </div>
-
-      <section className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 pb-16 lg:pb-20">
+     
+       <section className="relative z-10 max-w-7xl mx-auto py-4 px-6 lg:px-8 pb-16 lg:pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-end">
           <div className="lg:col-span-7">
             

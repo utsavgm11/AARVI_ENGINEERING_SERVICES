@@ -127,20 +127,7 @@ export default function IndustriesPage() {
     >
       <meta itemProp="name" content="Industries We Serve | Aarvi Engineering Services" />
 
-      {/* ══════════════════════════════════════════════════════════════════════ */}
-      {/* BREADCRUMBS                                                           */}
-      {/* ══════════════════════════════════════════════════════════════════════ */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-8 lg:pt-10">
-        <nav aria-label="Breadcrumb">
-          <ol className="flex items-center gap-2 text-xs font-semibold text-slate-400 uppercase tracking-wider">
-            <li>
-              <Link href="/" className="hover:text-aarvi-green transition-colors">Home</Link>
-            </li>
-            <li aria-hidden="true"><ChevronRight className="w-3 h-3" /></li>
-            <li className="text-aarvi-navy" aria-current="page">Industries We Serve</li>
-          </ol>
-        </nav>
-      </div>
+      
 
       {/* ══════════════════════════════════════════════════════════════════════ */}
       {/* HERO SECTION                                                          */}

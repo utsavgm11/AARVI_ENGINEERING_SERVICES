@@ -86,70 +86,74 @@ export default function VisionMissionSection() {
           </div>
 
           {/* ─── RIGHT SIDE: TALL CARDS ─── */}
-          {/* Added lg:pb-12 to prevent the translated second card from clipping on desktop */}
-          <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-6 lg:pl-8 lg:pb-12">
-            
-            {/* VISION CARD */}
-            <motion.div 
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="relative bg-linear-to-b from-white to-slate-50/80 rounded-4xl h-100 sm:h-112.5 lg:h-125 overflow-hidden shadow-[0_20px_40px_rgb(0,0,0,0.06)] border border-slate-100 flex flex-col group hover:-translate-y-2 transition-transform duration-500"
-            >
-              <div className="w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center text-[#008A5E] mb-5 lg:mb-6 relative z-10 group-hover:scale-110 group-hover:bg-[#008A5E] group-hover:text-white transition-all duration-500">
-                <Eye className="w-5 h-5 lg:w-6 lg:h-6" strokeWidth={2.5} />
-              </div>
-              <h3 className="text-2xl lg:text-3xl font-black text-[#0A1628] mb-3 lg:mb-4 relative z-10">Our Vision</h3>
-              <p className="text-[13px] lg:text-sm font-semibold text-slate-600 leading-relaxed relative z-10">
-                To become the preferred engineering partner for organizations shaping the
-                future of energy, process industries and industrial infrastructure.
-              </p>
-              
-              {/* about-vision.png rendering */}
-              <div className="absolute bottom-0 left-0 w-full h-[55%] z-0">
-                {/* Soft gradient fade over the image top */}
-                <div className="absolute inset-0 bg-linear-to-t from-transparent to-white/90 z-10" />
-                <Image 
-                  src={imgVision} 
-                  alt="Aarvi Strategic Vision Graphic" 
-                  fill 
-                  className="object-contain object-bottom opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
-                />
-              </div>
-            </motion.div>
+<div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-6 lg:pl-8 lg:pb-12">
+  
+  {/* VISION CARD */}
+  <motion.div 
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-50px" }}
+    transition={{ duration: 0.6, ease: "easeOut" }}
+    className="relative bg-linear-to-b from-white to-slate-50/80 rounded-4xl p-8 h-100 sm:h-112.5 lg:h-125 overflow-hidden shadow-[0_20px_40px_rgb(0,0,0,0.06)] border border-slate-100 flex flex-col group hover:-translate-y-2 transition-transform duration-500"
+  >
+    <div className="w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center text-[#008A5E] mb-5 lg:mb-6 relative z-10 group-hover:scale-110 group-hover:bg-[#008A5E] group-hover:text-white transition-all duration-500 shrink-0">
+      <Eye className="w-5 h-5 lg:w-6 lg:h-6" strokeWidth={2.5} />
+    </div>
+    
+    <h3 className="text-2xl lg:text-3xl font-black text-[#0A1628] mb-3 lg:mb-4 relative z-10">
+      Our Vision
+    </h3>
+    
+    <p className="text-[13px] lg:text-sm font-semibold text-slate-600 leading-relaxed relative z-10">
+      To become the preferred engineering partner for organizations shaping the
+      future of energy, process industries and industrial infrastructure.
+    </p>
+    
+    {/* about-vision.png rendering */}
+    <div className="absolute bottom-0 left-0 w-full h-[55%] z-0">
+      {/* Soft gradient fade over the image top (Matched to Mission card) */}
+      <div className="absolute inset-0 bg-linear-to-t from-transparent to-white/90 z-10 pointer-events-none" />
+      <Image 
+        src={imgVision} 
+        alt="Aarvi Strategic Vision Graphic" 
+        fill 
+        /* Matched to Mission card object-contain object-bottom */
+        className="object-contain object-bottom opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+      />
+    </div>
+  </motion.div>
 
-            {/* MISSION CARD */}
-            <motion.div 
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-              className="relative bg-linear-to-b from-white to-slate-50/80 rounded-4xl p-8 h-100 sm:h-112.5 lg:h-125 overflow-hidden shadow-[0_20px_40px_rgb(0,0,0,0.06)] border border-slate-100 flex flex-col group lg:translate-y-12 hover:-translate-y-2 transition-transform duration-500"
-            >
-              <div className="w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center text-[#008A5E] mb-5 lg:mb-6 relative z-10 group-hover:scale-110 group-hover:bg-[#008A5E] group-hover:text-white transition-all duration-500">
-                <Target className="w-5 h-5 lg:w-6 lg:h-6" strokeWidth={2.5} />
-              </div>
-              <h3 className="text-2xl lg:text-3xl font-black text-[#0A1628] mb-3 lg:mb-4 relative z-10">Our Promise</h3>
-              <p className="text-[13px] lg:text-sm font-semibold text-slate-600 leading-relaxed relative z-10">
-                To deliver every project with integrity, technical excellence and
-                unwavering commitment to our clients' success.
-              </p>
-              
-              {/* about-mission.png rendering */}
-              <div className="absolute bottom-0 left-0 w-full h-[55%] z-0">
-                {/* Soft gradient fade over the image top */}
-                <div className="absolute inset-0 bg-linear-to-t from-transparent to-white/90 z-10" />
-                <Image 
-                  src={imgMission} 
-                  alt="Aarvi Operational Mission Graphic" 
-                  fill 
-                  className="object-contain object-bottom opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
-                />
-              </div>
-            </motion.div>
+  {/* MISSION CARD */}
+  <motion.div 
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-50px" }}
+    transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+    className="relative bg-linear-to-b from-white to-slate-50/80 rounded-4xl p-8 h-100 sm:h-112.5 lg:h-125 overflow-hidden shadow-[0_20px_40px_rgb(0,0,0,0.06)] border border-slate-100 flex flex-col group lg:translate-y-12 hover:-translate-y-2 transition-transform duration-500"
+  >
+    <div className="w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center text-[#008A5E] mb-5 lg:mb-6 relative z-10 group-hover:scale-110 group-hover:bg-[#008A5E] group-hover:text-white transition-all duration-500 shrink-0">
+      <Target className="w-5 h-5 lg:w-6 lg:h-6" strokeWidth={2.5} />
+    </div>
+    <h3 className="text-2xl lg:text-3xl font-black text-[#0A1628] mb-3 lg:mb-4 relative z-10">Our Promise</h3>
+    <p className="text-[13px] lg:text-sm font-semibold text-slate-600 leading-relaxed relative z-10">
+      To deliver every project with integrity, technical excellence and
+      unwavering commitment to our client&#39;s success.
+    </p>
+    
+    {/* about-mission.png rendering */}
+    <div className="absolute bottom-0 left-0 w-full h-[55%] z-0">
+      {/* Soft gradient fade over the image top */}
+      <div className="absolute inset-0 bg-linear-to-t from-transparent to-white/90 z-10 pointer-events-none" />
+      <Image 
+        src={imgMission} 
+        alt="Aarvi Operational Mission Graphic" 
+        fill 
+        className="object-contain object-bottom opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+      />
+    </div>
+  </motion.div>
 
-          </div>
+</div>
         </div>
       </div>
     </section>
