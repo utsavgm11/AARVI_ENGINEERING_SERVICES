@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Clock, ArrowRight, AlertCircle } from 'lucide-react';
+import { Clock, ArrowRight, AlertCircle, BookOpen } from 'lucide-react';
 
 export default function BlogFeedPortal() {
   const [blogs, setBlogs] = useState([]);
@@ -47,6 +47,16 @@ export default function BlogFeedPortal() {
     );
   }
 
+  // ─── HELPER: Safely resolve image URLs (Local uploads vs HTTP links) ───
+  const resolveImage = (imgPath, fallbackType = 'featured') => {
+    if (!imgPath) {
+      return fallbackType === 'featured' 
+        ? 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=1200'
+        : 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&q=80&w=800';
+    }
+    return imgPath.startsWith('http') ? imgPath : `${API_BASE}${imgPath}`;
+  };
+
   // Slice the data to perfectly match the layout in the image
   const featuredPost = blogs[0];
   const sidePosts = blogs.slice(1, 4); // The 3 stacked posts on the right
@@ -87,8 +97,7 @@ export default function BlogFeedPortal() {
                   <div className="absolute inset-x-0 bottom-0 h-2/3 bg-linear-to-t from-[#1a1a1a]/95 via-[#1a1a1a]/60 to-transparent z-10" />
                   
                   <Image 
-                  
-                    src={featuredPost.cover_img ? `${API_BASE}${featuredPost.cover_img}` : 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=1200'} 
+                    src={resolveImage(featuredPost.cover_img, 'featured')} 
                     alt={featuredPost.title}
                     fill
                     unoptimized
@@ -96,13 +105,32 @@ export default function BlogFeedPortal() {
                   />
                   
                   <div className="absolute inset-x-0 bottom-0 p-5 sm:p-8 z-20">
+                    {/* Category Pill */}
+                    {featuredPost.category && (
+                      <span className="inline-block px-3 py-1 bg-[#52b7a3]/20 text-[#52b7a3] backdrop-blur-md border border-[#52b7a3]/30 text-[10px] font-bold uppercase tracking-widest rounded-full mb-3">
+                        {featuredPost.category}
+                      </span>
+                    )}
+
                     <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white leading-tight mb-2 sm:mb-3 group-hover:text-[#52b7a3] transition-colors wrap-break-word">
                       {featuredPost.title}
                     </h2>
-                    <div className="flex items-center gap-2 text-white/80 text-xs font-medium mb-2 sm:mb-3">
-                      <Clock className="w-3.5 h-3.5" />
-                      {new Date(featuredPost.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                    
+                    <div className="flex flex-wrap items-center gap-3 text-white/80 text-xs font-medium mb-2 sm:mb-3">
+                      <span className="flex items-center gap-1.5">
+                        <Clock className="w-3.5 h-3.5" />
+                        {new Date(featuredPost.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                      </span>
+                      {featuredPost.read_time && (
+                        <>
+                          <span className="text-white/30">•</span>
+                          <span className="flex items-center gap-1.5">
+                            <BookOpen className="w-3.5 h-3.5" /> {featuredPost.read_time}
+                          </span>
+                        </>
+                      )}
                     </div>
+                    
                     <p className="text-white/70 text-xs sm:text-sm line-clamp-2 pr-2 sm:pr-4">
                       {featuredPost.excerpt}
                     </p>
@@ -122,7 +150,7 @@ export default function BlogFeedPortal() {
                     <Link href={`/blogs/${post.slug}`} className="group flex items-center gap-6 bg-white rounded-2xl p-4 shadow-sm border border-slate-100 hover:shadow-md transition-all h-32 sm:h-32.5">
                       <div className="w-1/3 h-full rounded-lg overflow-hidden shrink-0 relative">
                         <Image 
-                          src={post.cover_img ? `${API_BASE}${post.cover_img}` : 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&q=80&w=800'} 
+                          src={resolveImage(post.cover_img, 'grid')} 
                           alt={post.title}
                           fill
                           unoptimized
@@ -133,9 +161,19 @@ export default function BlogFeedPortal() {
                         <h3 className="text-[#1a1a1a] font-bold text-sm md:text-base leading-tight mb-2 line-clamp-2 group-hover:text-[#52b7a3] transition-colors">
                           {post.title}
                         </h3>
-                        <div className="flex items-center gap-2 text-slate-400 text-xs font-medium mb-3">
-                          <Clock className="w-3 h-3" />
-                          {new Date(post.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                        <div className="flex flex-wrap items-center gap-2 text-slate-400 text-xs font-medium mb-3">
+                          <span className="flex items-center gap-1">
+                            <Clock className="w-3 h-3" />
+                            {new Date(post.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                          </span>
+                          {post.read_time && (
+                            <>
+                              <span className="text-slate-300">•</span>
+                              <span className="flex items-center gap-1">
+                                <BookOpen className="w-3 h-3" /> {post.read_time}
+                              </span>
+                            </>
+                          )}
                         </div>
                         <span className="text-[#1a1a1a] text-xs font-bold flex items-center gap-1 group-hover:text-[#52b7a3] transition-colors">
                           Read More <ArrowRight className="w-3 h-3" />
@@ -174,20 +212,36 @@ export default function BlogFeedPortal() {
                     <Link href={`/blogs/${post.slug}`} className="group bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition-all flex flex-col h-full">
                       <div className="w-full aspect-4/3 overflow-hidden relative">
                         <Image 
-                          src={post.cover_img ? `${API_BASE}${post.cover_img}` : 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&q=80&w=800'} 
+                          src={resolveImage(post.cover_img, 'grid')} 
                           alt={post.title}
                           fill
                           unoptimized
                           className="object-cover transition-transform duration-500 group-hover:scale-105"
                         />
+                        {/* Grid Card Category Badge */}
+                        {post.category && (
+                          <div className="absolute top-4 left-4 bg-white/95 text-[#1a1a1a] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md shadow-sm z-10">
+                            {post.category}
+                          </div>
+                        )}
                       </div>
                       <div className="p-5 sm:p-6 flex flex-col grow">
                         <h3 className="text-[#1a1a1a] font-bold text-lg leading-tight mb-3 line-clamp-2 group-hover:text-[#52b7a3] transition-colors">
                           {post.title}
                         </h3>
-                        <div className="flex items-center gap-2 text-slate-400 text-xs font-medium mb-4 grow">
-                          <Clock className="w-3.5 h-3.5" />
-                          {new Date(post.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                        <div className="flex flex-wrap items-center gap-2 text-slate-400 text-xs font-medium mb-4 grow">
+                          <span className="flex items-center gap-1">
+                            <Clock className="w-3.5 h-3.5" />
+                            {new Date(post.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                          </span>
+                          {post.read_time && (
+                            <>
+                              <span className="text-slate-200">•</span>
+                              <span className="flex items-center gap-1">
+                                <BookOpen className="w-3.5 h-3.5" /> {post.read_time}
+                              </span>
+                            </>
+                          )}
                         </div>
                         <span className="text-[#1a1a1a] text-sm font-bold flex items-center gap-1 group-hover:text-[#52b7a3] transition-colors mt-auto">
                           Read More <ArrowRight className="w-4 h-4" />

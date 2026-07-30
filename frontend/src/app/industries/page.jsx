@@ -199,7 +199,7 @@ export default function IndustriesPage() {
       {/* ══════════════════════════════════════════════════════════════════════ */}
       {/* INDUSTRIES GRID                                                       */}
       {/* ══════════════════════════════════════════════════════════════════════ */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-8 pb-20 lg:pb-28">
+      <section className="max-w-7xl mx-auto px-6 lg:px-8 pb-10 lg:pb-28">
         <motion.div
           variants={containerVariants}
           initial="hidden"

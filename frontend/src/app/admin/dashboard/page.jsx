@@ -3,10 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { 
   LayoutDashboard, FolderKanban, FileText, Users, LogOut, 
   Send, Plus, Trash2, CheckCircle2, AlertCircle, ShieldAlert,
-  Activity, ArrowLeft, UploadCloud, Edit3, Inbox
+  Activity, ArrowLeft, UploadCloud, Edit3, Inbox,Film
 } from 'lucide-react';
 
 export default function AdminDashboardPortal() {
@@ -403,47 +404,123 @@ export default function AdminDashboardPortal() {
           )}
 
           {/* ─── 3. PUBLICATIONS TAB ─── */}
-          {activeTab === 'blogs' && (
-            <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm">
-              {viewMode === 'grid' ? (
-                <div className="space-y-4">
-                  {!Array.isArray(blogsList) || blogsList.length === 0 ? (
-                    <div className="text-sm text-slate-500 font-medium">No publications found. Click &quot;Add New Entry&quot; to begin.</div>
-                  ) : (
-                    blogsList.map(blog => (
-                      <div key={blog.id} className="flex items-center justify-between p-4 border border-slate-100 bg-slate-50 rounded-xl hover:shadow-md">
-                        <div>
-                          <div className="text-sm font-black text-[#0a1628]">{blog.title}</div>
-                          <div className="text-[10px] font-mono text-slate-400">/{blog.slug}</div>
-                        </div>
-                        <button onClick={() => handleEditItem('blog', blog)} className="text-slate-400 hover:text-[#0a1628]"><Edit3 className="w-4 h-4" /></button>
-                      </div>
-                    ))
-                  )}
-                </div>
-              ) : (
-                <form onSubmit={handleActionSubmit} className="space-y-6 animate-in fade-in">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-1"><label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">Header</label><input required type="text" value={blogForm.title} onChange={e => setBlogForm({...blogForm, title: e.target.value})} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#1db87a]" /></div>
-                    <div className="space-y-1"><label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">Slug</label><input required type="text" value={blogForm.slug} onChange={e => setBlogForm({...blogForm, slug: e.target.value.toLowerCase().replace(/ /g, '-')})} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#1db87a]" /></div>
-                    
-                    <div className="md:col-span-2 space-y-1">
-                      <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">Cover Image</label>
-                      <div className="w-full border-2 border-dashed border-slate-200 rounded-xl p-6 flex flex-col items-center justify-center bg-slate-50 relative overflow-hidden group hover:border-[#1db87a] transition-colors">
-                        <input type="file" accept="image/*" onChange={(e) => handleFileUpload(e, 'blog')} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
-                        <UploadCloud className="w-6 h-6 text-slate-400 mb-2 group-hover:text-[#1db87a] transition-colors" />
-                        <div className="text-xs font-bold text-slate-600">{blogForm.cover_img ? 'Image Attached' : 'Click or drag file to upload'}</div>
-                      </div>
-                    </div>
-
-                    <div className="md:col-span-2 space-y-1"><label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">Excerpt</label><input required type="text" value={blogForm.excerpt} onChange={e => setBlogForm({...blogForm, excerpt: e.target.value})} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#1db87a]" /></div>
-                    <div className="md:col-span-2 space-y-1"><label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">HTML Body</label><textarea required rows={10} value={blogForm.content} onChange={e => setBlogForm({...blogForm, content: e.target.value})} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-xs font-mono outline-none focus:border-[#1db87a]" /></div>
-                  </div>
-                  <div className="pt-4 flex justify-end"><SubmitButton isSubmitting={isSubmitting} editingId={editingId} /></div>
-                </form>
-              )}
+{activeTab === 'blogs' && (
+  <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm">
+    {viewMode === 'grid' ? (
+      <div className="space-y-4">
+        {!Array.isArray(blogsList) || blogsList.length === 0 ? (
+          <div className="text-sm text-slate-500 font-medium">No publications found. Click &quot;Add New Entry&quot; to begin.</div>
+        ) : (
+          blogsList.map(blog => (
+            <div key={blog.id} className="flex items-center justify-between p-4 border border-slate-100 bg-slate-50 rounded-xl hover:shadow-md">
+              <div>
+                <div className="text-sm font-black text-[#0a1628]">{blog.title}</div>
+                <div className="text-[10px] font-mono text-slate-400">/{blog.slug}</div>
+              </div>
+              <button onClick={() => handleEditItem('blog', blog)} className="text-slate-400 hover:text-[#0a1628]"><Edit3 className="w-4 h-4" /></button>
             </div>
-          )}
+          ))
+        )}
+      </div>
+    ) : (
+      <form onSubmit={handleActionSubmit} className="space-y-6 animate-in fade-in">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <div className="space-y-1">
+            <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">Header</label>
+            <input required type="text" value={blogForm.title || ''} onChange={e => setBlogForm({...blogForm, title: e.target.value})} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#1db87a]" />
+          </div>
+          
+          <div className="space-y-1">
+            <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">Slug</label>
+            <input required type="text" value={blogForm.slug || ''} onChange={e => setBlogForm({...blogForm, slug: e.target.value.toLowerCase().replace(/ /g, '-')})} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#1db87a]" />
+          </div>
+          
+          {/* ─── UPGRADED COVER IMAGE PREVIEW ─── */}
+          <div className="md:col-span-2 space-y-1">
+            <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">Cover Image</label>
+            
+            {blogForm.cover_img ? (
+              <div className="relative w-full h-56 sm:h-64 rounded-xl overflow-hidden border-2 border-slate-200 group bg-slate-900">
+                {/* Image Preview */}
+                <Image 
+  src={blogForm.cover_img.startsWith('http') ? blogForm.cover_img : `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}${blogForm.cover_img}`} 
+  alt="Cover Preview" 
+  fill
+  unoptimized
+  className="object-cover transition-opacity duration-300 group-hover:opacity-75"
+/>
+                
+                {/* Hover Actions: Change or Delete */}
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
+                  <div className="relative">
+                    <input type="file" accept="image/*" onChange={(e) => handleFileUpload(e, 'blog')} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20" />
+                    <button type="button" className="px-4 py-2 bg-white text-slate-900 rounded-lg text-xs font-bold shadow-lg transition-transform hover:scale-105">
+                      Change Image
+                    </button>
+                  </div>
+                  <button 
+                    type="button" 
+                    onClick={() => setBlogForm({...blogForm, cover_img: null})} 
+                    className="p-2.5 bg-rose-600 text-white rounded-lg shadow-lg transition-transform hover:scale-105"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="w-full h-36 border-2 border-dashed border-slate-200 rounded-xl p-6 flex flex-col items-center justify-center bg-slate-50 relative overflow-hidden group hover:border-[#1db87a] transition-colors">
+                <input type="file" accept="image/*" onChange={(e) => handleFileUpload(e, 'blog')} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
+                <div className="w-10 h-10 rounded-full bg-emerald-50 text-[#1db87a] flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                  <UploadCloud className="w-5 h-5" />
+                </div>
+                <div className="text-xs font-bold text-slate-600">Click or drag file to upload</div>
+              </div>
+            )}
+          </div>
+
+          <div className="md:col-span-2 space-y-1">
+            <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">Excerpt</label>
+            <input required type="text" value={blogForm.excerpt || ''} onChange={e => setBlogForm({...blogForm, excerpt: e.target.value})} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#1db87a]" />
+          </div>
+          
+          <div className="md:col-span-2 space-y-1">
+            <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">HTML Body</label>
+            <textarea required rows={10} value={blogForm.content || ''} onChange={e => setBlogForm({...blogForm, content: e.target.value})} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-xs font-mono outline-none focus:border-[#1db87a]" />
+          </div>
+
+          {/* ─── NEW: METADATA ROW ─── */}
+          <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-slate-100">
+            <div className="space-y-1">
+              <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">Category</label>
+              <input type="text" placeholder="e.g. Engineering" value={blogForm.category || ''} onChange={e => setBlogForm({...blogForm, category: e.target.value})} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#1db87a]" />
+            </div>
+            <div className="space-y-1">
+              <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">Author</label>
+              <input type="text" placeholder="e.g. Aarvi Specialist" value={blogForm.author || ''} onChange={e => setBlogForm({...blogForm, author: e.target.value})} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#1db87a]" />
+            </div>
+            <div className="space-y-1">
+              <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">Read Time</label>
+              <input type="text" placeholder="e.g. 5 min read" value={blogForm.read_time || ''} onChange={e => setBlogForm({...blogForm, read_time: e.target.value})} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#1db87a]" />
+            </div>
+          </div>
+
+          {/* ─── NEW: OPTIONAL VIDEO ROW ─── */}
+          <div className="md:col-span-2 space-y-1 pt-4 border-t border-slate-100">
+            <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono flex items-center gap-1.5">
+              <Film className="w-3.5 h-3.5" /> Embedded Video URL (Optional)
+            </label>
+            <input type="url" placeholder="Paste YouTube, Vimeo, or uploaded MP4 URL here..." value={blogForm.video_url || ''} onChange={e => setBlogForm({...blogForm, video_url: e.target.value})} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#1db87a]" />
+          </div>
+
+        </div>
+        <div className="pt-4 flex justify-end">
+          <SubmitButton isSubmitting={isSubmitting} editingId={editingId} />
+        </div>
+      </form>
+    )}
+  </div>
+)}
 
           {/* ─── 5. USERS TAB ─── */}
           {activeTab === 'users' && userRole === 'IT_MANAGER' && (

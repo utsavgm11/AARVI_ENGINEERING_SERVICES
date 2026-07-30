@@ -71,6 +71,10 @@ class DBBlog(Base):
     excerpt = Column(String, nullable=False)
     author = Column(String, default="Aarvi Engineering Specialist")
     cover_img = Column(String, nullable=True)
+    video_url = Column(String, nullable=True)      # <--- ADDED FOR VIDEO
+    category = Column(String, nullable=True)       # <--- ADDED FOR CATEGORY
+    read_time = Column(String, nullable=True)      # <--- ADDED FOR READ TIME
+    whitepaper_url = Column(String, nullable=True) # <--- ADDED FOR PDF WHITEPAPERS
     created_at = Column(DateTime, default=datetime.utcnow)
 
 class DBContactInquiry(Base):
@@ -140,6 +144,10 @@ class BlogCreateSchema(BaseModel):
     excerpt: str
     author: Optional[str] = "Aarvi Engineering Specialist"
     cover_img: Optional[str] = None
+    video_url: Optional[str] = None      # <--- ADDED
+    category: Optional[str] = None       # <--- ADDED
+    read_time: Optional[str] = None      # <--- ADDED
+    whitepaper_url: Optional[str] = None # <--- ADDED
 
 class BlogResponseSchema(BlogCreateSchema):
     id: str
@@ -317,6 +325,14 @@ def write_new_blog_post(payload: BlogCreateSchema, db: Session = Depends(get_db_
     db.commit()
     db.refresh(new_post)
     return new_post
+
+@app.get("/api/blogs/{slug}", response_model=BlogResponseSchema)
+def get_single_blog_by_slug(slug: str, db: Session = Depends(get_db_session)):
+    post = db.query(DBBlog).filter(DBBlog.slug == slug).first()
+    if not post:
+        raise HTTPException(status_code=404, detail="Blog publication not found.")
+    return post
+
 
 @app.put("/api/blogs/{blog_id}", response_model=BlogResponseSchema)
 def edit_existing_blog(blog_id: str, payload: BlogCreateSchema, db: Session = Depends(get_db_session), _=Depends(require_role_clearance([UserRole.IT_MANAGER, UserRole.ADMIN]))):
