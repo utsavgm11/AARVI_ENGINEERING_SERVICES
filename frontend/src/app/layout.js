@@ -4,9 +4,10 @@ import Footer from "@/components/Footer";
 import { AuthProvider } from '@/context/AuthContext';
 
 export const metadata = {
-  title: "Aarvi Engineering Services & Consultants | Multi-Discipline Engineering Consultancy",
+  title: "Aarvi Engineering & Consultants | Multi-Discipline Engineering Services",
   description: "Over 39 years of corporate industry excellence delivering core process engineering, high-fidelity 3D piping layouts, offshore topsides engineering, plant safety consulting, and asset documentation globally.",
   keywords: ["Aarvi Engineering", "Process Engineering Consultants", "Piping Engineering Design", "Offshore Topside Engineering", "As-Built Documentation"],
+  
 };
 
 export default function RootLayout({ children }) {
