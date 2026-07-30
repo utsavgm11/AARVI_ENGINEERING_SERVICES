@@ -5,7 +5,7 @@ import { AuthProvider } from '@/context/AuthContext';
 
 export const metadata = {
   title: "Aarvi Engineering & Consultants | Multi-Discipline Engineering Services",
-  description: "Over 39 years of corporate industry excellence delivering core process engineering, high-fidelity 3D piping layouts, offshore topsides engineering, plant safety consulting, and asset documentation globally.",
+  description: "39+ years of engineering excellence delivering Concept, FEED, Detailed Engineering, Process Safety and Project Support for Energy, Process Industries and Industrial Infrastructure.",
   keywords: ["Aarvi Engineering", "Process Engineering Consultants", "Piping Engineering Design", "Offshore Topside Engineering", "As-Built Documentation"],
   
 };
