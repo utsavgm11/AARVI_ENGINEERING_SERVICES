@@ -107,7 +107,7 @@ export default function ClientOverview() {
   return (
     <section 
       data-nav-theme="light" 
-      className="w-full bg-[#FAFAFA] py-24 px-6 lg:px-8 border-t border-slate-200/60 overflow-hidden relative select-none"
+      className="w-full bg-[#FAFAFA] py-8 px-6 lg:px-8 border-t border-slate-200/60 overflow-hidden relative select-none"
       aria-labelledby="client-title"
     >
       {/* ─── CLEAN ISO-DOT MATRIX BACKGROUND LAYER ─── */}
