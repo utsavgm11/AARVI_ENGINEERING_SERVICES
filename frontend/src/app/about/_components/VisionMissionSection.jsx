@@ -12,7 +12,7 @@ import imgMission from '../../../assets/about-mission.png';
 
 export default function VisionMissionSection() {
   return (
-    <section id="vision-mission" className="w-full py-16 lg:py-24 bg-white relative overflow-hidden scroll-mt-20">
+    <section id="vision-mission" className="w-full py-8 lg:py-8 bg-white relative overflow-hidden scroll-mt-20">
       
       {/* ─── SEO METADATA ─── */}
       <script

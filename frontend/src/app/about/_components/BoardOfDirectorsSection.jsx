@@ -118,7 +118,7 @@ export default function BoardOfDirectorsSection() {
       </div>
 
       {/* ─── CONTENT WRAPPER ─── */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-10 py-24">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-10 py-8">
         
         {/* Header Section */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">

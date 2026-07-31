@@ -84,7 +84,7 @@ export default function WhyAarvi() {
     <motion.section 
       ref={sectionRef}
       style={{ backgroundColor: bgColor }}
-      className="relative w-full py-16 lg:py-24 px-4 lg:px-8 overflow-hidden z-20"
+      className="relative w-full py-10 lg:py-10 px-4 lg:px-8 overflow-hidden z-20"
       aria-labelledby="why-aarvi-title"
     >
       {/* ─── CLEAN ISO-DOT MATRIX BACKGROUND LAYER ─── */}
