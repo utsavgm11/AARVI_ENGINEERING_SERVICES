@@ -510,17 +510,48 @@ export default function AdminDashboardPortal() {
                     </div>
                   </div>
 
-                  {/* SECTION 3: MEDIA */}
-                  <div className="space-y-1 pb-6 border-b border-slate-100">
-                    <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">Cover Media</label>
-                    <div className="w-full border-2 border-dashed border-slate-200 rounded-xl p-6 flex flex-col items-center justify-center bg-slate-50 relative overflow-hidden group hover:border-[#1db87a] transition-colors">
-                      <input type="file" accept="image/*,video/*" onChange={(e) => handleFileUpload(e, 'project')} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
-                      <UploadCloud className="w-6 h-6 text-slate-400 mb-2 group-hover:text-[#1db87a] transition-colors" />
-                      <div className="text-xs font-bold text-slate-600">{projectForm.cover_image ? 'Media Uploaded Successfully (Click to replace)' : 'Click or drag file to upload server media'}</div>
-                      {projectForm.cover_image && <div className="text-[9px] font-mono text-[#1db87a] mt-1">{projectForm.cover_image}</div>}
-                    </div>
-                  </div>
-
+                 {/* SECTION 3: MEDIA */}
+<div className="space-y-1 pb-6 border-b border-slate-100">
+  <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">Cover Media</label>
+  
+  {projectForm.cover_image ? (
+    <div className="relative w-full h-56 sm:h-64 rounded-xl overflow-hidden border-2 border-slate-200 group bg-slate-900">
+      {/* Image Preview */}
+      <Image 
+        src={projectForm.cover_image.startsWith('http') ? projectForm.cover_image : `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}${projectForm.cover_image}`} 
+        alt="Project Cover Preview" 
+        fill
+        unoptimized
+        className="object-cover transition-opacity duration-300 group-hover:opacity-75"
+      />
+      
+      {/* Hover Actions: Change or Delete */}
+      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
+        <div className="relative">
+          <input type="file" accept="image/*,video/*" onChange={(e) => handleFileUpload(e, 'project')} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20" />
+          <button type="button" className="px-4 py-2 bg-white text-slate-900 rounded-lg text-xs font-bold shadow-lg transition-transform hover:scale-105">
+            Change Media
+          </button>
+        </div>
+        <button 
+          type="button" 
+          onClick={() => setProjectForm({...projectForm, cover_image: ''})} 
+          className="p-2.5 bg-rose-600 text-white rounded-lg shadow-lg transition-transform hover:scale-105"
+        >
+          <Trash2 className="w-4 h-4" />
+        </button>
+      </div>
+    </div>
+  ) : (
+    <div className="w-full h-36 border-2 border-dashed border-slate-200 rounded-xl p-6 flex flex-col items-center justify-center bg-slate-50 relative overflow-hidden group hover:border-[#1db87a] transition-colors">
+      <input type="file" accept="image/*,video/*" onChange={(e) => handleFileUpload(e, 'project')} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
+      <div className="w-10 h-10 rounded-full bg-emerald-50 text-[#1db87a] flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+        <UploadCloud className="w-5 h-5" />
+      </div>
+      <div className="text-xs font-bold text-slate-600">Click or drag file to upload server media</div>
+    </div>
+  )}
+</div>
                   {/* SECTION 4: TEXT OVERVIEW */}
                   <div className="grid grid-cols-1 gap-6 pb-6 border-b border-slate-100">
                     <div className="space-y-1">

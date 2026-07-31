@@ -1,4 +1,6 @@
 import os
+import cloudinary
+import cloudinary.uploader
 import uuid
 import shutil
 from enum import Enum
@@ -34,6 +36,13 @@ engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
+# ─── CLOUDINARY CONFIGURATION ───────────────────────────────────────────────
+cloudinary.config(
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET"),
+    secure=True
+)
 # ─── STRICT SECURITY ACCOUNT ENUMS ──────────────────────────────────────────
 class UserRole(str, Enum):
     IT_MANAGER = "IT_MANAGER"
@@ -385,7 +394,7 @@ def write_new_project(payload: ProjectCreateSchema, db: Session = Depends(get_db
 
 # Note: Changed project_id to int to match SQLAlchemy ID columns
 @app.put("/api/projects/{project_id}", response_model=ProjectResponseSchema)
-def edit_existing_project(project_id: int, payload: ProjectCreateSchema, db: Session = Depends(get_db_session), _=Depends(require_role_clearance([UserRole.IT_MANAGER, UserRole.ADMIN]))):
+def edit_existing_project(project_id: str, payload: ProjectCreateSchema, db: Session = Depends(get_db_session), _=Depends(require_role_clearance([UserRole.IT_MANAGER, UserRole.ADMIN]))):
     record = db.query(DBProject).filter(DBProject.id == project_id).first()
     if not record: 
         raise HTTPException(status_code=404, detail="Project entry not found in repository.")
@@ -397,7 +406,7 @@ def edit_existing_project(project_id: int, payload: ProjectCreateSchema, db: Ses
 
 # Note: Changed project_id to int to match SQLAlchemy ID columns
 @app.delete("/api/projects/{project_id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_project_record(project_id: int, db: Session = Depends(get_db_session), _=Depends(require_role_clearance([UserRole.IT_MANAGER, UserRole.ADMIN]))):
+def delete_project_record(project_id: str, db: Session = Depends(get_db_session), _=Depends(require_role_clearance([UserRole.IT_MANAGER, UserRole.ADMIN]))):
     record = db.query(DBProject).filter(DBProject.id == project_id).first()
     if not record: 
         raise HTTPException(status_code=404, detail="Project configuration entry missing.")
@@ -446,24 +455,28 @@ def delete_blog_post(blog_id: str, db: Session = Depends(get_db_session), _=Depe
     db.commit()
     return {"detail": "Publication document completely expunged."}
 
-# ─── 5. MEDIA UPLOAD ENGINE ─────────────────────────────────────────────────
+# ─── 5. MEDIA UPLOAD ENGINE (CLOUDINARY) ────────────────────────────────────
 @app.post("/api/upload")
 def upload_media_file(
     file: UploadFile = File(...), 
     _=Depends(require_role_clearance([UserRole.IT_MANAGER, UserRole.IT_EXECUTIVE, UserRole.ADMIN]))
 ):
-    """Saves uploaded media securely to the local server and returns the access URL."""
+    """Saves uploaded media securely to Cloudinary and returns the HTTPS access URL."""
     try:
-        file_extension = file.filename.split(".")[-1]
-        unique_filename = f"{uuid.uuid4()}.{file_extension}"
-        file_location = f"uploads/{unique_filename}"
+        # Stream the uploaded file directly to Cloudinary folder "aarvi_cms"
+        upload_result = cloudinary.uploader.upload(
+            file.file, 
+            folder="aarvi_cms",
+            resource_type="auto"  # Automatically detects image vs video
+        )
         
-        with open(file_location, "wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
-            
-        return {"url": f"/uploads/{unique_filename}"}
+        # Return the permanent, fast CDN URL to the frontend
+        return {"url": upload_result.get("secure_url")}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"File processing failure: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, 
+            detail=f"Cloudinary upload failure: {str(e)}"
+        )
     
 
 # ─── 6. PUBLIC CONTACT FORM INGESTION ───────────────────────────────────────
