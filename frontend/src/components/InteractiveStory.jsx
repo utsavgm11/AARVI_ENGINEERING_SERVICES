@@ -1136,125 +1136,123 @@ background:"#04050A"
            
 
           {/* ══════════════════════════════════════
-              RIGHT PANEL: Story Text Scenes
-          ══════════════════════════════════════ */}
-          <div
-            className="w-full lg:w-[45%] h-[55vh] lg:h-screen relative flex items-center"
-            style={{ borderLeft: `1px solid ${accentColor}18` }}
-          >
-            {SCENES.map((s, i) => (
-              <motion.article
-                key={i}
-                animate={{
-            opacity: sceneIndex === i ? 1 : 0,
-        }}
-        transition={{ duration: 0.5 }}
-                className={`absolute inset-0 flex flex-col justify-center px-8 sm:px-12 lg:px-14 transition-all duration-500 ${
-    sceneIndex === i
-        ? "pointer-events-auto"
-        : "pointer-events-none"
-}`}
-                aria-hidden={i !== sceneIndex}
-                role="article"
-              >
-               
-
-                {/* Headline number */}
-                <h2
-                  className="font-sans font-black tracking-tight leading-none mb-2 text-white"
-                  style={{ fontSize: "clamp(3.5rem, 8vw, 6.5rem)" }}
-                  itemProp="award"
-                >
-                  {s.headline}
-                </h2>
-
-                {/* Headline subtitle */}
-                <p
-                  className="font-sans font-bold uppercase tracking-wider mb-6"
-                  style={{
-                    fontSize: "clamp(1rem, 2vw, 1.5rem)",
-                    color: accentColors[i],
-                  }}
-                >
-                  {s.headlineSub}
-                </p>
-
-                {/* Description */}
-                <p
-                  className="text-slate-400 leading-relaxed mb-8 max-w-sm"
-                  style={{ fontSize: "clamp(0.875rem, 1.4vw, 1.05rem)" }}
-                >
-                  {s.accentLine}
-                </p>
-
-                {/* Badge */}
-                <div
-                  className="inline-flex items-center gap-2 text-[11px] font-mono font-bold tracking-wider uppercase px-4 py-2 rounded-sm w-max"
-                  style={{
-                    border: `1px solid ${accentColors[i]}40`,
-                    color: accentColors[i],
-                    background: `${accentColors[i]}10`,
-                  }}
-                >
-                  <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
-                    <circle cx="5" cy="5" r="3" fill={accentColors[i]} />
-                    <circle cx="5" cy="5" r="5" fill="none" stroke={accentColors[i]} strokeWidth="0.8" opacity="0.5" />
-                  </svg>
-                  {s.badge}
-                </div>
-
-                {/* Scene number marker */}
-                <div
-                  className="absolute top-8 right-8 font-mono text-[10px] opacity-20 font-bold tracking-widest"
-                  style={{ color: accentColors[i] }}
-                  aria-hidden="true"
-                >
-                  0{i + 1} / 03
-                </div>
-              </motion.article>
-            ))}
-             {/* ── Progress dots (mobile: top of canvas, desktop: bottom) ── */}
-            <div className="absolute bottom-20 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:bottom-14 lg:right-12 flex items-center gap-5 z-40 ">
-
-    <button
-        onClick={prevScene}
-        className="h-10 w-10 flex items-center justify-center arrowPrev rounded-full border transition-all duration-300 hover:scale-110 hover:-translate-y-0.5 active:scale-95"
-        style={{
-            borderColor: accentColor,
-            color: accentColor,
-            boxShadow: `0 0 15px ${accentColor}55`
-        }}
+    RIGHT PANEL: Story Text Scenes
+══════════════════════════════════════ */}
+<div
+  className="w-full lg:w-[45%] min-h-120 h-[55vh] lg:h-screen relative flex items-center"
+  style={{ borderLeft: `1px solid ${accentColor}18` }}
+>
+  {SCENES.map((s, i) => (
+    <motion.article
+      key={i}
+      animate={{
+        opacity: sceneIndex === i ? 1 : 0,
+      }}
+      transition={{ duration: 0.5 }}
+      /* ADDED pb-28 lg:pb-0 to prevent text from overlapping bottom controls */
+      className={`absolute inset-0 flex flex-col justify-center px-6 sm:px-12 lg:px-14 pb-28 lg:pb-0 transition-all duration-500 ${
+        sceneIndex === i
+          ? "pointer-events-auto"
+          : "pointer-events-none"
+      }`}
+      aria-hidden={i !== sceneIndex}
+      role="article"
     >
-        <ChevronLeft size={22}/>
+      {/* Headline number */}
+      <h2
+        className="font-sans font-black tracking-tight leading-none mb-2 text-white"
+        style={{ fontSize: "clamp(3rem, 7vw, 6.5rem)" }}
+        itemProp="award"
+      >
+        {s.headline}
+      </h2>
+
+      {/* Headline subtitle */}
+      <p
+        className="font-sans font-bold uppercase tracking-wider mb-4 sm:mb-6"
+        style={{
+          fontSize: "clamp(0.9rem, 1.8vw, 1.5rem)",
+          color: accentColors[i],
+        }}
+      >
+        {s.headlineSub}
+      </p>
+
+      {/* Description */}
+      <p
+        className="text-slate-400 leading-relaxed mb-6 sm:mb-8 max-w-sm"
+        style={{ fontSize: "clamp(0.8rem, 1.3vw, 1.05rem)" }}
+      >
+        {s.accentLine}
+      </p>
+
+      {/* Badge (Made text size & padding responsive to prevent overflow on 320px) */}
+      <div
+        className="inline-flex items-center gap-1.5 sm:gap-2 text-[9px] sm:text-[11px] font-mono font-bold tracking-normal sm:tracking-wider uppercase px-3 sm:px-4 py-1.5 sm:py-2 rounded-sm w-max max-w-full"
+        style={{
+          border: `1px solid ${accentColors[i]}40`,
+          color: accentColors[i],
+          background: `${accentColors[i]}10`,
+        }}
+      >
+        <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true" className="shrink-0">
+          <circle cx="5" cy="5" r="3" fill={accentColors[i]} />
+          <circle cx="5" cy="5" r="5" fill="none" stroke={accentColors[i]} strokeWidth="0.8" opacity="0.5" />
+        </svg>
+
+        {/* Truncate or fit cleanly */}
+        <span className="truncate">{s.badge}</span>
+      </div>
+
+      {/* Scene number marker */}
+      <div
+        className="absolute top-6 right-6 sm:top-8 sm:right-8 font-mono text-[10px] opacity-20 font-bold tracking-widest"
+        style={{ color: accentColors[i] }}
+        aria-hidden="true"
+      >
+        0{i + 1} / 03
+      </div>
+    </motion.article>
+  ))}
+
+  {/* ── Navigation controls (Moved to bottom-6 on mobile to avoid overlap) ── */}
+  <div className="absolute bottom-6 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:bottom-14 lg:right-12 flex items-center gap-4 sm:gap-5 z-40">
+    <button
+      onClick={prevScene}
+      className="h-9 w-9 sm:h-10 sm:w-10 flex items-center justify-center arrowPrev rounded-full border transition-all duration-300 hover:scale-110 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
+      style={{
+        borderColor: accentColor,
+        color: accentColor,
+        boxShadow: `0 0 15px ${accentColor}55`,
+      }}
+    >
+      <ChevronLeft size={20} />
     </button>
 
     <SceneDots
-        active={sceneIndex}
-        total={3}
-        color={accentColor}
-        onSelect={setSceneIndex}
+      active={sceneIndex}
+      total={3}
+      color={accentColor}
+      onSelect={setSceneIndex}
     />
 
     <button
-        onClick={nextScene}
-        className="h-10 w-10 flex items-center justify-center arrowNext rounded-full border transition-all duration-300 hover:scale-110 hover:-translate-y-0.5 active:scale-95"
-        style={{
-            borderColor: accentColor,
-            color: accentColor,
-            boxShadow: `0 0 15px ${accentColor}55`
-        }}
+      onClick={nextScene}
+      className="h-9 w-9 sm:h-10 sm:w-10 flex items-center justify-center arrowNext rounded-full border transition-all duration-300 hover:scale-110 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
+      style={{
+        borderColor: accentColor,
+        color: accentColor,
+        boxShadow: `0 0 15px ${accentColor}55`,
+      }}
     >
-        <ChevronRight size={22}/>
+      <ChevronRight size={20} />
     </button>
-
-</div> 
-
-             
-          </div>
+  </div>
+</div>
 
             {/* Static Aarvi Encon branding (always visible) */}
             <div
-              className="absolute bottom-8 left-8 lg:left-14 font-mono text-[9px] tracking-widest uppercase"
+              className="hidden lg:block absolute bottom-8 left-8 lg:left-14 font-mono text-[9px] tracking-widest uppercase"
               style={{ color: `${accentColor}50` }}
               aria-label="Aarvi Encon Engineering Services"
             >
