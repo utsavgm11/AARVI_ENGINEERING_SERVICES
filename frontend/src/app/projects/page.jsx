@@ -68,7 +68,7 @@ export default function ProjectsPage() {
 };
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
   return (
-    <div className="min-h-screen bg-slate-50/50 flex flex-col pt-2 pb-8 font-sans">
+    <div className="min-h-screen bg-slate-50/50 flex flex-col pt-2  font-sans">
       
      {/* ─── HERO SECTION ─── */}
 <section className="relative max-w-7xl mx-auto px-6 pt-6 pb-8 w-full overflow-hidden">
