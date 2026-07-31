@@ -11,7 +11,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, EmailStr
-from sqlalchemy import create_engine, Column, Integer, String, DateTime, Text, func
+# 👇 Added Boolean and JSON here
+from sqlalchemy import create_engine, Column, Integer, String, DateTime, Text, func, Boolean, JSON
 from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
@@ -51,15 +52,57 @@ class DBUser(Base):
 
 class DBProject(Base):
     __tablename__ = "projects"
+    # Preserved your UUID string implementation
     id = Column(String, primary_key=True, index=True, default=lambda: str(uuid.uuid4()))
+    
+    # Basic Information
     title = Column(String, nullable=False)
-    category = Column(String, nullable=False)
-    client = Column(String, default="Confidential")
-    location = Column(String, nullable=False)
-    duration = Column(String, nullable=False)
-    scope_of_work = Column(Text, nullable=False)
-    impacts = Column(ARRAY(String), nullable=False)
-    image_url = Column(String, nullable=True)
+    slug = Column(String, unique=True, index=True, nullable=False)
+    
+    # Confidentiality Handlers
+    client_name = Column(String, nullable=True)
+    is_confidential = Column(Boolean, default=False)
+    anonymous_client_label = Column(String, nullable=True)
+    
+    industry = Column(String, nullable=False)
+    location = Column(String, nullable=True)
+    country = Column(String, nullable=True)
+    completion_year = Column(String, nullable=True)
+    project_status = Column(String, nullable=False)
+
+    # Hero & Media
+    cover_image = Column(String, nullable=False)
+    gallery_images = Column(JSON, default=[])
+    video_url = Column(String, nullable=True)
+
+    # Overview
+    short_description = Column(String, nullable=False)
+    full_overview = Column(Text, nullable=False)
+
+    # Repeatable Node Lists
+    engineering_scope = Column(JSON, default=[])
+    services_delivered = Column(JSON, default=[])
+    technologies_used = Column(JSON, default=[])
+    key_results = Column(JSON, default=[])
+
+    # Key Facts
+    duration_months = Column(String, nullable=True)
+    start_date = Column(String, nullable=True)
+    end_date = Column(String, nullable=True)
+    engineering_hours = Column(String, nullable=True)
+    plant_capacity = Column(String, nullable=True)
+    project_budget = Column(String, nullable=True)
+
+    # Case Study Context
+    challenges = Column(Text, nullable=True)
+    solutions = Column(Text, nullable=True)
+    statistics = Column(JSON, default=[])
+
+    # SEO & Metadata
+    meta_title = Column(String, nullable=True)
+    meta_description = Column(Text, nullable=True)
+    og_image = Column(String, nullable=True)
+
     created_at = Column(DateTime, default=datetime.utcnow)
 
 class DBBlog(Base):
@@ -91,6 +134,7 @@ class DBContactInquiry(Base):
 # Automated verification execution to spin up infrastructure schemas safely
 Base.metadata.create_all(bind=engine)
 
+
 # ─── SYSTEM SCHEMAS (DATA VALIDATION PORTS) ──────────────────────────────────
 class TokenResponse(BaseModel):
     access_token: str
@@ -121,18 +165,54 @@ class UserResponseSchema(BaseModel):
     class Config:
         from_attributes = True
 
+# ─── NEW: PROJECT STATISTICS HELPER ───
+class StatItem(BaseModel):
+    value: str
+    label: str
+
 class ProjectCreateSchema(BaseModel):
     title: str
-    category: str
-    client: Optional[str] = "Confidential"
-    location: str
-    duration: str
-    scope_of_work: str
-    impacts: List[str]
-    image_url: Optional[str] = None
+    slug: str
+    
+    client_name: Optional[str] = None
+    is_confidential: Optional[bool] = False
+    anonymous_client_label: Optional[str] = None
+    
+    industry: str
+    location: Optional[str] = None
+    country: Optional[str] = None
+    completion_year: Optional[str] = None
+    project_status: str
+
+    cover_image: str
+    gallery_images: Optional[List[str]] = []
+    video_url: Optional[str] = None
+
+    short_description: str
+    full_overview: str
+
+    engineering_scope: Optional[List[str]] = []
+    services_delivered: Optional[List[str]] = []
+    technologies_used: Optional[List[str]] = []
+    key_results: Optional[List[str]] = []
+
+    duration_months: Optional[str] = None
+    start_date: Optional[str] = None
+    end_date: Optional[str] = None
+    engineering_hours: Optional[str] = None
+    plant_capacity: Optional[str] = None
+    project_budget: Optional[str] = None
+
+    challenges: Optional[str] = None
+    solutions: Optional[str] = None
+    statistics: Optional[List[StatItem]] = []
+
+    meta_title: Optional[str] = None
+    meta_description: Optional[str] = None
+    og_image: Optional[str] = None
 
 class ProjectResponseSchema(ProjectCreateSchema):
-    id: str
+    id: str  # Preserved as str to match your DB UUID!
     created_at: datetime
     class Config:
         from_attributes = True
@@ -281,9 +361,19 @@ def it_manager_modify_user(user_id: str, payload: UserUpdateSchema, db: Session 
     return target_user
 
 # ─── 3. PROJECTS LOG INTERFACE (RBAC FOR CONTENT CREATION) ────────────────────
+
 @app.get("/api/projects", response_model=List[ProjectResponseSchema])
 def get_all_projects_public(db: Session = Depends(get_db_session)):
     return db.query(DBProject).order_by(DBProject.created_at.desc()).all()
+
+# 👇 NEW ENDPOINT: Required for the /projects/[slug] frontend page!
+@app.get("/api/projects/{slug}", response_model=ProjectResponseSchema)
+def get_single_project_by_slug(slug: str, db: Session = Depends(get_db_session)):
+    record = db.query(DBProject).filter(DBProject.slug == slug).first()
+    if not record: 
+        raise HTTPException(status_code=404, detail="Project entry not found in repository.")
+    return record
+# 👆 -------------------------------------------------------------------------
 
 @app.post("/api/projects", response_model=ProjectResponseSchema, status_code=status.HTTP_201_CREATED)
 def write_new_project(payload: ProjectCreateSchema, db: Session = Depends(get_db_session), _=Depends(require_role_clearance([UserRole.IT_MANAGER, UserRole.ADMIN]))):
@@ -293,20 +383,24 @@ def write_new_project(payload: ProjectCreateSchema, db: Session = Depends(get_db
     db.refresh(new_record)
     return new_record
 
+# Note: Changed project_id to int to match SQLAlchemy ID columns
 @app.put("/api/projects/{project_id}", response_model=ProjectResponseSchema)
-def edit_existing_project(project_id: str, payload: ProjectCreateSchema, db: Session = Depends(get_db_session), _=Depends(require_role_clearance([UserRole.IT_MANAGER, UserRole.ADMIN]))):
+def edit_existing_project(project_id: int, payload: ProjectCreateSchema, db: Session = Depends(get_db_session), _=Depends(require_role_clearance([UserRole.IT_MANAGER, UserRole.ADMIN]))):
     record = db.query(DBProject).filter(DBProject.id == project_id).first()
-    if not record: raise HTTPException(status_code=404, detail="Project entry not found in repository.")
+    if not record: 
+        raise HTTPException(status_code=404, detail="Project entry not found in repository.")
     for key, val in payload.model_dump().items():
         setattr(record, key, val)
     db.commit()
     db.refresh(record)
     return record
 
+# Note: Changed project_id to int to match SQLAlchemy ID columns
 @app.delete("/api/projects/{project_id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_project_record(project_id: str, db: Session = Depends(get_db_session), _=Depends(require_role_clearance([UserRole.IT_MANAGER, UserRole.ADMIN]))):
+def delete_project_record(project_id: int, db: Session = Depends(get_db_session), _=Depends(require_role_clearance([UserRole.IT_MANAGER, UserRole.ADMIN]))):
     record = db.query(DBProject).filter(DBProject.id == project_id).first()
-    if not record: raise HTTPException(status_code=404, detail="Project configuration entry missing.")
+    if not record: 
+        raise HTTPException(status_code=404, detail="Project configuration entry missing.")
     db.delete(record)
     db.commit()
     return {"detail": "Project wiped clean from infrastructure database."}

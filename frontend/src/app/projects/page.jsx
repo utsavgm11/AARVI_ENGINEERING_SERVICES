@@ -46,10 +46,11 @@ export default function ProjectsPage() {
     fetchProjects();
   }, []);
 
-  // Filter logic
+  // Filter logic (Updated to support new 'industry' schema)
   const filteredProjects = projects.filter(project => {
     if (activeCategory === 'all') return true;
-    return project.category.toLowerCase().includes(activeCategory.replace('-', ' '));
+    const categoryMatch = project.industry || project.category || '';
+    return categoryMatch.toLowerCase().includes(activeCategory.replace('-', ' '));
   });
 
   // Helper to map category to an icon for the card badge
@@ -140,7 +141,11 @@ const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
           /* POPULATED GRID */
           <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <AnimatePresence>
-              {filteredProjects.map((project, index) => (
+              {filteredProjects.map((project, index) => {
+                // Support both new 'cover_image' and legacy 'image_url'
+                const heroImage = project.cover_image || project.image_url;
+                
+                return (
                 <motion.div 
                   key={project.id}
                   layout
@@ -152,9 +157,9 @@ const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
                 >
                   {/* Image Container */}
                   <div className="relative w-full h-64 bg-slate-100 overflow-hidden">
-                    {project.image_url ? (
+                    {heroImage ? (
                       <Image 
-                        src={project.image_url.startsWith('http') ? project.image_url : `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}${project.image_url}`}
+                        src={heroImage.startsWith('http') ? heroImage : `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}${heroImage}`}
                         alt={project.title}
                         fill
                         unoptimized
@@ -168,7 +173,7 @@ const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
                     
                     {/* Floating Icon Badge Overlapping Image */}
                     <div className="absolute -bottom-6 left-6 w-12 h-12 bg-[#0a1628] rounded-full border-4 border-white flex items-center justify-center shadow-lg z-10">
-                      {getCategoryIcon(project.category)}
+                      {getCategoryIcon(project.industry || project.category)}
                     </div>
                   </div>
 
@@ -184,15 +189,19 @@ const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
                     </div>
 
                     <p className="text-sm text-slate-600 leading-relaxed line-clamp-3 mb-6 grow">
-                      {project.scope_of_work}
+                      {project.short_description || project.scope_of_work}
                     </p>
 
-                    <button className="flex items-center gap-2 text-xs font-bold text-[#1db87a] tracking-widest uppercase group-hover:text-[#148f5e] transition-colors mt-auto w-fit">
+                    {/* Updated to link to the dynamic single project page */}
+                    <Link 
+                      href={`/projects/${project.slug || project.id}`}
+                      className="flex items-center gap-2 text-xs font-bold text-[#1db87a] tracking-widest uppercase group-hover:text-[#148f5e] transition-colors mt-auto w-fit"
+                    >
                       VIEW PROJECT <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                    </button>
+                    </Link>
                   </div>
                 </motion.div>
-              ))}
+              )})}
             </AnimatePresence>
           </motion.div>
         )}
@@ -239,7 +248,7 @@ const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
           </div>
         </section>
 
-     
+      
 
     </div>
   );

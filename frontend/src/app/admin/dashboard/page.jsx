@@ -342,67 +342,181 @@ export default function AdminDashboardPortal() {
           )}
 
           {/* ─── 2. PROJECTS TAB ─── */}
-          {activeTab === 'projects' && (
-            <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm">
-              {viewMode === 'grid' ? (
-                <div className="space-y-4">
-                  {!Array.isArray(projectsList) || projectsList.length === 0 ? (
-                    <div className="text-sm text-slate-500 font-medium">No projects in database. Click &quot;Add New Entry&quot; to begin.</div>
-                  ) : (
-                    projectsList.map(proj => (
-                      <div key={proj.id} className="flex items-center justify-between p-4 border border-slate-100 bg-slate-50 rounded-xl hover:shadow-md transition-shadow">
-                        <div>
-                          <div className="text-[10px] font-mono text-[#1db87a] uppercase font-bold tracking-wider mb-1">{proj.category}</div>
-                          <div className="text-sm font-black text-[#0a1628]">{proj.title}</div>
-                        </div>
-                        <button onClick={() => handleEditItem('project', proj)} className="text-slate-400 hover:text-[#0a1628] cursor-pointer"><Edit3 className="w-4 h-4" /></button>
-                      </div>
-                    ))
-                  )}
-                </div>
-              ) : (
-                <form onSubmit={handleActionSubmit} className="space-y-6 animate-in fade-in">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="md:col-span-2 space-y-1">
-                      <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">Project Title</label>
-                      <input required type="text" value={projectForm.title} onChange={e => setProjectForm({...projectForm, title: e.target.value})} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:border-[#1db87a] outline-none" />
-                    </div>
-                    
-                    <div className="md:col-span-2 space-y-1">
-                      <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">Cover Media</label>
-                      <div className="w-full border-2 border-dashed border-slate-200 rounded-xl p-6 flex flex-col items-center justify-center bg-slate-50 relative overflow-hidden group hover:border-[#1db87a] transition-colors">
-                        <input type="file" accept="image/*,video/*" onChange={(e) => handleFileUpload(e, 'project')} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
-                        <UploadCloud className="w-6 h-6 text-slate-400 mb-2 group-hover:text-[#1db87a] transition-colors" />
-                        <div className="text-xs font-bold text-slate-600">{projectForm.image_url ? 'Media Uploaded Successfully (Click to replace)' : 'Click or drag file to upload server media'}</div>
-                        {projectForm.image_url && <div className="text-[9px] font-mono text-[#1db87a] mt-1">{projectForm.image_url}</div>}
-                      </div>
-                    </div>
+{activeTab === 'projects' && (
+  <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm">
+    {viewMode === 'grid' ? (
+      <div className="space-y-4">
+        {!Array.isArray(projectsList) || projectsList.length === 0 ? (
+          <div className="text-sm text-slate-500 font-medium">No projects in database. Click &quot;Add New Entry&quot; to begin.</div>
+        ) : (
+          projectsList.map(proj => (
+            <div key={proj.id} className="flex items-center justify-between p-4 border border-slate-100 bg-slate-50 rounded-xl hover:shadow-md transition-shadow">
+              <div>
+                <div className="text-[10px] font-mono text-[#1db87a] uppercase font-bold tracking-wider mb-1">{proj.industry || proj.category}</div>
+                <div className="text-sm font-black text-[#0a1628]">{proj.title}</div>
+              </div>
+              <button onClick={() => handleEditItem('project', proj)} className="text-slate-400 hover:text-[#0a1628] cursor-pointer">
+                <Edit3 className="w-4 h-4" />
+              </button>
+            </div>
+          ))
+        )}
+      </div>
+    ) : (
+      <form onSubmit={handleActionSubmit} className="space-y-8 animate-in fade-in">
+        
+        {/* SECTION 1: CORE DETAILS */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-6 border-b border-slate-100">
+          <div className="md:col-span-2 space-y-1">
+            <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">Project Title</label>
+            <input required type="text" value={projectForm.title || ''} 
+              onChange={e => {
+                const val = e.target.value;
+                setProjectForm({
+                  ...projectForm, 
+                  title: val, 
+                  slug: val.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')
+                });
+              }} 
+              className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:border-[#1db87a] outline-none" 
+            />
+          </div>
+          
+          <div className="space-y-1">
+            <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">URL Slug (Auto)</label>
+            <input required type="text" value={projectForm.slug || ''} readOnly className="w-full px-4 py-3 border border-slate-200 bg-slate-50 rounded-xl text-sm font-mono text-slate-500 outline-none" />
+          </div>
 
-                    <div className="space-y-1"><label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">Stream Category</label>
-                    <select value={projectForm.category} onChange={e => setProjectForm({...projectForm, category: e.target.value})} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm bg-white font-bold text-slate-700 outline-none focus:border-[#1db87a]"><option value="process-safety">Process Safety Engineering</option><option value="pipelines">Pipeline Hydraulics</option></select></div>
-                    <div className="space-y-1"><label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">Location</label>
-                    <input required type="text" value={projectForm.location} onChange={e => setProjectForm({...projectForm, location: e.target.value})} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:border-[#1db87a] outline-none" /></div>
-                    <div className="space-y-1"><label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">Duration</label>
-                    <input required type="text" value={projectForm.duration} onChange={e => setProjectForm({...projectForm, duration: e.target.value})} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:border-[#1db87a] outline-none" /></div>
-                    <div className="md:col-span-2 space-y-1"><label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">Scope Matrix</label>
-                    <textarea required rows={4} value={projectForm.scope_of_work} onChange={e => setProjectForm({...projectForm, scope_of_work: e.target.value})} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:border-[#1db87a] outline-none" /></div>
-                    
-                    <div className="md:col-span-2 space-y-3 bg-slate-50 p-6 rounded-2xl border border-slate-100">
-                      <div className="flex justify-between items-center mb-2"><label className="text-[10px] font-black tracking-widest text-slate-500 uppercase font-mono">Impacts</label><button type="button" onClick={() => setImpacts([...impacts, ''])} className="text-[10px] font-mono font-black text-[#1db87a] flex items-center gap-1"><Plus className="w-3 h-3" /> Append Node</button></div>
-                      {impacts.map((imp, idx) => (
-                        <div key={idx} className="flex gap-2">
-                          <input required type="text" value={imp} onChange={e => { let c = [...impacts]; c[idx] = e.target.value; setImpacts(c); }} className="flex-1 px-4 py-2 border border-slate-200 rounded-xl text-xs outline-none" />
-                          {impacts.length > 1 && <button type="button" onClick={() => setImpacts(impacts.filter((_, i) => i !== idx))} className="text-slate-400 hover:text-rose-500"><Trash2 className="w-4 h-4" /></button>}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="pt-4 flex justify-end"><SubmitButton isSubmitting={isSubmitting} editingId={editingId} /></div>
-                </form>
-              )}
+          <div className="space-y-1">
+            <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">Industry</label>
+            <select value={projectForm.industry || 'Oil & Gas'} onChange={e => setProjectForm({...projectForm, industry: e.target.value})} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm bg-white font-bold text-slate-700 outline-none focus:border-[#1db87a]">
+              <option value="Oil & Gas">Oil & Gas</option>
+              <option value="Chemical">Chemical / Petrochemical</option>
+              <option value="Power">Power & Energy</option>
+              <option value="Infrastructure">Industrial Infrastructure</option>
+              <option value="Water">Water & Utilities</option>
+            </select>
+          </div>
+        </div>
+
+        {/* SECTION 2: NDA & CLIENT CONFIDENTIALITY */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-50 p-6 rounded-2xl border border-slate-100">
+          <div className="md:col-span-2 flex items-center justify-between bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+            <div>
+              <label className="text-xs font-black tracking-widest text-[#0a1628] uppercase">NDA / Confidential Client</label>
+              <p className="text-[10px] text-slate-500 mt-1">Enable to hide exact client name from public view.</p>
+            </div>
+            <input 
+              type="checkbox" 
+              checked={projectForm.is_confidential || false} 
+              onChange={e => setProjectForm({...projectForm, is_confidential: e.target.checked})} 
+              className="w-5 h-5 accent-[#1db87a] cursor-pointer"
+            />
+          </div>
+
+          {projectForm.is_confidential ? (
+            <div className="md:col-span-2 space-y-1">
+              <label className="text-[10px] font-black tracking-widest text-[#1db87a] uppercase font-mono">Anonymous Label (Displayed Publicly)</label>
+              <input type="text" placeholder="e.g. Fortune 500 Energy Major" value={projectForm.anonymous_client_label || ''} onChange={e => setProjectForm({...projectForm, anonymous_client_label: e.target.value})} className="w-full px-4 py-3 border border-emerald-200 bg-emerald-50/30 rounded-xl text-sm focus:border-[#1db87a] outline-none" />
+            </div>
+          ) : (
+            <div className="md:col-span-2 space-y-1">
+              <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">Client Name (Public)</label>
+              <input type="text" placeholder="e.g. Reliance Industries" value={projectForm.client_name || ''} onChange={e => setProjectForm({...projectForm, client_name: e.target.value})} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:border-[#1db87a] outline-none" />
             </div>
           )}
 
+          <div className="space-y-1">
+            <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">Status</label>
+            <select value={projectForm.project_status || 'Completed'} onChange={e => setProjectForm({...projectForm, project_status: e.target.value})} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm outline-none">
+              <option value="Completed">Completed</option>
+              <option value="Ongoing">Ongoing</option>
+            </select>
+          </div>
+          <div className="space-y-1">
+            <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">Location</label>
+            <input type="text" placeholder="City or Region" value={projectForm.location || ''} onChange={e => setProjectForm({...projectForm, location: e.target.value})} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:border-[#1db87a] outline-none" />
+          </div>
+        </div>
+
+        {/* SECTION 3: MEDIA */}
+        <div className="space-y-1 pb-6 border-b border-slate-100">
+          <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">Cover Media</label>
+          <div className="w-full border-2 border-dashed border-slate-200 rounded-xl p-6 flex flex-col items-center justify-center bg-slate-50 relative overflow-hidden group hover:border-[#1db87a] transition-colors">
+            <input type="file" accept="image/*,video/*" onChange={(e) => handleFileUpload(e, 'project')} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
+            <UploadCloud className="w-6 h-6 text-slate-400 mb-2 group-hover:text-[#1db87a] transition-colors" />
+            <div className="text-xs font-bold text-slate-600">{projectForm.cover_image ? 'Media Uploaded Successfully (Click to replace)' : 'Click or drag file to upload server media'}</div>
+            {projectForm.cover_image && <div className="text-[9px] font-mono text-[#1db87a] mt-1">{projectForm.cover_image}</div>}
+          </div>
+        </div>
+
+        {/* SECTION 4: TEXT OVERVIEW */}
+        <div className="grid grid-cols-1 gap-6 pb-6 border-b border-slate-100">
+          <div className="space-y-1">
+            <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">Short Description (Cards)</label>
+            <textarea required rows={2} value={projectForm.short_description || ''} onChange={e => setProjectForm({...projectForm, short_description: e.target.value})} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:border-[#1db87a] outline-none" />
+          </div>
+          <div className="space-y-1">
+            <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">Full Case Study Narrative</label>
+            <textarea required rows={5} value={projectForm.full_overview || ''} onChange={e => setProjectForm({...projectForm, full_overview: e.target.value})} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:border-[#1db87a] outline-none" />
+          </div>
+        </div>
+
+        {/* SECTION 5: REPEATABLE ARRAYS (SCOPE, TECH, RESULTS) */}
+        <div className="grid grid-cols-1 gap-6">
+          
+          {/* Engineering Scope Array */}
+          <div className="space-y-3 bg-slate-50 p-6 rounded-2xl border border-slate-100">
+            <div className="flex justify-between items-center mb-2">
+              <label className="text-[10px] font-black tracking-widest text-slate-500 uppercase font-mono">Engineering Scope</label>
+              <button type="button" onClick={() => setProjectForm({...projectForm, engineering_scope: [...(projectForm.engineering_scope || []), '']})} className="text-[10px] font-mono font-black text-[#1db87a] flex items-center gap-1"><Plus className="w-3 h-3" /> Add Scope</button>
+            </div>
+            {(projectForm.engineering_scope || []).map((scope, idx) => (
+              <div key={idx} className="flex gap-2">
+                <input required type="text" placeholder="e.g. Process Design" value={scope} onChange={e => { let c = [...projectForm.engineering_scope]; c[idx] = e.target.value; setProjectForm({...projectForm, engineering_scope: c}); }} className="flex-1 px-4 py-2 border border-slate-200 rounded-xl text-xs outline-none focus:border-[#1db87a]" />
+                <button type="button" onClick={() => setProjectForm({...projectForm, engineering_scope: projectForm.engineering_scope.filter((_, i) => i !== idx)})} className="text-slate-400 hover:text-rose-500"><Trash2 className="w-4 h-4" /></button>
+              </div>
+            ))}
+          </div>
+
+          {/* Tech Stack Array */}
+          <div className="space-y-3 bg-slate-50 p-6 rounded-2xl border border-slate-100">
+            <div className="flex justify-between items-center mb-2">
+              <label className="text-[10px] font-black tracking-widest text-slate-500 uppercase font-mono">Technologies Used</label>
+              <button type="button" onClick={() => setProjectForm({...projectForm, technologies_used: [...(projectForm.technologies_used || []), '']})} className="text-[10px] font-mono font-black text-[#1db87a] flex items-center gap-1"><Plus className="w-3 h-3" /> Add Tech</button>
+            </div>
+            {(projectForm.technologies_used || []).map((tech, idx) => (
+              <div key={idx} className="flex gap-2">
+                <input required type="text" placeholder="e.g. AVEVA E3D" value={tech} onChange={e => { let c = [...projectForm.technologies_used]; c[idx] = e.target.value; setProjectForm({...projectForm, technologies_used: c}); }} className="flex-1 px-4 py-2 border border-slate-200 rounded-xl text-xs outline-none focus:border-[#1db87a]" />
+                <button type="button" onClick={() => setProjectForm({...projectForm, technologies_used: projectForm.technologies_used.filter((_, i) => i !== idx)})} className="text-slate-400 hover:text-rose-500"><Trash2 className="w-4 h-4" /></button>
+              </div>
+            ))}
+          </div>
+
+          {/* Key Results / Impacts Array */}
+          <div className="space-y-3 bg-emerald-50/50 p-6 rounded-2xl border border-emerald-100">
+            <div className="flex justify-between items-center mb-2">
+              <label className="text-[10px] font-black tracking-widest text-emerald-700 uppercase font-mono">Key Results & Impacts</label>
+              <button type="button" onClick={() => setProjectForm({...projectForm, key_results: [...(projectForm.key_results || []), '']})} className="text-[10px] font-mono font-black text-[#1db87a] flex items-center gap-1"><Plus className="w-3 h-3" /> Add Result</button>
+            </div>
+            {(projectForm.key_results || []).map((res, idx) => (
+              <div key={idx} className="flex gap-2">
+                <input required type="text" placeholder="e.g. Zero Safety Incidents" value={res} onChange={e => { let c = [...projectForm.key_results]; c[idx] = e.target.value; setProjectForm({...projectForm, key_results: c}); }} className="flex-1 px-4 py-2 border border-emerald-200 rounded-xl text-xs outline-none focus:border-[#1db87a]" />
+                <button type="button" onClick={() => setProjectForm({...projectForm, key_results: projectForm.key_results.filter((_, i) => i !== idx)})} className="text-slate-400 hover:text-rose-500"><Trash2 className="w-4 h-4" /></button>
+              </div>
+            ))}
+          </div>
+
+        </div>
+        
+        {/* SUBMIT BUTTON */}
+        <div className="pt-8 flex justify-end">
+          <SubmitButton isSubmitting={isSubmitting} editingId={editingId} />
+        </div>
+      </form>
+    )}
+  </div>
+)}
           {/* ─── 3. PUBLICATIONS TAB ─── */}
 {activeTab === 'blogs' && (
   <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm">
