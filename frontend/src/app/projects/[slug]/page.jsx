@@ -69,7 +69,7 @@ export default function SingleProjectPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col pt-24 pb-20 font-sans">
+    <div className="min-h-screen bg-slate-50 flex flex-col  pb-20 font-sans">
       
       {/* ─── BREADCRUMBS & HEADER ─── */}
       <section className="max-w-7xl mx-auto px-6 w-full pt-8 pb-6">
@@ -273,7 +273,7 @@ export default function SingleProjectPage() {
       </section>
 
       {/* ─── CTA FOOTER ─── */}
-      <section className="max-w-5xl mx-auto px-6 w-full mt-24 text-center">
+      <section className="max-w-5xl mx-auto px-6 w-full mt-10 text-center">
         <div className="bg-[#0a1628] rounded-3xl p-12 relative overflow-hidden shadow-2xl">
           <div className="absolute inset-0 bg-[linear-gradient(rgba(29,184,122,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(29,184,122,0.1)_1px,transparent_1px)] bg-size-[32px_32px] opacity-20 pointer-events-none" />
           <div className="relative z-10">
