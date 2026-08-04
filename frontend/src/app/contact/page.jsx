@@ -111,7 +111,7 @@ export default function ContactPage() {
   // Reusable field wrapper: icon-prefixed single-line inputs
  
   return (
-    <main className="bg-aarvi-bg min-h-screen text-aarvi-navy selection:bg-aarvi-green/30 pt-24 pb-20 lg:pt-32 lg:pb-32 relative">
+    <main className="bg-aarvi-bg min-h-screen text-aarvi-navy selection:bg-aarvi-green/30 pt-8 pb-20 lg:pt-8 lg:pb-32 relative">
 
       {/* ─── GLOBAL BACKGROUND GRID ─── */}
       <div className="fixed inset-0 tech-grid opacity-40 pointer-events-none z-0" />
