@@ -5,22 +5,21 @@ import Link from 'next/link';
 import Image from 'next/image';
 import {
   ArrowUpRight, Activity, Layers, Disc, Hammer, Compass,
-  Zap, Sliders, Cpu, Briefcase, FileCheck, Box, Database
+  Zap, Sliders, Cpu, Briefcase, FileCheck, Box, Database , Map,
 } from 'lucide-react';
 
-// ─── LOCAL ASSETS ───────────────────────────────────────────────────────────
-import img1  from '../assets/service-1.png';
-import img2  from '../assets/service-2.png';
-import img3  from '../assets/service-3.png';
-import img4  from '../assets/service-4.png';
-import img5  from '../assets/service-5.png';
-import img6  from '../assets/service-6.png';
-import img7  from '../assets/service-7.png';
-import img8  from '../assets/service-8.png';
-import img9  from '../assets/service-9.png';
-import img10 from '../assets/service-10.png';
-import img11 from '../assets/service-11.png';
-import img12 from '../assets/service-12.png';
+import img1  from "../assets/service-1.png";
+import img2  from "../assets/service-2.png";
+import img3  from "../assets/service-3.png";
+import img4  from "../assets/service-3me.png";
+import img5  from "../assets/service-4.png";
+import img6  from "../assets/service-5.png";
+import img7  from "../assets/service-7.png";
+import img8  from "../assets/service-8.png";
+import img9  from "../assets/service-9.png";
+import img10 from "../assets/service-10.png"; // optional if unused
+import img11 from "../assets/service-11.png";
+import img12 from "../assets/service-12.png";
 
 // ─── THEME TOKENS (Upgraded to Hero Palette) ────────────────────────────────
 const CYAN       = '#00E8B8';        // brighter, modern premium cyan
@@ -30,19 +29,96 @@ const CYAN_BORDER= 'rgba(0,232,184,0.18)'; // Softened borders (40% reduction)
 
 // ─── SERVICE DATA ────────────────────────────────────────────────────────────
 const SERVICES = [
-  { title: "Process & Safety Engineering", code: "PE-101", desc: "FEED studies, process simulation, PFD/P&ID development, and SIL assessments.", icon: Activity, href: "/services/process-safety-engineering", img: img1 },
-  { title: "Plant Layout & Piping Engineering", code: "PP-102", desc: "3D routing, clash resolution, and isometric extraction.", icon: Layers, href: "/services/plant-layout-piping", img: img2 },
-  { title: "Mechanical Engineering", code: "ME-103", desc: "Static/rotating equipment sizing, vendor reviews, and pressure vessel support.", icon: Hammer, href: "/services/mechanical-equipment", img: img4 },
-  { title: "Civil & Structural Engineering", code: "CS-104", desc: "Site development, structural steel racks, and blast-resistant design.", icon: Compass, href: "/services/civil-structural", img: img5 },
-  { title: "Electrical Engineering", code: "EL-105", desc: "Power system design, short circuit studies, and substation compliance.", icon: Zap, href: "/services/electrical-engineering", img: img7 },
-  { title: "Instrumentation & Control Engineering", code: "IC-106", desc: "Datasheet development, cause & effect matrices, and SIS support.", icon: Sliders, href: "/services/instrumentation-control", img: img8 },
-  { title: "Engineering Simulations", code: "FE-107", desc: "Advanced computational fluid dynamics (CFD) and structural behaviour checks.", icon: Cpu, href: "/services/engineering-simulations", img: img10 },
-  { title: "Digital Engineering & 3D Modelling", code: "DE-108", desc: "Integrated intelligent 3D plant coordination models and database upgrades.", icon: Box, href: "/services/digital-engineering-3d", img: img9 },
-  { title: "Project Engineering & PMC Support", code: "PM-109", desc: "Project management, scheduling, and multi-discipline interface coordination.", icon: Briefcase, href: "/services/project-engineering-pmc", img: img11 },
-  { title: "As-Built & Asset Documentation", code: "AB-110", desc: "Database reconciliation and asset info validation handover packages.", icon: FileCheck, href: "/services/as-built-documentation", img: img12 },
-  { title: "Engineering Data & Digitalization", code: "ED-111", desc: "Legacy drawing digitization and digital twin data preparation workflows.", icon: Database, href: "/services/engineering-data-digitalization", img: img6 },
-  { title: "Construction Management, Commissioning Asset Support", code: "CC-112", desc: "Mechanical completion reviews, pre-commissioning, and startup support.", icon: Disc, href: "/services/construction-commissioning-support", img: img3 },
+  {
+    title: "Process & Safety Engineering",
+    code: "PE-101",
+    desc: "Process design, simulation, PFD/P&ID development, HAZOP, SIL assessment, and process safety management.",
+    icon: Activity,
+    href: "/services/process-safety-engineering",
+    img: img1,
+  },
+  {
+    title: "Plant Layout & Piping Engineering",
+    code: "PP-102",
+    desc: "Plot plans, equipment layout, 3D modelling, pipe stress analysis, clash detection, and isometric generation.",
+    icon: Layers,
+    href: "/services/plant-layout-piping",
+    img: img2,
+  },
+  {
+    title: "Pipeline Engineering",
+    code: "PL-103",
+    desc: "Pipeline routing, hydraulic and surge analysis, stress analysis, integrity engineering, and as-built documentation.",
+    icon: Map,
+    href: "/services/pipeline-engineering",
+    img: img3,
+  },
+  {
+    title: "Mechanical Engineering",
+    code: "ME-104",
+    desc: "Static, rotating and package equipment, pressure vessels, heat exchangers, tanks, and mechanical handling systems.",
+    icon: Hammer,
+    href: "/services/mechanical-engineering",
+    img: img4,
+  },
+  {
+    title: "Civil & Structural Engineering",
+    code: "CS-105",
+    desc: "Pipe racks, structural steel, foundations, offshore structures, seismic analysis, and blast-resistant design.",
+    icon: Compass,
+    href: "/services/civil-structural",
+    img: img5,
+  },
+  {
+    title: "Electrical Engineering",
+    code: "EL-106",
+    desc: "Power system design, load flow studies, short circuit analysis, cable routing, substations, and hazardous area compliance.",
+    icon: Zap,
+    href: "/services/electrical-engineering",
+    img: img6,
+  },
+  {
+    title: "Instrumentation & Control Engineering",
+    code: "IC-107",
+    desc: "Instrumentation design, I/O lists, control philosophy, SIS engineering, loop design, and telecom systems.",
+    icon: Sliders,
+    href: "/services/instrumentation-control",
+    img: img8,
+  },
+  {
+    title: "Engineering Simulations",
+    code: "ES-108",
+    desc: "CFD, finite element analysis, thermal studies, structural simulations, design verification, and performance validation.",
+    icon: Cpu,
+    href: "/services/engineering-simulations",
+    img: img7,
+  },
+  {
+    title: "As-Built & Asset Documentation",
+    code: "AB-109",
+    desc: "Redline incorporation, as-built updates, asset verification, engineering database reconciliation, and handover documentation.",
+    icon: FileCheck,
+    href: "/services/as-built-documentation",
+    img: img12,
+  },
+  {
+    title: "Digitalization",
+    code: "DG-110",
+    desc: "Engineering 2D/3D data migration, legacy drawing digitization, and SmartPlant data management & integration.",
+    icon: Database,
+    href: "/services/digitalization",
+    img: img9,
+  },
+  {
+    title: "Project Delivery & Execution Support",
+    code: "PD-111",
+    desc: "Procurement engineering, vendor management, design coordination, commissioning, maintenance, and asset integrity support.",
+    icon: Briefcase,
+    href: "/services/project-delivery-execution-support",
+    img: img11,
+  },
 ];
+
 
 const COL_A = SERVICES.slice(0, 6);
 const COL_B = SERVICES.slice(6, 12);

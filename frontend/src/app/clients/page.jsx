@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, ShieldCheck } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 // ─── LOGO IMPORTS ────────────────────────────────────────────────────────────
 import logoMcdermott from '../../assets/mcdermott.png';
@@ -87,6 +87,7 @@ const STATIC_CATEGORIES = [
 // index tag, corner registration marks, and a desaturate → full-color
 // reveal on hover (a "verified" stamp echoing the ISO badge below).
 function ClientCard({ client, index, visible }) {
+  
 
   return (
     <div
@@ -95,6 +96,7 @@ function ClientCard({ client, index, visible }) {
       } motion-reduce:transition-none`}
       style={{ transitionDelay: visible ? `${Math.min(index * 20, 400)}ms` : '0ms' }}
     >
+     
       
 
       {/* Corner registration marks */}
@@ -107,18 +109,18 @@ function ClientCard({ client, index, visible }) {
       </span>
 
       {/* Logo */}
-      <div className="relative h-full w-full transition-transform duration-500 ease-out group-hover:scale-105">
-  <Image
-    src={client.logo}
-    alt={`${client.name} Logo`}
-    fill
-    sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
-    className="object-contain"
-    priority={index < 8}
-  />
-</div>
+      <div className="relative h-full w-full transition-transform duration-500 ease-out motion-reduce:transform-none group-hover:scale-[1.06]">
+        <Image
+          src={client.logo}
+          alt={`${client.name} Logo`}
+          fill
+          sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
+          className="object-contain grayscale-55% opacity-80 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:grayscale-0"
+          priority={index < 8}
+        />
+      </div>
 
-     
+      
     </div>
   );
 }
@@ -169,7 +171,9 @@ export default function ClientsPage() {
 
         {/* Industrial Shadow Overlays for Crisp White Typography Contrast */}
         <div className="absolute inset-0 z-10 bg-[#060A17]/50 mix-blend-multiply" />
-        <div className="absolute inset-0 z-10 bg-linear-to-t from-[#FAFAFA] via-transparent to-[#060A17]/30" />
+
+        {/* FIXED GRADIENT: Pushes the white fade strictly to the bottom edge and protects text with a dark layer */}
+        <div className="absolute inset-0 z-10 bg-linear-to-t from-[#FAFAFA] from-2% via-[#060A17]/80 via-25% to-transparent" />
 
         <div className="relative z-20 mx-auto mt-10 max-w-5xl space-y-8 px-4 py-4">
 
@@ -192,12 +196,12 @@ export default function ClientsPage() {
             <span className="text-aarvi-green">most critical assets</span>
           </h1>
 
-          {/* Category chips */}
+          {/* Category chips - Background darkened for perfect legibility */}
           <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-2.5 pt-6 drop-shadow-md sm:gap-3">
             {STATIC_CATEGORIES.map((category) => (
               <span
                 key={category}
-                className="rounded-full border border-white/15 bg-white/5 px-4 py-1.5 font-sans text-[11px] font-bold uppercase tracking-widest text-slate-200 backdrop-blur-sm transition-colors duration-300 hover:border-aarvi-green/60 hover:text-aarvi-green sm:text-xs"
+                className="rounded-full border border-white/15 bg-black/40 px-4 py-1.5 font-sans text-[11px] font-bold uppercase tracking-widest text-slate-200 backdrop-blur-md transition-colors duration-300 hover:border-aarvi-green/60 hover:text-aarvi-green sm:text-xs"
               >
                 {category}
               </span>
@@ -211,45 +215,24 @@ export default function ClientsPage() {
 
         {/* Matrix Grid Box */}
         <div
-  ref={gridRef}
-  className="flex flex-wrap justify-center overflow-hidden rounded-2xl border border-slate-200 bg-slate-200/60 shadow-xl shadow-slate-200/50"
->
-  {CLIENTS.map((client, i) => (
-    <div
-      key={client.name}
-      className="flex w-1/2 justify-center border-r border-b border-slate-200 sm:w-1/3 md:w-1/4 lg:w-1/5"
-    >
-      <ClientCard
-        client={client}
-        index={i}
-        visible={cardsVisible}
-      />
-    </div>
-  ))}
-</div>
-
-        {/* Quality Validation Subbar */}
-        <div className="relative mt-16 flex flex-col items-center justify-between gap-6 border-t border-slate-200/80 pt-8 md:flex-row">
-          <span aria-hidden="true" className="absolute -top-px left-0 h-px w-16 bg-aarvi-green" />
-
-          <div className="flex items-center gap-3 rounded-xl border border-slate-100 bg-white px-5 py-3 shadow-sm">
-            <ShieldCheck className="h-5 w-5 shrink-0 text-aarvi-green" />
-            <span className="font-mono text-[11px] font-bold uppercase tracking-wide text-slate-500 sm:text-xs">
-              ISO 9001:2015 Technical Compliance certified quality validation
-            </span>
-          </div>
-
-          <Link
-            href="/projects"
-            className="group inline-flex items-center gap-2 rounded-xl bg-aarvi-navy px-6 py-4 font-mono text-xs font-black uppercase tracking-wider text-white shadow-md transition-colors duration-300 hover:bg-aarvi-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-aarvi-green focus-visible:ring-offset-2 focus-visible:ring-offset-[#FAFAFA]"
-          >
-            View All Projects
-            <ArrowRight
-              className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0"
-              strokeWidth={2.5}
-            />
-          </Link>
+          ref={gridRef}
+          className="flex flex-wrap justify-center overflow-hidden rounded-2xl border border-slate-200 bg-slate-200/60 shadow-xl shadow-slate-200/50"
+        >
+          {CLIENTS.map((client, i) => (
+            <div
+              key={client.name}
+              className="flex w-1/2 justify-center border-r border-b border-slate-200 sm:w-1/3 md:w-1/4 lg:w-1/5"
+            >
+              <ClientCard
+                client={client}
+                index={i}
+                visible={cardsVisible}
+              />
+            </div>
+          ))}
         </div>
+
+        
       </section>
 
     </main>
