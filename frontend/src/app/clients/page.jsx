@@ -4,8 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, ShieldCheck } from 'lucide-react';
 
-
-// ─── CORRECTED RELATIVE DIRECTORY CLIMB PATHS ────────────────────────────────
+// ─── LOGO IMPORTS ────────────────────────────────────────────────────────────
 import logoMcdermott from '../../assets/mcdermott.png';
 import logoWood from '../../assets/wood.png';
 import logoFluor from '../../assets/fluor.png';
@@ -39,149 +38,97 @@ import logoCpcl from '../../assets/cpcl.png';
 import logoToyo from '../../assets/toyo.png';
 import logoTata from '../../assets/tata.png';
 
-
-
 // ─── DATA CONFIGURATIONS ─────────────────────────────────────────────────────
-
-const STATS = [
-  { value: 120, suffix: '+', label: 'Global Clients' },
-  { value: 850, suffix: '+', label: 'Projects Delivered' },
-  { value: 37,  suffix: '',  label: 'Years of Engineering' },
-  { value: 18,  suffix: '+', label: 'Countries Served' },
-];
-
-const FILTERS = [
-  { key: 'all',     label: 'All Clients' },
-  { key: 'oil-gas', label: 'Oil & Gas' },
-  { key: 'epc',      label: 'EPC Contractors' },
-  { key: 'power',   label: 'Power & Energy' },
-  { key: 'infra',   label: 'Infrastructure' },
-];
-
 const CLIENTS = [
-  { name: "McDermott", sector: "epc", region: "International", logo: logoMcdermott },
-  { name: "Wood", sector: "epc", region: "International", logo: logoWood },
-  { name: "Fluor", sector: "epc", region: "International", logo: logoFluor },
-  { name: "Saipem", sector: "epc", region: "International", logo: logoSaipem },
-  { name: "Petrofac", sector: "epc", region: "International", logo: logoPetrofac },
-  { name: "Technip Energies", sector: "epc", region: "International", logo: logoTechnip },
-  { name: "Worley", sector: "epc", region: "International", logo: logoWorley },
-  { name: "Kentz", sector: "epc", region: "International", logo: logoKentz },
-  { name: "KBR", sector: "epc", region: "International", logo: logoKbr },
-  { name: "AM/NS India", sector: "infra", region: "India", logo: logoAmns },
-  { name: "SLB", sector: "oil-gas", region: "International", logo: logoSlb },
-  { name: "Whessoe", sector: "epc", region: "International", logo: logoWhessoe },
-  { name: "Tecnimont", sector: "epc", region: "International", logo: logoTecnimont },
-  { name: "Tasnee", sector: "oil-gas", region: "International", logo: logoTasnee },
-  { name: "L&T Engineering", sector: "infra", region: "India", logo: logoLt },
-  { name: "Tuah Engineering", sector: "epc", region: "International", logo: logoTuah },
-  { name: "Jacobs", sector: "epc", region: "International", logo: logoJacobs },
-  { name: "SPIC India", sector: "infra", region: "India", logo: logoSpic },
-  { name: "Jindal Steel & Power", sector: "infra", region: "India", logo: logoJindal },
-  { name: "HPCL", sector: "oil-gas", region: "India", logo: logoHpcl },
-  { name: "BPCL", sector: "oil-gas", region: "India", logo: logoBpcl },
-  { name: "SBM Offshore", sector: "epc", region: "International", logo: logoSbm },
-  { name: "Shell", sector: "oil-gas", region: "International", logo: logoShell },
-  { name: "Cairn Oil & Gas", sector: "oil-gas", region: "India", logo: logoCairn },
-  { name: "IndianOil", sector: "oil-gas", region: "India", logo: logoIocl },
-  { name: "Engineers India Limited", sector: "epc", region: "India", logo: logoEil },
-  { name: "Reliance Industries", sector: "oil-gas", region: "India", logo: logoReliance },
-  { name: "ONGC MRPL", sector: "oil-gas", region: "India", logo: logoMrpl },
-  { name: "GNFC", sector: "oil-gas", region: "India", logo: logoGnfc },
-  { name: "CPCL", sector: "oil-gas", region: "India", logo: logoCpcl },
-  { name: "Toyo Engineering", sector: "epc", region: "International", logo: logoToyo },
-  { name: "Tata Projects", sector: "infra", region: "India", logo: logoTata }
+  { name: "McDermott", logo: logoMcdermott },
+  { name: "Wood", logo: logoWood },
+  { name: "Fluor", logo: logoFluor },
+  { name: "Saipem", logo: logoSaipem },
+  { name: "Petrofac", logo: logoPetrofac },
+  { name: "Technip Energies", logo: logoTechnip },
+  { name: "Worley", logo: logoWorley },
+  { name: "Kentz", logo: logoKentz },
+  { name: "KBR", logo: logoKbr },
+  { name: "AM/NS India", logo: logoAmns },
+  { name: "SLB", logo: logoSlb },
+  { name: "Whessoe", logo: logoWhessoe },
+  { name: "Tecnimont", logo: logoTecnimont },
+  { name: "Tasnee", logo: logoTasnee },
+  { name: "L&T Engineering", logo: logoLt },
+  { name: "Tuah Engineering", logo: logoTuah },
+  { name: "Jacobs", logo: logoJacobs },
+  { name: "SPIC India", logo: logoSpic },
+  { name: "Jindal Steel & Power", logo: logoJindal },
+  { name: "HPCL", logo: logoHpcl },
+  { name: "BPCL", logo: logoBpcl },
+  { name: "SBM Offshore", logo: logoSbm },
+  { name: "Shell", logo: logoShell },
+  { name: "Cairn Oil & Gas", logo: logoCairn },
+  { name: "IndianOil", logo: logoIocl },
+  { name: "Engineers India Limited", logo: logoEil },
+  { name: "Reliance Industries", logo: logoReliance },
+  { name: "ONGC MRPL", logo: logoMrpl },
+  { name: "GNFC", logo: logoGnfc },
+  { name: "CPCL", logo: logoCpcl },
+  { name: "Toyo Engineering", logo: logoToyo },
+  { name: "Tata Projects", logo: logoTata }
 ];
 
-const REGION_COLORS = {
-  International: 'bg-[#dcfce7] text-[#15803d]',
-  India:         'bg-[#dbeafe] text-[#1e40af]',
-};
-
-// ─── HOOKS ──────────────────────────────────────────────────────────────────
-
-function useCountUp(target, started, duration = 1600) {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (!started) return;
-    let frame = 0;
-    const totalFrames = Math.round(duration / 16);
-    const step = target / totalFrames;
-    const timer = setInterval(() => {
-      frame++;
-      setCount(Math.min(Math.round(step * frame), target));
-      if (frame >= totalFrames) clearInterval(timer);
-    }, 16);
-    return () => clearInterval(timer);
-  }, [started, target, duration]);
-  return count;
-}
+const STATIC_CATEGORIES = [
+  "Owner Operators",
+  "EPC Contractors",
+  "PMC Consultants",
+  "Licensors",
+  "OEMs"
+];
 
 // ─── SUB COMPONENTS ─────────────────────────────────────────────────────────
-
-function StatCard({ value, suffix, label, started, index }) {
-  const count = useCountUp(value, started, 1400 + index * 100);
-  return (
-    <div className="bg-white px-5 py-7 text-center">
-      <div className="text-4xl font-extrabold text-aarvi-navy tracking-tight leading-none mb-1.5">
-        {count}<span className="text-aarvi-green">{suffix}</span>
-      </div>
-      <div className="text-[10.5px] font-semibold tracking-widest uppercase text-slate-400">
-        {label}
-      </div>
-    </div>
-  );
-}
-
+// Cards are styled like entries on a technical drawing register: a mono
+// index tag, corner registration marks, and a desaturate → full-color
+// reveal on hover (a "verified" stamp echoing the ISO badge below).
 function ClientCard({ client, index, visible }) {
+
   return (
     <div
-      className={`bg-white hover:bg-slate-50 border border-slate-100 transition-all duration-500 p-3 sm:p-5 flex flex-col items-center justify-center h-28 sm:h-36 w-full group relative ${
-        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-      }`}
-      style={{ transitionDelay: visible ? `${index * 35}ms` : '0ms' }}
+      className={`group relative flex h-32 w-full flex-col items-center justify-center bg-white p-4 transition-all duration-500 ease-out hover:z-10 hover:bg-slate-50 hover:shadow-[0_8px_24px_-8px_rgba(15,23,42,0.12)] sm:h-36 sm:p-6 lg:h-40 ${
+        visible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+      } motion-reduce:transition-none`}
+      style={{ transitionDelay: visible ? `${Math.min(index * 20, 400)}ms` : '0ms' }}
     >
-      {/* Corporate Logo Box (Fully colored, responsive, takes full available space, scales on hover) */}
-      <div className="relative w-full h-full transition-transform duration-500 ease-out group-hover:scale-110">
-        <Image
-          src={client.logo}
-          alt={`${client.name} Logo`}
-          fill
-          sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-          className="object-contain"
-          priority={index < 8}
-        />
-      </div>
+      
+
+      {/* Corner registration marks */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-2.5 opacity-0 transition-opacity duration-300 group-hover:opacity-100 sm:inset-3"
+      >
+        <span className="absolute right-0 top-0 h-2 w-2 border-r border-t border-aarvi-green" />
+        <span className="absolute bottom-0 left-0 h-2 w-2 border-b border-l border-aarvi-green" />
+      </span>
+
+      {/* Logo */}
+      <div className="relative h-full w-full transition-transform duration-500 ease-out group-hover:scale-105">
+  <Image
+    src={client.logo}
+    alt={`${client.name} Logo`}
+    fill
+    sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
+    className="object-contain"
+    priority={index < 8}
+  />
+</div>
+
+     
     </div>
   );
 }
 
 // ─── PAGE ────────────────────────────────────────────────────────────────────
-
 export default function ClientsPage() {
-  const [activeFilter, setActiveFilter] = useState('all');
-  const [statsStarted, setStatsStarted] = useState(false);
   const [cardsVisible, setCardsVisible] = useState(false);
-  const statsRef = useRef(null);
   const gridRef = useRef(null);
 
-  const filtered = CLIENTS.filter(
-    c => activeFilter === 'all' || c.sector === activeFilter
-  );
-
-  // Intersection observer for stats counter
-  useEffect(() => {
-    const el = statsRef.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setStatsStarted(true); },
-      { threshold: 0.2 }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-
-  // Intersection observer for card grid
+  // Intersection observer for card grid fade-in animation
   useEffect(() => {
     const el = gridRef.current;
     if (!el) return;
@@ -193,135 +140,115 @@ export default function ClientsPage() {
     return () => obs.disconnect();
   }, []);
 
-  function handleFilter(key) {
-    setCardsVisible(false);
-    setActiveFilter(key);
-    setTimeout(() => setCardsVisible(true), 80);
-  }
-
   return (
-    <main className="min-h-screen bg-[#FAFAFA] overflow-hidden select-none">
+    <main className="min-h-screen select-none overflow-hidden bg-[#FAFAFA]">
 
       {/* ── HIGH-CONTRAST CINEMATIC HERO WITH VIDEO ENVIRONMENT BACKGROUND ── */}
-      <section className="relative h-[65vh] min-h-120 w-full bg-[#060A17] flex items-center justify-center px-6 lg:px-10 text-center overflow-hidden">
-        
+      <section className="relative flex h-[65vh] min-h-125 w-full items-center justify-center overflow-hidden bg-[#060A17] px-6 text-center lg:px-10">
+
         {/* Dynamic Video Streaming Layer */}
         <video
           autoPlay
           muted
           loop
           playsInline
-          src="/chemical_factory.mp4" 
-          className="absolute inset-0 w-full h-full object-cover z-0 grayscale contrast-115 opacity-20 scale-102 pointer-events-none"
+          src="/chemical_factory.mp4"
+          className="pointer-events-none absolute inset-0 z-0 h-full w-full scale-105 object-cover opacity-20 grayscale contrast-125"
+        />
+
+        {/* Faint drafting-grid texture — technical, not decorative flourish */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-10 opacity-[0.06]"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)',
+            backgroundSize: '44px 44px',
+          }}
         />
 
         {/* Industrial Shadow Overlays for Crisp White Typography Contrast */}
-        <div className="absolute inset-0 bg-[#060A17]/40 z-10 mix-blend-multiply" />
-        <div className="absolute inset-0 bg-linear-to-t from-[#FAFAFA] via-[#060A17]/50 to-transparent z-10" />
+        <div className="absolute inset-0 z-10 bg-[#060A17]/50 mix-blend-multiply" />
+        <div className="absolute inset-0 z-10 bg-linear-to-t from-[#FAFAFA] via-transparent to-[#060A17]/30" />
 
-        <div className="relative z-20 max-w-4xl mx-auto space-y-6">
-          <div className="inline-flex items-center gap-2.5">
-            <span className="w-5 h-[1.5px] bg-aarvi-green" />
-            <span className="text-[10px] font-mono font-black tracking-[0.25em] uppercase text-aarvi-green">
+        <div className="relative z-20 mx-auto mt-10 max-w-5xl space-y-8 px-4 py-4">
+
+          {/* Corner registration marks framing the hero content — echoes the card index system below */}
+          <span aria-hidden="true" className="pointer-events-none absolute -left-1 -top-1 hidden h-5 w-5 border-l border-t border-aarvi-green/50 sm:block" />
+          <span aria-hidden="true" className="pointer-events-none absolute -right-1 -top-1 hidden h-5 w-5 border-r border-t border-aarvi-green/50 sm:block" />
+          <span aria-hidden="true" className="pointer-events-none absolute -bottom-1 -left-1 hidden h-5 w-5 border-b border-l border-aarvi-green/50 sm:block" />
+          <span aria-hidden="true" className="pointer-events-none absolute -bottom-1 -right-1 hidden h-5 w-5 border-b border-r border-aarvi-green/50 sm:block" />
+
+          <div className="inline-flex items-center gap-3">
+            <span className="h-[1.5px] w-6 bg-aarvi-green" />
+            <span className="font-mono text-[10px] font-black uppercase tracking-[0.25em] text-aarvi-green drop-shadow-md shadow-black/50 sm:text-xs">
               Strategic Alliances Portfolio
             </span>
-            <span className="w-5 h-[1.5px] bg-aarvi-green" />
+            <span className="h-[1.5px] w-6 bg-aarvi-green" />
           </div>
-          
-          <h1 className="text-4xl md:text-6xl font-sans font-black text-white leading-[1.05] tracking-tight uppercase max-w-3xl mx-auto drop-shadow-md">
+
+          <h1 className="mx-auto max-w-4xl font-sans text-4xl font-black uppercase leading-[1.05] tracking-tight text-white drop-shadow-xl md:text-5xl lg:text-7xl">
             Engineering the world&apos;s <br />
             <span className="text-aarvi-green">most critical assets</span>
           </h1>
-          
-          <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-xl mx-auto font-medium drop-shadow-sm">
-            From offshore platforms in the North Sea to downstream refinery expansions across South Asia — global industry leaders trust Aarvi&apos;s multi-discipline technical execution.
-          </p>
-        </div>
-      </section>
 
-      {/* ── STATS COUNTER DISPLAY OVERLAP ── */}
-      <section ref={statsRef} className="max-w-5xl mx-auto px-6 lg:px-10 -mt-12 relative z-20">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-slate-200 border border-slate-200 rounded-2xl overflow-hidden shadow-xl shadow-slate-200/50">
-          {STATS.map((s, i) => (
-            <StatCard key={s.label} {...s} started={statsStarted} index={i} />
-          ))}
+          {/* Category chips */}
+          <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-2.5 pt-6 drop-shadow-md sm:gap-3">
+            {STATIC_CATEGORIES.map((category) => (
+              <span
+                key={category}
+                className="rounded-full border border-white/15 bg-white/5 px-4 py-1.5 font-sans text-[11px] font-bold uppercase tracking-widest text-slate-200 backdrop-blur-sm transition-colors duration-300 hover:border-aarvi-green/60 hover:text-aarvi-green sm:text-xs"
+              >
+                {category}
+              </span>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ── MAIN LOGO WORKSPACE GRID ── */}
-      <section className="max-w-5xl mx-auto px-6 lg:px-10 py-20 relative z-20">
-
-        {/* Dynamic Client Category Filters */}
-        <div className="flex gap-1.5 flex-wrap justify-center mb-12 bg-white border border-slate-200/80 p-2 rounded-xl w-max mx-auto shadow-xs">
-          {FILTERS.map(f => (
-            <button
-              key={f.key}
-              onClick={() => handleFilter(f.key)}
-              className={`px-4 py-2 rounded-lg text-[11px] font-mono font-bold tracking-wider uppercase transition-all duration-150 cursor-pointer ${
-                activeFilter === f.key
-                  ? 'bg-aarvi-navy text-white shadow-xs'
-                  : 'bg-transparent text-slate-500 hover:text-aarvi-navy hover:bg-slate-50'
-              }`}
-            >
-              ┼ {f.label}
-            </button>
-          ))}
-        </div>
+      <section className="relative z-20 mx-auto max-w-6xl px-6 py-24 lg:px-10">
 
         {/* Matrix Grid Box */}
         <div
-          ref={gridRef}
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-px bg-slate-200/60 border border-slate-200 rounded-2xl overflow-hidden shadow-xs"
-        >
-          {filtered.map((client, i) => (
-            <ClientCard
-              key={client.name}
-              client={client}
-              index={i}
-              visible={cardsVisible}
-            />
-          ))}
-        </div>
+  ref={gridRef}
+  className="flex flex-wrap justify-center overflow-hidden rounded-2xl border border-slate-200 bg-slate-200/60 shadow-xl shadow-slate-200/50"
+>
+  {CLIENTS.map((client, i) => (
+    <div
+      key={client.name}
+      className="flex w-1/2 justify-center border-r border-b border-slate-200 sm:w-1/3 md:w-1/4 lg:w-1/5"
+    >
+      <ClientCard
+        client={client}
+        index={i}
+        visible={cardsVisible}
+      />
+    </div>
+  ))}
+</div>
 
         {/* Quality Validation Subbar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between mt-12 gap-4 border-t border-slate-200/80 pt-6">
-          <div className="flex items-center gap-2.5">
-            <ShieldCheck className="w-4 h-4 text-aarvi-green" />
-            <span className="text-[11px] font-mono font-bold uppercase tracking-wide text-slate-400">
+        <div className="relative mt-16 flex flex-col items-center justify-between gap-6 border-t border-slate-200/80 pt-8 md:flex-row">
+          <span aria-hidden="true" className="absolute -top-px left-0 h-px w-16 bg-aarvi-green" />
+
+          <div className="flex items-center gap-3 rounded-xl border border-slate-100 bg-white px-5 py-3 shadow-sm">
+            <ShieldCheck className="h-5 w-5 shrink-0 text-aarvi-green" />
+            <span className="font-mono text-[11px] font-bold uppercase tracking-wide text-slate-500 sm:text-xs">
               ISO 9001:2015 Technical Compliance certified quality validation
             </span>
           </div>
+
           <Link
             href="/projects"
-            className="inline-flex items-center gap-2 bg-aarvi-navy text-white text-xs font-mono font-black uppercase tracking-wider px-5 py-3 rounded-lg hover:bg-aarvi-green transition-colors duration-200 shadow-xs cursor-pointer"
+            className="group inline-flex items-center gap-2 rounded-xl bg-aarvi-navy px-6 py-4 font-mono text-xs font-black uppercase tracking-wider text-white shadow-md transition-colors duration-300 hover:bg-aarvi-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-aarvi-green focus-visible:ring-offset-2 focus-visible:ring-offset-[#FAFAFA]"
           >
-            View All Projects <ArrowRight className="w-3.5 h-3.5" strokeWidth={2.5} />
+            View All Projects
+            <ArrowRight
+              className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0"
+              strokeWidth={2.5}
+            />
           </Link>
-        </div>
-      </section>
-
-      {/* ── CORE CAPABILITIES SUMMARY PANELS ── */}
-      <section className="border-t border-slate-200/60 bg-white px-6 lg:px-10 py-16 relative z-20">
-        <div className="max-w-5xl mx-auto text-center">
-          <p className="font-mono text-[9px] font-black tracking-[0.25em] uppercase text-slate-400 mb-10">
-            ┼ Sector Footprint Matrix
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { icon: '⛽', label: 'Oil & Gas', desc: 'Upstream exploration, midstream infrastructure, and downstream refining configurations.' },
-              { icon: '🏗️', label: 'EPC Projects', desc: 'Full-lifecycle technical delivery coordination supporting global Tier-1 contractors.' },
-              { icon: '⚡', label: 'Power & Energy', desc: 'Thermal plant layouts, complex hydroelectric networks, and renewable integrations.' },
-              { icon: '📐', label: 'Infrastructure', desc: 'Cross-country industrial pipeline engineering and heavy metallurgy facility designs.' },
-            ].map(s => (
-              <div key={s.label} className="bg-slate-50/50 border border-slate-200/70 rounded-xl p-5 text-left flex flex-col justify-between h-40 hover:bg-white hover:shadow-lg transition-all duration-300 group">
-                <div className="text-xl">{s.icon}</div>
-                <div className="space-y-1">
-                  <p className="text-[12.5px] font-sans font-black text-aarvi-navy uppercase tracking-tight group-hover:text-aarvi-green transition-colors">{s.label}</p>
-                  <p className="text-[11px] text-slate-400 leading-snug font-medium line-clamp-2">{s.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
