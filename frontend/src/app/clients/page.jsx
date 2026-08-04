@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ShieldCheck } from 'lucide-react';
 
 // ─── LOGO IMPORTS ────────────────────────────────────────────────────────────
 import logoMcdermott from '../../assets/mcdermott.png';
@@ -96,7 +96,6 @@ function ClientCard({ client, index, visible }) {
       } motion-reduce:transition-none`}
       style={{ transitionDelay: visible ? `${Math.min(index * 20, 400)}ms` : '0ms' }}
     >
-     
       
 
       {/* Corner registration marks */}
@@ -115,7 +114,7 @@ function ClientCard({ client, index, visible }) {
           alt={`${client.name} Logo`}
           fill
           sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
-          className="object-contain grayscale-55% opacity-80 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:grayscale-0"
+          className="object-contain  transition-all duration-500 ease-out  "
           priority={index < 8}
         />
       </div>
@@ -145,8 +144,8 @@ export default function ClientsPage() {
   return (
     <main className="min-h-screen select-none overflow-hidden bg-[#FAFAFA]">
 
-      {/* ── HIGH-CONTRAST CINEMATIC HERO WITH VIDEO ENVIRONMENT BACKGROUND ── */}
-      <section className="relative flex h-[65vh] min-h-125 w-full items-center justify-center overflow-hidden bg-[#060A17] px-6 text-center lg:px-10">
+      {/* ── HIGH-CONTRAST CINEMATIC HERO ── */}
+      <section className="relative flex h-[55vh] min-h-112.5 w-full items-center justify-center overflow-hidden bg-[#060A17] px-6 text-center lg:px-10">
 
         {/* Dynamic Video Streaming Layer */}
         <video
@@ -158,7 +157,7 @@ export default function ClientsPage() {
           className="pointer-events-none absolute inset-0 z-0 h-full w-full scale-105 object-cover opacity-20 grayscale contrast-125"
         />
 
-        {/* Faint drafting-grid texture — technical, not decorative flourish */}
+        {/* Faint drafting-grid texture */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 z-10 opacity-[0.06]"
@@ -172,12 +171,12 @@ export default function ClientsPage() {
         {/* Industrial Shadow Overlays for Crisp White Typography Contrast */}
         <div className="absolute inset-0 z-10 bg-[#060A17]/50 mix-blend-multiply" />
 
-        {/* FIXED GRADIENT: Pushes the white fade strictly to the bottom edge and protects text with a dark layer */}
-        <div className="absolute inset-0 z-10 bg-linear-to-t from-[#FAFAFA] from-2% via-[#060A17]/80 via-25% to-transparent" />
+        {/* Smoother, simpler gradient since the categories are moved down */}
+        <div className="absolute inset-0 z-10 bg-linear-to-t from-[#FAFAFA] via-[#060A17]/40 to-transparent" />
 
         <div className="relative z-20 mx-auto mt-10 max-w-5xl space-y-8 px-4 py-4">
 
-          {/* Corner registration marks framing the hero content — echoes the card index system below */}
+          {/* Corner registration marks */}
           <span aria-hidden="true" className="pointer-events-none absolute -left-1 -top-1 hidden h-5 w-5 border-l border-t border-aarvi-green/50 sm:block" />
           <span aria-hidden="true" className="pointer-events-none absolute -right-1 -top-1 hidden h-5 w-5 border-r border-t border-aarvi-green/50 sm:block" />
           <span aria-hidden="true" className="pointer-events-none absolute -bottom-1 -left-1 hidden h-5 w-5 border-b border-l border-aarvi-green/50 sm:block" />
@@ -195,23 +194,25 @@ export default function ClientsPage() {
             Engineering the world&apos;s <br />
             <span className="text-aarvi-green">most critical assets</span>
           </h1>
-
-          {/* Category chips - Background darkened for perfect legibility */}
-          <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-2.5 pt-6 drop-shadow-md sm:gap-3">
-            {STATIC_CATEGORIES.map((category) => (
-              <span
-                key={category}
-                className="rounded-full border border-white/15 bg-black/40 px-4 py-1.5 font-sans text-[11px] font-bold uppercase tracking-widest text-slate-200 backdrop-blur-md transition-colors duration-300 hover:border-aarvi-green/60 hover:text-aarvi-green sm:text-xs"
-              >
-                {category}
-              </span>
-            ))}
-          </div>
         </div>
       </section>
 
       {/* ── MAIN LOGO WORKSPACE GRID ── */}
-      <section className="relative z-20 mx-auto max-w-6xl px-6 py-24 lg:px-10">
+      <section className="relative z-20 mx-auto max-w-6xl px-6 pb-24 pt-12 lg:px-10">
+
+        {/* ── CATEGORIES (Moved from Hero to here for perfect readability) ── */}
+        <div className="mx-auto mb-10 flex max-w-4xl flex-wrap items-center justify-center gap-3 sm:gap-4 lg:gap-6">
+          {STATIC_CATEGORIES.map((category, idx, arr) => (
+            <React.Fragment key={category}>
+              <span className="font-sans text-xs font-bold uppercase tracking-widest text-slate-600 sm:text-sm">
+                {category}
+              </span>
+              {idx < arr.length - 1 && (
+                <span className="select-none text-lg text-aarvi-green opacity-60">|</span>
+              )}
+            </React.Fragment>
+          ))}
+        </div>
 
         {/* Matrix Grid Box */}
         <div
@@ -221,7 +222,7 @@ export default function ClientsPage() {
           {CLIENTS.map((client, i) => (
             <div
               key={client.name}
-              className="flex w-1/2 justify-center border-r border-b border-slate-200 sm:w-1/3 md:w-1/4 lg:w-1/5"
+              className="flex w-1/2 justify-center border-b border-r border-slate-200 sm:w-1/3 md:w-1/4 lg:w-1/5"
             >
               <ClientCard
                 client={client}
@@ -232,6 +233,7 @@ export default function ClientsPage() {
           ))}
         </div>
 
+        {/* Quality Validation Subbar */}
         
       </section>
 
