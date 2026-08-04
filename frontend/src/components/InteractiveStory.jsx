@@ -1188,21 +1188,40 @@ background:"#04050A"
 
       {/* Badge (Made text size & padding responsive to prevent overflow on 320px) */}
       <div
-        className="inline-flex items-center gap-1.5 sm:gap-2 text-[9px] sm:text-[11px] font-mono font-bold tracking-normal sm:tracking-wider uppercase px-3 sm:px-4 py-1.5 sm:py-2 rounded-sm w-max max-w-full"
-        style={{
-          border: `1px solid ${accentColors[i]}40`,
-          color: accentColors[i],
-          background: `${accentColors[i]}10`,
-        }}
+  className="inline-flex flex-wrap items-center gap-3 sm:gap-4
+             text-[9px] sm:text-[11px]
+             font-mono font-bold uppercase
+             px-3 sm:px-4 py-2 rounded-sm w-max max-w-full"
+  style={{
+    border: `1px solid ${accentColors[i]}40`,
+    color: accentColors[i],
+    background: `${accentColors[i]}10`,
+  }}
+>
+  {s.badge.split(" • ").map((item) => (
+    <div key={item} className="flex items-center gap-1.5">
+      <svg
+        width="10"
+        height="10"
+        viewBox="0 0 10 10"
+        className="shrink-0"
       >
-        <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true" className="shrink-0">
-          <circle cx="5" cy="5" r="3" fill={accentColors[i]} />
-          <circle cx="5" cy="5" r="5" fill="none" stroke={accentColors[i]} strokeWidth="0.8" opacity="0.5" />
-        </svg>
+        <circle cx="5" cy="5" r="3" fill={accentColors[i]} />
+        <circle
+          cx="5"
+          cy="5"
+          r="5"
+          fill="none"
+          stroke={accentColors[i]}
+          strokeWidth="0.8"
+          opacity="0.5"
+        />
+      </svg>
 
-        {/* Truncate or fit cleanly */}
-        <span className="truncate">{s.badge}</span>
-      </div>
+      <span>{item}</span>
+    </div>
+  ))}
+</div>
 
       {/* Scene number marker */}
       <div

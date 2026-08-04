@@ -119,7 +119,7 @@ export default function ContactPage() {
       {/* ─── HEADER ─── */}
       <section className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 mb-16 lg:mb-20 text-center">
         <motion.div initial="hidden" animate="visible" variants={fadeUp}>
-          <span className="w-1.5 h-1.5 inline-block rounded-full bg-aarvi-green animate-pulse mb-4" />
+          
           <span className="text-[11px] font-mono font-bold text-aarvi-green tracking-[0.25em] uppercase ml-2">
             Consult an Expert
           </span>

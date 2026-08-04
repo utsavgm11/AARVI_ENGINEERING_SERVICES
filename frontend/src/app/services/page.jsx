@@ -92,7 +92,7 @@ const ALL_SERVICES = [
     desc: "CFD, finite element analysis, thermal studies, structural simulations, design verification, and performance validation.",
     icon: Cpu,
     href: "/services/engineering-simulations",
-    img: img10,
+    img: img7,
   },
   {
     title: "As-Built & Asset Documentation",
