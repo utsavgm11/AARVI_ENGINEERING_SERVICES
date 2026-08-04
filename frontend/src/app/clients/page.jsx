@@ -172,7 +172,11 @@ export default function ClientsPage() {
         <div className="absolute inset-0 z-10 bg-[#060A17]/50 mix-blend-multiply" />
 
         {/* Smoother, simpler gradient since the categories are moved down */}
-        <div className="absolute inset-0 z-10 bg-linear-to-t from-[#FAFAFA] via-[#060A17]/40 to-transparent" />
+        <div   className="absolute bottom-0 left-0 right-0 z-10 h-20"
+  style={{
+    background:
+      "linear-gradient(to top, #FAFAFA 0%, rgba(250,250,250,0.85) 35%, rgba(250,250,250,0.35) 65%, transparent 100%)",
+  }} />
 
         <div className="relative z-20 mx-auto mt-10 max-w-5xl space-y-8 px-4 py-4">
 
