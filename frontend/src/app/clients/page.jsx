@@ -178,7 +178,7 @@ export default function ClientsPage() {
       "linear-gradient(to top, #FAFAFA 0%, rgba(250,250,250,0.85) 35%, rgba(250,250,250,0.35) 65%, transparent 100%)",
   }} />
 
-        <div className="relative z-20 mx-auto mt-10 max-w-5xl space-y-8 px-4 py-4">
+        <div className="relative z-20 mx-auto -mt-12  max-w-5xl space-y-8 px-4 py-4">
 
           {/* Corner registration marks */}
           <span aria-hidden="true" className="pointer-events-none absolute -left-1 -top-1 hidden h-5 w-5 border-l border-t border-aarvi-green/50 sm:block" />
