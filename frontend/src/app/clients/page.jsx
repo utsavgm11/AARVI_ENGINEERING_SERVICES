@@ -83,12 +83,7 @@ const STATIC_CATEGORIES = [
 ];
 
 // ─── SUB COMPONENTS ─────────────────────────────────────────────────────────
-// Cards are styled like entries on a technical drawing register: a mono
-// index tag, corner registration marks, and a desaturate → full-color
-// reveal on hover (a "verified" stamp echoing the ISO badge below).
 function ClientCard({ client, index, visible }) {
-  
-
   return (
     <div
       className={`group relative flex h-32 w-full flex-col items-center justify-center bg-white p-4 transition-all duration-500 ease-out hover:z-10 hover:bg-slate-50 hover:shadow-[0_8px_24px_-8px_rgba(15,23,42,0.12)] sm:h-36 sm:p-6 lg:h-40 ${
@@ -96,8 +91,6 @@ function ClientCard({ client, index, visible }) {
       } motion-reduce:transition-none`}
       style={{ transitionDelay: visible ? `${Math.min(index * 20, 400)}ms` : '0ms' }}
     >
-      
-
       {/* Corner registration marks */}
       <span
         aria-hidden="true"
@@ -114,12 +107,10 @@ function ClientCard({ client, index, visible }) {
           alt={`${client.name} Logo`}
           fill
           sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
-          className="object-contain  transition-all duration-500 ease-out  "
+          className="object-contain transition-all duration-500 ease-out"
           priority={index < 8}
         />
       </div>
-
-      
     </div>
   );
 }
@@ -144,77 +135,78 @@ export default function ClientsPage() {
   return (
     <main className="min-h-screen select-none overflow-hidden bg-[#FAFAFA]">
 
-      {/* ── HIGH-CONTRAST CINEMATIC HERO ── */}
-      <section className="relative flex h-[55vh] min-h-112.5 w-full items-center justify-center overflow-hidden bg-[#060A17] px-6 text-center lg:px-10">
+      {/* ── ROUNDED CARD CINEMATIC HERO ── */}
+      {/* Outer section provides the white space padding around the video card */}
+      <section className="w-full bg-[#FAFAFA] px-4 pt-6 sm:px-6 lg:px-8">
+        
+        {/* The Video Container - mimicking the rounded card look */}
+        <div className="relative flex h-[55vh] min-h-112.5 w-full items-center justify-center overflow-hidden rounded-3xl bg-[#060A17] shadow-2xl">
+          
+          {/* Dynamic Video Streaming Layer */}
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            src="/chemical_factory.mp4"
+            className="pointer-events-none absolute inset-0 z-0 h-full w-full scale-105 object-cover opacity-25 grayscale contrast-125"
+          />
 
-        {/* Dynamic Video Streaming Layer */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          src="/chemical_factory.mp4"
-          className="pointer-events-none absolute inset-0 z-0 h-full w-full scale-105 object-cover opacity-20 grayscale contrast-125"
-        />
+          {/* Faint drafting-grid texture */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 z-10 opacity-[0.06]"
+            style={{
+              backgroundImage:
+                'linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)',
+              backgroundSize: '44px 44px',
+            }}
+          />
 
-        {/* Faint drafting-grid texture */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-10 opacity-[0.06]"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)',
-            backgroundSize: '44px 44px',
-          }}
-        />
+          {/* Industrial Shadow Overlays for Crisp White Typography Contrast */}
+          <div className="absolute inset-0 z-10 bg-[#060A17]/50 mix-blend-multiply" />
+          <div className="absolute inset-0 z-10 bg-linear-to-t from-[#060A17]/80 via-transparent to-transparent" />
 
-        {/* Industrial Shadow Overlays for Crisp White Typography Contrast */}
-        <div className="absolute inset-0 z-10 bg-[#060A17]/50 mix-blend-multiply" />
+          {/* Text Content */}
+          <div className="relative z-20 mx-auto max-w-5xl space-y-8 px-4 py-4 text-center">
 
-        {/* Smoother, simpler gradient since the categories are moved down */}
-        <div   className="absolute bottom-0 left-0 right-0 z-10 h-20"
-  style={{
-    background:
-      "linear-gradient(to top, #FAFAFA 0%, rgba(250,250,250,0.85) 35%, rgba(250,250,250,0.35) 65%, transparent 100%)",
-  }} />
+            {/* Corner registration marks */}
+            <span aria-hidden="true" className="pointer-events-none absolute -left-4 -top-4 hidden h-5 w-5 border-l border-t border-aarvi-green/50 sm:block" />
+            <span aria-hidden="true" className="pointer-events-none absolute -right-4 -top-4 hidden h-5 w-5 border-r border-t border-aarvi-green/50 sm:block" />
+            <span aria-hidden="true" className="pointer-events-none absolute -bottom-4 -left-4 hidden h-5 w-5 border-b border-l border-aarvi-green/50 sm:block" />
+            <span aria-hidden="true" className="pointer-events-none absolute -bottom-4 -right-4 hidden h-5 w-5 border-b border-r border-aarvi-green/50 sm:block" />
 
-        <div className="relative z-20 mx-auto -mt-12  max-w-5xl space-y-8 px-4 py-4">
+            <div className="inline-flex items-center gap-3">
+              <span className="h-[1.5px] w-6 bg-aarvi-green" />
+              <span className="font-mono text-[10px] font-black uppercase tracking-[0.25em] text-aarvi-green drop-shadow-md shadow-black/50 sm:text-xs">
+                Strategic Alliances Portfolio
+              </span>
+              <span className="h-[1.5px] w-6 bg-aarvi-green" />
+            </div>
 
-          {/* Corner registration marks */}
-          <span aria-hidden="true" className="pointer-events-none absolute -left-1 -top-1 hidden h-5 w-5 border-l border-t border-aarvi-green/50 sm:block" />
-          <span aria-hidden="true" className="pointer-events-none absolute -right-1 -top-1 hidden h-5 w-5 border-r border-t border-aarvi-green/50 sm:block" />
-          <span aria-hidden="true" className="pointer-events-none absolute -bottom-1 -left-1 hidden h-5 w-5 border-b border-l border-aarvi-green/50 sm:block" />
-          <span aria-hidden="true" className="pointer-events-none absolute -bottom-1 -right-1 hidden h-5 w-5 border-b border-r border-aarvi-green/50 sm:block" />
-
-          <div className="inline-flex items-center gap-3">
-            <span className="h-[1.5px] w-6 bg-aarvi-green" />
-            <span className="font-mono text-[10px] font-black uppercase tracking-[0.25em] text-aarvi-green drop-shadow-md shadow-black/50 sm:text-xs">
-              Strategic Alliances Portfolio
-            </span>
-            <span className="h-[1.5px] w-6 bg-aarvi-green" />
+            <h1 className="mx-auto max-w-4xl font-sans text-4xl font-black uppercase leading-[1.05] tracking-tight text-white drop-shadow-xl md:text-5xl lg:text-7xl">
+              Engineering the world&apos;s <br />
+              <span className="text-aarvi-green">most critical assets</span>
+            </h1>
           </div>
-
-          <h1 className="mx-auto max-w-4xl font-sans text-4xl font-black uppercase leading-[1.05] tracking-tight text-white drop-shadow-xl md:text-5xl lg:text-7xl">
-            Engineering the world&apos;s <br />
-            <span className="text-aarvi-green">most critical assets</span>
-          </h1>
         </div>
       </section>
 
       {/* ── MAIN LOGO WORKSPACE GRID ── */}
-      <section className="relative z-20 mx-auto max-w-6xl px-6 pb-24 pt-12 lg:px-10">
+      <section className="relative z-20 mx-auto max-w-6xl px-6 pb-24 pt-16 lg:px-10">
 
-        {/* ── CATEGORIES (Moved from Hero to here for perfect readability) ── */}
-        <div className="mx-auto mb-10 flex max-w-4xl flex-wrap items-center justify-center gap-3 sm:gap-4 lg:gap-6">
-          {STATIC_CATEGORIES.map((category, idx, arr) => (
-            <React.Fragment key={category}>
-              <span className="font-sans text-xs font-bold uppercase tracking-widest text-slate-600 sm:text-sm">
-                {category}
+        {/* ── CATEGORIES ── */}
+        <div className="mx-auto mb-10 flex w-full max-w-5xl flex-wrap items-center justify-center gap-6 rounded-2xl border border-slate-200 bg-white px-6 py-5 shadow-sm sm:gap-10">
+          {STATIC_CATEGORIES.map((category) => (
+            <span
+              key={category}
+              className="group flex cursor-default items-center gap-2 font-sans text-xs font-bold uppercase tracking-widest text-slate-500 transition-colors duration-300 hover:text-aarvi-green"
+            >
+              <span className="font-mono text-base font-normal text-slate-400 transition-colors duration-300 group-hover:text-aarvi-green">
+                ┼
               </span>
-              {idx < arr.length - 1 && (
-                <span className="select-none text-lg text-aarvi-green opacity-60">|</span>
-              )}
-            </React.Fragment>
+              {category}
+            </span>
           ))}
         </div>
 
@@ -237,8 +229,6 @@ export default function ClientsPage() {
           ))}
         </div>
 
-        {/* Quality Validation Subbar */}
-        
       </section>
 
     </main>
