@@ -14,16 +14,17 @@ import logoTechnip from '../../assets/technip.jpeg';
 import logoWorley from '../../assets/worley.jpeg';
 import logoKentz from '../../assets/kentz.png';
 import logoKbr from '../../assets/kbr.png';
-import logoAmns from '../../assets/amns.png';
+//import logoAmns from '../../assets/amns.png';
 import logoSlb from '../../assets/slb.png';
-import logoWhessoe from '../../assets/whessoe.png';
+//import logoWhessoe from '../../assets/whessoe.png';
 import logoTecnimont from '../../assets/tecnimont.png';
 import logoTasnee from '../../assets/tasnee.png';
 import logoLt from '../../assets/lt.png';
 import logoTuah from '../../assets/tuah.png';
 import logoJacobs from '../../assets/jacobs.png';
 import logoSpic from '../../assets/spic.png';
-import logoJindal from '../../assets/jindal.png';
+//import logoJindal from '../../assets/jindal.png';
+import logoTecnicas from '../../assets/tecnicas_reunidas.png';
 import logoHpcl from '../../assets/hpcl.png';
 import logoBpcl from '../../assets/bpcl.png';
 import logoSbm from '../../assets/sbmoffshor.png';
@@ -49,16 +50,16 @@ const CLIENTS = [
   { name: "Worley", logo: logoWorley },
   { name: "Kentz", logo: logoKentz },
   { name: "KBR", logo: logoKbr },
-  { name: "AM/NS India", logo: logoAmns },
+  //{ name: "AM/NS India", logo: logoAmns },
   { name: "SLB", logo: logoSlb },
-  { name: "Whessoe", logo: logoWhessoe },
+  //{ name: "Whessoe", logo: logoWhessoe },
   { name: "Tecnimont", logo: logoTecnimont },
   { name: "Tasnee", logo: logoTasnee },
   { name: "L&T Engineering", logo: logoLt },
   { name: "Tuah Engineering", logo: logoTuah },
   { name: "Jacobs", logo: logoJacobs },
   { name: "SPIC India", logo: logoSpic },
-  { name: "Jindal Steel & Power", logo: logoJindal },
+  //{ name: "Jindal Steel & Power", logo: logoJindal },
   { name: "HPCL", logo: logoHpcl },
   { name: "BPCL", logo: logoBpcl },
   { name: "SBM Offshore", logo: logoSbm },
@@ -71,7 +72,8 @@ const CLIENTS = [
   { name: "GNFC", logo: logoGnfc },
   { name: "CPCL", logo: logoCpcl },
   { name: "Toyo Engineering", logo: logoToyo },
-  { name: "Tata Projects", logo: logoTata }
+  { name: "Tata Projects", logo: logoTata },
+  { name: "Técnicas Reunidas", logo: logoTecnicas }
 ];
 
 const STATIC_CATEGORIES = [
