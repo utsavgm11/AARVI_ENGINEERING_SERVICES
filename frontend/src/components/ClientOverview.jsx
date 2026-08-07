@@ -15,16 +15,16 @@ import logoTechnip from '../assets/technip.jpeg';
 import logoWorley from '../assets/worley.jpeg';
 import logoKentz from '../assets/kentz.png';
 import logoKbr from '../assets/kbr.png';
-import logoAmns from '../assets/amns.png';
+//import logoAmns from '../assets/amns.png';
 import logoSlb from '../assets/slb.png';
-import logoWhessoe from '../assets/whessoe.png';
+//import logoWhessoe from '../assets/whessoe.png';
 import logoTecnimont from '../assets/tecnimont.png';
 import logoTasnee from '../assets/tasnee.png';
 import logoLt from '../assets/lt.png';
 import logoTuah from '../assets/tuah.png';
 import logoJacobs from '../assets/jacobs.png';
 import logoSpic from '../assets/spic.png';
-import logoJindal from '../assets/jindal.png';
+//import logoJindal from '../assets/jindal.png';
 import logoHpcl from '../assets/hpcl.png';
 import logoBpcl from '../assets/bpcl.png';
 import logoSbm from '../assets/sbmoffshor.png';
@@ -38,6 +38,7 @@ import logoGnfc from '../assets/gnfc.png';
 import logoCpcl from '../assets/cpcl.png';
 import logoToyo from '../assets/toyo.png';
 import logoTata from '../assets/tata.png';
+import logoTecnicas from '../assets/tecnicas_reunidas.png';
 
 const ALL_32_CLIENTS = [
   { id: "mcdermott", name: "McDermott", tier: "Tier-1 Global EPC", sector: "Offshore & Marine", project: "FPSO Topside Engineering", marker: "MCD_ENG", logo: logoMcdermott },
@@ -50,9 +51,9 @@ const ALL_32_CLIENTS = [
   { id: "kentz", name: "Kentz", tier: "Specialist Constructor", sector: "Procurement & Construction", project: "Electrical System Layouts", marker: "KNZ_EPC", logo: logoKentz },
   
   { id: "kbr", name: "KBR", tier: "Defense & Tech EPC", sector: "Ammonia & Specialized Chem", project: "Static Equipment Validation", marker: "KBR_TECH", logo: logoKbr },
-  { id: "amns", name: "AM/NS India", tier: "Steel Megamax Giant", sector: "Heavy Metallurgical", project: "Structural Steel Drafting", marker: "AMNS_IND", logo: logoAmns },
+  //{ id: "amns", name: "AM/NS India", tier: "Steel Megamax Giant", sector: "Heavy Metallurgical", project: "Structural Steel Drafting", marker: "AMNS_IND", logo: logoAmns },
   { id: "slb", name: "SLB", tier: "Subsurface Technology Alpha", sector: "Digital Oilfield Systems", project: "Intelligent Completion Logic", marker: "SLB_RESR", logo: logoSlb },
-  { id: "whessoe", name: "Whessoe", tier: "Cryogenic Tank Expert", sector: "LNG Storage Terminals", project: "Thermal Expansion Calculations", marker: "WHS_CRYO", logo: logoWhessoe },
+  //{ id: "whessoe", name: "Whessoe", tier: "Cryogenic Tank Expert", sector: "LNG Storage Terminals", project: "Thermal Expansion Calculations", marker: "WHS_CRYO", logo: logoWhessoe },
   { id: "tecnimont", name: "Tecnimont", tier: "Industrial Plant EPC", sector: "Polymer & Fertilizer Blocks", project: "MFA Piping Stress Modeling", marker: "TCM_PLAST", logo: logoTecnimont },
   { id: "tasnee", name: "Tasnee", tier: "Petrochemical Producer", sector: "Chemical Manufacturing", project: "HSE Process Safety Isolation", marker: "TSN_CHEM", logo: logoTasnee },
   { id: "lt", name: "L&T Engineering", tier: "National Infrastructure Giant", sector: "Heavy Engineering", project: "High-Load Foundation Civil Design", marker: "LT_HEAVY", logo: logoLt },
@@ -60,7 +61,7 @@ const ALL_32_CLIENTS = [
 
   { id: "jacobs", name: "Jacobs", tier: "Global Technical Consultancy", sector: "Advanced Facilities", project: "Water Cycle Lifecycle Design", marker: "JCB_CONS", logo: logoJacobs },
   { id: "spic", name: "SPIC India", tier: "Agricultural Agro-Chem", sector: "Fertilizer Infrastructure", project: "Instrumentation Control Loops", marker: "SPC_AGRO", logo: logoSpic },
-  { id: "jindal", name: "Jindal Steel & Power", tier: "Metallurgical Infrastructure", sector: "Power Generation Assets", project: "Civil Foundation Layouts", marker: "JSP_STEEL", logo: logoJindal },
+  //{ id: "jindal", name: "Jindal Steel & Power", tier: "Metallurgical Infrastructure", sector: "Power Generation Assets", project: "Civil Foundation Layouts", marker: "JSP_STEEL", logo: logoJindal },
   { id: "hpcl", name: "HPCL", tier: "National Hydrocarbon PSU", sector: "Refinery Expansion Layouts", project: "Piping Utility Optimization", marker: "HP_REFIN", logo: logoHpcl },
   { id: "bpcl", name: "BPCL", tier: "Downstream Energy PSU", sector: "Product Supply Infrastructure", project: "Hazardous Area Classification", marker: "BP_MUM", logo: logoBpcl },
   { id: "sbmoffshore", name: "SBM Offshore", tier: "FPSO Lease Supermajor", sector: "Floating Marine Assets", project: "Topside Module Integration", marker: "SBM_FPSO", logo: logoSbm },
@@ -74,7 +75,16 @@ const ALL_32_CLIENTS = [
   { id: "gnfc", name: "GNFC", tier: "Chemical State Enterprise", sector: "Industrial Fertilizers", project: "DCS Logic Configuration", marker: "GNF_GUJ", logo: logoGnfc },
   { id: "cpcl", name: "CPCL", tier: "Southern Petroleum Core", sector: "Refining & Lubricants", project: "Tank Farm Interconnections", marker: "CPC_CHN", logo: logoCpcl },
   { id: "toyo", name: "Toyo Engineering", tier: "Global EPC System House", sector: "Petrochemical Complexes", project: "3D Plant Design Overhaul", marker: "TOY_JPN", logo: logoToyo },
-  { id: "tata", name: "Tata Projects", tier: "Industrial Execution Alpha", sector: "Power & Infrastructure", project: "PMC Framework Support", marker: "TATA_PRJ", logo: logoTata }
+  { id: "tata", name: "Tata Projects", tier: "Industrial Execution Alpha", sector: "Power & Infrastructure", project: "PMC Framework Support", marker: "TATA_PRJ", logo: logoTata },
+  { 
+  id: "tecnicas", 
+  name: "Técnicas Reunidas", 
+  tier: "Global Energy EPC Leader", 
+  sector: "Refining & Petrochemicals", 
+  project: "Complex Downstream Execution", 
+  marker: "TR_MAD", 
+  logo: logoTecnicas 
+}
 ];
 
 const TRACK_1_SET = ALL_32_CLIENTS.slice(0, 16);
